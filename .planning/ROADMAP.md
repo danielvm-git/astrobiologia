@@ -15,16 +15,20 @@
 - [x] **UAT**: Articles can be created and stored in Appwrite.
 
 ### Phase 3: Public Portal - Home & Articles
-- [ ] Build Home page (Featured Article + Grid).
-- [ ] Implement Article Detail page with SEO meta tags.
-- [ ] Build Category filtering and Author bio page.
-- [ ] **UAT**: Public can read articles and browse categories.
+- [x] Build Home page (Featured Article + Grid).
+- [x] Implement Article Detail page with SEO meta tags.
+- [x] Build Category filtering and Author bio page.
+- [x] **UAT**: Public can read articles and browse categories.
 
 ### Phase 4: Initial Content Seed & Polish
 - [ ] Populate initial articles (Seed content).
 - [ ] Refine "New Scientist" / "Universe Today" aesthetics.
 - [ ] Finalize deployment via Appwrite Sites.
 - [ ] **UAT**: Site is live and looks premium.
+
+**Plans:** 2 plans
+- [ ] 04-01-PLAN.md — Content seeding and aesthetic audit (animations, typography).
+- [ ] 04-02-PLAN.md — Image optimization and production deployment on Appwrite Sites.
 
 ## Milestone 2: Expansion & Global Reach
 
