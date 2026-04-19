@@ -5,7 +5,7 @@ import { env } from '$env/dynamic/public';
 const client = new Client();
 
 client
-	.setEndpoint(env.PUBLIC_APPWRITE_ENDPOINT || 'https://nyc.cloud.appwrite.io/v1')
+	.setEndpoint(env.PUBLIC_APPWRITE_ENDPOINT || 'https://cloud.appwrite.io/v1')
 	.setProject(env.PUBLIC_APPWRITE_PROJECT_ID || '69e462f20036d39192ba');
 
 export const account = new Account(client);
