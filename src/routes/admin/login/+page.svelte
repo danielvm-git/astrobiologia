@@ -1,13 +1,15 @@
 <script lang="ts">
 	import { account, OAuthProvider } from '$lib/appwrite';
 
+	import { goto } from '$app/navigation';
+
 	let errorMessage = $state('');
 
 	async function loginWithGoogle() {
 		try {
-			// Create Google OAuth2 session
-			// Appwrite will redirect to Google, then back to our success URL
-			account.createOAuth2Session(
+			// Create Google OAuth2 token
+			// Appwrite will redirect to Google, then back to our success URL with userId and secret
+			account.createOAuth2Token(
 				OAuthProvider.Google,
 				`${window.location.origin}/admin/dashboard`,
 				`${window.location.origin}/admin/login?error=google_failed`
@@ -84,7 +86,10 @@
 					const password = formData.get('password') as string;
 					try {
 						await account.createEmailPasswordSession(email, password);
-						window.location.href = '/admin/dashboard';
+						// Small delay to ensure SDK writes fallback tokens if needed
+						setTimeout(() => {
+							goto('/admin/dashboard');
+						}, 100);
 					} catch (err: any) {
 						console.error('Login error:', err);
 						errorMessage = err.message || 'Login falhou.';
