@@ -1,0 +1,9 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"site_title": "Astrobiology.com.br",
+	"nav_home": "Home",
+	"nav_articles": "Articles",
+	"nav_about": "About",
+	"footer_tagline": "Exploring life in the universe.",
+	"search_placeholder": "Search articles..."
+}

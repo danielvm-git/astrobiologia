@@ -37,3 +37,6 @@ Thumbs.db
 .cursor
 .gemini
 
+# Paraglide
+src/lib/paraglide
+project.inlang/cache/
