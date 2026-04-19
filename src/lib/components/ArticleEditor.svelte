@@ -253,6 +253,7 @@
 								type="button"
 								onclick={() => (featuredImageId = '')}
 								class="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 transition"
+								aria-label="Remover imagem"
 							>
 								<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />

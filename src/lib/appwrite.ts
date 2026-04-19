@@ -1,12 +1,12 @@
 import { Client, Account, Databases, Storage, ID, Query, OAuthProvider } from 'appwrite';
-import { PUBLIC_APPWRITE_ENDPOINT, PUBLIC_APPWRITE_PROJECT_ID } from '$env/static/public';
+import { env } from '$env/dynamic/public';
 
 // Initialize Appwrite client
 const client = new Client();
 
 client
-	.setEndpoint(PUBLIC_APPWRITE_ENDPOINT)
-	.setProject(PUBLIC_APPWRITE_PROJECT_ID);
+	.setEndpoint(env.PUBLIC_APPWRITE_ENDPOINT || 'https://nyc.cloud.appwrite.io/v1')
+	.setProject(env.PUBLIC_APPWRITE_PROJECT_ID || '69e462f20036d39192ba');
 
 export const account = new Account(client);
 export const databases = new Databases(client);
