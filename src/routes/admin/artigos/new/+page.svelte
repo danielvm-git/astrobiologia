@@ -1,23 +1,19 @@
 <script lang="ts">
 	import ArticleEditor from '$lib/components/ArticleEditor.svelte';
-	import { databases } from '$lib/appwrite';
-	import type { PageData } from './$types';
+	import { databases, DATABASE_ID } from '$lib/appwrite';
 
-	export let data: PageData;
-
-	let isLoading = false;
+	let isLoading = $state(false);
 
 	async function saveArticle(articleData: any) {
 		isLoading = true;
 
 		try {
-			const DATABASE_ID = 'astrobiology_db';
 			const ARTICLES_COLLECTION_ID = 'articles';
 
-			await databases.updateDocument(
+			await databases.createDocument(
 				DATABASE_ID,
 				ARTICLES_COLLECTION_ID,
-				data.article.$id,
+				'unique()',
 				articleData
 			);
 		} catch (err) {
@@ -30,13 +26,13 @@
 </script>
 
 <svelte:head>
-	<title>Edit Article - Astrobiologia Admin</title>
+	<title>Criar Artigo - Admin Astrobiologia</title>
 	<meta name="robots" content="noindex, nofollow" />
 </svelte:head>
 
 <div class="mb-8">
-	<h1 class="text-3xl font-bold text-slate-900">Edit Article</h1>
-	<p class="text-slate-600 mt-2">Update "{data.article.title}"</p>
+	<h1 class="text-3xl font-bold text-slate-900">Criar Novo Artigo</h1>
+	<p class="text-slate-600 mt-2">Escreva e publique um novo artigo no seu site</p>
 </div>
 
-<ArticleEditor article={data.article} {isLoading} onSave={saveArticle} />
+<ArticleEditor bind:isLoading={isLoading} onSave={saveArticle} />

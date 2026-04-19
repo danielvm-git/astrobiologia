@@ -4,7 +4,21 @@
 	import { authStore } from '$lib/stores/auth';
 	import { account } from '$lib/appwrite';
 
+	import { onMount } from 'svelte';
 	let showMobileMenu = false;
+	let checkingAuth = true;
+
+	onMount(async () => {
+		try {
+			const user = await account.get();
+			authStore.setUser(user);
+		} catch (err) {
+			console.log('No client-side session, redirecting...');
+			await goto('/admin/login');
+		} finally {
+			checkingAuth = false;
+		}
+	});
 
 	async function handleLogout() {
 		try {
@@ -27,36 +41,40 @@
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="flex justify-between items-center h-16">
 				<div class="flex items-center gap-8">
-					<a href="/admin/dashboard" class="font-bold text-xl text-blue-600">Astrobiologia CMS</a>
+					<a href="/admin/dashboard" class="font-bold text-xl text-primary flex items-center gap-2">
+						<span class="text-2xl">🔭</span>
+						Astrobiologia CMS
+					</a>
 					<nav class="hidden md:flex gap-6">
 						<a
 							href="/admin/dashboard"
 							class="text-slate-600 hover:text-slate-900 px-3 py-2 {$page.url.pathname === '/admin/dashboard'
-								? 'text-blue-600 border-b-2 border-blue-600'
+								? 'text-primary border-b-2 border-primary'
 								: ''}"
 						>
 							Dashboard
 						</a>
 						<a
-							href="/admin/articles"
-							class="text-slate-600 hover:text-slate-900 px-3 py-2 {$page.url.pathname.startsWith('/admin/articles')
-								? 'text-blue-600 border-b-2 border-blue-600'
+							href="/admin/artigos"
+							class="text-slate-600 hover:text-slate-900 px-3 py-2 {$page.url.pathname.startsWith('/admin/artigos')
+								? 'text-primary border-b-2 border-primary'
 								: ''}"
 						>
-							Articles
+							Artigos
 						</a>
 					</nav>
 				</div>
 				<div class="flex items-center gap-4">
 					<button
-						on:click={handleLogout}
+						onclick={handleLogout}
 						class="px-4 py-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition"
 					>
-						Logout
+						Sair
 					</button>
 					<button
-						on:click={() => (showMobileMenu = !showMobileMenu)}
+						onclick={() => (showMobileMenu = !showMobileMenu)}
 						class="md:hidden p-2 hover:bg-slate-100 rounded-lg"
+						aria-label="Abrir menu"
 					>
 						<svg
 							class="w-6 h-6"
@@ -80,17 +98,17 @@
 				<nav class="md:hidden border-t border-slate-200 py-4">
 					<a
 						href="/admin/dashboard"
-						on:click={closeMobileMenu}
+						onclick={closeMobileMenu}
 						class="block px-3 py-2 text-slate-600 hover:text-slate-900"
 					>
 						Dashboard
 					</a>
 					<a
-						href="/admin/articles"
-						on:click={closeMobileMenu}
+						href="/admin/artigos"
+						onclick={closeMobileMenu}
 						class="block px-3 py-2 text-slate-600 hover:text-slate-900"
 					>
-						Articles
+						Artigos
 					</a>
 				</nav>
 			{/if}
@@ -99,6 +117,12 @@
 
 	<!-- Main Content -->
 	<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-		<slot />
+		{#if checkingAuth}
+			<div class="flex justify-center items-center py-20">
+				<div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+			</div>
+		{:else}
+			<slot />
+		{/if}
 	</main>
 </div>

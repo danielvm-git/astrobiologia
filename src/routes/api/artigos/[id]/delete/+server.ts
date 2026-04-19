@@ -1,9 +1,6 @@
-import { appwrite, databases } from '$lib/appwrite';
+import { databases, DATABASE_ID, COLLECTIONS } from '$lib/appwrite';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from '@sveltejs/kit';
-
-const DATABASE_ID = 'astrobiology_db';
-const ARTICLES_COLLECTION_ID = 'articles';
 
 export const POST: RequestHandler = async ({ params, request, cookies }) => {
 	try {
@@ -15,7 +12,11 @@ export const POST: RequestHandler = async ({ params, request, cookies }) => {
 
 		const { id } = params;
 
-		await databases.deleteDocument(DATABASE_ID, ARTICLES_COLLECTION_ID, id);
+		if (!id) {
+			return json({ error: 'Missing article ID' }, { status: 400 });
+		}
+
+		await databases.deleteDocument(DATABASE_ID, COLLECTIONS.ARTICLES, id);
 
 		return json({ success: true, message: 'Article deleted successfully' });
 	} catch (error) {

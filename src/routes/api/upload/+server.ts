@@ -1,8 +1,6 @@
-import { appwrite } from '$lib/appwrite';
+import { storage, STORAGE_BUCKET_ID, ID } from '$lib/appwrite';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from '@sveltejs/kit';
-
-const BUCKET_ID = 'article_images';
 
 export const POST: RequestHandler = async ({ request, cookies }) => {
 	try {
@@ -19,16 +17,13 @@ export const POST: RequestHandler = async ({ request, cookies }) => {
 			return json({ error: 'No file provided' }, { status: 400 });
 		}
 
-		const fileBuffer = await file.arrayBuffer();
-		const uint8Array = new Uint8Array(fileBuffer);
-
-		const response = await appwrite.storage.createFile(
-			BUCKET_ID,
-			appwrite.ID.unique(),
-			new File([uint8Array], file.name, { type: file.type })
+		const response = await storage.createFile(
+			STORAGE_BUCKET_ID,
+			ID.unique(),
+			file
 		);
 
-		const imageUrl = appwrite.getFilePreview(BUCKET_ID, response.$id);
+		const imageUrl = storage.getFilePreview(STORAGE_BUCKET_ID, response.$id).toString();
 
 		return json({ success: true, fileId: response.$id, url: imageUrl });
 	} catch (error) {

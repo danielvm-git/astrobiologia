@@ -1,8 +1,7 @@
-import { appwrite, databases } from '$lib/appwrite';
+import { databases, Query, DATABASE_ID } from '$lib/appwrite';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
-const DATABASE_ID = 'astrobiology_db';
 const ARTICLES_COLLECTION_ID = 'articles';
 
 export const load: PageServerLoad = async ({ params }) => {
@@ -12,9 +11,9 @@ export const load: PageServerLoad = async ({ params }) => {
 			DATABASE_ID,
 			ARTICLES_COLLECTION_ID,
 			[
-				appwrite.Query.equal('slug', params.slug),
-				appwrite.Query.equal('status', 'published'),
-				appwrite.Query.limit(1)
+				Query.equal('slug', params.slug),
+				Query.equal('status', 'published'),
+				Query.limit(1)
 			]
 		);
 
@@ -29,10 +28,10 @@ export const load: PageServerLoad = async ({ params }) => {
 			DATABASE_ID,
 			ARTICLES_COLLECTION_ID,
 			[
-				appwrite.Query.equal('category', article.category),
-				appwrite.Query.equal('status', 'published'),
-				appwrite.Query.notEqual('$id', article.$id),
-				appwrite.Query.limit(3)
+				Query.equal('category', article.category),
+				Query.equal('status', 'published'),
+				Query.notEqual('$id', article.$id),
+				Query.limit(3)
 			]
 		);
 

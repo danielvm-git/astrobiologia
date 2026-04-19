@@ -1,12 +1,10 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-
-	const dispatch = createEventDispatcher();
-
-	let query = '';
+	import { Search } from 'lucide-svelte';
+	let { onsearch } = $props();
+	let query = $state('');
 
 	function handleSearch() {
-		dispatch('search', { query });
+		onsearch?.({ query });
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
@@ -16,26 +14,23 @@
 	}
 </script>
 
-<div class="w-full max-w-lg">
-	<div class="relative">
+<div class="w-full">
+	<div class="relative group">
+		<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+			<Search class="h-5 w-5 text-slate-400 group-focus-within:text-primary transition-colors" />
+		</div>
 		<input
 			type="text"
-			placeholder="Search articles..."
+			placeholder="Buscar artigos..."
 			bind:value={query}
-			on:keydown={handleKeydown}
-			class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 placeholder-slate-500"
+			onkeydown={handleKeydown}
+			class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-slate-900 placeholder-slate-500 transition-all"
 		/>
 		<button
-			on:click={handleSearch}
-			class="absolute right-2 top-1/2 transform -translate-y-1/2 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition text-sm"
+			onclick={handleSearch}
+			class="absolute right-2 top-1.5 px-4 py-1.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition text-sm font-medium"
 		>
-			Search
+			Buscar
 		</button>
 	</div>
 </div>
-
-<style>
-	input::placeholder {
-		color: rgb(100, 116, 139);
-	}
-</style>

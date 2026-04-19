@@ -6,9 +6,11 @@
 	let mobileMenuOpen = $state(false);
 
 	const navLinks = [
-		{ href: '/', label: 'Início' },
-		{ href: '/artigos', label: 'Artigos' },
-		{ href: '/categorias', label: 'Categorias' },
+		{ href: '/', label: 'Home' },
+		{ href: '/categorias/noticias', label: 'Notícias' },
+		{ href: '/categorias/entrevistas', label: 'Entrevistas' },
+		{ href: '/categorias/analises', label: 'Análises' },
+		{ href: '/categorias/pesquisas-brasileiras', label: 'Pesquisas Brasileiras' },
 		{ href: '/sobre', label: 'Sobre' }
 	];
 

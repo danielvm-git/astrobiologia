@@ -1,8 +1,6 @@
-import { databases, Query } from '$lib/appwrite';
-import { error } from '@sveltejs/kit';
+import { databases, Query, DATABASE_ID } from '$lib/appwrite';
 import type { PageServerLoad } from './$types';
 
-const DATABASE_ID = 'astrobiology_db';
 const ARTICLES_COLLECTION_ID = 'articles';
 
 export const load: PageServerLoad = async () => {
@@ -35,6 +33,6 @@ export const load: PageServerLoad = async () => {
 		};
 	} catch (err) {
 		console.error('Error loading homepage data:', err);
-		throw error(500, 'Failed to load articles');
+		return { featured: [], recent: [] };
 	}
 };

@@ -1,8 +1,7 @@
-import { appwrite, databases } from '$lib/appwrite';
-import { error } from '@sveltejs/kit';
+import { databases, Query } from '$lib/appwrite';
 import type { PageServerLoad } from './$types';
 
-const DATABASE_ID = 'astrobiology_db';
+const DATABASE_ID = '69e464fb0006a1b3c4eb';
 const ARTICLES_COLLECTION_ID = 'articles';
 
 const categoryMap: Record<string, string> = {
@@ -27,9 +26,9 @@ export const load: PageServerLoad = async ({ params }) => {
 			DATABASE_ID,
 			ARTICLES_COLLECTION_ID,
 			[
-				appwrite.Query.equal('status', 'published'),
-				appwrite.Query.equal('category', categoryLabel),
-				appwrite.Query.orderDesc('publishedAt')
+				Query.equal('status', 'published'),
+				Query.equal('category', categoryLabel),
+				Query.orderDesc('publishedAt')
 			]
 		);
 
@@ -40,6 +39,6 @@ export const load: PageServerLoad = async ({ params }) => {
 		};
 	} catch (err) {
 		console.error('Error loading category:', err);
-		throw error(500, 'Failed to load category articles');
+		return { category: categorySlug, categoryLabel, articles: [] };
 	}
 };

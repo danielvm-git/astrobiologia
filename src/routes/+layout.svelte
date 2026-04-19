@@ -3,7 +3,9 @@
 	import Header from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 
+	import { page } from '$app/stores';
 	let { children } = $props();
+	const isAdmin = $derived($page.url.pathname.startsWith('/admin'));
 </script>
 
 <svelte:head>
@@ -13,9 +15,13 @@
 </svelte:head>
 
 <div class="flex min-h-screen flex-col">
+{#if !isAdmin}
 	<Header />
-	<main class="flex-1">
-		{@render children()}
-	</main>
+{/if}
+<main class="flex-1">
+	{@render children()}
+</main>
+{#if !isAdmin}
 	<Footer />
+{/if}
 </div>

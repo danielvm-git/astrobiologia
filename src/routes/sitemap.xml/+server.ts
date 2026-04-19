@@ -1,22 +1,18 @@
-import { appwrite } from '$lib/appwrite';
+import { getPublishedArticles } from '$lib/appwrite';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async () => {
 	try {
-		const articles = await appwrite.listArticles({
-			limit: 1000,
-			filters: ['status = "published"']
-		});
+		const articles = await getPublishedArticles(1000);
 
 		const staticPages = [
 			{ url: '/', changefreq: 'weekly', priority: 1.0 },
-			{ url: '/articles', changefreq: 'daily', priority: 0.9 },
-			{ url: '/about', changefreq: 'monthly', priority: 0.7 }
+			{ url: '/sobre', changefreq: 'monthly', priority: 0.7 }
 		];
 
-		const dynamicPages = articles.documents.map((article: any) => ({
-			url: `/articles/${article.slug}`,
-			lastmod: article.updatedAt || article.createdAt,
+		const dynamicPages = articles.map((article: any) => ({
+			url: `/artigos/${article.slug}`,
+			lastmod: article.$updatedAt || article.$createdAt,
 			changefreq: 'monthly',
 			priority: 0.8
 		}));
@@ -28,7 +24,7 @@ export const GET: RequestHandler = async () => {
 ${allPages
 	.map(
 		(page: any) => `  <url>
-    <loc>https://astrobiologia.com${page.url}</loc>
+    <loc>https://astrobiologia.com.br${page.url}</loc>
     ${page.lastmod ? `<lastmod>${page.lastmod}</lastmod>` : ''}
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>

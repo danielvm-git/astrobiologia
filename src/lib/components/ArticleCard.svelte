@@ -12,11 +12,12 @@
 
 	let { article, variant = 'default', class: className }: Props = $props();
 
-	const category = CATEGORIES.find((c) => c.slug === article.category);
-	const imageUrl = article.featuredImage ? getImageUrl(article.featuredImage, 800, 500) : null;
+	const category = $derived(article ? CATEGORIES.find((c) => c.slug === article.category) : null);
+	const imageUrl = $derived(article?.featuredImage ? getImageUrl(article.featuredImage, 800, 500) : null);
 </script>
 
-{#if variant === 'featured'}
+{#if article}
+	{#if variant === 'featured'}
 	<article class={cn('group relative overflow-hidden rounded-xl bg-card shadow-sm transition-shadow hover:shadow-md', className)}>
 		<a href="/artigos/{article.slug}" class="block">
 			<div class="relative aspect-[16/9] overflow-hidden">
@@ -31,7 +32,7 @@
 						<span class="text-4xl text-muted-foreground">🔭</span>
 					</div>
 				{/if}
-				<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+				<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
 				<div class="absolute bottom-0 left-0 right-0 p-6">
 					{#if category}
 						<span class="inline-flex rounded-full bg-primary/90 px-3 py-1 text-xs font-medium text-primary-foreground">
@@ -126,4 +127,5 @@
 			</div>
 		</div>
 	</article>
+	{/if}
 {/if}

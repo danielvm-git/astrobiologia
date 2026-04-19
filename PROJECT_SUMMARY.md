@@ -2,7 +2,7 @@
 
 ## Overview
 
-Astrobiologia.com is a comprehensive, modern astrobiology content platform built with SvelteKit and Appwrite Cloud. The site features a professional public-facing interface for reading articles and a secure admin CMS for content management.
+Astrobiologia.com.br is a professional science journalism platform focused on astrobiology and the search for life in the universe. Maintained by journalist and researcher Danilo Albergaria, it features news, interviews, and analyses with a special focus on Brazilian research. Built with SvelteKit and Appwrite Cloud.
 
 ## Technology Stack
 
@@ -15,18 +15,24 @@ Astrobiologia.com is a comprehensive, modern astrobiology content platform built
 
 ## Project Structure
 
-### Public Pages
-- **Homepage** (`/`) - Featured articles carousel + recent articles grid
-- **Articles Listing** (`/articles`) - Searchable, filterable article grid with pagination
-- **Article Detail** (`/articles/[slug]`) - Full article with meta tags and schema.org markup
-- **Categories** (`/categories/[category]`) - Category-specific article browsing
-- **About** (`/about`) - Information about Danilo Couto
+### Estrutura de Rotas (SvelteKit)
+- `/`: Homepage com artigos em destaque e últimas notícias.
+- `/artigos`: Listagem completa de artigos com filtros.
+- `/artigos/[slug]`: Página de leitura do artigo (estilo New Scientist).
+- `/categorias/[category]`: Listagem de artigos por categoria.
+- `/sobre`: Página biográfica e missão do autor.
+- `/admin`: Área administrativa (Login, Dashboard, Gerenciamento de Artigos).
+- `/admin/artigos`: Listagem e ações de artigos.
+- `/admin/artigos/new`: Editor de novo artigo.
+- `/admin/artigos/[id]/edit`: Edição de artigo existente.
 
-### Admin Pages (Protected)
-- **Admin Login** (`/admin/login`) - Secure authentication
-- **Dashboard** (`/admin/dashboard`) - Overview and quick stats
-- **Articles Management** (`/admin/articles`) - CRUD operations for articles
-- **Article Editor** (`/admin/articles/new`, `/admin/articles/[id]/edit`) - Rich text editor with image upload
+### Categorias Jornalísticas
+As categorias foram simplificadas para um fluxo editorial:
+- `noticias`: Fatos e descobertas recentes.
+- `entrevistas`: Diálogos com pesquisadores.
+- `analises`: Opinião e profundidade sobre temas.
+- `pesquisas-brasileiras`: Ciência nacional em foco.
+- `exoplanetas` & `extremofilos`: Temas técnicos de alto interesse.
 
 ### API Routes
 - `/api/articles/[id]/delete` - Delete articles via POST
@@ -243,6 +249,6 @@ Open source project available under MIT License.
 
 ---
 
-**Status**: Production Ready
-**Last Updated**: 2024
-**Maintainer**: Danilo Couto
+**Status**: MVP in Development
+**Last Updated**: 2026-04-19
+**Maintainer**: Danilo Albergaria

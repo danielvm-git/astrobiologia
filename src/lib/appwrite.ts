@@ -1,19 +1,22 @@
 import { Client, Account, Databases, Storage, ID, Query } from 'appwrite';
-import { PUBLIC_APPWRITE_ENDPOINT, PUBLIC_APPWRITE_PROJECT_ID } from '$env/static/public';
+import { env } from '$env/dynamic/public';
 
 // Initialize Appwrite client
 const client = new Client();
 
+const endpoint = env.PUBLIC_APPWRITE_ENDPOINT || 'https://nyc.cloud.appwrite.io/v1';
+const projectId = env.PUBLIC_APPWRITE_PROJECT_ID || '69e462f20036d39192ba';
+
 client
-	.setEndpoint(PUBLIC_APPWRITE_ENDPOINT || 'https://cloud.appwrite.io/v1')
-	.setProject(PUBLIC_APPWRITE_PROJECT_ID || '');
+	.setEndpoint(endpoint)
+	.setProject(projectId);
 
 export const account = new Account(client);
 export const databases = new Databases(client);
 export const storage = new Storage(client);
 
 // Database and collection IDs
-export const DATABASE_ID = 'astrobiologia';
+export const DATABASE_ID = '69e464fb0006a1b3c4eb';
 export const COLLECTIONS = {
 	ARTICLES: 'articles',
 	CATEGORIES: 'categories'
@@ -165,12 +168,12 @@ export async function deleteImage(fileId: string): Promise<void> {
 
 // Categories (static for now, can be moved to DB later)
 export const CATEGORIES: Category[] = [
-	{ $id: '1', name: 'Exoplanetas', slug: 'exoplanetas', description: 'Mundos além do Sistema Solar', color: 'primary' },
-	{ $id: '2', name: 'Extremófilos', slug: 'extremofilos', description: 'Vida em condições extremas', color: 'secondary' },
-	{ $id: '3', name: 'Origem da Vida', slug: 'origem-da-vida', description: 'Como a vida surgiu na Terra', color: 'accent' },
-	{ $id: '4', name: 'Missões Espaciais', slug: 'missoes-espaciais', description: 'Explorando o cosmos', color: 'primary' },
-	{ $id: '5', name: 'SETI', slug: 'seti', description: 'Busca por inteligência extraterrestre', color: 'secondary' },
-	{ $id: '6', name: 'Biossinaturas', slug: 'biossinaturas', description: 'Sinais de vida no universo', color: 'accent' }
+	{ $id: 'noticias', name: 'Notícias', slug: 'noticias', description: 'Últimas notícias sobre astrobiologia', color: 'primary' },
+	{ $id: 'entrevistas', name: 'Entrevistas', slug: 'entrevistas', description: 'Conversas com cientistas e pesquisadores', color: 'secondary' },
+	{ $id: 'analises', name: 'Análises', slug: 'analises', description: 'Análises profundas sobre temas científicos', color: 'accent' },
+	{ $id: 'pesquisas-brasileiras', name: 'Pesquisas Brasileiras', slug: 'pesquisas-brasileiras', description: 'Destaque para a ciência feita no Brasil', color: 'primary' },
+	{ $id: 'exoplanetas', name: 'Exoplanetas', slug: 'exoplanetas', description: 'Mundos além do Sistema Solar', color: 'secondary' },
+	{ $id: 'extremofilos', name: 'Extremófilos', slug: 'extremofilos', description: 'Vida em condições extremas', color: 'accent' }
 ];
 
 export { ID, Query };
