@@ -1,4 +1,4 @@
-import { appwrite, databases } from '$lib/appwrite';
+import { databases } from '$lib/appwrite';
 import { error, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 

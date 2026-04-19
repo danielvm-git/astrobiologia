@@ -23,31 +23,35 @@
 	<meta property="og:type" content="website" />
 </svelte:head>
 
-<main class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+<main class="min-h-screen bg-background">
 	<div class="max-w-7xl mx-auto px-4 py-16">
 		<div class="mb-8">
-			<h1 class="text-4xl font-bold text-slate-900 mb-2">{data.categoryLabel}</h1>
-			<p class="text-slate-600">
+			<h1 class="text-4xl font-bold text-foreground mb-2 font-sans">{data.categoryLabel}</h1>
+			<p class="text-muted-foreground font-sans">
 				{filteredArticles.length === 1 ? '1 artigo encontrado' : `${filteredArticles.length} artigos encontrados`}
 			</p>
 		</div>
 
-		<div class="mb-8">
-			<input
-				type="text"
-				placeholder="Buscar artigos..."
-				bind:value={searchQuery}
-				class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-			/>
+		<div class="mb-12">
+			<div class="relative max-w-md">
+				<input
+					type="text"
+					placeholder="Buscar nesta categoria..."
+					bind:value={searchQuery}
+					class="w-full px-4 py-3 rounded-xl border border-input bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-sans transition-all"
+				/>
+			</div>
 		</div>
 
 		{#if filteredArticles.length === 0}
-			<div class="text-center py-12 bg-white rounded-xl shadow-sm border border-slate-200">
-				<p class="text-slate-600 mb-4 text-lg">Nenhum artigo encontrado nesta categoria.</p>
-				<a href="/" class="text-primary hover:underline font-medium">Voltar para a página inicial</a>
+			<div class="text-center py-20 bg-card rounded-2xl border border-border shadow-sm">
+				<p class="text-muted-foreground mb-6 text-lg font-serif">Nenhum artigo encontrado nesta categoria no momento.</p>
+				<a href="/" class="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 font-sans">
+					Voltar para a página inicial
+				</a>
 			</div>
 		{:else}
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 				{#each filteredArticles as article (article.$id)}
 					<ArticleCard {article} />
 				{/each}

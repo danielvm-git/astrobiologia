@@ -6,13 +6,13 @@
 
 	let title = $state(article?.title || '');
 	let slug = $state(article?.slug || '');
-	let description = $state(article?.description || '');
+	let excerpt = $state(article?.excerpt || '');
 	let content = $state(article?.content || '');
 	let category = $state(article?.category || 'astrobiology');
 	let tags = $state(article?.tags?.join(', ') || '');
 	let status = $state(article?.status || 'draft');
 	let featured = $state(article?.featured || false);
-	let author = $state(article?.author || 'Danilo Albergaria');
+	let authorName = $state(article?.authorName || 'Danilo Albergaria');
 	let featuredImageUrl = $state(article?.featuredImage || '');
 
 	const categories = CATEGORIES;
@@ -38,13 +38,13 @@
 		const articleData = {
 			title,
 			slug: slug || generateSlug(title),
-			description,
+			excerpt,
 			content,
 			category,
 			tags: tags.split(',').map((t) => t.trim()),
 			status,
 			featured,
-			author,
+			authorName,
 			featuredImage: featuredImageUrl,
 			publishedAt: article?.publishedAt || new Date().toISOString(),
 			updatedAt: new Date().toISOString()
@@ -113,12 +113,12 @@
 			</div>
 
 			<div>
-				<label for="description" class="block text-sm font-medium text-slate-700 mb-2">
+				<label for="excerpt" class="block text-sm font-medium text-slate-700 mb-2">
 					Resumo *
 				</label>
 				<textarea
-					id="description"
-					bind:value={description}
+					id="excerpt"
+					bind:value={excerpt}
 					required
 					placeholder="Breve descrição para o card e SEO"
 					rows="3"
@@ -134,8 +134,8 @@
 					<input
 						id="author"
 						type="text"
-						bind:value={author}
-						placeholder="Danilo Couto"
+						bind:value={authorName}
+						placeholder="Danilo Albergaria"
 						class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
 					/>
 				</div>

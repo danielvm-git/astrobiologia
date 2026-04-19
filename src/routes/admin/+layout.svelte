@@ -9,11 +9,26 @@
 	let checkingAuth = true;
 
 	onMount(async () => {
+		// If we're on the login page, check if already logged in and redirect to dashboard
+		if ($page.url.pathname === '/admin/login') {
+			try {
+				const user = await account.get();
+				authStore.setUser(user);
+				await goto('/admin/dashboard');
+			} catch {
+				// Not logged in, stay on login page
+			} finally {
+				checkingAuth = false;
+			}
+			return;
+		}
+
+		// For all other admin pages, require authentication
 		try {
 			const user = await account.get();
 			authStore.setUser(user);
 		} catch (err) {
-			console.log('No client-side session, redirecting...');
+			console.log('No client-side session, redirecting to login...');
 			await goto('/admin/login');
 		} finally {
 			checkingAuth = false;

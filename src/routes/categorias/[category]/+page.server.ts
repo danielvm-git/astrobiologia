@@ -1,30 +1,21 @@
-import { databases, Query } from '$lib/appwrite';
+import { error } from '@sveltejs/kit';
+import { databases, Query, CATEGORIES, DATABASE_ID, COLLECTIONS } from '$lib/appwrite';
 import type { PageServerLoad } from './$types';
-
-const DATABASE_ID = '69e464fb0006a1b3c4eb';
-const ARTICLES_COLLECTION_ID = 'articles';
-
-const categoryMap: Record<string, string> = {
-	'exoplanets': 'Exoplanets',
-	'life-detection': 'Life Detection',
-	'biosignatures': 'Biosignatures',
-	'extremophiles': 'Extremophiles',
-	'missions': 'Space Missions',
-	'habitability': 'Habitability'
-};
 
 export const load: PageServerLoad = async ({ params }) => {
 	const categorySlug = params.category;
-	const categoryLabel = categoryMap[categorySlug];
+	const category = CATEGORIES.find(c => c.slug === categorySlug);
 
-	if (!categoryLabel) {
-		throw error(404, 'Category not found');
+	if (!category) {
+		throw error(404, 'Categoria não encontrada');
 	}
+
+	const categoryLabel = category.name;
 
 	try {
 		const response = await databases.listDocuments(
 			DATABASE_ID,
-			ARTICLES_COLLECTION_ID,
+			COLLECTIONS.ARTICLES,
 			[
 				Query.equal('status', 'published'),
 				Query.equal('category', categoryLabel),
