@@ -119,7 +119,7 @@ export async function getPublishedArticles(language = 'pt-br', limit = 20, offse
 	return articles.map(article => ({
 		...article,
 		translation: translations.find(t => t.article_id === article.$id)
-	})).filter(a => a.translation); // Ensure only articles with matching translation are returned
+	})).filter(a => a.translation);
 }
 
 export async function getFeaturedArticles(language = 'pt-br', limit = 5): Promise<Article[]> {
@@ -198,13 +198,21 @@ export async function getArticlesByCategory(category: string, language = 'pt-br'
 }
 
 export async function getAllArticles(): Promise<Article[]> {
-    // For admin, we want everything. We fetch master articles and then can optionally load translations.
-    // For now, let's just return masters.
 	const response = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES, [
 		Query.orderDesc('$createdAt'),
 		Query.limit(100)
 	]);
 	return response.documents as unknown as Article[];
+}
+
+/**
+ * Fetches all translations for a specific article.
+ */
+export async function getArticleTranslations(articleId: string): Promise<ArticleTranslation[]> {
+    const response = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, [
+        Query.equal('article_id', articleId)
+    ]);
+    return response.documents as unknown as ArticleTranslation[];
 }
 
 export async function createArticle(data: Omit<Article, '$id' | '$createdAt' | '$updatedAt' | 'translation'>): Promise<Article> {
@@ -217,8 +225,17 @@ export async function createArticle(data: Omit<Article, '$id' | '$createdAt' | '
 	return response as unknown as Article;
 }
 
+export async function createTranslation(data: Omit<ArticleTranslation, '$id'>): Promise<ArticleTranslation> {
+    const response = await databases.createDocument(
+        DATABASE_ID,
+        COLLECTIONS.ARTICLES_TRANSLATIONS,
+        ID.unique(),
+        data
+    );
+    return response as unknown as ArticleTranslation;
+}
+
 export async function updateArticle(id: string, data: Partial<Article>): Promise<Article> {
-    // Only update master fields here. Translations are updated separately.
     const { translation, ...masterData } = data;
 	const response = await databases.updateDocument(
 		DATABASE_ID,
@@ -227,6 +244,16 @@ export async function updateArticle(id: string, data: Partial<Article>): Promise
 		masterData
 	);
 	return response as unknown as Article;
+}
+
+export async function updateTranslation(id: string, data: Partial<ArticleTranslation>): Promise<ArticleTranslation> {
+    const response = await databases.updateDocument(
+        DATABASE_ID,
+        COLLECTIONS.ARTICLES_TRANSLATIONS,
+        id,
+        data
+    );
+    return response as unknown as ArticleTranslation;
 }
 
 export async function deleteArticle(id: string): Promise<void> {

@@ -1,18 +1,20 @@
-import { databases, DATABASE_ID, COLLECTIONS } from '$lib/appwrite';
-import { error, redirect } from '@sveltejs/kit';
+import { databases, DATABASE_ID, COLLECTIONS, getArticleTranslations } from '$lib/appwrite';
+import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ params }) => {
 	try {
-
-		const response = await databases.getDocument(
+		const article = await databases.getDocument(
 			DATABASE_ID,
 			COLLECTIONS.ARTICLES,
 			params.id
 		);
 
+        const translations = await getArticleTranslations(params.id);
+
 		return {
-			article: response
+			article,
+            translations
 		};
 	} catch (err) {
 		console.error('Error loading article:', err);

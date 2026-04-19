@@ -1,34 +1,51 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { CATEGORIES, uploadImage, getImageUrl } from '$lib/appwrite';
+	import { CATEGORIES, uploadImage, getImageUrl, type ArticleTranslation } from '$lib/appwrite';
 	import { onMount, onDestroy } from 'svelte';
 	import { Editor } from '@tiptap/core';
 	import StarterKit from '@tiptap/starter-kit';
 	import Link from '@tiptap/extension-link';
 	import Image from '@tiptap/extension-image';
 	import Placeholder from '@tiptap/extension-placeholder';
+    import { locales } from '$lib/paraglide/runtime';
+    import { cn } from '$lib/utils';
+    import { Languages, Copy, Trash2, Globe, FileText, CheckCircle2 } from 'lucide-svelte';
 
-	let { article = null, isLoading = $bindable(false), onSave } = $props();
+	let { article = null, translations = [], isLoading = $bindable(false), onSave } = $props();
 
-	// Capture initial values to avoid Svelte prop-reference-in-state warnings
-	const initial = article || {};
-
-	let title = $state(initial.title || '');
-	let slug = $state(initial.slug || '');
-	let excerpt = $state(initial.excerpt || '');
-	let content = $state(initial.content || '');
-	let category = $state(initial.category || 'noticias');
-	let tags = $state(initial.tags?.join(', ') || '');
-	let status = $state(initial.status || 'draft');
-	let featured = $state(initial.featured || false);
-	let authorName = $state(initial.authorName || 'Danilo Albergaria');
-	let featuredImageId = $state(initial.featuredImage || '');
+	// Master Metadata
+	let category = $state(article?.category || 'noticias');
+	let tags = $state(article?.tags?.join(', ') || '');
+	let status = $state(article?.status || 'draft');
+	let featured = $state(article?.featured || false);
+	let authorName = $state(article?.authorName || 'Danilo Albergaria');
+	let featuredImageId = $state(article?.featuredImage || '');
 	let featuredImageUrl = $derived(featuredImageId ? getImageUrl(featuredImageId) : '');
 
+    // Translation Management
+    let activeLang = $state('pt-br');
+    
+    // Initialize translations map
+    type TranslationState = Omit<ArticleTranslation, '$id' | 'article_id'>;
+    const initialTranslations: Record<string, TranslationState> = {};
+    locales.forEach(lang => {
+        const existing = translations.find((t: any) => t.language === lang);
+        initialTranslations[lang] = {
+            language: lang,
+            title: existing?.title || '',
+            slug: existing?.slug || '',
+            excerpt: existing?.excerpt || '',
+            content: existing?.content || '',
+            metaTitle: existing?.metaTitle || '',
+            metaDescription: existing?.metaDescription || ''
+        };
+    });
+
+    let transState = $state<Record<string, TranslationState>>(initialTranslations);
+
+    // Tiptap Editor
 	let editorElement = $state<HTMLElement | null>(null);
 	let editor = $state<Editor | null>(null);
-
-	const categories = CATEGORIES;
 
 	onMount(() => {
 		if (editorElement) {
@@ -51,9 +68,9 @@
 						placeholder: 'Escreva seu artigo aqui...'
 					})
 				],
-				content: content,
+				content: transState[activeLang].content,
 				onUpdate: ({ editor }) => {
-					content = editor.getHTML();
+					transState[activeLang].content = editor.getHTML();
 				},
 				editorProps: {
 					attributes: {
@@ -70,6 +87,19 @@
 		}
 	});
 
+    // Handle language switch
+    function handleLangSwitch(lang: string) {
+        // Save current content to state before switching
+        if (editor) {
+            transState[activeLang].content = editor.getHTML();
+        }
+        activeLang = lang;
+        // Update editor content
+        if (editor) {
+            editor.commands.setContent(transState[lang].content);
+        }
+    }
+
 	function generateSlug(title: string) {
 		return title
 			.toLowerCase()
@@ -80,10 +110,21 @@
 	}
 
 	function handleTitleChange() {
-		if (!article) {
-			slug = generateSlug(title);
+		if (!transState[activeLang].slug) {
+			transState[activeLang].slug = generateSlug(transState[activeLang].title);
 		}
 	}
+
+    function copyFromBase() {
+        const base = transState['pt-br'];
+        transState[activeLang].title = base.title;
+        transState[activeLang].slug = base.slug + '-en';
+        transState[activeLang].excerpt = base.excerpt;
+        transState[activeLang].content = base.content;
+        if (editor) {
+            editor.commands.setContent(base.content);
+        }
+    }
 
 	async function handleFeaturedImageUpload(e: Event) {
 		const target = e.target as HTMLInputElement;
@@ -125,14 +166,16 @@
 
 	async function handleSubmit(e: Event) {
 		e.preventDefault();
+        
+        // Ensure current editor content is captured
+        if (editor) {
+            transState[activeLang].content = editor.getHTML();
+        }
 
 		const articleData = {
-			title,
-			slug: slug || generateSlug(title),
-			excerpt,
-			content,
 			category,
-			tags: tags.split(',').map((t: string) => t.trim()),			status,
+			tags: tags.split(',').map((t: string) => t.trim()),
+			status,
 			featured,
 			authorName,
 			featuredImage: featuredImageId,
@@ -140,8 +183,11 @@
 			updatedAt: new Date().toISOString()
 		};
 
+        // Filter out empty translations (at least title and content required)
+        const finalTranslations = Object.values(transState).filter(t => t.title && t.content);
+
 		try {
-			await onSave(articleData);
+			await onSave(articleData, finalTranslations);
 			await goto('/admin/artigos');
 		} catch (err) {
 			console.error('Save error:', err);
@@ -151,268 +197,279 @@
 </script>
 
 <form onsubmit={handleSubmit} class="space-y-8 pb-20">
-	<!-- Basic Info -->
-	<div class="bg-white rounded-lg shadow-sm border border-slate-200 p-8">
-		<h2 class="text-2xl font-bold text-slate-900 mb-6">Detalhes do Artigo</h2>
+    <!-- Lang Selector Tabs -->
+    <div class="flex items-center gap-2 p-1 bg-slate-100 rounded-xl w-fit border border-slate-200">
+        {#each locales as tag}
+            <button
+                type="button"
+                onclick={() => handleLangSwitch(tag)}
+                class={cn(
+                    "px-6 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all",
+                    activeLang === tag 
+                        ? "bg-white text-primary shadow-sm ring-1 ring-slate-200" 
+                        : "text-slate-500 hover:text-slate-700"
+                )}
+            >
+                {tag === 'pt-br' ? 'Português' : 'English'}
+                {#if transState[tag].title}
+                    <span class="ml-2 text-green-500">●</span>
+                {/if}
+            </button>
+        {/each}
+    </div>
 
-		<div class="space-y-6">
-			<div>
-				<label for="title" class="block text-sm font-medium text-slate-700 mb-2">
-					Título *
-				</label>
-				<input
-					id="title"
-					type="text"
-					bind:value={title}
-					onchange={handleTitleChange}
-					required
-					placeholder="Título do artigo"
-					class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition"
-				/>
-			</div>
+	<!-- Content Area -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Main Editor Column -->
+        <div class="lg:col-span-2 space-y-8">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight flex items-center gap-2">
+                        <FileText class="w-5 h-5 text-primary" />
+                        Conteúdo ({activeLang})
+                    </h2>
+                    
+                    {#if activeLang !== 'pt-br'}
+                        <button 
+                            type="button"
+                            onclick={copyFromBase}
+                            class="flex items-center gap-2 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-primary border border-slate-200 rounded-lg hover:border-primary/20 transition-all"
+                        >
+                            <Copy class="w-3 h-3" />
+                            Copiar do Original (PT)
+                        </button>
+                    {/if}
+                </div>
 
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-				<div>
-					<label for="slug" class="block text-sm font-medium text-slate-700 mb-2">
-						Slug *
-					</label>
-					<input
-						id="slug"
-						type="text"
-						bind:value={slug}
-						required
-						placeholder="slug-do-artigo"
-						class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition"
-					/>
-				</div>
+                <div class="space-y-6">
+                    <div>
+                        <label for="title" class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">
+                            Título do Artigo
+                        </label>
+                        <input
+                            id="title"
+                            type="text"
+                            bind:value={transState[activeLang].title}
+                            oninput={handleTitleChange}
+                            required={activeLang === 'pt-br'}
+                            placeholder="Ex: A Vida em Exoplanetas"
+                            class="w-full px-5 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary/10 focus:border-primary focus:bg-white outline-none transition-all font-serif text-lg font-bold"
+                        />
+                    </div>
 
-				<div>
-					<label for="category" class="block text-sm font-medium text-slate-700 mb-2">
-						Categoria *
-					</label>
-					<select
-						id="category"
-						bind:value={category}
-						class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition"
-					>
-						{#each categories as cat}
-							<option value={cat.slug}>{cat.name}</option>
-						{/each}
-					</select>
-				</div>
-			</div>
+                    <div>
+                        <label for="slug" class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">
+                            Link Permanente (Slug)
+                        </label>
+                        <div class="flex items-center gap-2 text-slate-400 font-mono text-xs bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">
+                            <Globe class="w-3.5 h-3.5" />
+                            <span>/{activeLang}/artigos/</span>
+                            <input
+                                id="slug"
+                                type="text"
+                                bind:value={transState[activeLang].slug}
+                                placeholder="slug-do-artigo"
+                                class="bg-transparent border-none outline-none text-slate-900 flex-1 min-w-0"
+                            />
+                        </div>
+                    </div>
 
-			<div>
-				<label for="excerpt" class="block text-sm font-medium text-slate-700 mb-2">
-					Resumo *
-				</label>
-				<textarea
-					id="excerpt"
-					bind:value={excerpt}
-					required
-					placeholder="Breve descrição para o card e SEO"
-					rows="3"
-					class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition"
-				></textarea>
-			</div>
+                    <div>
+                        <label for="excerpt" class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">
+                            Resumo / Lide
+                        </label>
+                        <textarea
+                            id="excerpt"
+                            bind:value={transState[activeLang].excerpt}
+                            required={activeLang === 'pt-br'}
+                            placeholder="Uma introdução envolvente para o artigo..."
+                            rows="4"
+                            class="w-full px-5 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary/10 focus:border-primary focus:bg-white outline-none transition-all font-serif italic text-slate-600"
+                        ></textarea>
+                    </div>
 
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-				<div>
-					<label for="author" class="block text-sm font-medium text-slate-700 mb-2">
-						Autor
-					</label>
-					<input
-						id="author"
-						type="text"
-						bind:value={authorName}
-						placeholder="Danilo Albergaria"
-						class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition"
-					/>
-				</div>
+                    <!-- Tiptap Editor -->
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">
+                            Corpo do Artigo
+                        </label>
+                        <div class="rounded-2xl border border-slate-200 overflow-hidden bg-white shadow-sm ring-1 ring-slate-100">
+                            <div class="bg-slate-50/50 border-b border-slate-200 p-2 flex flex-wrap gap-1">
+                                <button
+                                    type="button"
+                                    onclick={() => editor?.chain().focus().toggleBold().run()}
+                                    class={cn("p-2 rounded-lg hover:bg-white hover:shadow-sm transition-all", editor?.isActive('bold') && "bg-white text-primary shadow-sm")}
+                                >
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 12h8a4 4 0 100-8H6v8zm0 0h10a4 4 0 110 8H6v-8z" /></svg>
+                                </button>
+                                <button
+                                    type="button"
+                                    onclick={() => editor?.chain().focus().toggleItalic().run()}
+                                    class={cn("p-2 rounded-lg hover:bg-white hover:shadow-sm transition-all", editor?.isActive('italic') && "bg-white text-primary shadow-sm")}
+                                >
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 0h4M4 20h4" /></svg>
+                                </button>
+                                <div class="w-px h-4 bg-slate-200 mx-1 self-center"></div>
+                                <button
+                                    type="button"
+                                    onclick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()}
+                                    class={cn("p-2 rounded-lg text-xs font-bold hover:bg-white hover:shadow-sm transition-all", editor?.isActive('heading', { level: 2 }) && "bg-white text-primary shadow-sm")}
+                                >
+                                    H2
+                                </button>
+                                <button
+                                    type="button"
+                                    onclick={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()}
+                                    class={cn("p-2 rounded-lg text-xs font-bold hover:bg-white hover:shadow-sm transition-all", editor?.isActive('heading', { level: 3 }) && "bg-white text-primary shadow-sm")}
+                                >
+                                    H3
+                                </button>
+                                <div class="w-px h-4 bg-slate-200 mx-1 self-center"></div>
+                                <button
+                                    type="button"
+                                    onclick={addImageToContent}
+                                    class="p-2 rounded-lg hover:bg-white hover:shadow-sm transition-all"
+                                >
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                </button>
+                            </div>
+                            <div bind:this={editorElement} class="editor-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-				<div>
-					<label for="tags" class="block text-sm font-medium text-slate-700 mb-2">
-						Tags (separadas por vírgula)
-					</label>
-					<input
-						id="tags"
-						type="text"
-						bind:value={tags}
-						placeholder="tag1, tag2, tag3"
-						class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition"
-					/>
-				</div>
-			</div>
+        <!-- Sidebar Column -->
+        <div class="space-y-8">
+            <!-- Master Settings -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-2">
+                    <Globe class="w-4 h-4" />
+                    Configurações Globais
+                </h3>
 
-			<div>
-				<label class="block text-sm font-medium text-slate-700 mb-2">
-					Imagem de Destaque
-				</label>
-				<div class="flex items-start gap-4">
-					{#if featuredImageUrl}
-						<div class="relative w-40 h-24 rounded-lg overflow-hidden border border-slate-200">
-							<img src={featuredImageUrl} alt="Preview" class="w-full h-full object-cover" />
-							<button
-								type="button"
-								onclick={() => (featuredImageId = '')}
-								class="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 transition"
-								aria-label="Remover imagem"
-							>
-								<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-								</svg>
-							</button>
-						</div>
-					{/if}
-					<div class="flex-1">
-						<input
-							type="file"
-							accept="image/*"
-							onchange={handleFeaturedImageUpload}
-							class="block w-full text-sm text-slate-500
-								file:mr-4 file:py-2 file:px-4
-								file:rounded-full file:border-0
-								file:text-sm file:font-semibold
-								file:bg-primary/10 file:text-primary
-								hover:file:bg-primary/20 transition"
-						/>
-						<p class="mt-1 text-xs text-slate-500">PNG, JPG ou WEBP. Máx 5MB.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                <div class="space-y-6">
+                    <div>
+                        <label for="category" class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">
+                            Categoria
+                        </label>
+                        <select
+                            id="category"
+                            bind:value={category}
+                            class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:bg-white transition-all text-sm font-semibold"
+                        >
+                            {#each CATEGORIES as cat}
+                                <option value={cat.slug}>{cat.name}</option>
+                            {/each}
+                        </select>
+                    </div>
 
-	<!-- Content (Tiptap Editor) -->
-	<div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
-		<div class="bg-slate-50 border-b border-slate-200 p-2 flex flex-wrap gap-1">
-			<!-- Editor Toolbar -->
-			<button
-				type="button"
-				onclick={() => editor?.chain().focus().toggleBold().run()}
-				class="p-2 rounded hover:bg-slate-200 transition {editor?.isActive('bold') ? 'bg-slate-200' : ''}"
-				title="Negrito"
-			>
-				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 12h8a4 4 0 100-8H6v8zm0 0h10a4 4 0 110 8H6v-8z" />
-				</svg>
-			</button>
-			<button
-				type="button"
-				onclick={() => editor?.chain().focus().toggleItalic().run()}
-				class="p-2 rounded hover:bg-slate-200 transition {editor?.isActive('italic') ? 'bg-slate-200' : ''}"
-				title="Itálico"
-			>
-				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 0h4M4 20h4" />
-				</svg>
-			</button>
-			<div class="w-px h-6 bg-slate-300 mx-1 self-center"></div>
-			<button
-				type="button"
-				onclick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()}
-				class="p-2 rounded hover:bg-slate-200 transition {editor?.isActive('heading', { level: 2 }) ? 'bg-slate-200' : ''}"
-				title="Título 2"
-			>
-				<span class="font-bold">H2</span>
-			</button>
-			<button
-				type="button"
-				onclick={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()}
-				class="p-2 rounded hover:bg-slate-200 transition {editor?.isActive('heading', { level: 3 }) ? 'bg-slate-200' : ''}"
-				title="Título 3"
-			>
-				<span class="font-bold">H3</span>
-			</button>
-			<div class="w-px h-6 bg-slate-300 mx-1 self-center"></div>
-			<button
-				type="button"
-				onclick={() => editor?.chain().focus().toggleBulletList().run()}
-				class="p-2 rounded hover:bg-slate-200 transition {editor?.isActive('bulletList') ? 'bg-slate-200' : ''}"
-				title="Lista com Marcadores"
-			>
-				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-				</svg>
-			</button>
-			<button
-				type="button"
-				onclick={() => editor?.chain().focus().toggleOrderedList().run()}
-				class="p-2 rounded hover:bg-slate-200 transition {editor?.isActive('orderedList') ? 'bg-slate-200' : ''}"
-				title="Lista Numerada"
-			>
-				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h10M4 8l.01.01M4 12l.01.01M4 16l.01.01M7 16h10" />
-				</svg>
-			</button>
-			<div class="w-px h-6 bg-slate-300 mx-1 self-center"></div>
-			<button
-				type="button"
-				onclick={() => editor?.chain().focus().toggleBlockquote().run()}
-				class="p-2 rounded hover:bg-slate-200 transition {editor?.isActive('blockquote') ? 'bg-slate-200' : ''}"
-				title="Citação"
-			>
-				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h10M4 8l.01.01M4 12l.01.01M4 16l.01.01M7 16h10" />
-				</svg>
-			</button>
-			<button
-				type="button"
-				onclick={addImageToContent}
-				class="p-2 rounded hover:bg-slate-200 transition"
-				title="Inserir Imagem"
-			>
-				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-				</svg>
-			</button>
-		</div>
+                    <div>
+                        <label for="tags" class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">
+                            Tags (vírgula)
+                        </label>
+                        <input
+                            id="tags"
+                            type="text"
+                            bind:value={tags}
+                            placeholder="exoplanetas, nasa, ciência"
+                            class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:bg-white transition-all text-sm"
+                        />
+                    </div>
 
-		<div bind:this={editorElement} class="editor-container"></div>
-	</div>
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">
+                            Imagem de Destaque
+                        </label>
+                        
+                        {#if featuredImageUrl}
+                            <div class="relative aspect-video rounded-xl overflow-hidden border border-slate-200 mb-3 group">
+                                <img src={featuredImageUrl} alt="Preview" class="w-full h-full object-cover" />
+                                <button
+                                    type="button"
+                                    onclick={() => (featuredImageId = '')}
+                                    class="absolute top-2 right-2 bg-red-500 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                    <Trash2 class="w-3.5 h-3.5" />
+                                </button>
+                            </div>
+                        {/if}
 
-	<!-- Publishing -->
-	<div class="bg-white rounded-lg shadow-sm border border-slate-200 p-8">
-		<h2 class="text-2xl font-bold text-slate-900 mb-6">Publicação</h2>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onchange={handleFeaturedImageUpload}
+                            class="block w-full text-[10px] text-slate-400
+                                file:mr-4 file:py-2 file:px-4
+                                file:rounded-lg file:border-0
+                                file:text-[10px] file:font-black file:uppercase file:tracking-widest
+                                file:bg-primary/10 file:text-primary
+                                hover:file:bg-primary/20 transition-all cursor-pointer"
+                        />
+                    </div>
+                </div>
+            </div>
 
-		<div class="space-y-4">
-			<div class="flex items-center gap-4">
-				<label for="status" class="block text-sm font-medium text-slate-700">
-					Status
-				</label>
-				<select
-					id="status"
-					bind:value={status}
-					class="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition"
-				>
-					<option value="draft">Rascunho</option>
-					<option value="published">Publicado</option>
-				</select>
-			</div>
+            <!-- Publishing -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-2">
+                    <CheckCircle2 class="w-4 h-4" />
+                    Publicação
+                </h3>
 
-			<label class="flex items-center gap-2 cursor-pointer group">
-				<input type="checkbox" bind:checked={featured} class="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary transition" />
-				<span class="text-sm font-medium text-slate-700 group-hover:text-slate-900 transition">Artigo em Destaque</span>
-			</label>
-		</div>
-	</div>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
+                        <span class="text-xs font-bold text-slate-600 uppercase tracking-widest">Status</span>
+                        <select
+                            bind:value={status}
+                            class="bg-transparent text-xs font-black text-primary uppercase tracking-widest outline-none cursor-pointer"
+                        >
+                            <option value="draft">Rascunho</option>
+                            <option value="published">Publicado</option>
+                        </select>
+                    </div>
 
-	<!-- Actions -->
-	<div class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 md:p-6 flex justify-center gap-4 z-10 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
-		<div class="max-w-7xl w-full flex justify-end gap-4">
-			<a
-				href="/admin/artigos"
-				class="px-8 py-3 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition font-medium"
-			>
-				Cancelar
-			</a>
-			<button
-				type="submit"
-				disabled={isLoading}
-				class="px-8 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition disabled:opacity-50 disabled:cursor-not-allowed font-medium shadow-sm shadow-primary/20"
-			>
-				{isLoading ? 'Processando...' : 'Salvar Artigo'}
-			</button>
+                    <label class="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors cursor-pointer group border border-transparent hover:border-slate-100">
+                        <input 
+                            type="checkbox" 
+                            bind:checked={featured} 
+                            class="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary transition-all" 
+                        />
+                        <span class="text-xs font-bold text-slate-600 uppercase tracking-widest group-hover:text-slate-900">Em Destaque</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<!-- Bottom Action Bar -->
+	<div class="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-md border-t border-slate-200 p-4 z-40">
+		<div class="max-w-7xl mx-auto flex justify-between items-center px-4">
+            <div class="flex items-center gap-4">
+                {#each locales as tag}
+                    <div class="flex items-center gap-1">
+                        <div class={cn("w-2 h-2 rounded-full", transState[tag].title ? "bg-green-500" : "bg-slate-300")}></div>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">{tag}</span>
+                    </div>
+                {/each}
+            </div>
+
+            <div class="flex gap-4">
+                <a
+                    href="/admin/artigos"
+                    class="px-6 py-2.5 text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-slate-700 transition-all"
+                >
+                    Cancelar
+                </a>
+                <button
+                    type="submit"
+                    disabled={isLoading}
+                    class="px-10 py-2.5 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all disabled:opacity-50 active:scale-[0.98]"
+                >
+                    {isLoading ? 'Salvando...' : 'Confirmar e Salvar'}
+                </button>
+            </div>
 		</div>
 	</div>
 </form>
@@ -421,7 +478,7 @@
 	:global(.tiptap p.is-editor-empty:first-child::before) {
 		content: attr(data-placeholder);
 		float: left;
-		color: #adb5bd;
+		color: #cbd5e1;
 		pointer-events: none;
 		height: 0;
 	}
@@ -429,9 +486,13 @@
 	:global(.tiptap) {
 		min-height: 400px;
 		outline: none;
+        font-family: serif;
+        font-size: 1.125rem;
+        line-height: 1.75;
 	}
 
-	.editor-container {
+	.editor-content {
 		background: white;
+        padding: 2rem;
 	}
 </style>

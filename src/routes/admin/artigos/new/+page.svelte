@@ -1,21 +1,23 @@
 <script lang="ts">
 	import ArticleEditor from '$lib/components/ArticleEditor.svelte';
-	import { databases, DATABASE_ID } from '$lib/appwrite';
+	import { createArticle, createTranslation } from '$lib/appwrite';
 
 	let isLoading = $state(false);
 
-	async function saveArticle(articleData: any) {
+	async function saveArticle(articleData: any, translations: any[]) {
 		isLoading = true;
 
 		try {
-			const ARTICLES_COLLECTION_ID = 'articles';
+			// 1. Create master
+			const master = await createArticle(articleData);
 
-			await databases.createDocument(
-				DATABASE_ID,
-				ARTICLES_COLLECTION_ID,
-				'unique()',
-				articleData
-			);
+            // 2. Create translations
+            for (const trans of translations) {
+                await createTranslation({
+                    ...trans,
+                    article_id: master.$id
+                });
+            }
 		} catch (err) {
 			console.error('Error saving article:', err);
 			throw err;
@@ -31,8 +33,8 @@
 </svelte:head>
 
 <div class="mb-8">
-	<h1 class="text-3xl font-bold text-slate-900">Criar Novo Artigo</h1>
-	<p class="text-slate-600 mt-2">Escreva e publique um novo artigo no seu site</p>
+	<h1 class="text-3xl font-black text-slate-900 uppercase tracking-tight">Criar Novo Artigo</h1>
+	<p class="text-slate-500 mt-2 text-sm font-medium uppercase tracking-widest">Inicie um novo conteúdo científico</p>
 </div>
 
 <ArticleEditor bind:isLoading={isLoading} onSave={saveArticle} />
