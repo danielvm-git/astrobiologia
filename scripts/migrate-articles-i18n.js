@@ -23,7 +23,7 @@ for (const line of envLines) {
     }
 }
 
-const ENDPOINT = env.PUBLIC_APPWRITE_ENDPOINT || 'https://cloud.appwrite.io/v1';
+const ENDPOINT = env.PUBLIC_APPWRITE_ENDPOINT || 'https://nyc.cloud.appwrite.io/v1';
 const PROJECT_ID = env.PUBLIC_APPWRITE_PROJECT_ID;
 const API_KEY = env.APPWRITE_API_KEY;
 const DATABASE_ID = env.PUBLIC_DATABASE_ID || '69e464fb0006a1b3c4eb';

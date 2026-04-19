@@ -1,16 +1,16 @@
 import { Client, Account, Databases, Storage, ID, Query, OAuthProvider } from 'appwrite';
-import { 
-    PUBLIC_APPWRITE_ENDPOINT, 
-    PUBLIC_APPWRITE_PROJECT_ID,
-    PUBLIC_DATABASE_ID,
-    PUBLIC_ARTICLES_COLLECTION_ID 
+import {
+	PUBLIC_APPWRITE_ENDPOINT,
+	PUBLIC_APPWRITE_PROJECT_ID,
+	PUBLIC_DATABASE_ID,
+	PUBLIC_ARTICLES_COLLECTION_ID
 } from '$env/static/public';
 
 // Initialize Appwrite client
 const client = new Client();
 
 client
-	.setEndpoint(PUBLIC_APPWRITE_ENDPOINT || 'https://cloud.appwrite.io/v1')
+	.setEndpoint(PUBLIC_APPWRITE_ENDPOINT || 'https://nyc.cloud.appwrite.io/v1')
 	.setProject(PUBLIC_APPWRITE_PROJECT_ID || '');
 
 export const account = new Account(client);
@@ -214,10 +214,10 @@ export async function getAllArticles(): Promise<Article[]> {
  * Fetches all translations for a specific article.
  */
 export async function getArticleTranslations(articleId: string): Promise<ArticleTranslation[]> {
-    const response = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, [
-        Query.equal('article_id', articleId)
-    ]);
-    return response.documents as unknown as ArticleTranslation[];
+	const response = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, [
+		Query.equal('article_id', articleId)
+	]);
+	return response.documents as unknown as ArticleTranslation[];
 }
 
 export async function createArticle(data: Omit<Article, '$id' | '$createdAt' | '$updatedAt' | 'translation'>): Promise<Article> {
@@ -231,17 +231,17 @@ export async function createArticle(data: Omit<Article, '$id' | '$createdAt' | '
 }
 
 export async function createTranslation(data: Omit<ArticleTranslation, '$id'>): Promise<ArticleTranslation> {
-    const response = await databases.createDocument(
-        DATABASE_ID,
-        COLLECTIONS.ARTICLES_TRANSLATIONS,
-        ID.unique(),
-        data
-    );
-    return response as unknown as ArticleTranslation;
+	const response = await databases.createDocument(
+		DATABASE_ID,
+		COLLECTIONS.ARTICLES_TRANSLATIONS,
+		ID.unique(),
+		data
+	);
+	return response as unknown as ArticleTranslation;
 }
 
 export async function updateArticle(id: string, data: Partial<Article>): Promise<Article> {
-    const { translation, ...masterData } = data;
+	const { translation, ...masterData } = data;
 	const response = await databases.updateDocument(
 		DATABASE_ID,
 		COLLECTIONS.ARTICLES,
@@ -252,24 +252,24 @@ export async function updateArticle(id: string, data: Partial<Article>): Promise
 }
 
 export async function updateTranslation(id: string, data: Partial<ArticleTranslation>): Promise<ArticleTranslation> {
-    const response = await databases.updateDocument(
-        DATABASE_ID,
-        COLLECTIONS.ARTICLES_TRANSLATIONS,
-        id,
-        data
-    );
-    return response as unknown as ArticleTranslation;
+	const response = await databases.updateDocument(
+		DATABASE_ID,
+		COLLECTIONS.ARTICLES_TRANSLATIONS,
+		id,
+		data
+	);
+	return response as unknown as ArticleTranslation;
 }
 
 export async function deleteArticle(id: string): Promise<void> {
-    // 1. Delete all translations
-    const trans = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, [
-        Query.equal('article_id', id)
-    ]);
-    for (const t of trans.documents) {
-        await databases.deleteDocument(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, t.$id);
-    }
-    // 2. Delete master
+	// 1. Delete all translations
+	const trans = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, [
+		Query.equal('article_id', id)
+	]);
+	for (const t of trans.documents) {
+		await databases.deleteDocument(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, t.$id);
+	}
+	// 2. Delete master
 	await databases.deleteDocument(DATABASE_ID, COLLECTIONS.ARTICLES, id);
 }
 

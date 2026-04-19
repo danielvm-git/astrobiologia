@@ -3,7 +3,9 @@ import { describe, it, expect, vi } from 'vitest';
 // Mock SvelteKit environment variables
 vi.mock('$env/static/public', () => ({
     PUBLIC_APPWRITE_ENDPOINT: 'https://localhost/v1',
-    PUBLIC_APPWRITE_PROJECT_ID: 'test-project'
+    PUBLIC_APPWRITE_PROJECT_ID: 'test-project',
+    PUBLIC_DATABASE_ID: 'astrobiology_db',
+    PUBLIC_ARTICLES_COLLECTION_ID: 'articles'
 }));
 
 import * as appwrite from '../../src/lib/appwrite';

@@ -11,7 +11,7 @@ As per the project roadmap, the primary deployment target is **Appwrite Sites**.
 3. **Storage**:
    - Bucket ID: `images`
 4. **Environment Variables**:
-   - `PUBLIC_APPWRITE_ENDPOINT`: `https://cloud.appwrite.io/v1`
+   - `PUBLIC_APPWRITE_ENDPOINT`: `https://nyc.cloud.appwrite.io/v1`
    - `PUBLIC_APPWRITE_PROJECT_ID`: Your Appwrite Project ID
 
 ### Step 1: Build the Project

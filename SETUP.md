@@ -59,7 +59,7 @@ cp .env.example .env.local
 
 Fill in your Appwrite credentials:
 ```
-VITE_APPWRITE_ENDPOINT=https://cloud.appwrite.io/v1
+VITE_APPWRITE_ENDPOINT=https://nyc.cloud.appwrite.io/v1
 VITE_APPWRITE_PROJECT_ID=your_project_id
 VITE_APPWRITE_API_KEY=your_api_key
 VITE_APPWRITE_DATABASE_ID=astrobiology_db
