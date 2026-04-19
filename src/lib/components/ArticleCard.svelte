@@ -91,46 +91,57 @@
 		</div>
 	</article>
 {:else}
-	<article class={cn('group overflow-hidden rounded-2xl border border-border/50 bg-card transition-all hover:shadow-xl hover:border-primary/20', className)}>
-		<a href="/artigos/{article.slug}" class="block">
-			<div class="relative aspect-[16/10] overflow-hidden">
+	<article class={cn('group overflow-hidden bg-white border border-slate-200 transition-all duration-300 hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] hover:border-primary/30 flex flex-col h-full', className)}>
+		<a href="/artigos/{article.slug}" class="block overflow-hidden">
+			<div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
 				{#if imageUrl}
 					<img
 						src={imageUrl}
 						alt={article.featuredImageAlt || article.title}
-						class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+						class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
 					/>
 				{:else}
-					<div class="flex h-full w-full items-center justify-center bg-muted">
-						<span class="text-3xl text-muted-foreground">🔭</span>
+					<div class="flex h-full w-full items-center justify-center">
+						<span class="text-3xl grayscale opacity-30">🔭</span>
+					</div>
+				{/if}
+				{#if article.featured}
+					<div class="absolute top-4 left-4">
+						<span class="bg-accent text-white text-[9px] font-black uppercase tracking-widest px-2 py-1 shadow-lg">
+							Destaque
+						</span>
 					</div>
 				{/if}
 			</div>
 		</a>
-		<div class="p-6">
+		<div class="p-6 flex flex-col flex-1">
 			{#if category}
 				<a
 					href="/categorias/{category.slug}"
-					class="inline-flex rounded-md bg-muted px-2 py-0.5 text-[10px] uppercase tracking-wider font-bold text-muted-foreground transition-colors hover:bg-muted/80 font-sans"
+					class="text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-4 hover:underline"
 				>
 					{category.name}
 				</a>
 			{/if}
-			<a href="/artigos/{article.slug}">
-				<h3 class="mt-3 text-xl font-bold leading-tight text-foreground transition-colors group-hover:text-primary text-balance font-serif">
+			<a href="/artigos/{article.slug}" class="group-hover:text-primary transition-colors">
+				<h3 class="text-xl md:text-2xl font-bold leading-[1.2] text-slate-900 mb-3 font-serif line-clamp-2">
 					{article.title}
 				</h3>
 			</a>
-			<p class="mt-3 line-clamp-3 text-sm text-muted-foreground leading-relaxed">
+			<p class="text-slate-600 text-sm leading-relaxed font-serif line-clamp-3 mb-6">
 				{article.excerpt}
 			</p>
-			<div class="mt-6 pt-4 border-t border-border/40 flex items-center justify-between text-[11px] font-medium text-muted-foreground uppercase tracking-wide font-sans">
-				<span class="flex items-center gap-1.5">
-					Astrobiologia.com
-				</span>
-				<span class="flex items-center gap-1">
-					{readingTime(article.content)} min de leitura
-				</span>
+			
+			<div class="mt-auto pt-6 border-t border-slate-100 flex items-center justify-between">
+				<div class="flex items-center gap-3">
+					<div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+						{formatDate(article.publishedAt || article.$createdAt)}
+					</div>
+				</div>
+				<div class="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+					<Clock class="h-3 w-3" />
+					{readingTime(article.content)} min
+				</div>
 			</div>
 		</div>
 	</article>
