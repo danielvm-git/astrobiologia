@@ -12,6 +12,7 @@ export const load: PageServerLoad = async () => {
 			[
 				Query.equal('status', 'published'),
 				Query.equal('featured', true),
+				Query.orderDesc('publishedAt'),
 				Query.limit(3)
 			]
 		);

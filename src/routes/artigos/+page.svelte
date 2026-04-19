@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ArticleCard from '$lib/components/ArticleCard.svelte';
 	import { CATEGORIES } from '$lib/appwrite';
+	import type { Article } from '$lib/appwrite';
 
 	let { data } = $props();
 
@@ -13,7 +14,7 @@
 			article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
 			(article.description || '').toLowerCase().includes(searchQuery.toLowerCase());
 		return matchesCategory && matchesSearch;
-	}));
+	}) as unknown as Article[]);
 
 	const categories = [{ slug: 'all', name: 'Todas as Categorias' }, ...CATEGORIES];
 </script>
