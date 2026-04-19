@@ -1,36 +1,19 @@
-import { databases, Query, DATABASE_ID } from '$lib/appwrite';
+import { getFeaturedArticles, getPublishedArticles } from '$lib/appwrite';
 import type { PageServerLoad } from './$types';
 
-const ARTICLES_COLLECTION_ID = 'articles';
+export const load: PageServerLoad = async ({ locals }) => {
+    const lang = (locals as any).paraglide?.lang || 'pt-br';
 
-export const load: PageServerLoad = async () => {
 	try {
 		// Fetch featured articles
-		const featuredResponse = await databases.listDocuments(
-			DATABASE_ID,
-			ARTICLES_COLLECTION_ID,
-			[
-				Query.equal('status', 'published'),
-				Query.equal('featured', true),
-				Query.orderDesc('publishedAt'),
-				Query.limit(3)
-			]
-		);
+		const featured = await getFeaturedArticles(lang, 3);
 
 		// Fetch recent articles
-		const recentResponse = await databases.listDocuments(
-			DATABASE_ID,
-			ARTICLES_COLLECTION_ID,
-			[
-				Query.equal('status', 'published'),
-				Query.orderDesc('publishedAt'),
-				Query.limit(24)
-			]
-		);
+		const recent = await getPublishedArticles(lang, 24);
 
 		return {
-			featured: featuredResponse.documents,
-			recent: recentResponse.documents
+			featured,
+			recent
 		};
 	} catch (err) {
 		console.error('Error loading homepage data:', err);

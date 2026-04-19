@@ -16,6 +16,7 @@ export const storage = new Storage(client);
 export const DATABASE_ID = env.PUBLIC_DATABASE_ID || '69e464fb0006a1b3c4eb';
 export const COLLECTIONS = {
 	ARTICLES: env.PUBLIC_ARTICLES_COLLECTION_ID || 'articles',
+	ARTICLES_TRANSLATIONS: 'article_translations',
 	CATEGORIES: 'categories'
 } as const;
 
@@ -29,14 +30,22 @@ export interface User {
 	labels?: string[];
 }
 
-export interface Article {
+export interface ArticleTranslation {
 	$id: string;
-	$createdAt: string;
-	$updatedAt: string;
+	article_id: string;
+	language: string;
 	title: string;
 	slug: string;
 	excerpt: string;
 	content: string;
+	metaTitle?: string;
+	metaDescription?: string;
+}
+
+export interface Article {
+	$id: string;
+	$createdAt: string;
+	$updatedAt: string;
 	category: string;
 	tags: string[];
 	featuredImage?: string;
@@ -46,11 +55,10 @@ export interface Article {
 	authorId: string;
 	authorName: string;
 	publishedAt?: string;
-	metaTitle?: string;
-	metaDescription?: string;
 	ogImage?: string;
-	language: string; // 'pt-BR', 'en', etc.
-	translationId?: string; // Links translations of the same article
+	language?: string; // Legacy fallback
+	// Joined translation data
+	translation?: ArticleTranslation;
 }
 
 export interface Category {
@@ -81,45 +89,117 @@ export async function logout(): Promise<void> {
 }
 
 // Article helpers
-export async function getPublishedArticles(limit = 20, offset = 0): Promise<Article[]> {
-	const response = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES, [
-		Query.equal('status', 'published'),
-		Query.orderDesc('publishedAt'),
+
+/**
+ * Fetches published articles with translations for a specific language.
+ */
+export async function getPublishedArticles(language = 'pt-br', limit = 20, offset = 0): Promise<Article[]> {
+	// 1. Get translations for the language
+	const transResponse = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, [
+		Query.equal('language', language),
 		Query.limit(limit),
 		Query.offset(offset)
 	]);
-	return response.documents as unknown as Article[];
+
+	if (transResponse.total === 0) return [];
+
+	const translations = transResponse.documents as unknown as ArticleTranslation[];
+	const articleIds = translations.map(t => t.article_id);
+
+	// 2. Get master articles for these translations
+	const articlesResponse = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES, [
+		Query.equal('$id', articleIds),
+		Query.equal('status', 'published'),
+		Query.orderDesc('publishedAt')
+	]);
+
+	const articles = articlesResponse.documents as unknown as Article[];
+
+	// 3. Join
+	return articles.map(article => ({
+		...article,
+		translation: translations.find(t => t.article_id === article.$id)
+	})).filter(a => a.translation); // Ensure only articles with matching translation are returned
 }
 
-export async function getFeaturedArticles(limit = 5): Promise<Article[]> {
+export async function getFeaturedArticles(language = 'pt-br', limit = 5): Promise<Article[]> {
 	const response = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES, [
 		Query.equal('status', 'published'),
 		Query.equal('featured', true),
 		Query.orderDesc('publishedAt'),
 		Query.limit(limit)
 	]);
-	return response.documents as unknown as Article[];
+
+	const articles = response.documents as unknown as Article[];
+	if (articles.length === 0) return [];
+
+	const articleIds = articles.map(a => a.$id);
+	const transResponse = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, [
+		Query.equal('article_id', articleIds),
+		Query.equal('language', language)
+	]);
+
+	const translations = transResponse.documents as unknown as ArticleTranslation[];
+
+	return articles.map(article => ({
+		...article,
+		translation: translations.find(t => t.article_id === article.$id)
+	})).filter(a => a.translation);
 }
 
-export async function getArticleBySlug(slug: string): Promise<Article | null> {
-	const response = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES, [
+export async function getArticleBySlug(slug: string, language = 'pt-br'): Promise<Article | null> {
+	// 1. Find translation by slug and language
+	const transResponse = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, [
 		Query.equal('slug', slug),
+		Query.equal('language', language),
 		Query.limit(1)
 	]);
-	return response.documents[0] as unknown as Article || null;
+
+	if (transResponse.total === 0) return null;
+
+	const translation = transResponse.documents[0] as unknown as ArticleTranslation;
+
+	// 2. Get master article
+	try {
+		const article = await databases.getDocument(DATABASE_ID, COLLECTIONS.ARTICLES, translation.article_id) as unknown as Article;
+		return {
+			...article,
+			translation
+		};
+	} catch (e) {
+		console.error('Failed to fetch master article:', e);
+		return null;
+	}
 }
 
-export async function getArticlesByCategory(category: string, limit = 20): Promise<Article[]> {
+export async function getArticlesByCategory(category: string, language = 'pt-br', limit = 20): Promise<Article[]> {
 	const response = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES, [
 		Query.equal('status', 'published'),
 		Query.equal('category', category),
 		Query.orderDesc('publishedAt'),
 		Query.limit(limit)
 	]);
-	return response.documents as unknown as Article[];
+
+	const articles = response.documents as unknown as Article[];
+	if (articles.length === 0) return [];
+
+	const articleIds = articles.map(a => a.$id);
+	const transResponse = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, [
+		Query.equal('article_id', articleIds),
+		Query.equal('language', language)
+	]);
+
+	const translations = transResponse.documents as unknown as ArticleTranslation[];
+
+	return articles.map(article => ({
+		...article,
+		translation: translations.find(t => t.article_id === article.$id)
+	})).filter(a => a.translation);
 }
 
 export async function getAllArticles(): Promise<Article[]> {
+    // For admin, we want everything. We fetch master articles and then can optionally load translations.
+    // For now, let's just return masters.
 	const response = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES, [
 		Query.orderDesc('$createdAt'),
 		Query.limit(100)
@@ -127,7 +207,7 @@ export async function getAllArticles(): Promise<Article[]> {
 	return response.documents as unknown as Article[];
 }
 
-export async function createArticle(data: Omit<Article, '$id' | '$createdAt' | '$updatedAt'>): Promise<Article> {
+export async function createArticle(data: Omit<Article, '$id' | '$createdAt' | '$updatedAt' | 'translation'>): Promise<Article> {
 	const response = await databases.createDocument(
 		DATABASE_ID,
 		COLLECTIONS.ARTICLES,
@@ -138,16 +218,26 @@ export async function createArticle(data: Omit<Article, '$id' | '$createdAt' | '
 }
 
 export async function updateArticle(id: string, data: Partial<Article>): Promise<Article> {
+    // Only update master fields here. Translations are updated separately.
+    const { translation, ...masterData } = data;
 	const response = await databases.updateDocument(
 		DATABASE_ID,
 		COLLECTIONS.ARTICLES,
 		id,
-		data
+		masterData
 	);
 	return response as unknown as Article;
 }
 
 export async function deleteArticle(id: string): Promise<void> {
+    // 1. Delete all translations
+    const trans = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, [
+        Query.equal('article_id', id)
+    ]);
+    for (const t of trans.documents) {
+        await databases.deleteDocument(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, t.$id);
+    }
+    // 2. Delete master
 	await databases.deleteDocument(DATABASE_ID, COLLECTIONS.ARTICLES, id);
 }
 

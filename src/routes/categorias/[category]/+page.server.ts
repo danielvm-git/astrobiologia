@@ -1,24 +1,16 @@
-import { databases, Query, DATABASE_ID, COLLECTIONS } from '$lib/appwrite';
+import { getArticlesByCategory } from '$lib/appwrite';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, locals }) => {
 	const { category } = params;
+    const lang = (locals as any).paraglide?.lang || 'pt-br';
 
 	try {
-		const response = await databases.listDocuments(
-			DATABASE_ID,
-			COLLECTIONS.ARTICLES,
-			[
-				Query.equal('status', 'published'),
-				Query.equal('category', category),
-				Query.orderDesc('publishedAt'),
-				Query.limit(50)
-			]
-		);
+		const articles = await getArticlesByCategory(category, lang, 50);
 
 		return {
-			articles: response.documents,
+			articles,
 			categorySlug: category
 		};
 	} catch (err) {

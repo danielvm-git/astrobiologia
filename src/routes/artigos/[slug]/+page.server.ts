@@ -1,48 +1,28 @@
-import { databases, Query, DATABASE_ID } from '$lib/appwrite';
+import { getArticleBySlug, getArticlesByCategory } from '$lib/appwrite';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
-const ARTICLES_COLLECTION_ID = 'articles';
-
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, locals }) => {
+    // locals.paraglide.lang is set by the paraglide middleware hook
+    const lang = (locals as any).paraglide?.lang || 'pt-br';
+    
 	try {
-		// Fetch the article by slug
-		const response = await databases.listDocuments(
-			DATABASE_ID,
-			ARTICLES_COLLECTION_ID,
-			[
-				Query.equal('slug', params.slug),
-				Query.equal('status', 'published'),
-				Query.limit(1)
-			]
-		);
+		// Fetch the article by slug and language
+		const article = await getArticleBySlug(params.slug, lang);
 
-		if (response.documents.length === 0) {
+		if (!article) {
 			throw error(404, 'Article not found');
 		}
 
-		const article = response.documents[0];
-
-		// Fetch related articles by category
-		const relatedResponse = await databases.listDocuments(
-			DATABASE_ID,
-			ARTICLES_COLLECTION_ID,
-			[
-				Query.equal('category', article.category),
-				Query.equal('status', 'published'),
-				Query.notEqual('$id', article.$id),
-				Query.limit(3)
-			]
-		);
+		// Fetch related articles by category in same language
+		const relatedArticles = await getArticlesByCategory(article.category, lang, 3);
 
 		return {
 			article,
-			relatedArticles: relatedResponse.documents
+			relatedArticles: relatedArticles.filter(a => a.$id !== article.$id)
 		};
 	} catch (err) {
-		if (err instanceof Error && err.message.includes('not found')) {
-			throw error(404, 'Article not found');
-		}
+		if (err && (err as any).status === 404) throw err;
 		console.error('Error loading article:', err);
 		throw error(500, 'Failed to load article');
 	}

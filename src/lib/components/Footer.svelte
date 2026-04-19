@@ -1,8 +1,11 @@
 <script lang="ts">
-	import { Telescope, Mail, Twitter, Github } from 'lucide-svelte';
+	import { Telescope, Mail, Twitter } from 'lucide-svelte';
 	import { CATEGORIES } from '$lib/appwrite';
+	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
+	import * as m from '$lib/paraglide/messages';
 
 	const currentYear = new Date().getFullYear();
+	const lang = $derived(getLocale());
 </script>
 
 <footer class="border-t border-border bg-muted/30">
@@ -10,14 +13,14 @@
 		<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
 			<!-- Brand -->
 			<div class="lg:col-span-1">
-				<a href="/" class="flex items-center gap-2">
+				<a href={localizeHref('/')} class="flex items-center gap-2">
 					<Telescope class="h-6 w-6 text-primary" />
 					<span class="text-lg font-bold text-foreground">
 						Astrobiologia<span class="text-primary">.com</span>
 					</span>
 				</a>
 				<p class="mt-4 text-sm leading-relaxed text-muted-foreground">
-					Explorando as fronteiras da vida no universo. Conteúdo científico sobre astrobiologia, exoplanetas e a busca por vida extraterrestre.
+					{m.footer_tagline()}
 				</p>
 			</div>
 
@@ -28,7 +31,7 @@
 					{#each CATEGORIES.slice(0, 4) as category}
 						<li>
 							<a
-								href="/categorias/{category.slug}"
+								href={localizeHref(`/categorias/${category.slug}`)}
 								class="text-sm text-muted-foreground transition-colors hover:text-primary"
 							>
 								{category.name}
@@ -43,22 +46,22 @@
 				<h3 class="text-sm font-semibold uppercase tracking-wider text-foreground">Links</h3>
 				<ul class="mt-4 flex flex-col gap-2">
 					<li>
-						<a href="/sobre" class="text-sm text-muted-foreground transition-colors hover:text-primary">
+						<a href={localizeHref('/sobre')} class="text-sm text-muted-foreground transition-colors hover:text-primary">
 							Sobre o Autor
 						</a>
 					</li>
 					<li>
-						<a href="/artigos" class="text-sm text-muted-foreground transition-colors hover:text-primary">
+						<a href={localizeHref('/artigos')} class="text-sm text-muted-foreground transition-colors hover:text-primary">
 							Todos os Artigos
 						</a>
 					</li>
 					<li>
-						<a href="/contato" class="text-sm text-muted-foreground transition-colors hover:text-primary">
+						<a href={localizeHref('/contato')} class="text-sm text-muted-foreground transition-colors hover:text-primary">
 							Contato
 						</a>
 					</li>
 					<li>
-						<a href="/privacidade" class="text-sm text-muted-foreground transition-colors hover:text-primary">
+						<a href={localizeHref('/privacidade')} class="text-sm text-muted-foreground transition-colors hover:text-primary">
 							Privacidade
 						</a>
 					</li>
