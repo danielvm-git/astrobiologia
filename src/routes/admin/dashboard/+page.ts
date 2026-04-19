@@ -1,9 +1,6 @@
-import { databases, Query } from '$lib/appwrite';
+import { databases, Query, DATABASE_ID, COLLECTIONS } from '$lib/appwrite';
 import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-
-const DATABASE_ID = '69e464fb0006a1b3c4eb';
-const ARTICLES_COLLECTION_ID = 'articles';
 
 export const load: PageLoad = async () => {
 
@@ -11,25 +8,25 @@ export const load: PageLoad = async () => {
 		// Get all articles
 		const allResponse = await databases.listDocuments(
 			DATABASE_ID,
-			ARTICLES_COLLECTION_ID,
+			COLLECTIONS.ARTICLES,
 			[Query.limit(100)]
 		);
 
 		const publishedResponse = await databases.listDocuments(
 			DATABASE_ID,
-			ARTICLES_COLLECTION_ID,
+			COLLECTIONS.ARTICLES,
 			[Query.equal('status', 'published'), Query.limit(100)]
 		);
 
 		const draftResponse = await databases.listDocuments(
 			DATABASE_ID,
-			ARTICLES_COLLECTION_ID,
+			COLLECTIONS.ARTICLES,
 			[Query.equal('status', 'draft'), Query.limit(100)]
 		);
 
 		const recentResponse = await databases.listDocuments(
 			DATABASE_ID,
-			ARTICLES_COLLECTION_ID,
+			COLLECTIONS.ARTICLES,
 			[Query.orderDesc('$createdAt'), Query.limit(5)]
 		);
 

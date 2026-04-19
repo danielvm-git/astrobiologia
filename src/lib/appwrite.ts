@@ -6,17 +6,16 @@ const client = new Client();
 
 client
 	.setEndpoint(env.PUBLIC_APPWRITE_ENDPOINT || 'https://cloud.appwrite.io/v1')
-	.setProject(env.PUBLIC_APPWRITE_PROJECT_ID || '69e462f20036d39192ba');
+	.setProject(env.PUBLIC_APPWRITE_PROJECT_ID || '');
 
 export const account = new Account(client);
 export const databases = new Databases(client);
 export const storage = new Storage(client);
 
 // Database and collection IDs
-// Note: These could also be in $env/static/public for consistency
-export const DATABASE_ID = '69e464fb0006a1b3c4eb';
+export const DATABASE_ID = env.PUBLIC_DATABASE_ID || '69e464fb0006a1b3c4eb';
 export const COLLECTIONS = {
-	ARTICLES: 'articles',
+	ARTICLES: env.PUBLIC_ARTICLES_COLLECTION_ID || 'articles',
 	CATEGORIES: 'categories'
 } as const;
 

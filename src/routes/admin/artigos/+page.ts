@@ -1,15 +1,12 @@
-import { databases, Query } from '$lib/appwrite';
+import { databases, Query, DATABASE_ID, COLLECTIONS } from '$lib/appwrite';
 import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-
-const DATABASE_ID = '69e464fb0006a1b3c4eb';
-const ARTICLES_COLLECTION_ID = 'articles';
 
 export const load: PageLoad = async () => {
 	try {
 		const response = await databases.listDocuments(
 			DATABASE_ID,
-			ARTICLES_COLLECTION_ID,
+			COLLECTIONS.ARTICLES,
 			[Query.orderDesc('$createdAt'), Query.limit(100)]
 		);
 
