@@ -11,9 +11,16 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
   },
   "dependencies": {
+    "@tiptap/core": "^3.22.4",
+    "@tiptap/extension-image": "^3.22.4",
+    "@tiptap/extension-link": "^3.22.4",
+    "@tiptap/extension-placeholder": "^3.22.4",
+    "@tiptap/pm": "^3.22.4",
+    "@tiptap/starter-kit": "^3.22.4",
     "appwrite": "^17.0.0",
     "clsx": "^2.1.1",
     "lucide-svelte": "^0.503.0",
+    "svelte-tiptap": "^3.0.1",
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {

@@ -8,15 +8,14 @@ The project has been initialized with a detailed plan for a journalistic portal.
 - [ ] Milestone 2: Expansion & Global Reach
 
 ## Active Phase
-- **Phase 2**: Administrative CMS (Articles CRUD)
+- **Phase 3**: Public Portal - Home & Articles
 
 ## Recent Progress
 - **2026-04-19**: Completed Phase 1: Infrastructure & Appwrite Setup.
-  - Hardened Appwrite client with static environment variables.
-  - Refined Article interfaces for SEO and i18n.
-  - Implemented premium scientific design tokens in Tailwind 4.
-  - Added smooth navigation transitions and loading state.
-- **2026-04-19**: Initialized project planning files.
+- **2026-04-19**: Completed Phase 2: Administrative CMS (Articles CRUD).
+  - Implemented Tiptap Rich Text editor and image upload to Appwrite Storage.
+  - Secured admin routes with server-side guards and Google OAuth.
+  - Refined article list and editor UI using Svelte 5 runes.
 
 ## Next Actions
 1. Run `/gsd-plan-phase 1` to begin infrastructure setup.

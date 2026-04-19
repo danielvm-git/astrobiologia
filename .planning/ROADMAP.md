@@ -9,10 +9,10 @@
 - [x] **UAT**: Appwrite connection verified, basic layout rendered.
 
 ### Phase 2: Administrative CMS (Articles CRUD)
-- [ ] Build Login page with Appwrite Auth.
-- [ ] Create Article CRUD interface (Create/Edit forms).
-- [ ] Implement Rich Text editor and Image upload.
-- [ ] **UAT**: Articles can be created and stored in Appwrite.
+- [x] Build Login page with Appwrite Auth.
+- [x] Create Article CRUD interface (Create/Edit forms).
+- [x] Implement Rich Text editor and Image upload.
+- [x] **UAT**: Articles can be created and stored in Appwrite.
 
 ### Phase 3: Public Portal - Home & Articles
 - [ ] Build Home page (Featured Article + Grid).
