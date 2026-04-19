@@ -127,4 +127,78 @@ h1, h2, h3, h4, h5, h6, .font-sans {
 	--tw-prose-pre-bg: var(--muted);
 	--tw-prose-th-borders: var(--border);
 	--tw-prose-td-borders: var(--border);
+	line-height: 1.85;
+	font-size: 1.25rem;
+}
+
+.prose-astro h1, .prose-astro h2, .prose-astro h3, .prose-astro h4 {
+	font-family: var(--font-sans);
+	font-weight: 800;
+	margin-top: 2.5em;
+	margin-bottom: 0.8em;
+	line-height: 1.2;
+	letter-spacing: -0.02em;
+}
+
+.prose-astro h2 {
+	font-size: 2rem;
+	border-bottom: 1px solid var(--border);
+	padding-bottom: 0.5em;
+}
+
+.prose-astro h3 {
+	font-size: 1.5rem;
+}
+
+.prose-astro p {
+	margin-bottom: 1.5em;
+}
+
+.prose-astro a {
+	text-decoration: underline;
+	text-underline-offset: 4px;
+	text-decoration-thickness: 1px;
+	font-weight: 600;
+	transition: all 0.2s;
+}
+
+.prose-astro a:hover {
+	color: var(--accent);
+	text-decoration-color: var(--accent);
+}
+
+.prose-astro blockquote {
+	font-style: normal;
+	border-left-width: 0;
+	padding-left: 2em;
+	padding-right: 2em;
+	margin-top: 3em;
+	margin-bottom: 3em;
+	color: var(--primary);
+	font-size: 1.5rem;
+	line-height: 1.4;
+	font-weight: 400;
+	position: relative;
+	border-top: 1px solid var(--border);
+	border-bottom: 1px solid var(--border);
+	padding-top: 1.5em;
+	padding-bottom: 1.5em;
+	text-align: center;
+}
+
+.prose-astro blockquote p::before, .prose-astro blockquote p::after {
+	content: none;
+}
+
+.prose-astro figure {
+	margin-top: 3em;
+	margin-bottom: 3em;
+}
+
+.prose-astro figcaption {
+	text-align: center;
+	font-family: var(--font-sans);
+	font-size: 0.875rem;
+	margin-top: 1em;
+	font-style: italic;
 }

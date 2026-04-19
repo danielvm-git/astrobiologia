@@ -25,38 +25,36 @@
 
 <main class="min-h-screen bg-background">
 	<!-- Hero Section -->
-	<div class="relative overflow-hidden bg-muted/30 pt-16 pb-12 md:pt-24 md:pb-20">
+	<div class="relative overflow-hidden pt-32 pb-16 md:pt-48 md:pb-24 border-b border-slate-100 bg-white">
 		<div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-			<a href="/categorias/{article.category}" class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 mb-6 transition-colors">
-				<ArrowLeft class="h-4 w-4" />
-				{category?.name || 'Voltar'}
-			</a>
-			<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6 text-balance font-sans">
+			{#if category}
+				<a href="/categorias/{article.category}" class="inline-block text-primary text-xs font-black uppercase tracking-[0.2em] mb-8 hover:underline">
+					{category.name}
+				</a>
+			{/if}
+			
+			<h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-slate-900 leading-[1.05] mb-10 text-balance font-sans tracking-tight">
 				{article.title}
 			</h1>
-			<p class="text-xl md:text-2xl text-muted-foreground leading-relaxed mb-8 text-balance">
+			
+			<p class="text-xl md:text-2xl text-slate-600 leading-relaxed mb-12 font-serif text-balance italic">
 				{article.excerpt}
 			</p>
 			
-			<div class="flex flex-wrap items-center gap-6 text-muted-foreground text-sm">
-				<div class="flex items-center gap-2">
-					<div class="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold font-sans">
-						DA
+			<div class="flex flex-wrap items-center gap-8 text-slate-400 text-[10px] font-black uppercase tracking-widest border-t border-slate-100 pt-8">
+				<div class="flex items-center gap-3">
+					<div class="h-8 w-8 rounded-full bg-accent text-white flex items-center justify-center font-bold">
+						{article.authorName?.charAt(0) || 'D'}
 					</div>
-					<div>
-						<p class="text-foreground font-medium font-sans">{article.authorName || 'Danilo Albergaria'}</p>
-						<p class="text-xs">Jornalista e Pesquisador</p>
-					</div>
+					<div class="text-slate-900">{article.authorName || 'Danilo Albergaria'}</div>
 				</div>
-				<div class="flex items-center gap-4 border-l border-border pl-6">
-					<div class="flex items-center gap-1.5">
-						<Calendar class="h-4 w-4" />
-						{formatDate(article.publishedAt || article.$createdAt)}
-					</div>
-					<div class="flex items-center gap-1.5">
-						<Clock class="h-4 w-4" />
-						{readingTime(article.content)} min de leitura
-					</div>
+				<div class="flex items-center gap-2">
+					<Calendar class="h-3.5 w-3.5" />
+					{formatDate(article.publishedAt || article.$createdAt)}
+				</div>
+				<div class="flex items-center gap-2">
+					<Clock class="h-3.5 w-3.5" />
+					{readingTime(article.content)} min de leitura
 				</div>
 			</div>
 		</div>
@@ -64,37 +62,55 @@
 
 	<!-- Featured Image -->
 	{#if imageUrl}
-		<div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 -mt-8 md:-mt-12 relative z-10">
-			<div class="aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl border-4 border-background bg-muted">
-				<img
-					src={imageUrl}
-					alt={article.featuredImageAlt || article.title}
-					class="w-full h-full object-cover"
-				/>
-			</div>
+		<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12">
+			<figure>
+				<div class="aspect-[16/9] overflow-hidden bg-slate-100">
+					<img
+						src={imageUrl}
+						alt={article.featuredImageAlt || article.title}
+						class="w-full h-full object-cover"
+					/>
+				</div>
+				{#if article.featuredImageAlt}
+					<figcaption class="mt-4 text-center text-slate-500 text-sm italic font-serif">
+						{article.featuredImageAlt}
+					</figcaption>
+				{/if}
+			</figure>
 		</div>
 	{/if}
 
 	<!-- Content -->
-	<article class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-		<div class="prose prose-astro prose-lg lg:prose-xl max-w-none prose-headings:font-bold prose-headings:font-sans prose-p:leading-relaxed prose-img:rounded-xl">
+	<article class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+		<div class="prose prose-astro max-w-none">
 			{@html article.content}
 		</div>
 
 		<!-- Footer Meta -->
-		<div class="mt-16 pt-8 border-t border-border flex flex-col md:flex-row md:items-center justify-between gap-6">
+		<div class="mt-24 pt-12 border-t border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-8">
 			{#if article.tags && article.tags.length > 0}
-				<div class="flex flex-wrap gap-2">
+				<div class="flex flex-wrap gap-3">
 					{#each article.tags as tag}
-						<span class="px-3 py-1 bg-muted text-muted-foreground rounded-full text-xs font-medium font-sans">
+						<span class="px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-widest">
 							#{tag}
 						</span>
 					{/each}
 				</div>
 			{/if}
 			
-			<div class="flex items-center gap-4">
-				<button class="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-sans">
+			<div class="flex items-center gap-6">
+				<button 
+					onclick={() => {
+						if (navigator.share) {
+							navigator.share({
+								title: article.title,
+								text: article.excerpt,
+								url: window.location.href
+							});
+						}
+					}}
+					class="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-primary transition-colors"
+				>
 					<Share2 class="h-4 w-4" />
 					Compartilhar
 				</button>
@@ -104,31 +120,38 @@
 
 	<!-- Related Articles -->
 	{#if relatedArticles && relatedArticles.length > 0}
-		<section class="bg-muted/30 py-16 md:py-24">
+		<section class="bg-slate-50 border-t border-slate-100 py-24">
 			<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-				<h2 class="text-3xl font-bold text-foreground mb-12 font-sans">Continue lendo</h2>
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+				<h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-16 text-center">Continue Explorando</h2>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
 					{#each relatedArticles as related}
-						<a
-							href="/artigos/{related.slug}"
-							class="group block"
-						>
-							<div class="aspect-[16/10] rounded-xl overflow-hidden bg-muted mb-4">
+						<div class="flex flex-col h-full bg-white border border-slate-100 hover:shadow-xl transition-all duration-300">
+							<a
+								href="/artigos/{related.slug}"
+								class="block overflow-hidden aspect-[16/10]"
+							>
 								{#if related.featuredImage}
 									<img
 										src={getImageUrl(related.featuredImage, 600, 375)}
 										alt={related.title}
-										class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+										class="w-full h-full object-cover hover:scale-105 transition duration-700"
 									/>
 								{:else}
-									<div class="w-full h-full flex items-center justify-center text-4xl">🔭</div>
+									<div class="w-full h-full flex items-center justify-center text-4xl bg-slate-50 opacity-30 grayscale">🔭</div>
 								{/if}
+							</a>
+							<div class="p-6 flex flex-col flex-1">
+								<a href="/artigos/{related.slug}" class="hover:text-primary transition-colors">
+									<h3 class="text-xl font-bold text-slate-900 mb-4 line-clamp-2 font-serif leading-tight">
+										{related.title}
+									</h3>
+								</a>
+								<p class="text-slate-500 text-sm line-clamp-2 font-serif mb-6 italic">{related.excerpt}</p>
+								<div class="mt-auto pt-6 border-t border-slate-50 text-[10px] font-black uppercase tracking-widest text-slate-400">
+									{formatDate(related.publishedAt || related.$createdAt)}
+								</div>
 							</div>
-							<h3 class="text-xl font-bold text-foreground group-hover:text-primary transition-colors mb-2 line-clamp-2 font-sans">
-								{related.title}
-							</h3>
-							<p class="text-muted-foreground text-sm line-clamp-2">{related.excerpt}</p>
-						</a>
+						</div>
 					{/each}
 				</div>
 			</div>
