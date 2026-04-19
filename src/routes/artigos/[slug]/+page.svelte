@@ -5,22 +5,57 @@
 	import { CATEGORIES, getImageUrl } from '$lib/appwrite';
 	import { Clock, ArrowLeft, Share2, Calendar } from 'lucide-svelte';
 
+	import { generateSchemaMarkup } from '$lib/seo';
+
 	export let data: PageData;
 	const { article, relatedArticles } = data;
 
 	const category = CATEGORIES.find(c => c.slug === article.category);
-	const imageUrl = article.featuredImage ? getImageUrl(article.featuredImage, 1200, 675) : null;
+	const imageUrl = article.featuredImage ? getImageUrl(article.featuredImage, 1200, 630) : null;
+	
+	const schemaMarkup = generateSchemaMarkup({
+		...article,
+		featuredImage: imageUrl,
+		createdAt: article.publishedAt || article.$createdAt,
+		updatedAt: article.$updatedAt
+	});
 </script>
 
 <svelte:head>
 	<title>{article.title} - Astrobiologia.com.br</title>
 	<meta name="description" content={article.excerpt} />
+	<link rel="canonical" href="https://astrobiologia.com.br/artigos/{article.slug}" />
+	
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="https://astrobiologia.com.br/artigos/{article.slug}" />
 	<meta property="og:title" content={article.title} />
 	<meta property="og:description" content={article.excerpt} />
 	{#if imageUrl}
 		<meta property="og:image" content={imageUrl} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
 	{/if}
-	<meta name="author" content={article.authorName || 'Danilo Albergaria'} />
+	<meta property="article:published_time" content={article.publishedAt || article.$createdAt} />
+	<meta property="article:author" content={article.authorName || 'Danilo Albergaria'} />
+	<meta property="article:section" content={category?.name || 'Astrobiologia'} />
+	{#if article.tags}
+		{#each article.tags as tag}
+			<meta property="article:tag" content={tag} />
+		{/each}
+	{/if}
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image" />
+	<meta property="twitter:url" content="https://astrobiologia.com.br/artigos/{article.slug}" />
+	<meta property="twitter:title" content={article.title} />
+	<meta property="twitter:description" content={article.excerpt} />
+	{#if imageUrl}
+		<meta property="twitter:image" content={imageUrl} />
+	{/if}
+
+	<!-- Schema.org -->
+	{@html `<script type="application/ld+json">${JSON.stringify(schemaMarkup)}</script>`}
 </svelte:head>
 
 <main class="min-h-screen bg-background">

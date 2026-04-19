@@ -46,7 +46,7 @@ export function generateSchemaMarkup(article: any) {
 		dateModified: article.updatedAt || article.createdAt,
 		author: {
 			'@type': 'Person',
-			name: 'Danilo Couto'
+			name: 'Danilo Albergaria'
 		},
 		publisher: {
 			'@type': 'Organization',
