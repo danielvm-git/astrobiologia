@@ -21,14 +21,14 @@
 - [x] **UAT**: Public can read articles and browse categories.
 
 ### Phase 4: Initial Content Seed & Polish
-- [ ] Populate initial articles (Seed content).
-- [ ] Refine "New Scientist" / "Universe Today" aesthetics.
-- [ ] Finalize deployment via Appwrite Sites.
-- [ ] **UAT**: Site is live and looks premium.
+- [x] Populate initial articles (Seed content).
+- [x] Refine "New Scientist" / "Universe Today" aesthetics.
+- [x] Finalize deployment via Appwrite Sites.
+- [x] **UAT**: Site is live and looks premium.
 
 **Plans:** 2 plans
-- [ ] 04-01-PLAN.md — Content seeding and aesthetic audit (animations, typography).
-- [ ] 04-02-PLAN.md — Image optimization and production deployment on Appwrite Sites.
+- [x] 04-01-PLAN.md — Content seeding and aesthetic audit (animations, typography).
+- [x] 04-02-PLAN.md — Image optimization and production deployment on Appwrite Sites.
 
 ## Milestone 2: Expansion & Global Reach
 

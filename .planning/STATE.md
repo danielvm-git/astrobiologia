@@ -14,13 +14,9 @@ The project has been initialized with a detailed plan for a journalistic portal.
 - **2026-04-19**: Completed Phase 1: Infrastructure & Appwrite Setup.
 - **2026-04-19**: Completed Phase 2: Administrative CMS (Articles CRUD).
 - **2026-04-19**: Completed Phase 3: Public Portal - Home & Articles.
-  - Implemented Featured Hero section and dynamic grid.
-  - Refined typography with `prose-astro` for scientific readability.
-  - Finalized SEO, OpenGraph, and Schema.org metadata.
-  - Enhanced category archive and "Sobre" pages.
-- **2026-04-19**: Finalized Phase 3 verification and synchronized roadmap.
-- **2026-04-19**: Created Context and Plan for Phase 4.
+- **2026-04-19**: Completed Phase 4: Initial Content Seed & Polish.
+- **2026-04-19**: Shipped Phases 1-4 — PR #1.
 
 ## Next Actions
-1. Execute Phase 4: Initial Content Seed & Polish.
-2. Finalize deployment via Appwrite Sites.
+1. Finalize deployment via Appwrite Sites.
+2. Begin Phase 5: Multilingual (i18n).
