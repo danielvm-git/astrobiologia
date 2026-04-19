@@ -1,16 +1,14 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { Menu, X, Search, ShieldCheck, Languages, ChevronDown } from 'lucide-svelte';
+	import { Menu, X, Search, ShieldCheck } from 'lucide-svelte';
 	import { authStore } from '$lib/stores/auth';
 	import { account, OAuthProvider } from '$lib/appwrite';
-	import { getLocale, locales, localizeHref } from '$lib/paraglide/runtime';
+	import { localizeHref } from '$lib/paraglide/runtime';
 	import * as m from '$lib/paraglide/messages';
+	import LanguageSwitcher from './LanguageSwitcher.svelte';
 
 	let mobileMenuOpen = $state(false);
 	let showLoginModal = $state(false);
-	let showLangMenu = $state(false);
-
-	const lang = $derived(getLocale());
 
 	const navLinks = $derived([
 		{ href: localizeHref('/'), label: m.nav_home() },
@@ -67,42 +65,7 @@
 
 		<!-- Search & Lang & CTA -->
 		<div class="hidden items-center gap-4 md:flex">
-			<!-- Language Switcher -->
-			<div class="relative">
-				<button
-					type="button"
-					onclick={() => (showLangMenu = !showLangMenu)}
-					class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-muted"
-				>
-					<Languages class="h-4 w-4" />
-					{lang}
-					<ChevronDown class="h-3 w-3 transition-transform {showLangMenu ? 'rotate-180' : ''}" />
-				</button>
-
-				{#if showLangMenu}
-					<!-- svelte-ignore a11y_click_events_have_key_events -->
-					<!-- svelte-ignore a11y_no_static_element_interactions -->
-					<div 
-						class="absolute right-0 mt-2 w-32 rounded-lg bg-card border border-border shadow-xl py-1 z-50 animate-in fade-in zoom-in duration-150"
-						onclick={() => (showLangMenu = false)}
-					>
-						{#each locales as tag}
-							<a
-								href={localizeHref(page.url.pathname, { locale: tag })}
-								class="block px-4 py-2 text-xs font-bold uppercase tracking-widest hover:bg-muted transition-colors {lang === tag ? 'text-primary' : 'text-muted-foreground'}"
-							>
-								{tag === 'pt-br' ? 'Português' : 'English'}
-							</a>
-						{/each}
-					</div>
-					<!-- Backdrop for closing -->
-					<button 
-						class="fixed inset-0 z-[-1] cursor-default bg-transparent w-full h-full border-none" 
-						onclick={() => (showLangMenu = false)}
-						aria-label="Fechar menu"
-					></button>
-				{/if}
-			</div>
+			<LanguageSwitcher variant="header" />
 
 			<button
 				type="button"
@@ -118,7 +81,7 @@
 					class="rounded-md bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition-all hover:bg-primary/20 flex items-center gap-2"
 				>
 					<ShieldCheck class="h-4 w-4" />
-					Panel
+					Painel
 				</a>
 			{:else}
 				<button
@@ -163,19 +126,7 @@
 					{/each}
 					<hr class="my-2 border-border" />
 					
-					<!-- Mobile Lang Switcher -->
-					<div class="flex items-center gap-4 px-3 py-2">
-						<span class="text-xs font-bold text-muted-foreground uppercase tracking-widest">Idioma:</span>
-						{#each locales as tag}
-							<a
-								href={localizeHref(page.url.pathname, { locale: tag })}
-								class="text-xs font-bold uppercase tracking-widest {lang === tag ? 'text-primary' : 'text-muted-foreground'}"
-								onclick={closeMobileMenu}
-							>
-								{tag}
-							</a>
-						{/each}
-					</div>
+					<LanguageSwitcher variant="mobile" />
 
 					<hr class="my-2 border-border" />
 
@@ -203,4 +154,72 @@
 		</div>
 	{/if}
 </header>
-...
+
+<!-- Login Modal -->
+{#if showLoginModal}
+	<div class="fixed inset-0 z-[100] flex items-center justify-center p-4">
+		<!-- Backdrop -->
+		<button 
+			type="button"
+			class="absolute inset-0 bg-background/80 backdrop-blur-sm transition-opacity cursor-default w-full h-full border-none" 
+			onclick={() => (showLoginModal = false)}
+			aria-label="Fechar modal"
+		></button>
+
+		<!-- Modal Content -->
+		<div class="relative w-full max-w-md scale-100 transform overflow-hidden rounded-2xl bg-card p-8 shadow-2xl border border-border transition-all animate-in fade-in zoom-in duration-200">
+			<button 
+				type="button"
+				class="absolute right-4 top-4 text-muted-foreground hover:text-foreground transition-colors"
+				onclick={() => (showLoginModal = false)}
+			>
+				<X class="h-5 w-5" />
+			</button>
+
+			<div class="text-center mb-8">
+				<div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+					<ShieldCheck class="h-6 w-6 text-primary" />
+				</div>
+				<h2 class="text-2xl font-bold text-foreground font-serif">Área Restrita</h2>
+				<p class="mt-2 text-muted-foreground font-sans text-sm text-pretty">
+					Acesse o painel administrativo para gerenciar seus artigos e conteúdos científicos.
+				</p>
+			</div>
+
+			<div class="space-y-4">
+				<button
+					onclick={loginWithGoogle}
+					class="flex w-full items-center justify-center gap-3 rounded-xl border border-border bg-background px-4 py-3 text-sm font-semibold text-foreground transition-all hover:bg-muted hover:shadow-md active:scale-[0.98]"
+				>
+					<svg class="h-5 w-5" viewBox="0 0 24 24">
+						<path
+							fill="currentColor"
+							d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+							style="fill: #4285F4"
+						/>
+						<path
+							fill="currentColor"
+							d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+							style="fill: #34A853"
+						/>
+						<path
+							fill="currentColor"
+							d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"
+							style="fill: #FBBC05"
+						/>
+						<path
+							fill="currentColor"
+							d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+							style="fill: #EA4335"
+						/>
+					</svg>
+					Entrar com Google
+				</button>
+				
+				<p class="text-center text-[10px] text-muted-foreground uppercase tracking-widest font-medium">
+					Acesso restrito a administradores
+				</p>
+			</div>
+		</div>
+	</div>
+{/if}

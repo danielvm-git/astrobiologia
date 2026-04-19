@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { Telescope, Mail, Twitter } from 'lucide-svelte';
 	import { CATEGORIES } from '$lib/appwrite';
-	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
+	import { localizeHref } from '$lib/paraglide/runtime';
 	import * as m from '$lib/paraglide/messages';
+	import LanguageSwitcher from './LanguageSwitcher.svelte';
 
 	const currentYear = new Date().getFullYear();
-	const lang = $derived(getLocale());
 </script>
 
 <footer class="border-t border-border bg-muted/30">
@@ -22,6 +22,9 @@
 				<p class="mt-4 text-sm leading-relaxed text-muted-foreground">
 					{m.footer_tagline()}
 				</p>
+				<div class="mt-6">
+					<LanguageSwitcher variant="footer" />
+				</div>
 			</div>
 
 			<!-- Categories -->
@@ -47,12 +50,12 @@
 				<ul class="mt-4 flex flex-col gap-2">
 					<li>
 						<a href={localizeHref('/sobre')} class="text-sm text-muted-foreground transition-colors hover:text-primary">
-							Sobre o Autor
+							{m.nav_about()}
 						</a>
 					</li>
 					<li>
 						<a href={localizeHref('/artigos')} class="text-sm text-muted-foreground transition-colors hover:text-primary">
-							Todos os Artigos
+							{m.nav_articles()}
 						</a>
 					</li>
 					<li>
