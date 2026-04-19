@@ -15,16 +15,17 @@ Maximum simplicity, minimum maintenance (under 1 hour/month), low cost (free tie
 ## Requirements
 
 ### Validated
-- ✓ [SvelteKit + Tailwind 4 Setup] — existing
-- ✓ [Appwrite Integration Foundation] — existing logic in `src/lib/appwrite.ts`
+- ✓ [Appwrite Cloud Configuration] — v1.0
+- ✓ [CMS / Admin Dashboard] — v1.0 (Full CRUD + Tiptap)
+- ✓ [Public Interface] — v1.0 (Home + Detail + Category Filter)
+- ✓ [Author Profile] — v1.0 (Integrated in "Sobre" page)
+- ✓ [SEO & Social Sharing] — v1.0 (Meta tags + Schema.org)
 
 ### Active
-- [ ] [Appwrite Cloud Configuration] — Database collections, storage buckets, and auth setup.
-- [ ] [CMS / Admin Dashboard] — Extremely simple CRUD for articles (Title, Slug, Rich Text, Image, Category).
-- [ ] [Public Interface] — Featured article grid, article list, and detailed article view.
-- [ ] [Author Profile] — Professional bio and links for Danilo Albergaria.
-- [ ] [Multilingual Support] — i18n for English, Spanish, Dutch, Chinese, Japanese.
-- [ ] [SEO & Discovery] — Meta tags, Open Graph, Sitemap, and basic search.
+- [ ] [Multilingual Support (i18n)] — Implementation for global audience (Phase 5).
+- [ ] [Server-side Global Search] — Database-indexed discovery (Phase 6).
+- [ ] [Performance Audit] — Formal Lighthouse optimization and lazy loading (Phase 7).
+- [ ] [Newsletter] — Simple subscription form for engagement.
 
 ### Out of Scope
 - [Complex User Accounts] — Site is primarily a solo editorial portal.
@@ -34,17 +35,16 @@ Maximum simplicity, minimum maintenance (under 1 hour/month), low cost (free tie
 ## Key Decisions
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Appwrite Cloud | All-in-one BaaS reduces maintenance and simplifies hosting/storage. | Accepted |
-| SvelteKit + Tailwind 4 | Modern, fast development with premium aesthetics. | Accepted |
-| i18n via DeepL | Automates translations for a global audience with low effort. | Pending |
+| Appwrite Cloud | All-in-one BaaS reduces maintenance and hosting. | ✓ Good |
+| Google OAuth Only | Simplifies admin auth while maintaining security. | ✓ Good |
+| Tiptap Editor | Flexible rich text without heavy dependencies. | ✓ Good |
+| Client-side Filter | Quick discovery for MVP without complex backend logic. | ✓ Good |
+| i18n via DeepL | Automates translations for a global audience. | Pending |
 
 ## Context
-- **Target Audience**: Science enthusiasts, researchers, and students interested in astrobiology.
+- **Current State**: v1.0 shipped (MVP). Core CMS and Portal functional.
+- **Codebase**: ~3.7k insertions, 85 files changed in v1.0.
 - **Tone**: Professional, journalistic, and scientifically accurate.
-- **Reference Sites**: New Scientist, Universe Today, PLOS One.
-
-## Evolution
-This document evolves at phase transitions and milestone boundaries.
 
 ---
-*Last updated: 2026-04-19 after initialization*
+*Last updated: 2026-04-19 after v1.0 milestone*

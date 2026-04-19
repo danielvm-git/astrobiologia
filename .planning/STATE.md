@@ -1,22 +1,28 @@
 # Project State: Astrobiologia.com.br
 
 ## Current Context
-The project has been initialized with a detailed plan for a journalistic portal. The tech stack is confirmed (SvelteKit + Appwrite Cloud + Tailwind 4). Initial codebase mapping has been completed, showing a solid foundation but requiring backend configuration and administrative UI.
+v1.0 (MVP) has been successfully shipped and archived. The core journalistic infrastructure is live, featuring a secure CMS and a premium public portal. The project is now moving into the "Global Discovery" phase.
 
 ## Milestones
-- [ ] Milestone 1: MVP - Functional Portal & Admin
+- [x] Milestone 1: MVP - Functional Portal & Admin
 - [ ] Milestone 2: Expansion & Global Reach
 
 ## Active Phase
-- **Phase 4**: Initial Content Seed & Polish (Planned)
+- **Planning**: Phase 5: Multilingual (i18n)
 
 ## Recent Progress
-- **2026-04-19**: Completed Phase 1: Infrastructure & Appwrite Setup.
-- **2026-04-19**: Completed Phase 2: Administrative CMS (Articles CRUD).
-- **2026-04-19**: Completed Phase 3: Public Portal - Home & Articles.
-- **2026-04-19**: Completed Phase 4: Initial Content Seed & Polish.
-- **2026-04-19**: Shipped Phases 1-4 — PR #1.
+- **2026-04-19**: Completed Milestone 1.0.
+- **2026-04-19**: Archived v1.0 Roadmap and Requirements.
+- **2026-04-19**: Evolved PROJECT.md to reflect shipped MVP and next goals.
 
-## Next Actions
-1. Finalize deployment via Appwrite Sites.
-2. Begin Phase 5: Multilingual (i18n).
+## Project Reference
+See: .planning/PROJECT.md (updated 2026-04-19)
+
+**Core value**: Professional astrobiology journalism with zero maintenance.
+**Current focus**: Planning next milestone (Multilingual & Global Search).
+
+## Decisions Log (v1.0 Summary)
+- Secure Appwrite connectivity via static env vars.
+- Google OAuth for admin simplicity.
+- Tiptap rich text for high-performance editing.
+- Client-side filtering for MVP article discovery.

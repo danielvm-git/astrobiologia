@@ -1,50 +1,49 @@
-# Project Roadmap: Astrobiologia.com.br
+# Roadmap: Astrobiologia.com.br
 
-## Milestone 1: MVP - Functional Portal & Admin
+## Milestones
 
-### Phase 1: Infrastructure & Appwrite Setup
-- [x] Configure Appwrite Cloud (Database, Storage Bucket, Auth).
-- [x] Finalize SvelteKit integration (Env vars, Server-side Client).
-- [x] Implement foundational design system (Tailwind 4).
-- [x] **UAT**: Appwrite connection verified, basic layout rendered.
+- ✅ **v1.0 MVP** — Phases 1-4 (shipped 2026-04-19)
+- 🚧 **v1.1 Global Discovery** — Phases 5-7 (planned)
 
-### Phase 2: Administrative CMS (Articles CRUD)
-- [x] Build Login page with Appwrite Auth.
-- [x] Create Article CRUD interface (Create/Edit forms).
-- [x] Implement Rich Text editor and Image upload.
-- [x] **UAT**: Articles can be created and stored in Appwrite.
+## Phases
 
-### Phase 3: Public Portal - Home & Articles
-- [x] Build Home page (Featured Article + Grid).
-- [x] Implement Article Detail page with SEO meta tags.
-- [x] Build Category filtering and Author bio page.
-- [x] **UAT**: Public can read articles and browse categories.
+<details>
+<summary>✅ v1.0 MVP (Phases 1-4) — SHIPPED 2026-04-19</summary>
 
-### Phase 4: Initial Content Seed & Polish
-- [x] Populate initial articles (Seed content).
-- [x] Refine "New Scientist" / "Universe Today" aesthetics.
-- [x] Finalize deployment via Appwrite Sites.
-- [x] **UAT**: Site is live and looks premium.
+- [x] Phase 1: Infrastructure & Appwrite Setup (1/1 plans) — completed 2026-04-19
+- [x] Phase 2: Administrative CMS (1/1 plans) — completed 2026-04-19
+- [x] Phase 3: Public Portal - Home & Articles (1/1 plans) — completed 2026-04-19
+- [x] Phase 4: Initial Content Seed & Polish (2/2 plans) — completed 2026-04-19
 
-**Plans:** 2 plans
-- [x] 04-01-PLAN.md — Content seeding and aesthetic audit (animations, typography).
-- [x] 04-02-PLAN.md — Image optimization and production deployment on Appwrite Sites.
+</details>
 
-## Milestone 2: Expansion & Global Reach
+### 🚧 v1.1 Global Discovery (In Progress / Planned)
 
-### Phase 5: Multilingual (i18n)
+#### Phase 5: Multilingual (i18n)
 - [ ] Integrate `svelte-i18n` or similar.
-- [ ] Implement language switcher.
+- [ ] Implement language switcher in Header/Footer.
 - [ ] Integration with DeepL for article drafts.
 - [ ] **UAT**: UI and articles are accessible in multiple languages.
 
-### Phase 6: Search & Discovery
-- [ ] Implement global search (Appwrite Query).
-- [ ] Finalize SEO optimization (Sitemap, Schema.org).
-- [ ] **UAT**: Search returns relevant articles, SEO audit passes.
+#### Phase 6: Search & Discovery
+- [ ] Implement global search using Appwrite `Query.search`.
+- [ ] Finalize SEO optimization (Sitemap, Schema.org news specific).
+- [ ] **UAT**: Search returns relevant articles from database, SEO audit passes.
 
-### Phase 7: Optimization & Maintenance
-- [ ] Image optimization and lazy loading.
-- [ ] Dark mode refinements.
-- [ ] Newsletter subscription form (simple).
+#### Phase 7: Optimization & Maintenance
+- [ ] Fine-grained Svelte 5 transitions and animations.
+- [ ] Image lazy loading and performance tuning.
+- [ ] Newsletter subscription form.
 - [ ] **UAT**: Site performance is excellent (90+ Lighthouse).
+
+## Progress
+
+| Phase             | Milestone | Plans Complete | Status      | Completed  |
+| ----------------- | --------- | -------------- | ----------- | ---------- |
+| 1. Foundation     | v1.0      | 1/1            | Complete    | 2026-04-19 |
+| 2. CMS            | v1.0      | 1/1            | Complete    | 2026-04-19 |
+| 3. Public Portal  | v1.0      | 1/1            | Complete    | 2026-04-19 |
+| 4. Content Seed   | v1.0      | 2/2            | Complete    | 2026-04-19 |
+| 5. Multilingual   | v1.1      | 0/1            | Not started | -          |
+| 6. Search         | v1.1      | 0/1            | Not started | -          |
+| 7. Optimization   | v1.1      | 0/1            | Not started | -          |
