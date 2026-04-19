@@ -1,21 +1,19 @@
 import { Client, Account, Databases, Storage, ID, Query } from 'appwrite';
-import { env } from '$env/dynamic/public';
+import { PUBLIC_APPWRITE_ENDPOINT, PUBLIC_APPWRITE_PROJECT_ID } from '$env/static/public';
 
 // Initialize Appwrite client
 const client = new Client();
 
-const endpoint = env.PUBLIC_APPWRITE_ENDPOINT || 'https://nyc.cloud.appwrite.io/v1';
-const projectId = env.PUBLIC_APPWRITE_PROJECT_ID || '69e462f20036d39192ba';
-
 client
-	.setEndpoint(endpoint)
-	.setProject(projectId);
+	.setEndpoint(PUBLIC_APPWRITE_ENDPOINT)
+	.setProject(PUBLIC_APPWRITE_PROJECT_ID);
 
 export const account = new Account(client);
 export const databases = new Databases(client);
 export const storage = new Storage(client);
 
 // Database and collection IDs
+// Note: These could also be in $env/static/public for consistency
 export const DATABASE_ID = '69e464fb0006a1b3c4eb';
 export const COLLECTIONS = {
 	ARTICLES: 'articles',
@@ -51,6 +49,9 @@ export interface Article {
 	publishedAt?: string;
 	metaTitle?: string;
 	metaDescription?: string;
+	ogImage?: string;
+	language: string; // 'pt-BR', 'en', etc.
+	translationId?: string; // Links translations of the same article
 }
 
 export interface Category {

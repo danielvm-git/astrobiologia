@@ -8,11 +8,15 @@ The project has been initialized with a detailed plan for a journalistic portal.
 - [ ] Milestone 2: Expansion & Global Reach
 
 ## Active Phase
-- **Phase 1**: Infrastructure & Appwrite Setup (Ready to start)
+- **Phase 2**: Administrative CMS (Articles CRUD)
 
 ## Recent Progress
-- **2026-04-19**: Initialized project planning files (`PROJECT.md`, `REQUIREMENTS.md`, `ROADMAP.md`, `config.json`).
-- **2026-04-19**: Completed codebase mapping (`.planning/codebase/`).
+- **2026-04-19**: Completed Phase 1: Infrastructure & Appwrite Setup.
+  - Hardened Appwrite client with static environment variables.
+  - Refined Article interfaces for SEO and i18n.
+  - Implemented premium scientific design tokens in Tailwind 4.
+  - Added smooth navigation transitions and loading state.
+- **2026-04-19**: Initialized project planning files.
 
 ## Next Actions
 1. Run `/gsd-plan-phase 1` to begin infrastructure setup.

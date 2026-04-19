@@ -3,10 +3,10 @@
 ## Milestone 1: MVP - Functional Portal & Admin
 
 ### Phase 1: Infrastructure & Appwrite Setup
-- [ ] Configure Appwrite Cloud (Database, Storage Bucket, Auth).
-- [ ] Finalize SvelteKit integration (Env vars, Server-side Client).
-- [ ] Implement foundational design system (Tailwind 4).
-- [ ] **UAT**: Appwrite connection verified, basic layout rendered.
+- [x] Configure Appwrite Cloud (Database, Storage Bucket, Auth).
+- [x] Finalize SvelteKit integration (Env vars, Server-side Client).
+- [x] Implement foundational design system (Tailwind 4).
+- [x] **UAT**: Appwrite connection verified, basic layout rendered.
 
 ### Phase 2: Administrative CMS (Articles CRUD)
 - [ ] Build Login page with Appwrite Auth.
