@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { account } from '$lib/appwrite';
+	import { account, OAuthProvider } from '$lib/appwrite';
 
 	let errorMessage = $state('');
 
@@ -8,7 +8,7 @@
 			// Create Google OAuth2 session
 			// Appwrite will redirect to Google, then back to our success URL
 			account.createOAuth2Session(
-				'google',
+				OAuthProvider.Google,
 				`${window.location.origin}/admin/dashboard`,
 				`${window.location.origin}/admin/login?error=google_failed`
 			);
@@ -67,6 +67,54 @@
 					</svg>
 					Continuar com Google
 				</button>
+				
+				<div class="relative py-2">
+					<div class="absolute inset-0 flex items-center">
+						<div class="w-full border-t border-slate-300"></div>
+					</div>
+					<div class="relative flex justify-center text-sm">
+						<span class="px-2 bg-white text-slate-500">Ou</span>
+					</div>
+				</div>
+
+				<form class="space-y-4" onsubmit={async (e) => {
+					e.preventDefault();
+					const formData = new FormData(e.target as HTMLFormElement);
+					const email = formData.get('email') as string;
+					const password = formData.get('password') as string;
+					try {
+						await account.createEmailPasswordSession(email, password);
+						window.location.href = '/admin/dashboard';
+					} catch (err: any) {
+						console.error('Login error:', err);
+						errorMessage = err.message || 'Login falhou.';
+					}
+				}}>
+					<div>
+						<input 
+							type="email" 
+							name="email" 
+							placeholder="Email" 
+							required 
+							class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+						/>
+					</div>
+					<div>
+						<input 
+							type="password" 
+							name="password" 
+							placeholder="Senha" 
+							required 
+							class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+						/>
+					</div>
+					<button 
+						type="submit"
+						class="w-full px-4 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition font-medium"
+					>
+						Entrar com Email
+					</button>
+				</form>
 			</div>
 
 			<p class="text-center text-slate-500 text-xs mt-8">

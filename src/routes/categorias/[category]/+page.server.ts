@@ -1,16 +1,9 @@
+import { databases, Query, DATABASE_ID, COLLECTIONS } from '$lib/appwrite';
 import { error } from '@sveltejs/kit';
-import { databases, Query, CATEGORIES, DATABASE_ID, COLLECTIONS } from '$lib/appwrite';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params }) => {
-	const categorySlug = params.category;
-	const category = CATEGORIES.find(c => c.slug === categorySlug);
-
-	if (!category) {
-		throw error(404, 'Categoria não encontrada');
-	}
-
-	const categoryLabel = category.name;
+	const { category } = params;
 
 	try {
 		const response = await databases.listDocuments(
@@ -18,18 +11,18 @@ export const load: PageServerLoad = async ({ params }) => {
 			COLLECTIONS.ARTICLES,
 			[
 				Query.equal('status', 'published'),
-				Query.equal('category', categoryLabel),
-				Query.orderDesc('publishedAt')
+				Query.equal('category', category),
+				Query.orderDesc('publishedAt'),
+				Query.limit(50)
 			]
 		);
 
 		return {
-			category: categorySlug,
-			categoryLabel,
-			articles: response.documents
+			articles: response.documents,
+			categorySlug: category
 		};
 	} catch (err) {
-		console.error('Error loading category:', err);
-		return { category: categorySlug, categoryLabel, articles: [] };
+		console.error('Error loading category articles:', err);
+		throw error(404, 'Categoria não encontrada');
 	}
 };

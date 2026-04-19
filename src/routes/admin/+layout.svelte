@@ -10,6 +10,27 @@
 
 	onMount(async () => {
 		try {
+			// Extract OAuth parameters from URL search or hash
+			let userId = $page.url.searchParams.get('userId');
+			let secret = $page.url.searchParams.get('secret');
+
+			if (!userId || !secret) {
+				const hashParams = new URLSearchParams($page.url.hash.replace('#', ''));
+				userId = hashParams.get('userId');
+				secret = hashParams.get('secret');
+			}
+
+			// If returning from OAuth, establish the session first
+			if (userId && secret) {
+				try {
+					await account.createSession(userId, secret);
+					// Clean up URL
+					window.history.replaceState({}, '', $page.url.pathname);
+				} catch (e) {
+					console.warn('Could not create session from URL parameters', e);
+				}
+			}
+
 			// Get current user session
 			const user = await account.get();
 			authStore.setUser(user);
@@ -20,6 +41,7 @@
 			}
 		} catch (err) {
 			console.log('Session check failed:', err);
+			
 			// Only redirect to login if we're not already there
 			if (!$page.url.pathname.includes('/login')) {
 				await goto('/admin/login');

@@ -17,7 +17,7 @@
 		article?.featuredImage 
 			? (article.featuredImage.startsWith('http') 
 				? article.featuredImage 
-				: getImageUrl(article.featuredImage, 800, 500))
+				: `${getImageUrl(article.featuredImage, 800, 500)}&output=webp&quality=80`)
 			: null
 	);
 </script>
@@ -32,6 +32,7 @@
 						src={imageUrl}
 						alt={article.featuredImageAlt || article.title}
 						class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+						fetchpriority="high"
 					/>
 				{:else}
 					<div class="flex h-full w-full items-center justify-center bg-muted">
@@ -71,6 +72,7 @@
 						src={imageUrl}
 						alt={article.featuredImageAlt || article.title}
 						class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+						loading="lazy"
 					/>
 				{:else}
 					<div class="flex h-full w-full items-center justify-center bg-muted">
@@ -91,14 +93,15 @@
 		</div>
 	</article>
 {:else}
-	<article class={cn('group overflow-hidden bg-white border border-slate-200 transition-all duration-300 hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] hover:border-primary/30 flex flex-col h-full', className)}>
+	<article class={cn('group overflow-hidden bg-white border border-slate-100 transition-all duration-500 hover:shadow-[0_32px_64px_-12px_rgba(0,0,0,0.08)] hover:border-primary/20 flex flex-col h-full', className)}>
 		<a href="/artigos/{article.slug}" class="block overflow-hidden">
-			<div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
+			<div class="relative aspect-[16/10] overflow-hidden bg-slate-50">
 				{#if imageUrl}
 					<img
 						src={imageUrl}
 						alt={article.featuredImageAlt || article.title}
-						class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+						class="h-full w-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+						loading="lazy"
 					/>
 				{:else}
 					<div class="flex h-full w-full items-center justify-center">
@@ -123,16 +126,16 @@
 					{category.name}
 				</a>
 			{/if}
-			<a href="/artigos/{article.slug}" class="group-hover:text-primary transition-colors">
-				<h3 class="text-xl md:text-2xl font-bold leading-[1.2] text-slate-900 mb-3 font-serif line-clamp-2">
+			<a href="/artigos/{article.slug}" class="group-hover:text-primary transition-colors duration-300">
+				<h3 class="text-xl md:text-2xl font-bold leading-[1.15] text-slate-900 mb-4 font-serif group-hover:underline decoration-accent/30 decoration-2 underline-offset-4 transition-all">
 					{article.title}
 				</h3>
 			</a>
-			<p class="text-slate-600 text-sm leading-relaxed font-serif line-clamp-3 mb-6">
+			<p class="text-slate-600 text-base leading-relaxed font-serif line-clamp-3 mb-8 italic">
 				{article.excerpt}
 			</p>
 			
-			<div class="mt-auto pt-6 border-t border-slate-100 flex items-center justify-between">
+			<div class="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between">
 				<div class="flex items-center gap-3">
 					<div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
 						{formatDate(article.publishedAt || article.$createdAt)}

@@ -8,15 +8,19 @@ The project has been initialized with a detailed plan for a journalistic portal.
 - [ ] Milestone 2: Expansion & Global Reach
 
 ## Active Phase
-- **Phase 3**: Public Portal - Home & Articles
+- **Phase 4**: Initial Content Seed & Polish (Planned)
 
 ## Recent Progress
 - **2026-04-19**: Completed Phase 1: Infrastructure & Appwrite Setup.
 - **2026-04-19**: Completed Phase 2: Administrative CMS (Articles CRUD).
-  - Implemented Tiptap Rich Text editor and image upload to Appwrite Storage.
-  - Secured admin routes with server-side guards and Google OAuth.
-  - Refined article list and editor UI using Svelte 5 runes.
+- **2026-04-19**: Completed Phase 3: Public Portal - Home & Articles.
+  - Implemented Featured Hero section and dynamic grid.
+  - Refined typography with `prose-astro` for scientific readability.
+  - Finalized SEO, OpenGraph, and Schema.org metadata.
+  - Enhanced category archive and "Sobre" pages.
+- **2026-04-19**: Finalized Phase 3 verification and synchronized roadmap.
+- **2026-04-19**: Created Context and Plan for Phase 4.
 
 ## Next Actions
-1. Run `/gsd-plan-phase 1` to begin infrastructure setup.
-2. Verify Appwrite Cloud credentials and collection schemas.
+1. Execute Phase 4: Initial Content Seed & Polish.
+2. Finalize deployment via Appwrite Sites.

@@ -11,7 +11,11 @@
 	const { article, relatedArticles } = data;
 
 	const category = CATEGORIES.find(c => c.slug === article.category);
-	const imageUrl = article.featuredImage ? getImageUrl(article.featuredImage, 1200, 630) : null;
+	const imageUrl = article.featuredImage 
+		? (article.featuredImage.startsWith('http') 
+			? article.featuredImage 
+			: `${getImageUrl(article.featuredImage, 1200, 630)}&output=webp&quality=85`) 
+		: null;
 	
 	const schemaMarkup = generateSchemaMarkup({
 		...article,
@@ -59,7 +63,7 @@
 </svelte:head>
 
 <main class="min-h-screen bg-background">
-	<!-- Hero Section -->
+	<!-- Page Header -->
 	<div class="relative overflow-hidden pt-32 pb-16 md:pt-48 md:pb-24 border-b border-slate-100 bg-white">
 		<div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
 			{#if category}
@@ -104,6 +108,7 @@
 						src={imageUrl}
 						alt={article.featuredImageAlt || article.title}
 						class="w-full h-full object-cover"
+						fetchpriority="high"
 					/>
 				</div>
 				{#if article.featuredImageAlt}
@@ -167,9 +172,10 @@
 							>
 								{#if related.featuredImage}
 									<img
-										src={getImageUrl(related.featuredImage, 600, 375)}
+										src={related.featuredImage.startsWith('http') ? related.featuredImage : `${getImageUrl(related.featuredImage, 600, 375)}&output=webp&quality=80`}
 										alt={related.title}
 										class="w-full h-full object-cover hover:scale-105 transition duration-700"
+										loading="lazy"
 									/>
 								{:else}
 									<div class="w-full h-full flex items-center justify-center text-4xl bg-slate-50 opacity-30 grayscale">🔭</div>
@@ -193,7 +199,3 @@
 		</section>
 	{/if}
 </main>
-
-<style>
-	/* Any page-specific overrides if necessary */
-</style>

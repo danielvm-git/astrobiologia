@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import { Menu, X, Telescope, Search, LogIn, ShieldCheck } from 'lucide-svelte';
 	import { authStore } from '$lib/stores/auth';
-	import { account } from '$lib/appwrite';
+	import { account, OAuthProvider } from '$lib/appwrite';
 
 	let mobileMenuOpen = $state(false);
 	let showLoginModal = $state(false);
@@ -27,7 +27,7 @@
 	async function loginWithGoogle() {
 		try {
 			account.createOAuth2Session(
-				'google',
+				OAuthProvider.Google,
 				`${window.location.origin}/admin/dashboard`,
 				`${window.location.origin}/admin/login?error=google_failed`
 			);
@@ -149,14 +149,17 @@
 {#if showLoginModal}
 	<div class="fixed inset-0 z-[100] flex items-center justify-center p-4">
 		<!-- Backdrop -->
-		<div 
-			class="absolute inset-0 bg-background/80 backdrop-blur-sm transition-opacity" 
+		<button 
+			type="button"
+			class="absolute inset-0 bg-background/80 backdrop-blur-sm transition-opacity cursor-default w-full h-full border-none" 
 			onclick={() => (showLoginModal = false)}
-		></div>
+			aria-label="Fechar modal"
+		></button>
 
 		<!-- Modal Content -->
 		<div class="relative w-full max-w-md scale-100 transform overflow-hidden rounded-2xl bg-card p-8 shadow-2xl border border-border transition-all animate-in fade-in zoom-in duration-200">
 			<button 
+				type="button"
 				class="absolute right-4 top-4 text-muted-foreground hover:text-foreground transition-colors"
 				onclick={() => (showLoginModal = false)}
 			>

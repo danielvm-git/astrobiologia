@@ -1,4 +1,4 @@
-import { Client, Account, Databases, Storage, ID, Query } from 'appwrite';
+import { Client, Account, Databases, Storage, ID, Query, OAuthProvider } from 'appwrite';
 import { PUBLIC_APPWRITE_ENDPOINT, PUBLIC_APPWRITE_PROJECT_ID } from '$env/static/public';
 
 // Initialize Appwrite client
@@ -178,4 +178,4 @@ export const CATEGORIES: Category[] = [
 	{ $id: 'extremofilos', name: 'Extremófilos', slug: 'extremofilos', description: 'Vida em condições extremas', color: 'accent' }
 ];
 
-export { ID, Query };
+export { ID, Query, OAuthProvider };

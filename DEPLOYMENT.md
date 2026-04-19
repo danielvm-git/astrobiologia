@@ -48,3 +48,21 @@ If you choose to use Vercel for SSR or advanced features:
 - **Backups**: Use Appwrite's built-in data export features.
 - **Analytics**: Use a privacy-focused solution like Plausible or simple Vercel Analytics if using Vercel.
 - **Updates**: Monthly dependency checks with `pnpm update`.
+
+## Development & Commit Rules
+
+### Agent Behavior
+- **SEARCH FIRST**: Exhaustively search the codebase before implementing new logic.
+- **REUSE FIRST**: Prioritize extending existing patterns/utilities over creating new ones.
+- **LOG CHECK**: Always verify changes by inspecting relevant logs (browser/server/CI).
+- **Coding Standards**: Plan in one paragraph before coding; keep imports alphabetically sorted; keep files under 300 lines.
+
+### Clean Code
+- **Core Principles**: Follow the Boy Scout Rule; optimize for readability.
+- **Functions**: Target ≤ 20 lines; do exactly one thing.
+- **Error Handling**: Prefer exceptions over return codes.
+
+### Conventional Commits
+- **Format**: `<type>(<scope>): <subject>` (e.g., `feat(auth): add login flow`).
+- **Subject Line**: Imperative mood, lowercase first letter, no trailing period.
+- **Hard Rules**: **Never** use `git add .` or `git add -A`; one logical change per commit.
