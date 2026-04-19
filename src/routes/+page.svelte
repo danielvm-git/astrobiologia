@@ -11,7 +11,6 @@
 	const recentArticles = $derived(
 		(data.recent?.filter((a: any) => a.$id !== featuredArticle?.$id) || [])
 			.filter((a: any) => activeCategory === 'Todos' || a.category === activeCategory || a.category === CATEGORIES.find(c => c.slug === activeCategory)?.name)
-			.slice(0, 8)
 	);
 </script>
 

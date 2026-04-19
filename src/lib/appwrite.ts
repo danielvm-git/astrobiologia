@@ -154,6 +154,7 @@ export async function deleteArticle(id: string): Promise<void> {
 // Image helpers
 export function getImageUrl(fileId: string, width = 800, height = 600): string {
 	if (!fileId) return '';
+	if (fileId.startsWith('http')) return fileId;
 	return storage.getFilePreview(STORAGE_BUCKET_ID, fileId, width, height).toString();
 }
 

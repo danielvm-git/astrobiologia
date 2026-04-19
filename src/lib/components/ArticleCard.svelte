@@ -13,7 +13,13 @@
 	let { article, variant = 'default', class: className }: Props = $props();
 
 	const category = $derived(article ? CATEGORIES.find((c) => c.slug === article.category) : null);
-	const imageUrl = $derived(article?.featuredImage ? getImageUrl(article.featuredImage, 800, 500) : null);
+	const imageUrl = $derived(
+		article?.featuredImage 
+			? (article.featuredImage.startsWith('http') 
+				? article.featuredImage 
+				: getImageUrl(article.featuredImage, 800, 500))
+			: null
+	);
 </script>
 
 {#if article}
