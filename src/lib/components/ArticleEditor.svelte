@@ -10,16 +10,19 @@
 
 	let { article = null, isLoading = $bindable(false), onSave } = $props();
 
-	let title = $state(article?.title || '');
-	let slug = $state(article?.slug || '');
-	let excerpt = $state(article?.excerpt || '');
-	let content = $state(article?.content || '');
-	let category = $state(article?.category || 'noticias');
-	let tags = $state(article?.tags?.join(', ') || '');
-	let status = $state(article?.status || 'draft');
-	let featured = $state(article?.featured || false);
-	let authorName = $state(article?.authorName || 'Danilo Albergaria');
-	let featuredImageId = $state(article?.featuredImage || '');
+	// Capture initial values to avoid Svelte prop-reference-in-state warnings
+	const initial = article || {};
+
+	let title = $state(initial.title || '');
+	let slug = $state(initial.slug || '');
+	let excerpt = $state(initial.excerpt || '');
+	let content = $state(initial.content || '');
+	let category = $state(initial.category || 'noticias');
+	let tags = $state(initial.tags?.join(', ') || '');
+	let status = $state(initial.status || 'draft');
+	let featured = $state(initial.featured || false);
+	let authorName = $state(initial.authorName || 'Danilo Albergaria');
+	let featuredImageId = $state(initial.featuredImage || '');
 	let featuredImageUrl = $derived(featuredImageId ? getImageUrl(featuredImageId) : '');
 
 	let editorElement = $state<HTMLElement | null>(null);

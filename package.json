@@ -24,8 +24,7 @@
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
-    "@sveltejs/adapter-auto": "^6.0.0",
-    "@sveltejs/adapter-static": "^3.0.10",
+    "@sveltejs/adapter-node": "^5.2.9",
     "@sveltejs/kit": "^2.21.0",
     "@sveltejs/vite-plugin-svelte": "^5.1.0",
     "@tailwindcss/typography": "^0.5.16",

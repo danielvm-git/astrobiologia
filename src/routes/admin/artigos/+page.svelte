@@ -2,7 +2,7 @@
 	import { databases, DATABASE_ID } from '$lib/appwrite';
 	
 	let { data } = $props();
-	let articles = $state(data.articles);
+	let articles = $state(data.articles ? [...data.articles] : []);
 	let isDeleting = $state<Record<string, boolean>>({});
 
 	async function deleteArticle(articleId: string) {
