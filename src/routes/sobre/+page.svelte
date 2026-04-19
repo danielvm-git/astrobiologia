@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { Microscope, Globe, Telescope, Newspaper, Search, BookOpen } from 'lucide-svelte';
 
 	async function navigateToAdmin() {
 		await goto('/admin/login');
@@ -14,42 +15,62 @@
 	/>
 </svelte:head>
 
-<main class="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+<main class="min-h-screen bg-background pt-20">
 	<!-- Hero Section -->
-	<section class="relative py-20 md:py-32 overflow-hidden">
-		<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-			<h1 class="text-5xl md:text-6xl font-bold text-slate-900 mb-6">Sobre o Autor</h1>
-			<p class="text-xl md:text-2xl text-slate-600 mb-8">
-				Comunicação da ciência da vida no universo
+	<section class="relative py-24 md:py-48 overflow-hidden bg-[#0a0a0c]">
+		<div class="absolute inset-0 z-0 opacity-40">
+			<div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30"></div>
+			<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-accent/20 rounded-full blur-[150px]"></div>
+		</div>
+		
+		<div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+			<div class="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-accent text-white text-[10px] font-bold mb-10 uppercase tracking-[0.2em]">
+				O Projeto
+			</div>
+			<h1 class="text-5xl md:text-8xl font-black text-white mb-10 font-sans tracking-tight leading-[0.95]">Explorando a Vida no Universo</h1>
+			<p class="text-xl md:text-3xl text-slate-400 font-serif leading-relaxed italic max-w-3xl mx-auto">
+				"Uma ponte entre a ciência de ponta e o público, comunicando as descobertas que redefinem nosso lugar no cosmos."
 			</p>
 		</div>
 	</section>
 
 	<!-- About Danilo -->
-	<section class="py-16 md:py-24">
-		<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-				<div>
-					<h2 class="text-4xl font-bold text-slate-900 mb-6">Danilo Albergaria</h2>
-					<p class="text-lg text-slate-600 mb-4 text-balance">
-						Danilo Albergaria é pós-doutorando e jornalista no Laboratório de Astrobiologia da Universidade de São Paulo (USP), pesquisador associado da Universidade de Leiden (Holanda) e membro da Força Tarefa da Estratégia Decenal de Pesquisa e Exploração em Astrobiologia da NASA.
-					</p>
-					<p class="text-lg text-slate-600 mb-4 text-balance">
-						Tem financiamento da FAPESP com o projeto “Pontes interdisciplinares para a compreensão da vida no Universo: o Núcleo de Apoio à Pesquisa e Inovação em Astrobiologia e o Laboratório de Astrobiologia da USP".
-					</p>
-					<p class="text-lg text-slate-600 text-balance">
-						Especialista em comunicação da busca por vida fora da Terra, Danilo traz uma perspectiva única que une o rigor acadêmico ao faro jornalístico.
-					</p>
+	<section class="py-24 md:py-40 border-b border-slate-100">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
+				<div class="lg:col-span-7">
+					<div class="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-6">O Autor</div>
+					<h2 class="text-5xl md:text-7xl font-black text-slate-900 mb-12 font-sans tracking-tight uppercase leading-none">
+						Danilo <br/> Albergaria
+					</h2>
+					<div class="space-y-8 text-xl md:text-2xl text-slate-600 font-serif leading-loose italic">
+						<p>
+							Danilo Albergaria é pós-doutorando e jornalista no <span class="text-slate-900 font-bold not-italic">Laboratório de Astrobiologia da Universidade de São Paulo (USP)</span>, pesquisador associado da <span class="text-slate-900 font-bold not-italic">Universidade de Leiden (Holanda)</span> e membro da Força Tarefa da Estratégia Decenal de Pesquisa e Exploração em Astrobiologia da <span class="text-slate-900 font-bold not-italic">NASA</span>.
+						</p>
+						<p>
+							Com financiamento da <span class="text-slate-900 font-bold not-italic">FAPESP</span>, ele lidera o projeto “Pontes interdisciplinares para a compreensão da vida no Universo: o Núcleo de Apoio à Pesquisa e Inovação em Astrobiologia e o Laboratório de Astrobiologia da USP".
+						</p>
+						<p>
+							Especialista em comunicação da busca por vida fora da Terra, Danilo une o rigor acadêmico ao faro jornalístico para traduzir a complexidade do cosmos em narrativas acessíveis e inspiradoras.
+						</p>
+					</div>
 				</div>
-				<div class="bg-gradient-to-br from-blue-600 to-indigo-900 rounded-2xl h-96 flex flex-col items-center justify-center shadow-xl">
-					<div class="text-center text-white p-8">
-						<div class="text-7xl mb-6">🔭</div>
-						<p class="text-2xl font-bold mb-2">Danilo Albergaria</p>
-						<p class="text-blue-200">Jornalista & Pesquisador</p>
-						<div class="mt-6 flex flex-wrap justify-center gap-3">
-							<span class="bg-white/10 px-3 py-1 rounded-full text-xs">USP</span>
-							<span class="bg-white/10 px-3 py-1 rounded-full text-xs">Leiden</span>
-							<span class="bg-white/10 px-3 py-1 rounded-full text-xs">NASA Task Force</span>
+				
+				<div class="lg:col-span-5 sticky top-32">
+					<div class="relative">
+						<div class="absolute -top-10 -right-10 w-40 h-40 bg-accent/5 rounded-full blur-3xl"></div>
+						<div class="relative bg-white p-12 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] border border-slate-100 flex flex-col items-center justify-center text-center">
+							<div class="w-40 h-40 md:w-56 md:h-56 bg-slate-50 rounded-full flex items-center justify-center text-8xl mb-12 border border-slate-100 shadow-inner grayscale opacity-50">
+								🔭
+							</div>
+							<h3 class="text-3xl font-black text-slate-900 mb-2 font-sans uppercase tracking-tight">Danilo Albergaria</h3>
+							<p class="text-accent text-[10px] font-black uppercase tracking-[0.3em] mb-10 font-sans">Jornalista & Pesquisador</p>
+							
+							<div class="flex flex-wrap justify-center gap-4">
+								<span class="bg-slate-50 text-slate-400 px-5 py-2 text-[10px] font-black uppercase tracking-widest border border-slate-100">USP</span>
+								<span class="bg-slate-50 text-slate-400 px-5 py-2 text-[10px] font-black uppercase tracking-widest border border-slate-100">Leiden</span>
+								<span class="bg-slate-50 text-slate-400 px-5 py-2 text-[10px] font-black uppercase tracking-widest border border-slate-100">NASA</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -58,62 +79,41 @@
 	</section>
 
 	<!-- Mission Section -->
-	<section class="py-16 md:py-24 bg-slate-50">
-		<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-			<h2 class="text-4xl font-bold text-slate-900 mb-12 text-center">Nossa Missão</h2>
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-				<div class="bg-white p-8 rounded-xl shadow-sm border border-slate-100">
-					<div class="text-4xl mb-4">📰</div>
-					<h3 class="text-xl font-bold text-slate-900 mb-4">Informar</h3>
-					<p class="text-slate-600">
+	<section class="py-24 md:py-40 bg-slate-50/50">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="text-center mb-24">
+				<div class="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-6">Nossos Pilares</div>
+				<h2 class="text-4xl md:text-6xl font-black text-slate-900 mb-6 font-sans tracking-tight uppercase">Missão Jornalística</h2>
+			</div>
+			
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+				<div class="group">
+					<div class="w-16 h-16 bg-white text-primary border border-slate-100 shadow-sm flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+						<Newspaper class="w-8 h-8" />
+					</div>
+					<h3 class="text-2xl font-black text-slate-900 mb-6 font-sans uppercase tracking-tight">Informar</h3>
+					<p class="text-lg text-slate-600 font-serif leading-relaxed italic">
 						Trazer notícias precisas e atualizadas sobre as descobertas mais recentes na astrobiologia global e brasileira.
 					</p>
 				</div>
-				<div class="bg-white p-8 rounded-xl shadow-sm border border-slate-100">
-					<div class="text-4xl mb-4">🔬</div>
-					<h3 class="text-xl font-bold text-slate-900 mb-4">Analisar</h3>
-					<p class="text-slate-600">
+				
+				<div class="group">
+					<div class="w-16 h-16 bg-white text-primary border border-slate-100 shadow-sm flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+						<Search class="w-8 h-8" />
+					</div>
+					<h3 class="text-2xl font-black text-slate-900 mb-6 font-sans uppercase tracking-tight">Analisar</h3>
+					<p class="text-lg text-slate-600 font-serif leading-relaxed italic">
 						Oferecer profundidade e contexto para entender as implicações das pesquisas sobre a vida no cosmos.
 					</p>
 				</div>
-				<div class="bg-white p-8 rounded-xl shadow-sm border border-slate-100">
-					<div class="text-4xl mb-4">🇧🇷</div>
-					<h3 class="text-xl font-bold text-slate-900 mb-4">Destacar</h3>
-					<p class="text-slate-600">
-						Dar visibilidade à ciência produzida no Brasil, fortalecendo a comunidade científica nacional.
-					</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Content Areas -->
-	<section class="py-16 md:py-24">
-		<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-			<h2 class="text-4xl font-bold text-slate-900 mb-12 text-center">O que cobrimos</h2>
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-slate-700">
-				<div class="space-y-4">
-					<h3 class="text-2xl font-bold text-slate-900">Astrobiologia Brasileira</h3>
-					<p>
-						Acompanhamento de perto das pesquisas realizadas no Laboratório de Astrobiologia da USP e em outros centros de excelência no Brasil.
-					</p>
-				</div>
-				<div class="space-y-4">
-					<h3 class="text-2xl font-bold text-slate-900">Exoplanetas</h3>
-					<p>
-						A busca por mundos habitáveis e a caracterização de atmosferas em busca de sinais de vida (biossinaturas).
-					</p>
-				</div>
-				<div class="space-y-4">
-					<h3 class="text-2xl font-bold text-slate-900">Origens da Vida</h3>
-					<p>
-						As investigações químicas e biológicas sobre como a vida surgiu na Terra e as possibilidades de processos similares em outros astros.
-					</p>
-				</div>
-				<div class="space-y-4">
-					<h3 class="text-2xl font-bold text-slate-900">Exploração Espacial</h3>
-					<p>
-						Missões da NASA, ESA e outras agências que buscam vida em Marte, Europa, Encélado e além.
+				
+				<div class="group">
+					<div class="w-16 h-16 bg-white text-primary border border-slate-100 shadow-sm flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+						<Globe class="w-8 h-8" />
+					</div>
+					<h3 class="text-2xl font-black text-slate-900 mb-6 font-sans uppercase tracking-tight">Destacar</h3>
+					<p class="text-lg text-slate-600 font-serif leading-relaxed italic">
+						Dar visibilidade à ciência produzida no Brasil, fortalecendo a comunidade científica nacional frente ao mundo.
 					</p>
 				</div>
 			</div>
@@ -121,22 +121,23 @@
 	</section>
 
 	<!-- CTA -->
-	<section class="py-16 md:py-24 bg-slate-900">
-		<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-			<h2 class="text-4xl font-bold mb-6 text-balance">Acompanhe a Jornada</h2>
-			<p class="text-xl mb-8 text-slate-400 text-balance">
-				Fique por dentro das últimas descobertas sobre a vida no universo.
+	<section class="py-24 md:py-48 bg-[#0a0a0c] relative overflow-hidden">
+		<div class="absolute inset-0 bg-primary/5 pointer-events-none"></div>
+		<div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+			<h2 class="text-4xl md:text-8xl font-black mb-12 font-sans tracking-tight leading-none uppercase">Acompanhe a <br/> Jornada</h2>
+			<p class="text-xl md:text-3xl mb-16 text-slate-400 font-serif max-w-3xl mx-auto leading-relaxed italic">
+				Receba as últimas descobertas sobre a vida no universo diretamente na sua fonte de informação preferida.
 			</p>
-			<div class="flex flex-wrap justify-center gap-4">
+			<div class="flex flex-wrap justify-center gap-8">
 				<a
-					href="/categorias/noticias"
-					class="px-8 py-4 bg-primary text-primary-foreground font-bold rounded-lg hover:bg-primary/90 transition"
+					href="/artigos"
+					class="px-12 py-6 bg-white text-black font-black uppercase tracking-widest text-sm hover:bg-accent hover:text-white transition-all duration-300"
 				>
-					Ler Notícias
+					Explorar Artigos
 				</a>
 				<a
 					href="/#newsletter"
-					class="px-8 py-4 bg-white/10 text-white font-bold rounded-lg hover:bg-white/20 transition"
+					class="px-12 py-6 bg-transparent text-white border border-white/20 font-black uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-all duration-300"
 				>
 					Assinar Newsletter
 				</a>
@@ -144,10 +145,3 @@
 		</div>
 	</section>
 </main>
-
-<style>
-	:global(.prose) {
-		--tw-prose-body: rgb(51, 65, 85);
-		--tw-prose-headings: rgb(15, 23, 42);
-	}
-</style>
