@@ -86,10 +86,8 @@
 					const password = formData.get('password') as string;
 					try {
 						await account.createEmailPasswordSession(email, password);
-						// Small delay to ensure SDK writes fallback tokens if needed
-						setTimeout(() => {
-							goto('/admin/dashboard');
-						}, 100);
+						// Force full reload to ensure server hooks pick up the new cookies
+						window.location.href = '/admin/dashboard';
 					} catch (err: any) {
 						console.error('Login error:', err);
 						errorMessage = err.message || 'Login falhou.';
