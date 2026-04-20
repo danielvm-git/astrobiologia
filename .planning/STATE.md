@@ -30,3 +30,7 @@ See: .planning/PROJECT.md (updated 2026-04-20)
 - Tiptap rich text for high-performance editing.
 - Client-side filtering for MVP article discovery.
 - **i18n**: Paraglide-js for localized routing and static translation support.
+
+## Accumulated Context
+### Roadmap Evolution
+- Phase 8 added: adicionar seletor para holandês, chinês, espanhol e japonês nas paginas publicas e opção de tradução para esses idiomas na área administrativa

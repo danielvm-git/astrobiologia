@@ -13,6 +13,7 @@
     "test": "vitest run",
     "test:api": "vitest run",
     "test:e2e": "playwright test",
+    "test:e2e:p0": "playwright test tests/e2e/p0 --project=chromium",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "preflight": "npm install && npm run check && npm run test && npm run build",

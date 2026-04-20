@@ -39,10 +39,62 @@ To ensure the build process is resilient and secure on Appwrite Cloud, we use **
 | `PUBLIC_APPWRITE_PROJECT_ID` | Yes | Public | Appwrite Project ID |
 | `APPWRITE_API_KEY` | Yes | Private (Secret) | Admin API Key for SSR Auth |
 | `PUBLIC_DATABASE_ID` | Yes | Public | Appwrite Database ID |
-| `PUBLIC_ARTICLES_COLLECTION_ID`| Yes | Public | Articles Collection ID |
+| `PUBLIC_ARTICLES_COLLECTION_ID` | Yes | Public | Articles collection ID |
+| `PUBLIC_ARTICLES_TRANSLATIONS_COLLECTION_ID` | No | Public | Translations collection (default `article_translations`); set to a parallel collection for E2E/CI in the same project. |
+| `PUBLIC_CATEGORIES_COLLECTION_ID` | No | Public | Categories collection (default `categories`). |
+| `PUBLIC_STORAGE_BUCKET_ID` | No | Public | Image storage bucket (default `images`); use a second bucket for automation if needed. |
 
 > [!IMPORTANT]
 > You MUST set these variables in the **Settings > Environment Variables** section of your site in the Appwrite Console. Mark `APPWRITE_API_KEY` as a **Secret**.
+
+## GitHub Actions ↔ Appwrite Sites
+
+There are **two** supported ways to connect your repo and Appwrite; you can use **one or both**.
+
+### A — Appwrite Git (recommended for previews)
+
+In **Appwrite Console → Sites → your site → Settings → Git repository**, connect this GitHub repo.
+
+| Event | Behavior (per [Appwrite Git deployments](https://appwrite.io/docs/products/sites/deploy-from-git)) |
+| :--- | :--- |
+| Push to **production branch** (usually `main`) | New deployment is built and **activated** on your primary domain. |
+| Push to **other branches** | New deployment is created **but not activated**; a **[preview link](https://appwrite.io/docs/products/sites/previews)** is generated (access is limited to **members of your Appwrite organization**). |
+
+**Quality gate:** Require the GitHub Actions **CI** workflow to pass before merging into `main` (branch protection). After merge, the production push either goes to Appwrite via Git **or** via the CLI job below—**do not** run two competing production deploy pipelines unless you intend to.
+
+### B — GitHub Actions deploy after tests (CLI push)
+
+This repo includes a **`deploy-appwrite-sites`** job in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs **only** when:
+
+1. The workflow was triggered by a **push** to `main` or `master`,
+2. **`appwrite.config.json`** exists in the repository root,
+3. Required **secrets** are set (see below).
+
+It runs **after** `check-and-unit` and `e2e-p0` succeed. The CLI uses [non-interactive mode](https://appwrite.io/docs/tooling/command-line/non-interactive): API key authentication, then `appwrite push sites --activate`.
+
+**Setup:**
+
+1. Copy `appwrite.config.json.example` → `appwrite.config.json`, or generate/sync with the CLI using [`appwrite pull sites`](https://appwrite.io/docs/tooling/command-line/sites) after `appwrite login` locally.
+2. Verify `installCommand`, `buildCommand`, `outputDirectory`, `adapter`, and `buildRuntime` match your Appwrite Sites settings (`@sveltejs/adapter-node` outputs to **`build`** by default).
+3. Commit **`appwrite.config.json`** (it holds IDs, not secrets). Keep **`APPWRITE_API_KEY`** out of git.
+4. In **GitHub → Settings → Secrets and variables → Actions**, add:
+
+| Secret | Purpose |
+| :--- | :--- |
+| `APPWRITE_ENDPOINT` | e.g. `https://<REGION>.cloud.appwrite.io/v1` |
+| `APPWRITE_PROJECT_ID` | Project ID |
+| `APPWRITE_API_KEY` | API key with permission to manage Sites (scoped key recommended) |
+| `APPWRITE_SITE_ID` | Same `$id` as your site in `appwrite.config.json` |
+
+If `appwrite.config.json` is missing, the deploy job is **skipped** so CI still passes.
+
+### Preview URL “only from GitHub”
+
+True PR previews that **wait** for Actions are **not** the same as Appwrite’s branch previews. Typical pattern:
+
+- **PR:** run tests only (or deploy to a **non-Appwrite** preview host).
+- **Branch previews on Appwrite:** enable **Git integration** above; non–production-branch pushes get an **Appwrite preview URL** (org-only per docs).
+- **Production:** merge after CI green → either Appwrite builds from `main` (Git) or the **CLI deploy** job pushes and activates.
 
 ## Rollback procedure
 - **Appwrite Sites**: To roll back, re-upload the previous successful build directory (`build/` or `.svelte-kit/output/`) to the Appwrite Sites console.

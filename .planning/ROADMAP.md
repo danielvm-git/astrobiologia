@@ -50,3 +50,13 @@
 | 5. Multilingual   | v1.1      | 4/4            | Complete      | 2026-04-20 |
 | 6. Search Engine  | v1.1      | 0/1            | Next Priority | -          |
 | 7. Optimization   | v1.1      | 0/1            | Not started   | -          |
+
+### Phase 8: adicionar seletor para holandês, chinês, espanhol e japonês nas paginas publicas e opção de tradução para esses idiomas na área administrativa
+
+**Goal:** [To be planned]
+**Requirements**: TBD
+**Depends on:** Phase 7
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd-plan-phase 8 to break down)
