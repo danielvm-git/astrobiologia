@@ -52,7 +52,8 @@ To ensure the build process is resilient and secure on Appwrite Cloud, we use **
 Google OAuth (`createOAuth2Token`) rejects redirects that are not allowlisted and must use the same scheme as configured (typically **`https`**).
 
 - **Symptom:** Appwrite API error **`Invalid redirect`** when clicking “Continue with Google” in production only.
-- **Cause:** Some edges send **`X-Forwarded-Proto: http`** even though the browser hits **`https://`**. Prefer fixing at the platform layer: for `@sveltejs/adapter-node`, set **`ORIGIN=https://<your-public-host>`** (see [SvelteKit adapter-node](https://svelte.dev/docs/kit/adapter-node) env vars), or set optional **`PUBLIC_ORIGIN`** to that same URL in site env. The codebase also prefers **`event.url`** when it is already **`https:`** so OAuth callback URLs stay HTTPS.
+- **Cause (scheme):** Some edges send **`X-Forwarded-Proto: http`** even though the browser hits **`https://`**. Prefer fixing at the platform layer: for `@sveltejs/adapter-node`, set **`ORIGIN=https://<your-public-host>`** (see [SvelteKit adapter-node](https://svelte.dev/docs/kit/adapter-node) env vars), or set optional **`PUBLIC_ORIGIN`** to that same URL in site env. The codebase also prefers **`event.url`** when it is already **`https:`** so OAuth callback URLs stay HTTPS.
+- **Cause (hostname — most common once URLs are already `https://`):** **`success`** / **`failure`** hosts must match a **Web** platform registered on the Appwrite **project**. In **Appwrite Console → your project → Auth → Platforms**, add **Web** with hostname **`astrobiologia.appwrite.network`** (hostname only — no `https://`, no path). Use a wildcard like **`*.appwrite.network`** only if previews use different subdomains. Deployed URLs that are not localhost will **not** work until this exists — see [community threads](https://appwrite.io/threads/1327716367025045565).
 
 ## GitHub Actions ↔ Appwrite Sites
 

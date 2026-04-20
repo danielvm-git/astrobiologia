@@ -79,6 +79,40 @@ export const actions = {
 		const { account } = createAdminClient();
 
 		try {
+			// Visible in Appwrite Sites / any host logs (ingest URL only works locally)
+			log.info('[DEBUG-ad9f63] Google OAuth pre-token', {
+				successUrl,
+				failureUrl,
+				...requestHostContext
+			});
+
+			// #region agent log
+			fetch('http://127.0.0.1:7935/ingest/d09c7f4b-ef13-49c5-ad00-b084fd7a41e4', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'ad9f63' },
+				body: JSON.stringify({
+					sessionId: 'ad9f63',
+					hypothesisId: 'H1',
+					location: 'admin/login/+page.server.ts:google',
+					message: 'before createOAuth2Token',
+					data: {
+						successUrl,
+						failureUrl,
+						successPath: (() => {
+							try {
+								return new URL(successUrl).pathname;
+							} catch {
+								return null;
+							}
+						})(),
+						projectIdLen: (publicEnv.PUBLIC_APPWRITE_PROJECT_ID || '').length,
+						endpointHost: appwriteEndpointHost()
+					},
+					timestamp: Date.now()
+				})
+			}).catch(() => {});
+			// #endregion
+
 			const redirectUrl = await account.createOAuth2Token({
 				provider: OAuthProvider.Google,
 				success: successUrl,
@@ -89,6 +123,25 @@ export const actions = {
 		} catch (err: unknown) {
 			const status = typeof err === 'object' && err !== null && 'status' in err ? (err as { status?: number }).status : undefined;
 			if (status === 302) throw err;
+
+			// #region agent log
+			fetch('http://127.0.0.1:7935/ingest/d09c7f4b-ef13-49c5-ad00-b084fd7a41e4', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'ad9f63' },
+				body: JSON.stringify({
+					sessionId: 'ad9f63',
+					hypothesisId: 'H1-H5',
+					location: 'admin/login/+page.server.ts:google:catch',
+					message: 'createOAuth2Token rejected',
+					data: {
+						...serializeOAuthFailure(err),
+						successUrl,
+						failureUrl
+					},
+					timestamp: Date.now()
+				})
+			}).catch(() => {});
+			// #endregion
 
 			log.error('Google OAuth createOAuth2Token failed', {
 				oauth: serializeOAuthFailure(err),

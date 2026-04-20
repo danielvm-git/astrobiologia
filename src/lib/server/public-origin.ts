@@ -18,10 +18,35 @@ function fallbackOrigin(url: Pick<URL, 'origin' | 'protocol'>): string | undefin
  * @see https://svelte.dev/docs/kit/adapter-node — `ORIGIN`, `PROTOCOL_HEADER`, `HOST_HEADER`
  */
 export function getPublicOrigin(url: Pick<URL, 'origin' | 'protocol' | 'host'>, request: Pick<Request, 'headers'>): string {
+	let branch = 'fallback-localhost';
+	let resolved: string;
+
 	const explicit = publicEnv.PUBLIC_ORIGIN?.trim().replace(/\/$/, '');
 	if (explicit) {
 		try {
-			return new URL(explicit).origin;
+			resolved = new URL(explicit).origin;
+			branch = 'PUBLIC_ORIGIN';
+			// #region agent log
+			fetch('http://127.0.0.1:7935/ingest/d09c7f4b-ef13-49c5-ad00-b084fd7a41e4', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'ad9f63' },
+				body: JSON.stringify({
+					sessionId: 'ad9f63',
+					hypothesisId: 'H2',
+					location: 'public-origin.ts:getPublicOrigin',
+					message: 'resolved public origin',
+					data: {
+						branch,
+						resolved,
+						fromUrlPreview: fallbackOrigin(url) ?? null,
+						xfProto: request?.headers?.get('x-forwarded-proto') ?? null,
+						xfHost: request?.headers?.get('x-forwarded-host') ?? null
+					},
+					timestamp: Date.now()
+				})
+			}).catch(() => {});
+			// #endregion
+			return resolved;
 		} catch {
 			// ignore invalid PUBLIC_ORIGIN
 		}
@@ -31,17 +56,56 @@ export function getPublicOrigin(url: Pick<URL, 'origin' | 'protocol' | 'host'>, 
 
 	// Trust HTTPS from the framework URL when present (fixes broken X-Forwarded-Proto at the edge).
 	if (fromUrl?.startsWith('https://')) {
-		return fromUrl;
+		resolved = fromUrl;
+		branch = 'https-from-event-url';
+		// #region agent log
+		fetch('http://127.0.0.1:7935/ingest/d09c7f4b-ef13-49c5-ad00-b084fd7a41e4', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'ad9f63' },
+			body: JSON.stringify({
+				sessionId: 'ad9f63',
+				hypothesisId: 'H2',
+				location: 'public-origin.ts:getPublicOrigin',
+				message: 'resolved public origin',
+				data: {
+					branch,
+					resolved,
+					fromUrlPreview: fromUrl ?? null,
+					xfProto: request?.headers?.get('x-forwarded-proto') ?? null,
+					xfHost: request?.headers?.get('x-forwarded-host') ?? null
+				},
+				timestamp: Date.now()
+			})
+		}).catch(() => {});
+		// #endregion
+		return resolved;
 	}
 
 	const headers = request?.headers;
 	const xfProto = headers?.get('x-forwarded-proto')?.split(',')[0]?.trim();
 	const xfHost = headers?.get('x-forwarded-host')?.split(',')[0]?.trim();
 	if (xfProto && xfHost) {
-		return `${xfProto}://${xfHost}`;
+		resolved = `${xfProto}://${xfHost}`;
+		branch = 'x-forwarded-headers';
+	} else {
+		resolved = fromUrl ?? 'http://localhost';
+		branch = fromUrl ? 'fallback-fromUrl' : 'fallback-localhost';
 	}
-
-	return fromUrl ?? 'http://localhost';
+	// #region agent log
+	fetch('http://127.0.0.1:7935/ingest/d09c7f4b-ef13-49c5-ad00-b084fd7a41e4', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'ad9f63' },
+		body: JSON.stringify({
+			sessionId: 'ad9f63',
+			hypothesisId: 'H2',
+			location: 'public-origin.ts:getPublicOrigin',
+			message: 'resolved public origin',
+			data: { branch, resolved, fromUrlPreview: fromUrl ?? null, xfProto: xfProto ?? null, xfHost: xfHost ?? null },
+			timestamp: Date.now()
+		})
+	}).catch(() => {});
+	// #endregion
+	return resolved;
 }
 
 /** Whether the client connection is HTTPS (works behind reverse proxies). */
