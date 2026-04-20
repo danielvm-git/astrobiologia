@@ -20,6 +20,11 @@
 	"category_entrevistas": "Entrevistas",
 	"category_analises": "Análises",
 	"category_pesquisas": "Pesquisas",
+	"category_exoplanetas": "Exoplanetas",
+	"category_extremofilos": "Extremófilos",
 	"read_more": "Ler mais",
-	"published_on": "Publicado em"
+	"published_on": "Publicado em",
+    "reading_time": "{minutes} min de leitura",
+    "share": "Compartilhar",
+    "continue_exploring": "Continue Explorando"
 }

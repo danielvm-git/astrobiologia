@@ -41,6 +41,7 @@ vi.mock('appwrite', () => {
         ID: { unique: () => 'unique-id' },
         Query: {
             equal: (field: string, value: any) => `equal(${field}, ${value})`,
+            search: (field: string, value: string) => `search(${field}, ${value})`,
             orderDesc: (field: string) => `orderDesc(${field})`,
             limit: (value: number) => `limit(${value})`,
             offset: (value: number) => `offset(${value})`,
@@ -108,4 +109,24 @@ describe('Phase 5: i18n Relational Flow', () => {
         const article = await appwrite.getArticleBySlug('non-existent', 'en');
         expect(article).toBeNull();
     });
+
+	it('should search translations and join published master articles', async () => {
+		mocks.mockListDocuments
+			.mockResolvedValueOnce({
+				total: 1,
+				documents: [{ $id: 't1', article_id: 'a1', language: 'en', title: 'Mars microbes' }]
+			})
+			.mockResolvedValueOnce({ total: 0, documents: [] })
+			.mockResolvedValueOnce({ total: 0, documents: [] })
+			.mockResolvedValueOnce({
+				total: 1,
+				documents: [{ $id: 'a1', status: 'published', category: 'noticias' }]
+			});
+
+		const results = await appwrite.searchPublishedArticles('mars', 'en');
+
+		expect(results).toHaveLength(1);
+		expect(results[0].$id).toBe('a1');
+		expect(results[0].translation?.title).toBe('Mars microbes');
+	});
 });
