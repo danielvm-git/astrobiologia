@@ -77,20 +77,20 @@ describe('Phase 5: i18n Relational Flow', () => {
     });
 
     it('should correctly join master with translations for listing', async () => {
-        // 1. Mock translations list
-        mocks.mockListDocuments.mockResolvedValueOnce({
-            total: 2,
-            documents: [
-                { $id: 't-pt-1', article_id: 'a1', language: 'pt-br', title: 'PT 1' },
-                { $id: 't-pt-2', article_id: 'a2', language: 'pt-br', title: 'PT 2' }
-            ]
-        });
-        // 2. Mock master articles list
+        // 1. Mock master articles list
         mocks.mockListDocuments.mockResolvedValueOnce({
             total: 2,
             documents: [
                 { $id: 'a1', status: 'published' },
                 { $id: 'a2', status: 'published' }
+            ]
+        });
+        // 2. Mock translations list
+        mocks.mockListDocuments.mockResolvedValueOnce({
+            total: 2,
+            documents: [
+                { $id: 't-pt-1', article_id: 'a1', language: 'pt-br', title: 'PT 1' },
+                { $id: 't-pt-2', article_id: 'a2', language: 'pt-br', title: 'PT 2' }
             ]
         });
 

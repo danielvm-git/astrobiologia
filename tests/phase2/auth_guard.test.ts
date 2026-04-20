@@ -35,7 +35,18 @@ vi.mock('$lib/paraglide/server', () => ({
 }));
 
 vi.mock('$lib/paraglide/runtime', () => ({
-    getTextDirection: vi.fn(() => 'ltr')
+    getTextDirection: vi.fn(() => 'ltr'),
+    deLocalizeHref: vi.fn((path) => path),
+    localizeHref: vi.fn((path) => path)
+}));
+
+vi.mock('$lib/server/appwrite', () => ({
+    createSessionClient: vi.fn(() => ({
+        account: {
+            get: vi.fn().mockResolvedValue({ $id: 'user123', email: 'admin@astrobiologia.com' })
+        }
+    })),
+    SESSION_COOKIE: 'a_session'
 }));
 
 describe('Admin Auth Hook', () => {
@@ -44,8 +55,10 @@ describe('Admin Auth Hook', () => {
     it('should redirect to dashboard if authenticated and on login page', async () => {
         const event = {
             cookies: {
-                getAll: () => [{ name: 'a_session_123', value: 'xyz' }]
+                get: (name: string) => name === 'a_session' ? 'xyz' : undefined,
+                delete: vi.fn()
             },
+            locals: {},
             url: { pathname: '/admin/login' }
         } as any;
 
@@ -60,8 +73,10 @@ describe('Admin Auth Hook', () => {
     it('should redirect to login if not authenticated and not on login page', async () => {
         const event = {
             cookies: {
-                getAll: () => []
+                get: () => undefined,
+                delete: vi.fn()
             },
+            locals: {},
             url: { pathname: '/admin/artigos' }
         } as any;
 
@@ -76,32 +91,40 @@ describe('Admin Auth Hook', () => {
     it('should allow access if authenticated and not on login page', async () => {
         const event = {
             cookies: {
-                getAll: () => [{ name: 'a_session_123', value: 'xyz' }]
+                get: (name: string) => name === 'a_session' ? 'xyz' : undefined,
+                delete: vi.fn()
             },
+            locals: {},
             url: { pathname: '/admin/artigos' }
         } as any;
 
         await handle({ event, resolve });
         expect(resolve).toHaveBeenCalled();
+        expect(event.locals.user).toBeDefined();
     });
 
     it('should allow access to login page if not authenticated', async () => {
         const event = {
             cookies: {
-                getAll: () => []
+                get: () => undefined,
+                delete: vi.fn()
             },
+            locals: {},
             url: { pathname: '/admin/login' }
         } as any;
 
         await handle({ event, resolve });
         expect(resolve).toHaveBeenCalled();
+        expect(event.locals.user).toBeNull();
     });
 
     it('should not affect non-admin routes', async () => {
         const event = {
             cookies: {
-                getAll: () => []
+                get: () => undefined,
+                delete: vi.fn()
             },
+            locals: {},
             url: { pathname: '/artigos' }
         } as any;
 

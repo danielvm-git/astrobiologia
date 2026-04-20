@@ -69,15 +69,15 @@ describe('Appwrite Operations', () => {
 
     describe('Article CRUD operations', () => {
         it('getPublishedArticles should fetch published articles with translations', async () => {
-            // First call: translations
-            mocks.mockListDocuments.mockResolvedValueOnce({ 
-                total: 1,
-                documents: [{ $id: 't1', article_id: '1', language: 'pt-br', title: 'Translated' }] 
-            });
-            // Second call: master articles
+            // First call: master articles
             mocks.mockListDocuments.mockResolvedValueOnce({ 
                 total: 1,
                 documents: [{ $id: '1', category: 'news', status: 'published' }] 
+            });
+            // Second call: translations
+            mocks.mockListDocuments.mockResolvedValueOnce({ 
+                total: 1,
+                documents: [{ $id: 't1', article_id: '1', language: 'pt-br', title: 'Translated' }] 
             });
 
             const articles = await appwrite.getPublishedArticles('pt-br');

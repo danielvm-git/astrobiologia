@@ -23,17 +23,6 @@
 			? article.featuredImage 
 			: `${getImageUrl(article.featuredImage, 1200, 630)}&output=webp&quality=85`) 
 		: null);
-	
-	const schemaMarkup = $derived(generateSchemaMarkup({
-		...article,
-		title,
-		slug,
-		excerpt,
-		content,
-		featuredImage: imageUrl,
-		createdAt: article.publishedAt || article.$createdAt,
-		updatedAt: article.$updatedAt
-	}));
 </script>
 
 <svelte:head>
@@ -54,23 +43,6 @@
 	<meta property="article:published_time" content={article.publishedAt || article.$createdAt} />
 	<meta property="article:author" content={article.authorName || 'Danilo Albergaria'} />
 	<meta property="article:section" content={category?.name || 'Astrobiologia'} />
-	{#if article.tags}
-		{#each article.tags as tag}
-			<meta property="article:tag" content={tag} />
-		{/each}
-	{/if}
-
-	<!-- Twitter -->
-	<meta property="twitter:card" content="summary_large_image" />
-	<meta property="twitter:url" content="https://astrobiologia.com.br/{lang}/artigos/{slug}" />
-	<meta property="twitter:title" content={title} />
-	<meta property="twitter:description" content={excerpt} />
-	{#if imageUrl}
-		<meta property="twitter:image" content={imageUrl} />
-	{/if}
-
-	<!-- Schema.org -->
-	{@html `<script type="application/ld+json">${JSON.stringify(schemaMarkup)}</script>`}
 </svelte:head>
 
 <main class="min-h-screen bg-background">

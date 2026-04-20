@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { getLocale, locales, localizeHref } from '$lib/paraglide/runtime';
+	import { getLocale, locales, localizeHref, deLocalizeHref } from '$lib/paraglide/runtime';
 	import { Languages, ChevronDown } from 'lucide-svelte';
 	import { cn } from '$lib/utils';
 
@@ -45,7 +45,7 @@
 			>
 				{#each locales as tag}
 					<a
-						href={localizeHref(page.url.pathname, { locale: tag })}
+						href={localizeHref(deLocalizeHref(page.url.pathname), { locale: tag })}
 						class={cn(
 							'block px-4 py-2.5 text-[10px] font-black uppercase tracking-widest transition-colors hover:bg-slate-50',
 							currentLang === tag ? 'text-primary' : 'text-slate-500'
@@ -69,7 +69,7 @@
 		<div class="flex flex-wrap gap-2 px-3">
 			{#each locales as tag}
 				<a
-					href={localizeHref(page.url.pathname, { locale: tag })}
+					href={localizeHref(deLocalizeHref(page.url.pathname), { locale: tag })}
 					class={cn(
 						'px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-all border',
 						currentLang === tag 
@@ -86,7 +86,7 @@
 	<div class={cn('flex items-center gap-6', className)}>
 		{#each locales as tag}
 			<a
-				href={localizeHref(page.url.pathname, { locale: tag })}
+				href={localizeHref(deLocalizeHref(page.url.pathname), { locale: tag })}
 				class={cn(
 					'text-[10px] font-black uppercase tracking-widest transition-colors',
 					currentLang === tag ? 'text-primary' : 'text-slate-400 hover:text-slate-600'

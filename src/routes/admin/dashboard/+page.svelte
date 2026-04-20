@@ -1,8 +1,9 @@
 <script lang="ts">
+	import { localizeHref } from '$lib/paraglide/runtime';
 	import type { PageData } from './$types';
 
-	export let data: PageData;
-	const { stats, error } = data;
+	let { data }: { data: PageData } = $props();
+	const { stats, error } = $derived(data);
 </script>
 
 <svelte:head>
@@ -78,13 +79,13 @@
 			<h2 class="text-xl font-bold text-slate-900 mb-4">Ações Rápidas</h2>
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 				<a
-					href="/admin/artigos/new"
+					href={localizeHref('/admin/artigos/new')}
 					class="px-4 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition text-center font-medium"
 				>
 					Criar Novo Artigo
 				</a>
 				<a
-					href="/admin/artigos"
+					href={localizeHref('/admin/artigos')}
 					class="px-4 py-3 bg-slate-200 text-slate-900 rounded-lg hover:bg-slate-300 transition text-center font-medium"
 				>
 					Gerenciar Artigos
@@ -123,7 +124,7 @@
 									</td>
 									<td class="py-3 px-4">
 										<a
-											href="/admin/artigos/{article.$id}/edit"
+											href={localizeHref(`/admin/artigos/${article.$id}/edit`)}
 											class="text-primary hover:text-primary/80 font-medium"
 										>
 											Editar
