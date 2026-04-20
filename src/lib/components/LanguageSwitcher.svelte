@@ -12,7 +12,11 @@
 	let { variant = 'header', class: className }: Props = $props();
 	let isOpen = $state(false);
 
-	const currentLang = $derived(getLocale());
+	const currentLang = $derived.by(() => {
+		// Access page.url to ensure this derived value re-runs on navigation
+		const _ = page.url;
+		return getLocale();
+	});
 
 	function toggleMenu() {
 		isOpen = !isOpen;

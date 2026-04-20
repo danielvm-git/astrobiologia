@@ -9,7 +9,7 @@
 	import Placeholder from '@tiptap/extension-placeholder';
     import { locales } from '$lib/paraglide/runtime';
     import { cn } from '$lib/utils';
-    import { Languages, Copy, Trash2, Globe, FileText, CheckCircle2 } from 'lucide-svelte';
+    import { Languages, Copy, Trash2, Globe, FileText, CheckCircle2, Sparkles } from 'lucide-svelte';
 
 	let { article = null, translations = [], isLoading = $bindable(false), onSave } = $props();
 
@@ -125,6 +125,63 @@
             editor.commands.setContent(base.content);
         }
     }
+    
+    async function translateWithDeepL() {
+        if (activeLang === 'pt-br') return;
+        
+        const base = transState['pt-br'];
+        if (!base.title) {
+            alert('Por favor, preencha o título em Português antes de traduzir.');
+            return;
+        }
+
+        isLoading = true;
+        try {
+            // Translate Title
+            const titleRes = await fetch('/api/translate', {
+                method: 'POST',
+                body: JSON.stringify({ text: base.title, isHtml: false })
+            });
+            const titleData = await titleRes.json();
+            if (titleData.error) throw new Error(titleData.error);
+            if (titleData.translated) transState[activeLang].title = titleData.translated;
+
+            // Translate Excerpt
+            if (base.excerpt) {
+                const excerptRes = await fetch('/api/translate', {
+                    method: 'POST',
+                    body: JSON.stringify({ text: base.excerpt, isHtml: false })
+                });
+                const excerptData = await excerptRes.json();
+                if (excerptData.translated) transState[activeLang].excerpt = excerptData.translated;
+            }
+
+            // Translate Content (HTML)
+            if (base.content) {
+                const contentRes = await fetch('/api/translate', {
+                    method: 'POST',
+                    body: JSON.stringify({ text: base.content, isHtml: true })
+                });
+                const contentData = await contentRes.json();
+                if (contentData.translated) {
+                    transState[activeLang].content = contentData.translated;
+                    if (editor) {
+                        editor.commands.setContent(contentData.translated);
+                    }
+                }
+            }
+
+            // Auto-generate slug if title translated
+            if (titleData.translated && !transState[activeLang].slug) {
+                transState[activeLang].slug = generateSlug(titleData.translated);
+            }
+        } catch (err: any) {
+            console.error('Translation error:', err);
+            alert(err.message || 'Erro ao traduzir. Verifique a chave da API do DeepL em .env');
+        } finally {
+            isLoading = false;
+        }
+    }
 
 	async function handleFeaturedImageUpload(e: Event) {
 		const target = e.target as HTMLInputElement;
@@ -230,14 +287,25 @@
                     </h2>
                     
                     {#if activeLang !== 'pt-br'}
-                        <button 
-                            type="button"
-                            onclick={copyFromBase}
-                            class="flex items-center gap-2 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-primary border border-slate-200 rounded-lg hover:border-primary/20 transition-all"
-                        >
-                            <Copy class="w-3 h-3" />
-                            Copiar do Original (PT)
-                        </button>
+                        <div class="flex items-center gap-2">
+                            <button 
+                                type="button"
+                                onclick={translateWithDeepL}
+                                disabled={isLoading}
+                                class="flex items-center gap-2 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-primary hover:text-white bg-primary/5 hover:bg-primary border border-primary/20 rounded-lg transition-all disabled:opacity-50"
+                            >
+                                <Sparkles class="w-3 h-3" />
+                                Traduzir com DeepL
+                            </button>
+                            <button 
+                                type="button"
+                                onclick={copyFromBase}
+                                class="flex items-center gap-2 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-primary border border-slate-200 rounded-lg hover:border-primary/20 transition-all"
+                            >
+                                <Copy class="w-3 h-3" />
+                                Copiar do Original
+                            </button>
+                        </div>
                     {/if}
                 </div>
 

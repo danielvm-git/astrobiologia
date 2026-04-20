@@ -1,11 +1,12 @@
-import { databases, Query, DATABASE_ID, COLLECTIONS } from '$lib/appwrite';
-import { redirect } from '@sveltejs/kit';
-import type { PageLoad } from './$types';
+import { createSessionClient, DATABASE_ID } from '$lib/server/appwrite';
+import { COLLECTIONS } from '$lib/appwrite';
+import { Query } from 'node-appwrite';
+import type { PageServerLoad } from './$types';
 
-export const load: PageLoad = async () => {
-
+export const load: PageServerLoad = async (event) => {
 	try {
-		// Get all articles
+		const { databases } = createSessionClient(event);
+
 		const allResponse = await databases.listDocuments(
 			DATABASE_ID,
 			COLLECTIONS.ARTICLES,
@@ -48,6 +49,13 @@ export const load: PageLoad = async () => {
 	} catch (err) {
 		console.error('Dashboard error:', err);
 		return {
+			stats: {
+				totalArticles: 0,
+				publishedArticles: 0,
+				draftArticles: 0,
+				categories: 0,
+				recentArticles: []
+			},
 			error: 'Failed to load dashboard data'
 		};
 	}
