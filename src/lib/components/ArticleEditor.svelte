@@ -13,7 +13,7 @@
 
 	let { article = null, translations = [], isLoading = $bindable(false), onSave } = $props();
 
-	// Master Metadata
+	// Master Metadata - Initialize with initial values from props
 	let category = $state(article?.category || 'noticias');
 	let tags = $state(article?.tags?.join(', ') || '');
 	let status = $state(article?.status || 'draft');
@@ -290,14 +290,15 @@
 
                     <!-- Tiptap Editor -->
                     <div>
-                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">
+                        <span class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">
                             Corpo do Artigo
-                        </label>
+                        </span>
                         <div class="rounded-2xl border border-slate-200 overflow-hidden bg-white shadow-sm ring-1 ring-slate-100">
                             <div class="bg-slate-50/50 border-b border-slate-200 p-2 flex flex-wrap gap-1">
                                 <button
                                     type="button"
                                     onclick={() => editor?.chain().focus().toggleBold().run()}
+                                    aria-label="Negrito"
                                     class={cn("p-2 rounded-lg hover:bg-white hover:shadow-sm transition-all", editor?.isActive('bold') && "bg-white text-primary shadow-sm")}
                                 >
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 12h8a4 4 0 100-8H6v8zm0 0h10a4 4 0 110 8H6v-8z" /></svg>
@@ -305,6 +306,7 @@
                                 <button
                                     type="button"
                                     onclick={() => editor?.chain().focus().toggleItalic().run()}
+                                    aria-label="Itálico"
                                     class={cn("p-2 rounded-lg hover:bg-white hover:shadow-sm transition-all", editor?.isActive('italic') && "bg-white text-primary shadow-sm")}
                                 >
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 0h4M4 20h4" /></svg>
@@ -328,6 +330,7 @@
                                 <button
                                     type="button"
                                     onclick={addImageToContent}
+                                    aria-label="Adicionar imagem"
                                     class="p-2 rounded-lg hover:bg-white hover:shadow-sm transition-all"
                                 >
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
@@ -379,7 +382,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">
+                        <label for="featured-image" class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">
                             Imagem de Destaque
                         </label>
                         
@@ -397,6 +400,7 @@
                         {/if}
 
                         <input
+                            id="featured-image"
                             type="file"
                             accept="image/*"
                             onchange={handleFeaturedImageUpload}

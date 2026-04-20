@@ -8,36 +8,41 @@ The primary deployment target is **Appwrite Sites**, which hosts the static buil
 - **Vercel**: (Optional) Alternative host for SSR or advanced features.
 
 ## Build pipeline
-The build process must generate a static site for compatibility with Appwrite Sites.
+The build process generates a server-side rendered (SSR) bundle for **Appwrite Sites**, which now supports Node.js runtimes.
 
 1. **Install Dependencies**:
    ```bash
-   pnpm install
+   npm install
    ```
 2. **Paraglide Compilation**:
-   The project uses Paraglide for i18n. Ensure messages are compiled before or during the build process:
+   The project uses Paraglide for i18n. While the Vite plugin usually handles this, ensure messages are fully compiled to avoid `ENOENT` errors during build:
    ```bash
-   npx paraglide-js compile --project ./project.inlang
+   npx paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide
    ```
-   *Note: The `paraglideVitePlugin` in `vite.config.ts` handles this automatically during `pnpm build`, but it must be present in the build environment.*
 
 3. **Production Build**:
    ```bash
-   pnpm build
+   npm run build
    ```
-   **Important**: For Appwrite Sites, the project should be configured with `@sveltejs/adapter-static`. Ensure `svelte.config.js` is updated to use the static adapter and that `prerender` is enabled for all routes.
+   **Note**: The project uses `@sveltejs/adapter-node`. Ensure the site is configured as an **SSR** site in the Appwrite Console.
 
 ## Environment setup
-Appwrite Sites hosts static files. Consequently, all environment variables must be available at build time to be "baked into" the client-side code.
+To ensure the build process is resilient and secure on Appwrite Cloud, we use **Dynamic Environment Variables**.
 
-**Requirement**: Use `$env/static/public` for all public configuration. Static environment variables ensure that values are correctly bundled into the generated files for the browser. Dynamic environment variables (`$env/dynamic/public`) will not work on a static host like Appwrite Sites.
+**Key Lesson**: Do NOT use `$env/static/public` or `$env/static/private` for variables that are provided by the Appwrite Console. Using static variables will cause the build to fail on Appwrite Cloud because they are not present in the shell during the `npm run build` phase.
 
-| Variable | Required | Default | Description |
+**Solution**: Use `$env/dynamic/public` and `$env/dynamic/private`. This allows the build to complete without a `.env` file, with SvelteKit resolving the values at runtime from the environment.
+
+| Variable | Required | Scope | Description |
 | :--- | :--- | :--- | :--- |
-| `PUBLIC_APPWRITE_ENDPOINT` | Yes | `https://cloud.appwrite.io/v1` | Appwrite Cloud endpoint URL |
-| `PUBLIC_APPWRITE_PROJECT_ID` | Yes | - | Appwrite Project ID |
-| `PUBLIC_DATABASE_ID` | Yes | `69e464fb0006a1b3c4eb` | Appwrite Database ID |
-| `PUBLIC_ARTICLES_COLLECTION_ID`| Yes | `articles` | Articles Collection ID |
+| `PUBLIC_APPWRITE_ENDPOINT` | Yes | Public | Appwrite Cloud endpoint URL |
+| `PUBLIC_APPWRITE_PROJECT_ID` | Yes | Public | Appwrite Project ID |
+| `APPWRITE_API_KEY` | Yes | Private (Secret) | Admin API Key for SSR Auth |
+| `PUBLIC_DATABASE_ID` | Yes | Public | Appwrite Database ID |
+| `PUBLIC_ARTICLES_COLLECTION_ID`| Yes | Public | Articles Collection ID |
+
+> [!IMPORTANT]
+> You MUST set these variables in the **Settings > Environment Variables** section of your site in the Appwrite Console. Mark `APPWRITE_API_KEY` as a **Secret**.
 
 ## Rollback procedure
 - **Appwrite Sites**: To roll back, re-upload the previous successful build directory (`build/` or `.svelte-kit/output/`) to the Appwrite Sites console.

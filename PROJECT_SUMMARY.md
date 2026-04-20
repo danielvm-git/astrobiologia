@@ -135,17 +135,21 @@ pnpm build
 ### Deployment
 The project is optimized for Appwrite Sites or any Node.js compatible environment.
 
-## Future Enhancements
+## Lessons Learned & Best Practices
 
-### Upcoming Phases
-- User comments and discussions.
-- Email newsletter subscription.
-- Reading time estimates.
-- Article recommendation engine.
-- Interactive visualizations.
+### Build Resiliency (Appwrite Sites)
+- **Environment Variables**: Always use `$env/dynamic/public` and `$env/dynamic/private` for variables configured in the Appwrite Console. Using static variables causes build failures on Appwrite Cloud because they are not available during the `npm run build` phase.
+- **i18n Compilation**: Paraglide generation can sometimes lag behind Vite. Running `npx paraglide-js compile` manually is a reliable way to resolve `ENOENT` errors for message files during a clean build.
+
+### Svelte 5 (Runes) & State
+- **State Initialization**: Svelte 5 warns when props are referenced directly in `$state` calls (`state_referenced_locally`). For initial editor state that should NOT track prop updates after load, this pattern is acceptable but requires clarity. 
+- **A11y Compliance**: Interactive components (like Tiptap buttons) must have explicit `aria-label` attributes to pass `svelte-check` and ensure accessibility.
+
+### Backend Synchronization
+- **API-Driven Config**: Environment variables for Appwrite Sites can and should be managed via the Appwrite API (`sites_create_variable`) to ensure parity between local development and production without manual console overhead.
 
 ---
 
 **Status**: Stable - Milestone 1 (MVP) & Phase 5 (i18n) Complete
-**Last Updated**: 2026-05-20
+**Last Updated**: 2026-04-20
 **Maintainer**: Danilo Albergaria

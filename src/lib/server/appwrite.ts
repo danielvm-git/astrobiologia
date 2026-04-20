@@ -1,10 +1,6 @@
 import { Client, Account, Databases, Storage } from 'node-appwrite';
-import { 
-    PUBLIC_APPWRITE_ENDPOINT, 
-    PUBLIC_APPWRITE_PROJECT_ID,
-    PUBLIC_DATABASE_ID
-} from '$env/static/public';
-import { APPWRITE_API_KEY } from '$env/static/private';
+import { env as publicEnv } from '$env/dynamic/public';
+import { env as privateEnv } from '$env/dynamic/private';
 
 export const SESSION_COOKIE = 'a_session';
 
@@ -14,9 +10,9 @@ export const SESSION_COOKIE = 'a_session';
  */
 export function createAdminClient() {
     const client = new Client()
-        .setEndpoint(PUBLIC_APPWRITE_ENDPOINT)
-        .setProject(PUBLIC_APPWRITE_PROJECT_ID)
-        .setKey(APPWRITE_API_KEY);
+        .setEndpoint(publicEnv.PUBLIC_APPWRITE_ENDPOINT || 'https://cloud.appwrite.io/v1')
+        .setProject(publicEnv.PUBLIC_APPWRITE_PROJECT_ID || '')
+        .setKey(privateEnv.APPWRITE_API_KEY || '');
 
     return {
         get account() {
@@ -37,8 +33,8 @@ export function createAdminClient() {
  */
 export function createSessionClient(event: { cookies: { get: (name: string) => string | undefined } }) {
     const client = new Client()
-        .setEndpoint(PUBLIC_APPWRITE_ENDPOINT)
-        .setProject(PUBLIC_APPWRITE_PROJECT_ID);
+        .setEndpoint(publicEnv.PUBLIC_APPWRITE_ENDPOINT || 'https://cloud.appwrite.io/v1')
+        .setProject(publicEnv.PUBLIC_APPWRITE_PROJECT_ID || '');
 
     const session = event.cookies.get(SESSION_COOKIE);
     if (session) {
@@ -55,4 +51,4 @@ export function createSessionClient(event: { cookies: { get: (name: string) => s
     };
 }
 
-export const DATABASE_ID = PUBLIC_DATABASE_ID;
+export const DATABASE_ID = publicEnv.PUBLIC_DATABASE_ID || '';
