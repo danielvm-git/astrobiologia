@@ -19,8 +19,12 @@ A professional journalistic portal covering astrobiology, maintained by Danilo A
 - **Simplicity**: Prioritize low maintenance and free tier usage.
 - **Language**: Core content is in Portuguese, but the project supports multi-language (i18n).
 - **Backend**: Use Appwrite Cloud for all backend needs. Do not introduce self-hosted components.
+- **Authentication**: Always use project-specific session cookies (`a_session_${PROJECT_ID}`) for SSR to maintain sync with the client-side SDK.
+- **Admin Routing**: Use server-side load functions (`+page.server.ts`) for all authenticated admin data fetching to avoid 401 errors in the browser.
+- **Appwrite SDK Split**: Two SDKs with DIFFERENT APIs are in use:
+  - `appwrite` (client, v17, browser): positional args — `createEmailPasswordSession(email, password)`
+  - `node-appwrite` (server, v24, SSR): named params — `createEmailPasswordSession({ email, password })`, `createOAuth2Token({ provider, success, failure })`, `createSession({ userId, secret })`
 - **Svelte 5**: Use runes (`$state`, `$derived`, etc.) and modern Svelte 5 patterns.
-- **Tailwind 4**: Use Tailwind 4 features and avoid legacy configurations.
 
 ## Current Status
 - **Active Phase**: Phase 2: Administrative CMS (Articles CRUD).
