@@ -5,5 +5,21 @@
 	"nav_articles": "Artigos",
 	"nav_about": "Sobre",
 	"footer_tagline": "Explorando a vida no universo.",
-	"search_placeholder": "Pesquisar artigos..."
+	"search_placeholder": "Pesquisar artigos...",
+	"hero_title": "Explorando a Vida no Universo",
+	"hero_subtitle": "Jornalismo científico sobre astrobiologia, exoplanetas e a busca por vida além da Terra.",
+	"section_latest": "Últimas Reportagens",
+	"filter_all": "Todos",
+	"newsletter_title": "Mantenha-se Informado",
+	"newsletter_subtitle": "Assine nossa newsletter e receba as últimas novidades da astrobiologia.",
+	"newsletter_button": "Assinar",
+	"newsletter_placeholder": "seu@email.com",
+	"empty_category": "Nenhum artigo encontrado nesta categoria.",
+	"empty_category_cta": "Ver todos os artigos",
+	"category_noticias": "Notícias",
+	"category_entrevistas": "Entrevistas",
+	"category_analises": "Análises",
+	"category_pesquisas": "Pesquisas",
+	"read_more": "Ler mais",
+	"published_on": "Publicado em"
 }

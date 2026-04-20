@@ -1,9 +1,25 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"site_title": "Astrobiology.com.br",
+	"site_title": "Astrobiologia.com.br",
 	"nav_home": "Home",
 	"nav_articles": "Articles",
 	"nav_about": "About",
 	"footer_tagline": "Exploring life in the universe.",
-	"search_placeholder": "Search articles..."
+	"search_placeholder": "Search articles...",
+	"hero_title": "Exploring Life in the Universe",
+	"hero_subtitle": "Scientific journalism on astrobiology, exoplanets and the search for life beyond Earth.",
+	"section_latest": "Latest Stories",
+	"filter_all": "All",
+	"newsletter_title": "Stay Informed",
+	"newsletter_subtitle": "Subscribe to our newsletter and receive the latest astrobiology news.",
+	"newsletter_button": "Subscribe",
+	"newsletter_placeholder": "your@email.com",
+	"empty_category": "No articles found in this category.",
+	"empty_category_cta": "View all articles",
+	"category_noticias": "News",
+	"category_entrevistas": "Interviews",
+	"category_analises": "Analyses",
+	"category_pesquisas": "Research",
+	"read_more": "Read more",
+	"published_on": "Published on"
 }
