@@ -1,21 +1,23 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import { page } from '$app/state';
-	import { Menu, X, Search, ShieldCheck } from 'lucide-svelte';
+	import { Lock, Mail, Menu, Search, ShieldCheck, Telescope, X } from 'lucide-svelte';
 	import { authStore } from '$lib/stores/auth';
-	import { account, OAuthProvider } from '$lib/appwrite';
+
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import * as m from '$lib/paraglide/messages';
 	import LanguageSwitcher from './LanguageSwitcher.svelte';
 
 	let mobileMenuOpen = $state(false);
 	let showLoginModal = $state(false);
+	let loginError = $state('');
 
 	const navLinks = $derived([
 		{ href: localizeHref('/'), label: m.nav_home() },
-		{ href: localizeHref('/categorias/noticias'), label: 'Notícias' },
-		{ href: localizeHref('/categorias/entrevistas'), label: 'Entrevistas' },
-		{ href: localizeHref('/categorias/analises'), label: 'Análises' },
-		{ href: localizeHref('/categorias/pesquisas-brasileiras'), label: 'Pesquisas' },
+		{ href: localizeHref('/categorias/noticias'), label: m.category_noticias() },
+		{ href: localizeHref('/categorias/entrevistas'), label: m.category_entrevistas() },
+		{ href: localizeHref('/categorias/analises'), label: m.category_analises() },
+		{ href: localizeHref('/categorias/pesquisas-brasileiras'), label: m.category_pesquisas() },
 		{ href: localizeHref('/sobre'), label: m.nav_about() }
 	]);
 
@@ -27,16 +29,22 @@
 		mobileMenuOpen = false;
 	}
 
-	async function loginWithGoogle() {
-		try {
-			account.createOAuth2Session(
-				OAuthProvider.Google,
-				`${window.location.origin}/admin/dashboard`,
-				`${window.location.origin}/admin/login?error=google_failed`
-			);
-		} catch (err) {
-			console.error('Google login error:', err);
-		}
+	function openModal() {
+		loginError = '';
+		showLoginModal = true;
+	}
+
+
+
+	// Same full-page redirect pattern as /admin/login to avoid cookie race condition.
+	function modalLoginEnhance() {
+		return async ({ result }: { result: { type: string; location?: string; data?: any } }) => {
+			if (result.type === 'redirect' && result.location) {
+				window.location.href = result.location;
+			} else if (result.type === 'failure') {
+				loginError = result.data?.message ?? 'Login falhou. Verifique suas credenciais.';
+			}
+		};
 	}
 </script>
 
@@ -67,14 +75,14 @@
 		<div class="hidden items-center gap-4 md:flex">
 			<LanguageSwitcher variant="header" />
 
-			<button
-				type="button"
+			<a
+				href={localizeHref('/busca')}
 				class="flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
 				aria-label={m.search_placeholder()}
 			>
 				<Search class="h-5 w-5" />
-			</button>
-			
+			</a>
+
 			{#if $authStore.isLoggedIn}
 				<a
 					href="/admin/dashboard"
@@ -85,7 +93,7 @@
 				</a>
 			{:else}
 				<button
-					onclick={() => (showLoginModal = true)}
+					onclick={openModal}
 					class="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 shadow-sm"
 				>
 					Admin
@@ -125,7 +133,7 @@
 						</a>
 					{/each}
 					<hr class="my-2 border-border" />
-					
+
 					<LanguageSwitcher variant="mobile" />
 
 					<hr class="my-2 border-border" />
@@ -141,10 +149,7 @@
 					{:else}
 						<button
 							class="rounded-md bg-primary px-3 py-2 text-center text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-							onclick={() => {
-								closeMobileMenu();
-								showLoginModal = true;
-							}}
+							onclick={() => { closeMobileMenu(); openModal(); }}
 						>
 							Acesso Administrativo
 						</button>
@@ -155,70 +160,117 @@
 	{/if}
 </header>
 
-<!-- Login Modal -->
+<!-- Login Modal — Command Center style -->
 {#if showLoginModal}
 	<div class="fixed inset-0 z-[100] flex items-center justify-center p-4">
 		<!-- Backdrop -->
-		<button 
+		<button
 			type="button"
-			class="absolute inset-0 bg-background/80 backdrop-blur-sm transition-opacity cursor-default w-full h-full border-none" 
+			class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm cursor-default w-full h-full border-none"
 			onclick={() => (showLoginModal = false)}
 			aria-label="Fechar modal"
 		></button>
 
-		<!-- Modal Content -->
-		<div class="relative w-full max-w-md scale-100 transform overflow-hidden rounded-2xl bg-card p-8 shadow-2xl border border-border transition-all animate-in fade-in zoom-in duration-200">
-			<button 
+		<!-- Modal card -->
+		<div class="relative w-full max-w-md rounded-[32px] bg-white shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
+			<!-- Close -->
+			<button
 				type="button"
-				class="absolute right-4 top-4 text-muted-foreground hover:text-foreground transition-colors"
+				class="absolute right-5 top-5 z-10 flex h-8 w-8 items-center justify-center rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
 				onclick={() => (showLoginModal = false)}
 			>
-				<X class="h-5 w-5" />
+				<X class="h-4 w-4" />
 			</button>
 
-			<div class="text-center mb-8">
-				<div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-					<ShieldCheck class="h-6 w-6 text-primary" />
+			<!-- Dark header band -->
+			<div class="bg-slate-900 px-10 pt-8 pb-7 flex items-center gap-3">
+				<div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-lg shrink-0">
+					<Telescope class="w-6 h-6 text-primary" />
 				</div>
-				<h2 class="text-2xl font-bold text-foreground font-serif">Área Restrita</h2>
-				<p class="mt-2 text-muted-foreground font-sans text-sm text-pretty">
-					Acesse o painel administrativo para gerenciar seus artigos e conteúdos científicos.
-				</p>
+				<div class="flex flex-col">
+					<span class="text-base font-black text-white uppercase tracking-tighter leading-none">Astrobiologia</span>
+					<span class="text-[9px] font-black text-accent uppercase tracking-[0.3em] leading-none mt-1">Command Center</span>
+				</div>
 			</div>
 
-			<div class="space-y-4">
-				<button
-					onclick={loginWithGoogle}
-					class="flex w-full items-center justify-center gap-3 rounded-xl border border-border bg-background px-4 py-3 text-sm font-semibold text-foreground transition-all hover:bg-muted hover:shadow-md active:scale-[0.98]"
+			<!-- Form area -->
+			<div class="px-10 py-8 space-y-5">
+				<!-- Title -->
+				<div class="text-center">
+					<h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">Autenticação</h2>
+					<p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1">Acesse as ferramentas de editoria</p>
+				</div>
+
+				{#if loginError}
+					<div class="p-3 bg-red-50 border border-red-100 text-red-600 rounded-2xl text-xs font-bold flex items-center gap-3">
+						<div class="w-2 h-2 rounded-full bg-red-600 shrink-0"></div>
+						{loginError}
+					</div>
+				{/if}
+
+				<!-- Google — posts to the same server action as /admin/login page -->
+				<form method="POST" action="/admin/login?/google">
+					<button
+						type="submit"
+						class="w-full flex items-center justify-center gap-3 px-5 py-3.5 bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl hover:bg-slate-100 transition-all font-black uppercase tracking-widest text-[10px] shadow-sm"
+					>
+						<svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24">
+							<path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+							<path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+							<path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
+							<path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+						</svg>
+						Continuar com Google
+					</button>
+				</form>
+
+				<!-- Divider -->
+				<div class="relative flex items-center">
+					<div class="flex-1 border-t border-slate-100"></div>
+					<span class="px-4 text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">ou e-mail</span>
+					<div class="flex-1 border-t border-slate-100"></div>
+				</div>
+
+				<!-- Email / password — posts to the real login server action -->
+				<form
+					method="POST"
+					action="/admin/login?/login"
+					class="space-y-3"
+					use:enhance={modalLoginEnhance}
 				>
-					<svg class="h-5 w-5" viewBox="0 0 24 24">
-						<path
-							fill="currentColor"
-							d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-							style="fill: #4285F4"
+					<div class="relative group">
+						<Mail class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-primary transition-colors" />
+						<input
+							type="email"
+							name="email"
+							placeholder="E-mail Administrativo"
+							required
+							class="w-full pl-12 pr-5 py-3.5 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-primary/5 focus:border-primary outline-none transition-all text-sm font-medium"
 						/>
-						<path
-							fill="currentColor"
-							d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-							style="fill: #34A853"
+					</div>
+					<div class="relative group">
+						<Lock class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-primary transition-colors" />
+						<input
+							type="password"
+							name="password"
+							placeholder="Chave de Acesso"
+							required
+							class="w-full pl-12 pr-5 py-3.5 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-primary/5 focus:border-primary outline-none transition-all text-sm font-medium"
 						/>
-						<path
-							fill="currentColor"
-							d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"
-							style="fill: #FBBC05"
-						/>
-						<path
-							fill="currentColor"
-							d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-							style="fill: #EA4335"
-						/>
-					</svg>
-					Entrar com Google
-				</button>
-				
-				<p class="text-center text-[10px] text-muted-foreground uppercase tracking-widest font-medium">
-					Acesso restrito a administradores
-				</p>
+					</div>
+					<button
+						type="submit"
+						class="w-full px-5 py-3.5 bg-primary text-white rounded-2xl hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/20 transition-all font-black uppercase tracking-widest text-[10px] active:scale-[0.98]"
+					>
+						Entrar no Sistema
+					</button>
+				</form>
+			</div>
+
+			<!-- Footer -->
+			<div class="bg-slate-50 px-10 py-4 border-t border-slate-100 flex items-center justify-center gap-2">
+				<div class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+				<p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Acesso restrito a administradores</p>
 			</div>
 		</div>
 	</div>
