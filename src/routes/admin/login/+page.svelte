@@ -1,7 +1,17 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-    import { Telescope, Lock, Mail, Github, Chrome } from 'lucide-svelte';
+	import { Telescope, Lock, Mail, Chrome } from 'lucide-svelte';
 	import type { ActionData } from './$types';
+
+	function loginEnhance() {
+		return async ({ result }: { result: { type: string; location?: string } }) => {
+			// Force a full-page navigation so the session cookie is committed before
+			// hooks.server.ts validates it on the dashboard SSR request.
+			if (result.type === 'redirect' && result.location) {
+				window.location.href = result.location;
+			}
+		};
+	}
 
 	let { form }: { form: ActionData } = $props();
 	let errorMessage = $state('');
@@ -69,7 +79,7 @@
 						<div class="flex-1 border-t border-slate-100"></div>
 					</div>
 
-					<form action="?/login" method="POST" class="space-y-4" use:enhance>
+					<form action="?/login" method="POST" class="space-y-4" use:enhance={loginEnhance}>
 						<div class="relative group">
                             <Mail class="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-primary transition-colors" />
 							<input 
