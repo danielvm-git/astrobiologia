@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import type { PageData } from './$types';
 	import { formatDate, readingTime } from '$lib/utils';
 	import { CATEGORIES, getImageUrl } from '$lib/appwrite';
@@ -40,21 +41,28 @@
 	);
 	const schemaJson = $derived(JSON.stringify(schemaMarkup).replace(/</g, '\\u003c'));
 
-    const getCategoryName = (slug: string) => {
-        switch(slug) {
-            case 'noticias': return m.category_noticias();
-            case 'entrevistas': return m.category_entrevistas();
-            case 'analises': return m.category_analises();
-            case 'pesquisas-brasileiras': return m.category_pesquisas();
-            case 'exoplanetas': return m.category_exoplanetas();
-            case 'extremofilos': return m.category_extremofilos();
-            default: return slug;
-        }
-    }
+	const copy = $derived.by(() => {
+		const _ = page.url;
+		const categories: Record<string, string> = {
+			noticias: m.category_noticias(),
+			entrevistas: m.category_entrevistas(),
+			analises: m.category_analises(),
+			'pesquisas-brasileiras': m.category_pesquisas(),
+			exoplanetas: m.category_exoplanetas(),
+			extremofilos: m.category_extremofilos()
+		};
+		return {
+			site_title: m.site_title(),
+			share: m.share(),
+			continue_exploring: m.continue_exploring(),
+			categoryLabel: (slug: string) => categories[slug] ?? slug,
+			readingTimeLabel: (minutes: number) => m.reading_time({ minutes })
+		};
+	});
 </script>
 
 <svelte:head>
-	<title>{title} - {m.site_title()}</title>
+	<title>{title} - {copy.site_title}</title>
 	<meta name="description" content={excerpt} />
 	<link rel="canonical" href={articleUrl} />
 	
@@ -82,7 +90,7 @@
 		<div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
 			{#if category}
 				<a href="/{lang}/categorias/{article.category}" class="inline-block text-primary text-xs font-black uppercase tracking-[0.2em] mb-8 hover:underline">
-					{getCategoryName(article.category)}
+					{copy.categoryLabel(article.category)}
 				</a>
 			{/if}
 			
@@ -107,7 +115,7 @@
 				</div>
 				<div class="flex items-center gap-2">
 					<Clock class="h-3.5 w-3.5" />
-					{m.reading_time({ minutes: readingTime(content) })}
+					{copy.readingTimeLabel(readingTime(content))}
 				</div>
 			</div>
 		</div>
@@ -166,7 +174,7 @@
 					class="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-primary transition-colors"
 				>
 					<Share2 class="h-4 w-4" />
-					{m.share()}
+					{copy.share}
 				</button>
 			</div>
 		</div>
@@ -176,7 +184,7 @@
 	{#if relatedArticles && relatedArticles.length > 0}
 		<section class="bg-slate-50 border-t border-slate-100 py-24">
 			<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-				<h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-16 text-center">{m.continue_exploring()}</h2>
+				<h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-16 text-center">{copy.continue_exploring}</h2>
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
 					{#each relatedArticles as related}
 						{@const rTitle = related.translation?.title || (related as any).title}

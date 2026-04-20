@@ -25,6 +25,11 @@
 		];
 	});
 
+	const searchAriaLabel = $derived.by(() => {
+		const _ = page.url;
+		return m.search_placeholder();
+	});
+
 	function toggleMobileMenu() {
 		mobileMenuOpen = !mobileMenuOpen;
 	}
@@ -82,7 +87,7 @@
 			<a
 				href={localizeHref('/busca')}
 				class="flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-				aria-label={m.search_placeholder()}
+				aria-label={searchAriaLabel}
 			>
 				<Search class="h-5 w-5" />
 			</a>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import type { Article } from '$lib/appwrite';
 	import { getImageUrl, CATEGORIES } from '$lib/appwrite';
 	import { formatDate, readingTime, cn } from '$lib/utils';
@@ -30,17 +31,21 @@
 			: null
 	);
 
-    const getCategoryName = (slug: string) => {
-        switch(slug) {
-            case 'noticias': return m.category_noticias();
-            case 'entrevistas': return m.category_entrevistas();
-            case 'analises': return m.category_analises();
-            case 'pesquisas-brasileiras': return m.category_pesquisas();
-            case 'exoplanetas': return m.category_exoplanetas();
-            case 'extremofilos': return m.category_extremofilos();
-            default: return slug;
-        }
-    }
+	const categoryLabels = $derived.by(() => {
+		const _ = page.url;
+		return {
+			noticias: m.category_noticias(),
+			entrevistas: m.category_entrevistas(),
+			analises: m.category_analises(),
+			'pesquisas-brasileiras': m.category_pesquisas(),
+			exoplanetas: m.category_exoplanetas(),
+			extremofilos: m.category_extremofilos()
+		} as Record<string, string>;
+	});
+
+	function categoryLabel(slug: string) {
+		return categoryLabels[slug] ?? slug;
+	}
 </script>
 
 {#if article}
@@ -64,7 +69,7 @@
 				<div class="absolute bottom-0 left-0 right-0 p-6">
 					{#if category}
 						<span class="inline-flex rounded-full bg-primary/90 px-3 py-1 text-xs font-medium text-primary-foreground">
-							{getCategoryName(category.slug)}
+							{categoryLabel(category.slug)}
 						</span>
 					{/if}
 					<h2 class="mt-3 text-2xl font-bold leading-tight text-white text-balance md:text-3xl font-serif">
@@ -144,7 +149,7 @@
 					href="/{lang}/categorias/{category.slug}"
 					class="text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-4 hover:underline"
 				>
-					{getCategoryName(category.slug)}
+					{categoryLabel(category.slug)}
 				</a>
 			{/if}
 			<a href="/{lang}/artigos/{slug}" class="group-hover:text-primary transition-colors duration-300">
