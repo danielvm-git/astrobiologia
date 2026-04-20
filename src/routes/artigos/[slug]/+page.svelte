@@ -4,6 +4,7 @@
 	import { CATEGORIES, getImageUrl } from '$lib/appwrite';
 	import { Clock, Share2, Calendar } from 'lucide-svelte';
 	import { getLocale } from '$lib/paraglide/runtime';
+	import * as m from '$lib/paraglide/messages';
 
 	import { generateSchemaMarkup } from '$lib/seo';
 
@@ -17,6 +18,7 @@
 	const excerpt = $derived(article.translation?.excerpt || (article as any).excerpt);
 	const content = $derived(article.translation?.content || (article as any).content || '');
 	const lang = $derived(getLocale());
+	const articleUrl = $derived(`https://astrobiologia.com.br/${lang}/artigos/${slug}`);
 
 	const category = $derived(CATEGORIES.find(c => c.slug === article.category));
 	const imageUrl = $derived(article.featuredImage 
@@ -24,16 +26,41 @@
 			? article.featuredImage 
 			: `${getImageUrl(article.featuredImage, 1200, 630)}&output=webp&quality=85`) 
 		: null);
+	const schemaMarkup = $derived(
+		generateSchemaMarkup({
+			title,
+			excerpt,
+			featuredImage: imageUrl,
+			publishedAt: article.publishedAt,
+			$createdAt: article.$createdAt,
+			$updatedAt: article.$updatedAt,
+			url: articleUrl,
+			language: lang
+		})
+	);
+	const schemaJson = $derived(JSON.stringify(schemaMarkup).replace(/</g, '\\u003c'));
+
+    const getCategoryName = (slug: string) => {
+        switch(slug) {
+            case 'noticias': return m.category_noticias();
+            case 'entrevistas': return m.category_entrevistas();
+            case 'analises': return m.category_analises();
+            case 'pesquisas-brasileiras': return m.category_pesquisas();
+            case 'exoplanetas': return m.category_exoplanetas();
+            case 'extremofilos': return m.category_extremofilos();
+            default: return slug;
+        }
+    }
 </script>
 
 <svelte:head>
-	<title>{title} - Astrobiologia.com.br</title>
+	<title>{title} - {m.site_title()}</title>
 	<meta name="description" content={excerpt} />
-	<link rel="canonical" href="https://astrobiologia.com.br/{lang}/artigos/{slug}" />
+	<link rel="canonical" href={articleUrl} />
 	
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://astrobiologia.com.br/{lang}/artigos/{slug}" />
+	<meta property="og:url" content={articleUrl} />
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={excerpt} />
 	{#if imageUrl}
@@ -44,6 +71,9 @@
 	<meta property="article:published_time" content={article.publishedAt || article.$createdAt} />
 	<meta property="article:author" content={article.authorName || 'Danilo Albergaria'} />
 	<meta property="article:section" content={category?.name || 'Astrobiologia'} />
+	<script type="application/ld+json">
+		{@html schemaJson}
+	</script>
 </svelte:head>
 
 <main class="min-h-screen bg-background">
@@ -52,7 +82,7 @@
 		<div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
 			{#if category}
 				<a href="/{lang}/categorias/{article.category}" class="inline-block text-primary text-xs font-black uppercase tracking-[0.2em] mb-8 hover:underline">
-					{category.name}
+					{getCategoryName(article.category)}
 				</a>
 			{/if}
 			
@@ -73,11 +103,11 @@
 				</div>
 				<div class="flex items-center gap-2">
 					<Calendar class="h-3.5 w-3.5" />
-					{formatDate(article.publishedAt || article.$createdAt)}
+					{formatDate(article.publishedAt || article.$createdAt, lang)}
 				</div>
 				<div class="flex items-center gap-2">
 					<Clock class="h-3.5 w-3.5" />
-					{readingTime(content)} min de leitura
+					{m.reading_time({ minutes: readingTime(content) })}
 				</div>
 			</div>
 		</div>
@@ -136,7 +166,7 @@
 					class="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-primary transition-colors"
 				>
 					<Share2 class="h-4 w-4" />
-					Compartilhar
+					{m.share()}
 				</button>
 			</div>
 		</div>
@@ -146,7 +176,7 @@
 	{#if relatedArticles && relatedArticles.length > 0}
 		<section class="bg-slate-50 border-t border-slate-100 py-24">
 			<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-				<h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-16 text-center">Continue Explorando</h2>
+				<h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-16 text-center">{m.continue_exploring()}</h2>
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
 					{#each relatedArticles as related}
 						{@const rTitle = related.translation?.title || (related as any).title}
@@ -176,7 +206,7 @@
 								</a>
 								<p class="text-slate-500 text-sm line-clamp-2 font-serif mb-6 italic">{rExcerpt}</p>
 								<div class="mt-auto pt-6 border-t border-slate-50 text-[10px] font-black uppercase tracking-widest text-slate-400">
-									{formatDate(related.publishedAt || related.$createdAt)}
+									{formatDate(related.publishedAt || related.$createdAt, lang)}
 								</div>
 							</div>
 						</div>

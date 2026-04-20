@@ -4,6 +4,7 @@
 	import { formatDate, readingTime, cn } from '$lib/utils';
 	import { Clock } from 'lucide-svelte';
 	import { getLocale } from '$lib/paraglide/runtime';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
 		article: Article;
@@ -28,6 +29,18 @@
 				: `${getImageUrl(article.featuredImage, 800, 500)}&output=webp&quality=80`)
 			: null
 	);
+
+    const getCategoryName = (slug: string) => {
+        switch(slug) {
+            case 'noticias': return m.category_noticias();
+            case 'entrevistas': return m.category_entrevistas();
+            case 'analises': return m.category_analises();
+            case 'pesquisas-brasileiras': return m.category_pesquisas();
+            case 'exoplanetas': return m.category_exoplanetas();
+            case 'extremofilos': return m.category_extremofilos();
+            default: return slug;
+        }
+    }
 </script>
 
 {#if article}
@@ -51,7 +64,7 @@
 				<div class="absolute bottom-0 left-0 right-0 p-6">
 					{#if category}
 						<span class="inline-flex rounded-full bg-primary/90 px-3 py-1 text-xs font-medium text-primary-foreground">
-							{category.name}
+							{getCategoryName(category.slug)}
 						</span>
 					{/if}
 					<h2 class="mt-3 text-2xl font-bold leading-tight text-white text-balance md:text-3xl font-serif">
@@ -61,7 +74,7 @@
 						{excerpt}
 					</p>
 					<div class="mt-4 flex items-center gap-4 text-xs text-white/70">
-						<span>{formatDate(article.publishedAt || article.$createdAt)}</span>
+						<span>{formatDate(article.publishedAt || article.$createdAt, lang)}</span>
 						<span class="flex items-center gap-1">
 							<Clock class="h-3 w-3" />
 							{readingTime(content)} min de leitura
@@ -96,7 +109,7 @@
 				</h3>
 			</a>
 			<p class="mt-1 text-xs text-muted-foreground">
-				{formatDate(article.publishedAt || article.$createdAt)}
+				{formatDate(article.publishedAt || article.$createdAt, lang)}
 			</p>
 		</div>
 	</article>
@@ -131,7 +144,7 @@
 					href="/{lang}/categorias/{category.slug}"
 					class="text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-4 hover:underline"
 				>
-					{category.name}
+					{getCategoryName(category.slug)}
 				</a>
 			{/if}
 			<a href="/{lang}/artigos/{slug}" class="group-hover:text-primary transition-colors duration-300">
@@ -146,7 +159,7 @@
 			<div class="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between">
 				<div class="flex items-center gap-3">
 					<div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-						{formatDate(article.publishedAt || article.$createdAt)}
+						{formatDate(article.publishedAt || article.$createdAt, lang)}
 					</div>
 				</div>
 				<div class="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">

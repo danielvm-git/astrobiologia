@@ -42,8 +42,10 @@ export function generateSchemaMarkup(article: any) {
 		headline: article.title,
 		description: article.excerpt || article.title,
 		image: article.featuredImage || '/default-og-image.jpg',
-		datePublished: article.createdAt,
-		dateModified: article.updatedAt || article.createdAt,
+		datePublished: article.publishedAt || article.$createdAt,
+		dateModified: article.$updatedAt || article.$createdAt,
+		mainEntityOfPage: article.url,
+		inLanguage: article.language || 'pt-BR',
 		author: {
 			'@type': 'Person',
 			name: 'Danilo Albergaria'

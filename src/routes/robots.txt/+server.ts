@@ -6,7 +6,7 @@ Allow: /
 Disallow: /admin/
 Disallow: /admin/login
 
-Sitemap: https://astrobiologia.com/sitemap.xml`;
+Sitemap: https://astrobiologia.com.br/sitemap.xml`;
 
 	return new Response(robots, {
 		headers: {

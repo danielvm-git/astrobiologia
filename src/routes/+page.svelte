@@ -14,11 +14,23 @@
 		(data.recent || [])
 			.filter((a: any) => activeCategory === 'Todos' || a.category === activeCategory) as unknown as Article[]
 	);
+
+    const getCategoryName = (slug: string) => {
+        switch(slug) {
+            case 'noticias': return m.category_noticias();
+            case 'entrevistas': return m.category_entrevistas();
+            case 'analises': return m.category_analises();
+            case 'pesquisas-brasileiras': return m.category_pesquisas();
+            case 'exoplanetas': return m.category_exoplanetas();
+            case 'extremofilos': return m.category_extremofilos();
+            default: return slug;
+        }
+    }
 </script>
 
 <svelte:head>
-	<title>Astrobiologia.com.br - Explorando a vida no universo</title>
-	<meta name="description" content="O portal de notícias e análises sobre astrobiologia no Brasil. Exoplanetas, vida extraterrestre, biologia espacial e exploração científica." />
+	<title>{m.site_title()} - {m.hero_title()}</title>
+	<meta name="description" content={m.hero_subtitle()} />
 </svelte:head>
 
 <main class="bg-background min-h-screen">
@@ -55,7 +67,7 @@
 							class="rounded-full px-5 py-2 text-sm font-semibold transition-all {activeCategory === category.slug ? 'bg-primary text-white shadow-md' : 'bg-white text-slate-600 border border-slate-200 hover:border-primary hover:text-primary'}"
 							onclick={() => activeCategory = category.slug}
 						>
-							{category.name}
+							{getCategoryName(category.slug)}
 						</button>
 					{/each}
 				</div>
