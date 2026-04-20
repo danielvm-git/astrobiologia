@@ -9,11 +9,11 @@
 
 	let { data } = $props();
 
-	let activeCategory = $state('Todos');
+	let activeCategory = $state('all');
 
 	const recentArticles = $derived(
 		(data.recent || [])
-			.filter((a: any) => activeCategory === 'Todos' || a.category === activeCategory) as unknown as Article[]
+			.filter((a: any) => activeCategory === 'all' || a.category === activeCategory) as unknown as Article[]
 	);
 
 	/** Re-fetch Paraglide strings when locale segment in URL changes (client-side nav). */
@@ -73,8 +73,8 @@
 				<!-- Category Filters -->
 				<div class="flex flex-wrap gap-2">
 					<button
-						class="rounded-full px-5 py-2 text-sm font-semibold transition-all {activeCategory === 'Todos' ? 'bg-primary text-white shadow-md' : 'bg-white text-slate-600 border border-slate-200 hover:border-primary hover:text-primary'}"
-						onclick={() => activeCategory = 'Todos'}
+						class="rounded-full px-5 py-2 text-sm font-semibold transition-all {activeCategory === 'all' ? 'bg-primary text-white shadow-md' : 'bg-white text-slate-600 border border-slate-200 hover:border-primary hover:text-primary'}"
+						onclick={() => activeCategory = 'all'}
 					>
 						{copy.filter_all}
 					</button>
@@ -102,7 +102,7 @@
 						{copy.empty_category}
 					</p>
 					<button 
-						onclick={() => activeCategory = 'Todos'}
+						onclick={() => activeCategory = 'all'}
 						class="mt-4 text-primary hover:underline font-bold font-sans uppercase tracking-widest text-xs"
 					>
 						{copy.empty_category_cta}

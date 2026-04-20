@@ -156,41 +156,47 @@
 			</main>
 		</div>
 
-		<!-- Mobile Menu Overlay -->
+		<!-- Mobile Menu -->
 		{#if isMobileOpen}
-			<div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[60] md:hidden" onclick={() => (isMobileOpen = false)}>
-				<div class="w-72 h-full bg-slate-900 flex flex-col" onclick={(e) => e.stopPropagation()}>
-                    <div class="h-16 flex items-center justify-between px-6 border-b border-slate-800">
-                        <span class="font-black text-white uppercase tracking-widest">Menu</span>
-                        <button onclick={() => (isMobileOpen = false)} class="text-slate-400">
-                            <X class="w-6 h-6" />
-                        </button>
-                    </div>
-                    <nav class="flex-1 p-4 space-y-2">
-                        {#each menuItems as item}
-                            <a
-                                href={localizeHref(item.href)}
-                                onclick={() => (isMobileOpen = false)}
-                                class={cn(
-                                    "flex items-center gap-3 px-4 py-3 rounded-xl transition-all",
-                                    currentPath.startsWith(item.href) ? "bg-accent text-accent-foreground font-bold" : "text-slate-400 hover:bg-slate-800 hover:text-white"
-                                )}
-                            >
-                                <item.icon class="w-5 h-5" />
-                                <span>{item.name}</span>
-                            </a>
-                        {/each}
-                    </nav>
-                    <div class="p-6 border-t border-slate-800">
-                        <form method="POST" action="/admin/logout" use:enhance>
-                            <button type="submit" class="flex items-center gap-3 text-red-400 font-bold uppercase tracking-widest text-xs">
-                                <LogOut class="w-4 h-4" />
-                                Sair da Sessão
-                            </button>
-                        </form>
-                    </div>
+            <!-- Backdrop -->
+			<button 
+                class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[60] md:hidden w-full h-full border-none" 
+                onclick={() => (isMobileOpen = false)}
+                aria-label="Fechar menu"
+            ></button>
+
+            <!-- Sidebar -->
+            <div class="fixed inset-y-0 left-0 w-72 bg-slate-900 flex flex-col z-[70] md:hidden shadow-2xl animate-in slide-in-from-left duration-300">
+                <div class="h-16 flex items-center justify-between px-6 border-b border-slate-800">
+                    <span class="font-black text-white uppercase tracking-widest">Menu</span>
+                    <button onclick={() => (isMobileOpen = false)} class="text-slate-400 p-2">
+                        <X class="w-6 h-6" />
+                    </button>
                 </div>
-			</div>
+                <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+                    {#each menuItems as item}
+                        <a
+                            href={localizeHref(item.href)}
+                            onclick={() => (isMobileOpen = false)}
+                            class={cn(
+                                "flex items-center gap-3 px-4 py-3 rounded-xl transition-all",
+                                currentPath.startsWith(item.href) ? "bg-accent text-accent-foreground font-bold" : "text-slate-400 hover:bg-slate-800 hover:text-white"
+                            )}
+                        >
+                            <item.icon class="w-5 h-5" />
+                            <span>{item.name}</span>
+                        </a>
+                    {/each}
+                </nav>
+                <div class="p-6 border-t border-slate-800">
+                    <form method="POST" action="/admin/logout" use:enhance>
+                        <button type="submit" class="flex items-center gap-3 text-red-400 font-bold uppercase tracking-widest text-xs">
+                            <LogOut class="w-4 h-4" />
+                            Sair da Sessão
+                        </button>
+                    </form>
+                </div>
+            </div>
 		{/if}
 	{:else}
 		{@render children()}
@@ -199,6 +205,7 @@
 
 <style>
     :global(body) {
-        @apply antialiased;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 </style>

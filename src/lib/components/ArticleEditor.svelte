@@ -34,6 +34,15 @@
     // Translation Management
     let activeLang = $state('pt-br');
     
+    const languageNames: Record<string, string> = {
+        'pt-br': 'Português',
+        'en': 'English',
+        'nl': 'Nederlands',
+        'es': 'Español',
+        'ja': '日本語',
+        'zh': '中文'
+    };
+    
     type TranslationState = Omit<ArticleTranslation, '$id' | 'article_id'>;
     
     function buildTranslationMap(src: any[]): Record<string, TranslationState> {
@@ -281,7 +290,7 @@
                         : "text-slate-500 hover:text-slate-700"
                 )}
             >
-                {tag === 'pt-br' ? 'Português' : 'English'}
+                {languageNames[tag] || tag.toUpperCase()}
                 {#if transState[tag].title}
                     <span class="ml-2 text-green-500">●</span>
                 {/if}
@@ -536,7 +545,7 @@
                 {#each locales as tag}
                     <div class="flex items-center gap-1">
                         <div class={cn("w-2 h-2 rounded-full", transState[tag].title ? "bg-green-500" : "bg-slate-300")}></div>
-                        <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">{tag}</span>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">{languageNames[tag] || tag}</span>
                     </div>
                 {/each}
             </div>

@@ -4,6 +4,7 @@ import { Query } from 'node-appwrite';
 import { error, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { createLogger } from '$lib/server/logger';
+import { locales } from '$lib/paraglide/runtime';
 
 const logger = createLogger('ADMIN-ARTIGOS-SERVER');
 
@@ -21,7 +22,7 @@ export const load: PageServerLoad = async (event) => {
         
         // Fetch all translations for these articles to determine status badges
         let titles: Record<string, string> = {};
-        let availability: Record<string, { pt: boolean; en: boolean }> = {};
+        let availability: Record<string, Record<string, boolean>> = {};
 
         if (articleIds.length > 0) {
             const transResponse = await databases.listDocuments(
@@ -33,14 +34,13 @@ export const load: PageServerLoad = async (event) => {
             transResponse.documents.forEach((t: any) => {
                 // Initialize availability for this article if not present
                 if (!availability[t.article_id]) {
-                    availability[t.article_id] = { pt: false, en: false };
+                    availability[t.article_id] = {};
+                    locales.forEach(l => availability[t.article_id][l] = false);
                 }
 
+                availability[t.article_id][t.language] = true;
                 if (t.language === 'pt-br') {
                     titles[t.article_id] = t.title;
-                    availability[t.article_id].pt = true;
-                } else if (t.language === 'en') {
-                    availability[t.article_id].en = true;
                 }
             });
         }
@@ -49,8 +49,7 @@ export const load: PageServerLoad = async (event) => {
 			articles: JSON.parse(JSON.stringify(response.documents)).map((a: any) => ({
                 ...a,
                 title: titles[a.$id] || '(Sem título)',
-                pt: availability[a.$id]?.pt || false,
-                en: availability[a.$id]?.en || false
+                languages: availability[a.$id] || Object.fromEntries(locales.map(l => [l, false]))
             }))
 		};
 	} catch (err) {

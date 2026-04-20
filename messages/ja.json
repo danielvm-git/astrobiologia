@@ -16,6 +16,7 @@
 	"newsletter_placeholder": "your@email.com",
 	"empty_category": "このカテゴリーに記事は見つかりませんでした。",
 	"empty_category_cta": "すべての記事を見る",
+	"category_label": "カテゴリー",
 	"category_noticias": "ニュース",
 	"category_entrevistas": "インタビュー",
 	"category_analises": "分析",
@@ -25,6 +26,7 @@
 	"read_more": "続きを読む",
 	"published_on": "公開日",
 	"reading_time": "{minutes} 分で読めます",
+	"reading_time_short": "{minutes} 分",
 	"share": "共有",
 	"continue_exploring": "探索を続ける"
 }

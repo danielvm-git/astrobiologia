@@ -4,7 +4,7 @@
 	import { getImageUrl, CATEGORIES } from '$lib/appwrite';
 	import { formatDate, readingTime, cn } from '$lib/utils';
 	import { Clock } from 'lucide-svelte';
-	import { getLocale } from '$lib/paraglide/runtime';
+	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
 	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
@@ -51,7 +51,7 @@
 {#if article}
 	{#if variant === 'featured'}
 	<article class={cn('group relative overflow-hidden rounded-xl bg-card shadow-sm transition-shadow hover:shadow-md', className)}>
-		<a href="/{lang}/artigos/{slug}" class="block">
+		<a href={localizeHref(`/artigos/${slug}`)} class="block">
 			<div class="relative aspect-[16/9] overflow-hidden">
 				{#if imageUrl}
 					<img
@@ -82,7 +82,7 @@
 						<span>{formatDate(article.publishedAt || article.$createdAt, lang)}</span>
 						<span class="flex items-center gap-1">
 							<Clock class="h-3 w-3" />
-							{readingTime(content)} min de leitura
+							{m.reading_time({ minutes: readingTime(content).toString() })}
 						</span>
 					</div>
 				</div>
@@ -91,7 +91,7 @@
 	</article>
 {:else if variant === 'compact'}
 	<article class={cn('group flex gap-4', className)}>
-		<a href="/{lang}/artigos/{slug}" class="shrink-0">
+		<a href={localizeHref(`/artigos/${slug}`)} class="shrink-0">
 			<div class="relative h-20 w-28 overflow-hidden rounded-lg">
 				{#if imageUrl}
 					<img
@@ -108,7 +108,7 @@
 			</div>
 		</a>
 		<div class="flex flex-col justify-center">
-			<a href="/{lang}/artigos/{slug}">
+			<a href={localizeHref(`/artigos/${slug}`)}>
 				<h3 class="font-medium leading-snug text-foreground transition-colors group-hover:text-primary font-serif">
 					{title}
 				</h3>
@@ -120,7 +120,7 @@
 	</article>
 {:else}
 	<article class={cn('group overflow-hidden bg-white border border-slate-100 transition-all duration-500 hover:shadow-[0_32px_64px_-12px_rgba(0,0,0,0.08)] hover:border-primary/20 flex flex-col h-full', className)}>
-		<a href="/{lang}/artigos/{slug}" class="block overflow-hidden">
+		<a href={localizeHref(`/artigos/${slug}`)} class="block overflow-hidden">
 			<div class="relative aspect-[16/10] overflow-hidden bg-slate-50">
 				{#if imageUrl}
 					<img
@@ -146,13 +146,13 @@
 		<div class="p-6 flex flex-col flex-1">
 			{#if category}
 				<a
-					href="/{lang}/categorias/{category.slug}"
+					href={localizeHref(`/categorias/${category.slug}`)}
 					class="text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-4 hover:underline"
 				>
 					{categoryLabel(category.slug)}
 				</a>
 			{/if}
-			<a href="/{lang}/artigos/{slug}" class="group-hover:text-primary transition-colors duration-300">
+			<a href={localizeHref(`/artigos/${slug}`)} class="group-hover:text-primary transition-colors duration-300">
 				<h3 class="text-xl md:text-2xl font-bold leading-[1.15] text-slate-900 mb-4 font-serif group-hover:underline decoration-accent/30 decoration-2 underline-offset-4 transition-all">
 					{title}
 				</h3>
@@ -169,7 +169,7 @@
 				</div>
 				<div class="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
 					<Clock class="h-3 w-3" />
-					{readingTime(content)} min
+					{m.reading_time_short({ minutes: readingTime(content).toString() })}
 				</div>
 			</div>
 		</div>

@@ -16,6 +16,7 @@
 	"newsletter_placeholder": "your@email.com",
 	"empty_category": "该类别下未发现文章。",
 	"empty_category_cta": "查看所有文章",
+	"category_label": "分类",
 	"category_noticias": "新闻",
 	"category_entrevistas": "采访",
 	"category_analises": "分析",
@@ -25,6 +26,7 @@
 	"read_more": "阅读更多",
 	"published_on": "发布于",
 	"reading_time": "{minutes} 分钟阅读",
+	"reading_time_short": "{minutes} 分钟",
 	"share": "分享",
 	"continue_exploring": "继续探索"
 }

@@ -2,6 +2,8 @@
 	import ArticleCard from '$lib/components/ArticleCard.svelte';
 	import { CATEGORIES } from '$lib/appwrite';
 	import type { Article } from '$lib/appwrite';
+	import { localizeHref } from '$lib/paraglide/runtime';
+	import * as m from '$lib/paraglide/messages';
 
 	let { data } = $props();
 
@@ -16,22 +18,25 @@
 		return matchesCategory && matchesSearch;
 	}) as unknown as Article[]);
 
-	const categories = [{ slug: 'all', name: 'Todas as Categorias' }, ...CATEGORIES];
+	const categories = $derived([{ slug: 'all', name: m.filter_all() }, ...CATEGORIES.map(c => ({
+		...c,
+		name: (m as any)[`category_${c.slug.replace('-', '')}`]?.() || c.name
+	}))]);
 </script>
 
 <svelte:head>
-	<title>Artigos - Astrobiologia</title>
-	<meta name="description" content="Explore nossa coleção completa de artigos sobre astrobiologia." />
-	<meta name="og:title" content="Artigos - Astrobiologia" />
-	<meta name="og:description" content="Explore nossa coleção completa de artigos sobre astrobiologia." />
+	<title>{m.nav_articles()} - Astrobiologia</title>
+	<meta name="description" content={m.hero_subtitle()} />
+	<meta name="og:title" content="{m.nav_articles()} - Astrobiologia" />
+	<meta name="og:description" content={m.hero_subtitle()} />
 </svelte:head>
 
 <main class="min-h-screen bg-slate-50">
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 		<div class="text-center mb-12">
-			<h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Artigos</h1>
+			<h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">{m.nav_articles()}</h1>
 			<p class="text-xl text-slate-600 max-w-2xl mx-auto font-serif">
-				Descubra as últimas pesquisas e análises no campo da astrobiologia.
+				{m.hero_subtitle()}
 			</p>
 		</div>
 
@@ -41,12 +46,12 @@
 				<!-- Search -->
 				<div>
 					<label for="search" class="block text-sm font-medium text-slate-700 mb-2">
-						Buscar artigos
+						{m.search_placeholder().replace('...', '')}
 					</label>
 					<input
 						id="search"
 						type="text"
-						placeholder="Título, tema ou palavra-chave..."
+						placeholder={m.search_placeholder()}
 						bind:value={searchQuery}
 						class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
 					/>
@@ -55,7 +60,7 @@
 				<!-- Category Filter -->
 				<div>
 					<label for="category" class="block text-sm font-medium text-slate-700 mb-2">
-						Categoria
+						{m.category_label()}
 					</label>
 					<select
 						id="category"
@@ -81,12 +86,12 @@
 			</div>
 		{:else}
 			<div class="text-center py-20 bg-white rounded-2xl border border-dashed border-slate-300">
-				<p class="text-xl text-slate-600">Nenhum artigo encontrado com esses filtros.</p>
+				<p class="text-xl text-slate-600">{m.empty_category()}</p>
 				<button 
 					onclick={() => { selectedCategory = 'all'; searchQuery = ''; }}
 					class="mt-4 text-primary hover:underline font-medium"
 				>
-					Limpar filtros
+					{m.filter_all()}
 				</button>
 			</div>
 		{/if}

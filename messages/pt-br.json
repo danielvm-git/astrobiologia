@@ -16,6 +16,7 @@
 	"newsletter_placeholder": "seu@email.com",
 	"empty_category": "Nenhum artigo encontrado nesta categoria.",
 	"empty_category_cta": "Ver todos os artigos",
+	"category_label": "Categorias",
 	"category_noticias": "Notícias",
 	"category_entrevistas": "Entrevistas",
 	"category_analises": "Análises",
@@ -25,6 +26,7 @@
 	"read_more": "Ler mais",
 	"published_on": "Publicado em",
     "reading_time": "{minutes} min de leitura",
+    "reading_time_short": "{minutes} min",
     "share": "Compartilhar",
     "continue_exploring": "Continue Explorando"
 }

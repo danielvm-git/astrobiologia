@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { Microscope, Globe, Telescope, Newspaper, Search, BookOpen } from 'lucide-svelte';
+	import { localizeHref } from '$lib/paraglide/runtime';
 
 	async function navigateToAdmin() {
 		await goto('/admin/login');
@@ -130,13 +131,13 @@
 			</p>
 			<div class="flex flex-wrap justify-center gap-8">
 				<a
-					href="/artigos"
+					href={localizeHref('/artigos')}
 					class="px-12 py-6 bg-white text-black font-black uppercase tracking-widest text-sm hover:bg-accent hover:text-white transition-all duration-300"
 				>
 					Explorar Artigos
 				</a>
 				<a
-					href="/#newsletter"
+					href={localizeHref('/#newsletter')}
 					class="px-12 py-6 bg-transparent text-white border border-white/20 font-black uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-all duration-300"
 				>
 					Assinar Newsletter

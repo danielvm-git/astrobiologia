@@ -16,6 +16,7 @@
 	"newsletter_placeholder": "jouw@email.com",
 	"empty_category": "Geen artikelen gevonden in deze categorie.",
 	"empty_category_cta": "Bekijk alle artikelen",
+	"category_label": "Categorieën",
 	"category_noticias": "Nieuws",
 	"category_entrevistas": "Interviews",
 	"category_analises": "Analyses",
@@ -25,6 +26,7 @@
 	"read_more": "Lees meer",
 	"published_on": "Gepubliceerd op",
 	"reading_time": "{minutes} min leestijd",
+	"reading_time_short": "{minutes} min",
 	"share": "Delen",
 	"continue_exploring": "Blijf ontdekken"
 }

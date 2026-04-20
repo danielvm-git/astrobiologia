@@ -15,7 +15,7 @@
         ChevronRight
     } from 'lucide-svelte';
     import { cn } from '$lib/utils';
-    import { localizeHref } from '$lib/paraglide/runtime';
+    import { localizeHref, locales } from '$lib/paraglide/runtime';
 	
 	let { data } = $props();
 	let articles = $state<any[]>([]);
@@ -141,21 +141,12 @@
                                             {article.title}
                                         </p>
                                         <div class="flex items-center gap-2 mt-1">
-                                            <div class="flex items-center gap-1">
-                                                <div class="w-2 h-2 rounded-full bg-green-500"></div>
-                                                <span class="text-[9px] font-black text-slate-400 uppercase">PT</span>
-                                            </div>
-                                            {#if article.en}
-                                                <div class="flex items-center gap-1">
-                                                    <div class="w-2 h-2 rounded-full bg-green-500"></div>
-                                                    <span class="text-[9px] font-black text-slate-400 uppercase">EN</span>
+                                            {#each locales as tag}
+                                                <div class={cn("flex items-center gap-1", !article.languages[tag] && "opacity-40")}>
+                                                    <div class={cn("w-2 h-2 rounded-full", article.languages[tag] ? "bg-green-500" : "bg-slate-300")}></div>
+                                                    <span class="text-[9px] font-black text-slate-400 uppercase">{tag === 'pt-br' ? 'PT' : tag.toUpperCase()}</span>
                                                 </div>
-                                            {:else}
-                                                <div class="flex items-center gap-1 opacity-40">
-                                                    <div class="w-2 h-2 rounded-full bg-slate-300"></div>
-                                                    <span class="text-[9px] font-black text-slate-400 uppercase">EN</span>
-                                                </div>
-                                            {/if}
+                                            {/each}
                                         </div>
                                     </div>
                                 </div>

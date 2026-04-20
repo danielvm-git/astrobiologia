@@ -56,12 +56,10 @@
 		</button>
 
 		{#if isOpen}
-			<!-- svelte-ignore a11y_click_events_have_key_events -->
-			<!-- svelte-ignore a11y_no_static_element_interactions -->
 			<div 
 				class="absolute right-0 mt-2 w-40 rounded-xl bg-white border border-slate-100 shadow-2xl py-2 z-50 animate-in fade-in zoom-in duration-150"
 			>
-				{#each locales as tag}
+				{#each locales as tag (tag)}
 					<a
 						href={localizeHref(deLocalizeHref(page.url.pathname), { locale: tag })}
 						class={cn(
@@ -85,7 +83,7 @@
 	<div class={cn('flex flex-col gap-4 py-2', className)}>
 		<span class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-3">Idioma</span>
 		<div class="flex flex-wrap gap-2 px-3">
-			{#each locales as tag}
+			{#each locales as tag (tag)}
 				<a
 					href={localizeHref(deLocalizeHref(page.url.pathname), { locale: tag })}
 					class={cn(
@@ -101,16 +99,16 @@
 		</div>
 	</div>
 {:else if variant === 'footer'}
-	<div class={cn('flex items-center gap-6', className)}>
-		{#each locales as tag}
+	<div class={cn('flex flex-wrap items-center gap-x-4 gap-y-2', className)}>
+		{#each locales as tag (tag)}
 			<a
 				href={localizeHref(deLocalizeHref(page.url.pathname), { locale: tag })}
 				class={cn(
-					'text-[10px] font-black uppercase tracking-widest transition-colors',
+					'text-[10px] font-black tracking-widest transition-colors',
 					currentLang === tag ? 'text-primary' : 'text-slate-400 hover:text-slate-600'
 				)}
 			>
-				{languageNames[tag] || tag.toUpperCase()}
+				{languageNames[tag]}
 			</a>
 		{/each}
 	</div>
