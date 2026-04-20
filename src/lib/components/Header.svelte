@@ -12,14 +12,18 @@
 	let showLoginModal = $state(false);
 	let loginError = $state('');
 
-	const navLinks = $derived([
-		{ href: localizeHref('/'), label: m.nav_home() },
-		{ href: localizeHref('/categorias/noticias'), label: m.category_noticias() },
-		{ href: localizeHref('/categorias/entrevistas'), label: m.category_entrevistas() },
-		{ href: localizeHref('/categorias/analises'), label: m.category_analises() },
-		{ href: localizeHref('/categorias/pesquisas-brasileiras'), label: m.category_pesquisas() },
-		{ href: localizeHref('/sobre'), label: m.nav_about() }
-	]);
+	const navLinks = $derived.by(() => {
+		// Access page.url to ensure this derived value re-runs on navigation/locale change
+		const _ = page.url;
+		return [
+			{ href: localizeHref('/'), label: m.nav_home() },
+			{ href: localizeHref('/categorias/noticias'), label: m.category_noticias() },
+			{ href: localizeHref('/categorias/entrevistas'), label: m.category_entrevistas() },
+			{ href: localizeHref('/categorias/analises'), label: m.category_analises() },
+			{ href: localizeHref('/categorias/pesquisas-brasileiras'), label: m.category_pesquisas() },
+			{ href: localizeHref('/sobre'), label: m.nav_about() }
+		];
+	});
 
 	function toggleMobileMenu() {
 		mobileMenuOpen = !mobileMenuOpen;

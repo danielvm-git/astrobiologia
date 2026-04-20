@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { Telescope, Mail, Twitter } from 'lucide-svelte';
 	import { CATEGORIES } from '$lib/appwrite';
 	import { localizeHref } from '$lib/paraglide/runtime';
@@ -6,6 +7,14 @@
 	import LanguageSwitcher from './LanguageSwitcher.svelte';
 
 	const currentYear = new Date().getFullYear();
+	const labels = $derived.by(() => {
+		const _ = page.url;
+		return {
+			tagline: m.footer_tagline(),
+			about: m.nav_about(),
+			articles: m.nav_articles()
+		};
+	});
 </script>
 
 <footer class="border-t border-border bg-muted/30">
@@ -20,7 +29,7 @@
 					</span>
 				</a>
 				<p class="mt-4 text-sm leading-relaxed text-muted-foreground">
-					{m.footer_tagline()}
+					{labels.tagline}
 				</p>
 				<div class="mt-6">
 					<LanguageSwitcher variant="footer" />
@@ -50,12 +59,12 @@
 				<ul class="mt-4 flex flex-col gap-2">
 					<li>
 						<a href={localizeHref('/sobre')} class="text-sm text-muted-foreground transition-colors hover:text-primary">
-							{m.nav_about()}
+							{labels.about}
 						</a>
 					</li>
 					<li>
 						<a href={localizeHref('/artigos')} class="text-sm text-muted-foreground transition-colors hover:text-primary">
-							{m.nav_articles()}
+							{labels.articles}
 						</a>
 					</li>
 					<li>

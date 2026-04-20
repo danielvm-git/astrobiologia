@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { afterNavigate } from '$app/navigation';
 	import { getLocale, locales, localizeHref, deLocalizeHref } from '$lib/paraglide/runtime';
 	import { Languages, ChevronDown } from 'lucide-svelte';
 	import { cn } from '$lib/utils';
@@ -25,6 +26,10 @@
 	function closeMenu() {
 		isOpen = false;
 	}
+
+	afterNavigate(() => {
+		isOpen = false;
+	});
 
 	const languageNames: Record<string, string> = {
 		'pt-br': 'Português',
@@ -55,7 +60,6 @@
 			<!-- svelte-ignore a11y_no_static_element_interactions -->
 			<div 
 				class="absolute right-0 mt-2 w-40 rounded-xl bg-white border border-slate-100 shadow-2xl py-2 z-50 animate-in fade-in zoom-in duration-150"
-				onclick={closeMenu}
 			>
 				{#each locales as tag}
 					<a
