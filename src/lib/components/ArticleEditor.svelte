@@ -13,35 +13,49 @@
 
 	let { article = null, translations = [], isLoading = $bindable(false), onSave } = $props();
 
-	// Master Metadata - Initialize with initial values from props
-	let category = $state(article?.category || 'noticias');
-	let tags = $state(article?.tags?.join(', ') || '');
-	let status = $state(article?.status || 'draft');
-	let featured = $state(article?.featured || false);
-	let authorName = $state(article?.authorName || 'Danilo Albergaria');
-	let featuredImageId = $state(article?.featuredImage || '');
+	// Master Metadata - Initialized from props. These are editable by user after mount.
+	// Note: article prop is not expected to change reactively during editor lifecycle.
+	/* eslint-disable svelte/no-state-referenced-locally */
+	// svelte-ignore state_referenced_locally
+	let category = $state(article?.category ?? 'noticias');
+	// svelte-ignore state_referenced_locally
+	let tags = $state(article?.tags?.join(', ') ?? '');
+	// svelte-ignore state_referenced_locally
+	let status = $state(article?.status ?? 'draft');
+	// svelte-ignore state_referenced_locally
+	let featured = $state(article?.featured ?? false);
+	// svelte-ignore state_referenced_locally
+	let authorName = $state(article?.authorName ?? 'Danilo Albergaria');
+	// svelte-ignore state_referenced_locally
+	let featuredImageId = $state(article?.featuredImage ?? '');
+
 	let featuredImageUrl = $derived(featuredImageId ? getImageUrl(featuredImageId) : '');
 
     // Translation Management
     let activeLang = $state('pt-br');
     
-    // Initialize translations map
     type TranslationState = Omit<ArticleTranslation, '$id' | 'article_id'>;
-    const initialTranslations: Record<string, TranslationState> = {};
-    locales.forEach(lang => {
-        const existing = translations.find((t: any) => t.language === lang);
-        initialTranslations[lang] = {
-            language: lang,
-            title: existing?.title || '',
-            slug: existing?.slug || '',
-            excerpt: existing?.excerpt || '',
-            content: existing?.content || '',
-            metaTitle: existing?.metaTitle || '',
-            metaDescription: existing?.metaDescription || ''
-        };
-    });
+    
+    function buildTranslationMap(src: any[]): Record<string, TranslationState> {
+        const state: Record<string, TranslationState> = {};
+        locales.forEach(lang => {
+            const existing = src.find((t: any) => t.language === lang);
+            state[lang] = {
+                language: lang,
+                title: existing?.title ?? '',
+                slug: existing?.slug ?? '',
+                excerpt: existing?.excerpt ?? '',
+                content: existing?.content ?? '',
+                metaTitle: existing?.metaTitle ?? '',
+                metaDescription: existing?.metaDescription ?? ''
+            };
+        });
+        return state;
+    }
 
-    let transState = $state<Record<string, TranslationState>>(initialTranslations);
+    // svelte-ignore state_referenced_locally
+    // Initialized from translations prop. User edits mutate this directly.
+    let transState = $state<Record<string, TranslationState>>(buildTranslationMap(translations));
 
     // Tiptap Editor
 	let editorElement = $state<HTMLElement | null>(null);
@@ -52,7 +66,8 @@
 			editor = new Editor({
 				element: editorElement,
 				extensions: [
-					StarterKit,
+					// StarterKit v3 bundles Link; disable it here so we configure it independently below
+					StarterKit.configure({ link: false }),
 					Link.configure({
 						openOnClick: false,
 						HTMLAttributes: {
@@ -236,8 +251,7 @@
 			featured,
 			authorName,
 			featuredImage: featuredImageId,
-			publishedAt: article?.publishedAt || new Date().toISOString(),
-			updatedAt: new Date().toISOString()
+			publishedAt: article?.publishedAt || new Date().toISOString()
 		};
 
         // Filter out empty translations (at least title and content required)

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+    import { Telescope, Lock, Mail, Github, Chrome } from 'lucide-svelte';
 	import type { ActionData } from './$types';
 
 	let { form }: { form: ActionData } = $props();
@@ -17,76 +18,111 @@
 	<meta name="robots" content="noindex, nofollow" />
 </svelte:head>
 
-<main class="min-h-screen bg-slate-900 flex items-center justify-center p-4">
-	<div class="w-full max-w-md">
-		<div class="bg-white rounded-2xl shadow-2xl p-8">
-			<div class="text-center mb-8">
-				<h1 class="text-3xl font-bold text-slate-900 mb-2">Astrobiologia Admin</h1>
-				<p class="text-slate-600">Sistema de Gerenciamento de Conteúdo</p>
-			</div>
+<main class="min-h-screen bg-slate-900 flex items-center justify-center p-6 relative overflow-hidden">
+    <!-- Decorative background elements -->
+    <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-accent rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary rounded-full blur-[120px]"></div>
+    </div>
 
-			<div class="space-y-6">
-				{#if errorMessage}
-					<div class="p-4 bg-red-100 text-red-700 rounded-lg text-sm">
-						{errorMessage}
-					</div>
-				{/if}
+	<div class="w-full max-w-lg relative z-10">
+        <div class="flex justify-center mb-10">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-2xl">
+                    <Telescope class="w-8 h-8 text-primary" />
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-2xl font-black text-white uppercase tracking-tighter leading-none">Astrobiologia</span>
+                    <span class="text-[10px] font-black text-accent uppercase tracking-[0.3em] leading-none mt-1">Command Center</span>
+                </div>
+            </div>
+        </div>
 
-				<form action="?/google" method="POST">
-					<button
-						type="submit"
-						class="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition font-medium shadow-sm"
-					>
-						<svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true">
-							<path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-							<path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-							<path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
-							<path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-						</svg>
-						Continuar com Google
-					</button>
-				</form>
-				
-				<div class="relative py-2">
-					<div class="absolute inset-0 flex items-center">
-						<div class="w-full border-t border-slate-300"></div>
-					</div>
-					<div class="relative flex justify-center text-sm">
-						<span class="px-2 bg-white text-slate-500">Ou</span>
-					</div>
+		<div class="bg-white rounded-[32px] shadow-2xl overflow-hidden border border-white/20">
+			<div class="p-10 md:p-12">
+				<div class="text-center mb-10">
+					<h1 class="text-2xl font-black text-slate-900 uppercase tracking-tight mb-2">Autenticação</h1>
+					<p class="text-slate-500 text-sm font-medium uppercase tracking-widest">Acesse as ferramentas de editoria</p>
 				</div>
 
-				<form action="?/login" method="POST" class="space-y-4" use:enhance>
-					<div>
-						<input 
-							type="email" 
-							name="email" 
-							placeholder="Email" 
-							required 
-							class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
-						/>
-					</div>
-					<div>
-						<input 
-							type="password" 
-							name="password" 
-							placeholder="Senha" 
-							required 
-							class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
-						/>
-					</div>
-					<button 
-						type="submit"
-						class="w-full px-4 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition font-medium"
-					>
-						Entrar com Email
-					</button>
-				</form>
-			</div>
+				<div class="space-y-8">
+					{#if errorMessage}
+						<div class="p-4 bg-red-50 border border-red-100 text-red-600 rounded-2xl text-xs font-bold flex items-center gap-3 animate-shake">
+							<div class="w-2 h-2 rounded-full bg-red-600"></div>
+                            {errorMessage}
+						</div>
+					{/if}
 
-			<p class="text-center text-slate-500 text-xs mt-8">
-				Acesso restrito a administradores autorizados.
-			</p>
+					<form action="?/google" method="POST">
+						<button
+							type="submit"
+							class="w-full flex items-center justify-center gap-4 px-6 py-4 bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl hover:bg-slate-100 transition-all font-black uppercase tracking-widest text-[10px] shadow-sm group"
+						>
+							<Chrome class="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
+							Continuar com Google
+						</button>
+					</form>
+					
+					<div class="relative py-2 flex items-center">
+						<div class="flex-1 border-t border-slate-100"></div>
+						<span class="px-4 text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">ou e-mail</span>
+						<div class="flex-1 border-t border-slate-100"></div>
+					</div>
+
+					<form action="?/login" method="POST" class="space-y-4" use:enhance>
+						<div class="relative group">
+                            <Mail class="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-primary transition-colors" />
+							<input 
+								type="email" 
+								name="email" 
+								placeholder="E-mail Administrativo" 
+								required 
+								class="w-full pl-14 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-primary/5 focus:border-primary outline-none transition-all text-sm font-medium"
+							/>
+						</div>
+						<div class="relative group">
+                            <Lock class="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-primary transition-colors" />
+							<input 
+								type="password" 
+								name="password" 
+								placeholder="Chave de Acesso" 
+								required 
+								class="w-full pl-14 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-primary/5 focus:border-primary outline-none transition-all text-sm font-medium"
+							/>
+						</div>
+						<button 
+							type="submit"
+							class="w-full px-6 py-4 bg-primary text-white rounded-2xl hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/20 transition-all font-black uppercase tracking-widest text-[10px] active:scale-[0.98]"
+						>
+							Entrar no Sistema
+						</button>
+					</form>
+				</div>
+
+				<div class="mt-12 flex flex-col items-center gap-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                        <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Servidores Operacionais</span>
+                    </div>
+                </div>
+			</div>
+            
+            <div class="bg-slate-50 p-6 text-center border-t border-slate-100">
+                <p class="text-slate-400 text-[9px] font-black uppercase tracking-widest">
+                    Desenvolvido para o Astrobiologia.com.br • © 2026
+                </p>
+            </div>
 		</div>
 	</div>
 </main>
+
+<style>
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-4px); }
+        75% { transform: translateX(4px); }
+    }
+    .animate-shake {
+        animation: shake 0.2s ease-in-out 0s 2;
+    }
+</style>

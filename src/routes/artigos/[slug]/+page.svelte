@@ -8,7 +8,8 @@
 	import { generateSchemaMarkup } from '$lib/seo';
 
 	let { data }: { data: PageData } = $props();
-	const { article, relatedArticles } = data;
+	const article = $derived(data.article);
+	const relatedArticles = $derived(data.relatedArticles);
 
 	// Use translation data if available, fallback to master (legacy support)
 	const title = $derived(article.translation?.title || (article as any).title);

@@ -43,7 +43,7 @@ export const load: PageServerLoad = async (event) => {
 				publishedArticles: publishedResponse.total,
 				draftArticles: draftResponse.total,
 				categories: categories.size,
-				recentArticles: recentResponse.documents
+				recentArticles: JSON.parse(JSON.stringify(recentResponse.documents))
 			}
 		};
 	} catch (err) {

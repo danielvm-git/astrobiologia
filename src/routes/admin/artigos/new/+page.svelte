@@ -1,6 +1,7 @@
 <script lang="ts">
+	import { deserialize } from '$app/forms';
+	import { goto } from '$app/navigation';
 	import ArticleEditor from '$lib/components/ArticleEditor.svelte';
-	import { createArticle, createTranslation } from '$lib/appwrite';
 
 	let isLoading = $state(false);
 
@@ -8,19 +9,26 @@
 		isLoading = true;
 
 		try {
-			// 1. Create master
-			const master = await createArticle(articleData);
+            const formData = new FormData();
+            formData.append('articleData', JSON.stringify(articleData));
+            formData.append('translations', JSON.stringify(translations));
 
-            // 2. Create translations
-            for (const trans of translations) {
-                await createTranslation({
-                    ...trans,
-                    article_id: master.$id
-                });
+            const response = await fetch('?/save', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = deserialize(await response.text());
+
+            if (result.type === 'success') {
+                await goto('/admin/artigos');
+            } else if (result.type === 'failure' || result.type === 'error') {
+                const errorMessage = (result as any).data?.error || (result as any).error?.message || 'Erro ao salvar';
+                alert(errorMessage);
             }
 		} catch (err) {
 			console.error('Error saving article:', err);
-			throw err;
+			alert('Erro inesperado ao salvar.');
 		} finally {
 			isLoading = false;
 		}

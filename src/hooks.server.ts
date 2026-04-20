@@ -2,6 +2,9 @@ import { redirect, type Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 import { deLocalizeHref, getTextDirection, localizeHref } from '$lib/paraglide/runtime';
 import { paraglideMiddleware } from '$lib/paraglide/server';
+import { createLogger } from '$lib/server/logger';
+
+const logger = createLogger('HOOKS');
 
 const handleParaglide: Handle = ({ event, resolve }) => paraglideMiddleware(event.request, ({ request, locale }) => {
 	event.request = request;
@@ -14,7 +17,7 @@ const handleParaglide: Handle = ({ event, resolve }) => paraglideMiddleware(even
 
 import { createSessionClient, SESSION_COOKIE } from '$lib/server/appwrite';
 
-const handleAdminAuth: Handle = async ({ event, resolve }) => {
+export const handleAdminAuth: Handle = async ({ event, resolve }) => {
 	const path = deLocalizeHref(event.url.pathname).replace(/\/$/, '') || '/';
 	const isAdminPath = path.startsWith('/admin');
 
@@ -29,12 +32,12 @@ const handleAdminAuth: Handle = async ({ event, resolve }) => {
 		
 		if (hasSessionCookie) {
 			event.locals.user = await account.get() as any;
-			console.log('Hook: Session verified for', event.locals.user?.email);
+			logger.info('Session verified', { email: event.locals.user?.email, path });
 		} else {
 			event.locals.user = null;
 		}
 	} catch (e: any) {
-		console.warn('Hook: Session verification failed:', e.message);
+		logger.warn('Session verification failed', { message: e.message, path });
 		// Session invalid or expired - only delete if it was our specific cookie
 		if (event.cookies.get(SESSION_COOKIE)) {
 			event.cookies.delete(SESSION_COOKIE, { path: '/' });
@@ -46,10 +49,12 @@ const handleAdminAuth: Handle = async ({ event, resolve }) => {
 		const isLoginPage = path === '/admin/login';
 
 		if (!event.locals.user && !isLoginPage) {
+			logger.info('Redirecting unauthenticated user to login', { path });
 			throw redirect(302, localizeHref('/admin/login'));
 		}
 
 		if (event.locals.user && isLoginPage) {
+			logger.info('Redirecting authenticated user to dashboard', { email: event.locals.user.email });
 			throw redirect(302, localizeHref('/admin/dashboard'));
 		}
 	}

@@ -1,16 +1,13 @@
-import { storage, STORAGE_BUCKET_ID, ID } from '$lib/appwrite';
+import { createSessionClient, DATABASE_ID } from '$lib/server/appwrite';
+import { COLLECTIONS, STORAGE_BUCKET_ID } from '$lib/appwrite';
+import { ID } from 'node-appwrite';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from '@sveltejs/kit';
 
-export const POST: RequestHandler = async ({ request, cookies }) => {
+export const POST: RequestHandler = async (event) => {
 	try {
-		const session = cookies.get('session');
-
-		if (!session) {
-			return json({ error: 'Unauthorized' }, { status: 401 });
-		}
-
-		const formData = await request.formData();
+        const { storage } = createSessionClient(event);
+		const formData = await event.request.formData();
 		const file = formData.get('file') as File;
 
 		if (!file) {
@@ -26,8 +23,11 @@ export const POST: RequestHandler = async ({ request, cookies }) => {
 		const imageUrl = storage.getFilePreview(STORAGE_BUCKET_ID, response.$id).toString();
 
 		return json({ success: true, fileId: response.$id, url: imageUrl });
-	} catch (error) {
+	} catch (error: any) {
 		console.error('Upload error:', error);
-		return json({ error: 'Failed to upload file' }, { status: 500 });
+        if (error.code === 401) {
+            return json({ error: 'Não autorizado. Por favor, faça login novamente.' }, { status: 401 });
+        }
+		return json({ error: 'Falha ao enviar arquivo' }, { status: 500 });
 	}
 };

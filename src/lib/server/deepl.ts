@@ -11,12 +11,10 @@ export async function translateToEnglish(text: string): Promise<string> {
         throw new Error('DEEPL_API_KEY is not configured in .env');
     }
 
-    // Determine if using Free or Pro API
     const isFree = authKey.endsWith(':fx');
     const url = isFree ? 'https://api-free.deepl.com/v2/translate' : 'https://api.deepl.com/v2/translate';
 
     const params = new URLSearchParams();
-    params.append('auth_key', authKey);
     params.append('text', text);
     params.append('source_lang', 'PT');
     params.append('target_lang', 'EN-US');
@@ -26,6 +24,7 @@ export async function translateToEnglish(text: string): Promise<string> {
             method: 'POST',
             body: params,
             headers: {
+                'Authorization': `DeepL-Auth-Key ${authKey}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         });
@@ -44,10 +43,6 @@ export async function translateToEnglish(text: string): Promise<string> {
     }
 }
 
-/**
- * Translates HTML content from Portuguese to English using DeepL REST API.
- * Preserves HTML tags.
- */
 export async function translateHtmlToEnglish(html: string): Promise<string> {
     if (!authKey) {
         throw new Error('DEEPL_API_KEY is not configured in .env');
@@ -57,7 +52,6 @@ export async function translateHtmlToEnglish(html: string): Promise<string> {
     const url = isFree ? 'https://api-free.deepl.com/v2/translate' : 'https://api.deepl.com/v2/translate';
 
     const params = new URLSearchParams();
-    params.append('auth_key', authKey);
     params.append('text', html);
     params.append('source_lang', 'PT');
     params.append('target_lang', 'EN-US');
@@ -68,6 +62,7 @@ export async function translateHtmlToEnglish(html: string): Promise<string> {
             method: 'POST',
             body: params,
             headers: {
+                'Authorization': `DeepL-Auth-Key ${authKey}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         });

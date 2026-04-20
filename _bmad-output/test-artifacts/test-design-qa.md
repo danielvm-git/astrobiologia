@@ -1,0 +1,154 @@
+---
+workflowStatus: 'in-progress'
+totalSteps: 5
+stepsCompleted: ['step-05-generate-output']
+lastStep: 'step-05-generate-output'
+nextStep: ''
+lastSaved: '2026-04-20T02:42:10Z'
+workflowType: 'testarch-test-design'
+inputDocuments:
+  - '.planning/PROJECT.md'
+  - '.planning/ROADMAP.md'
+  - 'package.json'
+---
+
+# Test Design for QA: Astrobiologia.com.br Portal
+
+**Purpose:** Test execution recipe for QA team. Defines what to test, how to test it, and what QA needs from other teams.
+
+**Date:** 2026-04-20
+**Author:** Murat (Master Test Architect)
+**Status:** Draft
+**Project:** Astrobiologia.com.br
+
+**Related:** See [Architecture doc](test-design-architecture.md) for testability concerns and architectural blockers.
+
+---
+
+## Executive Summary
+
+**Scope:** End-to-end and integration testing of the Astrobiologia portal, covering Administrative CRUD, Public UI, and Multilingual logic.
+
+**Risk Summary:**
+- Total Risks: 6 (2 high-priority score ≥6, 2 medium, 2 low)
+- Critical Categories: SEC (Security), OPS (Operations)
+
+**Coverage Summary:**
+- P0 tests: ~4 (critical paths, security)
+- P1 tests: ~8 (important features, integration)
+- P2 tests: ~6 (edge cases, regression)
+- P3 tests: ~2 (exploratory, benchmarks)
+- **Total**: ~20 tests (~1.5 weeks with 1 QA)
+
+---
+
+## Not in Scope
+
+| Item | Reasoning | Mitigation |
+| :--- | :--- | :--- |
+| **Appwrite Internals** | Third-party infrastructure | Trusted platform; monitoring only |
+| **Real-time Comments** | Out of scope for MVP | N/A |
+
+---
+
+## Dependencies & Test Blockers
+
+**CRITICAL:** QA cannot proceed without these items from other teams.
+
+### Backend/Architecture Dependencies (Pre-Implementation)
+1. **Dedicated Test Project** - Admin - Immediate
+   - Need a separate Appwrite Project to avoid data collision.
+2. **DeepL Mocking Strategy** - Dev Team - Phase 6
+   - Need a way to simulate translations without API costs.
+
+### QA Infrastructure Setup (Pre-Implementation)
+1. **Playwright Integration** - QA
+   - Install `@playwright/test` and configure sharding.
+2. **Article Factories** - QA
+   - Faker-based article generation for CRUD testing.
+
+---
+
+## Test Coverage Plan
+
+### P0 (Critical)
+| Test ID | Requirement | Test Level | Risk Link |
+| :--- | :--- | :--- | :--- |
+| **P0-001** | Admin Login (Valid/Invalid) | E2E | R2 |
+| **P0-002** | Unauthorized redirect from `/admin` | E2E | R2 |
+| **P0-003** | Public Home page loads (all languages) | E2E | R3 |
+| **P0-004** | Article detail page loads | E2E | R5 |
+
+### P1 (High)
+| Test ID | Requirement | Test Level | Risk Link |
+| :--- | :--- | :--- | :--- |
+| **P1-001** | Create Article with i18n drafting | E2E | R6 |
+| **P1-002** | Update Article metadata | API | R1 |
+| **P1-003** | Language switcher persistence | E2E | R3 |
+| **P1-004** | Image upload to Appwrite Storage | API | R5 |
+| **P1-005** | Mobile responsive menu interaction | E2E | - |
+| **P1-006** | Social sharing metadata validation | API | R1 |
+| **P1-007** | Article category filtering | E2E | - |
+| **P1-008** | Search functionality basic path | E2E | - |
+
+### P2 (Medium)
+
+| Test ID | Requirement | Test Level | Risk Link |
+| :--- | :--- | :--- | :--- |
+| **P2-001** | 404 page for non-existent articles | E2E | - |
+| **P2-002** | Robots.txt and sitemap.xml availability | API | R1 |
+| **P2-003** | Browser back/forward with i18n | E2E | R3 |
+| **P2-004** | Large file upload error handling | API | R5 |
+| **P2-005** | Contact form validation | E2E | - |
+| **P2-006** | RSS feed integrity | API | - |
+
+### Medium/Low-Priority Risks
+
+| Risk ID | Category | Description | Score | QA Test Coverage |
+| :--- | :--- | :--- | :--- | :--- |
+| **R3** | BUS | Broken Translations (i18n) | **4** | P0-003, P1-003 (E2E) |
+| **R6** | BUS | DeepL API Cost Spike | **4** | P1-001 (E2E/API) |
+| **R1** | BUS | Minor SEO Metadata Drift | **2** | P2-002 (API) |
+| **R4** | OPS | Image Optimization Latency | **2** | P3-001 (NFR) |
+
+### P3 (Low)
+
+| Test ID | Requirement | Test Level | Notes |
+| :--- | :--- | :--- | :--- |
+| **P3-001** | Lighthouse performance audit | NFR | Target score ≥ 90 |
+| **P3-002** | Basic load test on Home page | NFR | k6 smoke test |
+
+---
+
+## Execution Strategy
+
+### Every PR: Core Suites (~5 min)
+- All Vitest Unit/Integration tests.
+- P0 Playwright E2E tests.
+
+### Nightly: Full Regression (~20 min)
+- All P0, P1, P2 Playwright tests.
+- Visual regression checks.
+- SEO validation (Sitemap, Metadata).
+
+---
+
+## QA Effort Estimate
+
+| Priority | Count | Effort Range | Notes |
+| :--- | :--- | :--- | :--- |
+| P0 | ~4 | ~10-15 hours | Core environment setup |
+| P1 | ~8 | ~15-20 hours | Complex i18n logic |
+| P2 | ~6 | ~10-15 hours | SEO and Visuals |
+| **Total** | ~20 | **~35-50 hours** | **1 engineer, part-time** |
+
+---
+
+## Appendix B: Knowledge Base References
+- **Risk Governance**: `risk-governance.md`
+- **Test Priorities Matrix**: `test-priorities-matrix.md`
+- **Test Levels Framework**: `test-levels-framework.md`
+- **Test Quality**: `test-quality.md`
+
+---
+**Generated by:** BMad TEA Agent

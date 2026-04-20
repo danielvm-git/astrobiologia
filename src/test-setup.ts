@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { vi } from 'vitest';
+import { vi, beforeEach } from 'vitest';
 
 // Mock SvelteKit environment variables
 vi.mock('$env/static/public', () => ({
@@ -23,3 +23,14 @@ vi.mock('$app/environment', () => ({
     building: false,
     version: 'any'
 }));
+
+import { appwriteMockImplementation } from '../tests/mocks/appwrite';
+
+// Global Appwrite mock
+vi.mock('appwrite', () => appwriteMockImplementation);
+vi.mock('node-appwrite', () => appwriteMockImplementation);
+
+// Standardize mock clearing
+beforeEach(() => {
+    vi.clearAllMocks();
+});

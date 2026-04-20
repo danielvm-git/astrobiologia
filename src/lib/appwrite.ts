@@ -304,8 +304,21 @@ export function getImageUrl(fileId: string, width = 800, height = 600): string {
 }
 
 export async function uploadImage(file: File): Promise<string> {
-	const response = await storage.createFile(STORAGE_BUCKET_ID, ID.unique(), file);
-	return response.$id;
+	const formData = new FormData();
+	formData.append('file', file);
+
+	const response = await fetch('/api/upload', {
+		method: 'POST',
+		body: formData
+	});
+
+	if (!response.ok) {
+		const err = await response.json();
+		throw new Error(err.error || 'Upload failed');
+	}
+
+	const data = await response.json();
+	return data.fileId;
 }
 
 export async function deleteImage(fileId: string): Promise<void> {
