@@ -71,6 +71,7 @@
 
 **Incoming:**
 - `/oauth`: Redirect endpoint for Google OAuth2 callbacks.
+  - Server actions must pass **`https`** success/failure URLs registered in Appwrite Auth. Appwrite Sites has been observed to send **`X-Forwarded-Proto: http`** while `event.url` is already **`https:`**; the app resolves public origin accordingly (see `src/lib/server/public-origin.ts`). Optional **`PUBLIC_ORIGIN`** overrides origin if needed.
 
 **Outgoing:**
 - None detected.

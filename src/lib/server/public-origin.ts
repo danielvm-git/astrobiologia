@@ -10,7 +10,12 @@ function fallbackOrigin(url: Pick<URL, 'origin' | 'protocol'>): string | undefin
 
 /**
  * Browser-facing origin for OAuth redirect URLs and secure cookies.
- * Behind Appwrite/Varnish, `url` may reflect an internal scheme/host; forwarded headers (or PUBLIC_ORIGIN) fix that.
+ *
+ * Ordering matters: Appwrite Sites / Varnish sometimes send **X-Forwarded-Proto: http** on an internal hop
+ * while SvelteKit's `event.url` is already **https://** (correct public URL). Preferring forwarded headers
+ * unconditionally caused **http** OAuth redirect URLs → Appwrite `Invalid redirect` (400).
+ *
+ * @see https://svelte.dev/docs/kit/adapter-node — `ORIGIN`, `PROTOCOL_HEADER`, `HOST_HEADER`
  */
 export function getPublicOrigin(url: Pick<URL, 'origin' | 'protocol' | 'host'>, request: Pick<Request, 'headers'>): string {
 	const explicit = publicEnv.PUBLIC_ORIGIN?.trim().replace(/\/$/, '');
@@ -22,6 +27,13 @@ export function getPublicOrigin(url: Pick<URL, 'origin' | 'protocol' | 'host'>, 
 		}
 	}
 
+	const fromUrl = fallbackOrigin(url);
+
+	// Trust HTTPS from the framework URL when present (fixes broken X-Forwarded-Proto at the edge).
+	if (fromUrl?.startsWith('https://')) {
+		return fromUrl;
+	}
+
 	const headers = request?.headers;
 	const xfProto = headers?.get('x-forwarded-proto')?.split(',')[0]?.trim();
 	const xfHost = headers?.get('x-forwarded-host')?.split(',')[0]?.trim();
@@ -29,7 +41,7 @@ export function getPublicOrigin(url: Pick<URL, 'origin' | 'protocol' | 'host'>, 
 		return `${xfProto}://${xfHost}`;
 	}
 
-	return fallbackOrigin(url) ?? 'http://localhost';
+	return fromUrl ?? 'http://localhost';
 }
 
 /** Whether the client connection is HTTPS (works behind reverse proxies). */

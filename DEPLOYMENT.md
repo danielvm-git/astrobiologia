@@ -47,6 +47,13 @@ To ensure the build process is resilient and secure on Appwrite Cloud, we use **
 > [!IMPORTANT]
 > You MUST set these variables in the **Settings > Environment Variables** section of your site in the Appwrite Console. Mark `APPWRITE_API_KEY` as a **Secret**.
 
+### OAuth / Google login on Appwrite Sites
+
+Google OAuth (`createOAuth2Token`) rejects redirects that are not allowlisted and must use the same scheme as configured (typically **`https`**).
+
+- **Symptom:** Appwrite API error **`Invalid redirect`** when clicking “Continue with Google” in production only.
+- **Cause:** Some edges send **`X-Forwarded-Proto: http`** even though the browser hits **`https://`**. Prefer fixing at the platform layer: for `@sveltejs/adapter-node`, set **`ORIGIN=https://<your-public-host>`** (see [SvelteKit adapter-node](https://svelte.dev/docs/kit/adapter-node) env vars), or set optional **`PUBLIC_ORIGIN`** to that same URL in site env. The codebase also prefers **`event.url`** when it is already **`https:`** so OAuth callback URLs stay HTTPS.
+
 ## GitHub Actions ↔ Appwrite Sites
 
 There are **two** supported ways to connect your repo and Appwrite; you can use **one or both**.

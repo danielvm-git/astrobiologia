@@ -19,7 +19,7 @@ A professional journalistic portal covering astrobiology, maintained by Danilo A
 - **Simplicity**: Prioritize low maintenance and free tier usage.
 - **Language**: Core content is in Portuguese, but the project supports multi-language (i18n).
 - **Backend**: Use Appwrite Cloud for all backend needs. Do not introduce self-hosted components.
-- **Authentication**: Always use project-specific session cookies (`a_session_${PROJECT_ID}`) for SSR to maintain sync with the client-side SDK.
+- **Authentication**: Always use project-specific session cookies (`a_session_${PROJECT_ID}`) for SSR to maintain sync with the client-side SDK. Server OAuth (`createOAuth2Token`) **success/failure** URLs must use the real **HTTPS** public origin — build them with `getPublicOrigin()` from `$lib/server/public-origin.ts` (Appwrite Sites can send `X-Forwarded-Proto: http` while `event.url` is already `https:`). Optionally set **`PUBLIC_ORIGIN`** or adapter-node **`ORIGIN`** if needed.
 - **Admin Routing**: Use server-side load functions (`+page.server.ts`) for all authenticated admin data fetching to avoid 401 errors in the browser.
 - **Appwrite SDK Split**: Two SDKs with DIFFERENT APIs are in use:
   - `appwrite` (client, v17, browser): positional args — `createEmailPasswordSession(email, password)`
