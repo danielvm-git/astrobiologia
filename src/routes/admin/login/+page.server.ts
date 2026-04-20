@@ -8,11 +8,11 @@ export const actions = {
         const { account } = createAdminClient();
         
         try {
-            const redirectUrl = await account.createOAuth2Token(
-                OAuthProvider.Google,
-                `${url.origin}/oauth`,
-                `${url.origin}/admin/login?error=google_failed`
-            );
+            const redirectUrl = await account.createOAuth2Token({
+                provider: OAuthProvider.Google,
+                success: `${url.origin}/oauth`,
+                failure: `${url.origin}/admin/login?error=google_failed`
+            });
             
             throw redirect(302, redirectUrl);
         } catch (err: any) {
@@ -33,7 +33,7 @@ export const actions = {
         
         try {
             const { account } = createAdminClient();
-            const session = await account.createEmailPasswordSession(email, password);
+            const session = await account.createEmailPasswordSession({ email, password });
             
             cookies.set(SESSION_COOKIE, session.secret, {
                 path: '/',

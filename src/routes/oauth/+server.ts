@@ -13,7 +13,7 @@ export async function GET({ url, cookies }) {
     try {
         console.log('OAuth Callback: userId=', userId);
         const { account } = createAdminClient();
-        const session = await account.createSession(userId, secret);
+        const session = await account.createSession({ userId, secret });
         console.log('OAuth Session Created: expires=', session.expire);
 
         cookies.set(SESSION_COOKIE, session.secret, {
