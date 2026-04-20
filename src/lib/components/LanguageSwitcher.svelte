@@ -25,6 +25,15 @@
 	function closeMenu() {
 		isOpen = false;
 	}
+
+	const languageNames: Record<string, string> = {
+		'pt-br': 'Português',
+		'en': 'English',
+		'nl': 'Nederlands',
+		'es': 'Español',
+		'ja': '日本語',
+		'zh': '中文'
+	};
 </script>
 
 {#if variant === 'header'}
@@ -34,6 +43,7 @@
 			onclick={toggleMenu}
 			class="flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-primary transition-colors rounded-md hover:bg-slate-50"
 			aria-expanded={isOpen}
+			aria-label="Selecionar idioma"
 		>
 			<Languages class="h-3.5 w-3.5" />
 			{currentLang}
@@ -55,7 +65,7 @@
 							currentLang === tag ? 'text-primary' : 'text-slate-500'
 						)}
 					>
-						{tag === 'pt-br' ? 'Português' : 'English'}
+						{languageNames[tag] || tag.toUpperCase()}
 					</a>
 				{/each}
 			</div>
@@ -81,7 +91,7 @@
 							: 'bg-white text-slate-500 border-slate-100 hover:border-primary/20'
 					)}
 				>
-					{tag === 'pt-br' ? 'Português' : 'English'}
+					{languageNames[tag] || tag.toUpperCase()}
 				</a>
 			{/each}
 		</div>
@@ -96,7 +106,7 @@
 					currentLang === tag ? 'text-primary' : 'text-slate-400 hover:text-slate-600'
 				)}
 			>
-				{tag === 'pt-br' ? 'Português' : 'English'}
+				{languageNames[tag] || tag.toUpperCase()}
 			</a>
 		{/each}
 	</div>

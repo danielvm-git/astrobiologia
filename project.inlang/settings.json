@@ -10,6 +10,10 @@
 	"baseLocale": "pt-br",
 	"locales": [
 		"pt-br",
-		"en"
+		"en",
+		"nl",
+		"zh",
+		"es",
+		"ja"
 	]
 }
