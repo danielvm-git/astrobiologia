@@ -34,20 +34,20 @@
 </svelte:head>
 
 <main class="bg-background min-h-screen">
-	<!-- Page Header -->
-	<header class="bg-slate-900 pt-32 pb-16 md:pt-48 md:pb-24">
-		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-			<h1 class="text-4xl md:text-6xl font-black text-white mb-6 font-sans tracking-tight">
+	<!-- Hero: navy band sized to content (minimal vertical padding) -->
+	<header class="bg-slate-900">
+		<div class="mx-auto max-w-7xl px-4 pt-6 pb-3 text-center sm:px-6 md:pt-7 md:pb-5 lg:px-8">
+			<h1 class="mb-1 font-sans text-4xl font-black tracking-tight text-white md:mb-2 md:text-6xl">
 				{m.hero_title()}<span class="text-accent">.</span>
 			</h1>
-			<p class="text-xl text-slate-400 font-serif max-w-2xl mx-auto italic">
+			<p class="mx-auto max-w-2xl font-serif text-lg italic text-slate-400 md:text-xl">
 				{m.hero_subtitle()}
 			</p>
 		</div>
 	</header>
 
 	<!-- Main Content Feed -->
-	<section class="py-16 md:py-24">
+	<section class="py-12 md:py-16">
 		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 			<div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12 border-b border-slate-200 pb-8">
 				<div>
@@ -62,7 +62,7 @@
 					>
 						{m.filter_all()}
 					</button>
-					{#each CATEGORIES as category}
+					{#each CATEGORIES as category (category.slug)}
 						<button
 							class="rounded-full px-5 py-2 text-sm font-semibold transition-all {activeCategory === category.slug ? 'bg-primary text-white shadow-md' : 'bg-white text-slate-600 border border-slate-200 hover:border-primary hover:text-primary'}"
 							onclick={() => activeCategory = category.slug}

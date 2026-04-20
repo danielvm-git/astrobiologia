@@ -5,6 +5,7 @@ import { AppwriteException, OAuthProvider } from 'node-appwrite';
 import { createLogger } from '$lib/server/logger';
 import { env as privateEnv } from '$env/dynamic/private';
 import { env as publicEnv } from '$env/dynamic/public';
+import { getPublicOrigin, isPublicHttps } from '$lib/server/public-origin';
 
 const log = createLogger('ADMIN-LOGIN');
 
@@ -53,9 +54,22 @@ function serializeOAuthFailure(err: unknown): Record<string, unknown> {
 
 export const actions = {
 	google: async ({ url, request }) => {
-		const successUrl = `${url.origin}/oauth`;
-		const failureUrl = `${url.origin}/admin/login?error=google_failed`;
+		if (!privateEnv.APPWRITE_API_KEY?.trim()) {
+			log.error('Google OAuth blocked: APPWRITE_API_KEY is empty at runtime', {
+				env: oauthEnvSnapshot()
+			});
+			return fail(503, {
+				message: 'Failed to initialize Google login.',
+				error: 'server_misconfigured'
+			});
+		}
+
+		const origin = getPublicOrigin(url, request);
+		const successUrl = `${origin}/oauth`;
+		const failureUrl = `${origin}/admin/login?error=google_failed`;
 		const requestHostContext = {
+			urlOrigin: url.origin,
+			publicOrigin: origin,
 			urlHost: url.host,
 			forwardedHost: request.headers.get('x-forwarded-host'),
 			forwardedProto: request.headers.get('x-forwarded-proto'),
@@ -116,7 +130,7 @@ export const actions = {
                 path: '/',
                 expires: new Date(session.expire),
                 sameSite: 'lax',
-                secure: url.protocol === 'https:',
+                secure: isPublicHttps(url, request),
                 httpOnly: true
             });
             

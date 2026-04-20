@@ -1,8 +1,9 @@
 import { createAdminClient, SESSION_COOKIE } from '$lib/server/appwrite';
 import { redirect } from '@sveltejs/kit';
 import { localizeHref } from '$lib/paraglide/runtime';
+import { isPublicHttps } from '$lib/server/public-origin';
 
-export async function GET({ url, cookies }) {
+export async function GET({ url, cookies, request }) {
     const userId = url.searchParams.get('userId');
     const secret = url.searchParams.get('secret');
 
@@ -20,7 +21,7 @@ export async function GET({ url, cookies }) {
             path: '/',
             expires: new Date(session.expire),
             sameSite: 'lax',
-            secure: url.protocol === 'https:',
+            secure: isPublicHttps(url, request),
             httpOnly: true
         });
     } catch (err: any) {
