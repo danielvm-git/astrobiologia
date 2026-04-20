@@ -57,5 +57,7 @@ export default defineConfig({
 		command: 'npm run build && npm run preview',
 		port: 4173,
 		reuseExistingServer: !process.env.CI,
+		/** Production build often exceeds Playwright's default 60s on CI and cold caches. */
+		timeout: 180 * 1000
 	},
 });
