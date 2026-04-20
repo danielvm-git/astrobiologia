@@ -1,12 +1,12 @@
 import { json } from '@sveltejs/kit';
-import { databases, DATABASE_ID } from '$lib/appwrite';
+import { databases, DATABASE_ID, COLLECTIONS } from '$lib/appwrite';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async () => {
 	try {
 		// Attempt to list collections as a connectivity check
 		const startTime = Date.now();
-		const response = await databases.listDocuments(DATABASE_ID, 'articles', []);
+		const response = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES, []);
 		const duration = Date.now() - startTime;
 
 		return json({

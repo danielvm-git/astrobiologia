@@ -3,10 +3,11 @@ import { GET } from '../../src/routes/api/health/+server';
 
 // Mock dependencies
 vi.mock('$lib/appwrite', () => ({
-    databases: {
-        listDocuments: vi.fn().mockResolvedValue({ documents: [] })
-    },
-    DATABASE_ID: 'test-db'
+	databases: {
+		listDocuments: vi.fn().mockResolvedValue({ documents: [] })
+	},
+	DATABASE_ID: 'test-db',
+	COLLECTIONS: { ARTICLES: 'articles' }
 }));
 
 vi.mock('@sveltejs/kit', () => ({

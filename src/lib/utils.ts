@@ -5,18 +5,18 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
-export function formatDate(date: string | Date): string {
+export function formatDate(date: string | Date, locale = 'pt-BR'): string {
 	const d = typeof date === 'string' ? new Date(date) : date;
-	return new Intl.DateTimeFormat('pt-BR', {
+	return new Intl.DateTimeFormat(locale, {
 		day: 'numeric',
 		month: 'long',
 		year: 'numeric'
 	}).format(d);
 }
 
-export function formatShortDate(date: string | Date): string {
+export function formatShortDate(date: string | Date, locale = 'pt-BR'): string {
 	const d = typeof date === 'string' ? new Date(date) : date;
-	return new Intl.DateTimeFormat('pt-BR', {
+	return new Intl.DateTimeFormat(locale, {
 		day: 'numeric',
 		month: 'short',
 		year: 'numeric'
