@@ -18,7 +18,11 @@ export const actions = {
         } catch (err: any) {
             if (err.status === 302) throw err; // Handle redirect
             console.error('Google OAuth error:', err);
-            return fail(500, { message: 'Failed to initialize Google login.' });
+            return fail(500, { 
+                message: 'Failed to initialize Google login.',
+                error: err.message,
+                code: err.code
+            });
         }
     },
     
