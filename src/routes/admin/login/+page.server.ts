@@ -1,30 +1,103 @@
 import { createAdminClient, SESSION_COOKIE } from '$lib/server/appwrite';
 import { redirect, fail } from '@sveltejs/kit';
 import { localizeHref } from '$lib/paraglide/runtime';
-import { OAuthProvider } from 'node-appwrite';
+import { AppwriteException, OAuthProvider } from 'node-appwrite';
+import { createLogger } from '$lib/server/logger';
+import { env as privateEnv } from '$env/dynamic/private';
+import { env as publicEnv } from '$env/dynamic/public';
+
+const log = createLogger('ADMIN-LOGIN');
+
+function appwriteEndpointHost(): string {
+	const raw = publicEnv.PUBLIC_APPWRITE_ENDPOINT?.trim();
+	if (!raw) return 'unset';
+	try {
+		return new URL(raw).host;
+	} catch {
+		return 'invalid-url';
+	}
+}
+
+/** Booleans and host only — never logs secrets. */
+function oauthEnvSnapshot() {
+	return {
+		hasApiKey: Boolean(privateEnv.APPWRITE_API_KEY?.trim()),
+		hasProjectId: Boolean(publicEnv.PUBLIC_APPWRITE_PROJECT_ID?.trim()),
+		endpointHost: appwriteEndpointHost(),
+		projectIdLen: (publicEnv.PUBLIC_APPWRITE_PROJECT_ID || '').length
+	};
+}
+
+function serializeOAuthFailure(err: unknown): Record<string, unknown> {
+	if (err instanceof AppwriteException) {
+		const response =
+			typeof err.response === 'string' ? err.response.slice(0, 1200) : String(err.response ?? '');
+		return {
+			kind: 'AppwriteException',
+			code: err.code,
+			type: err.type,
+			message: err.message,
+			response
+		};
+	}
+	if (err instanceof Error) {
+		const rec: Record<string, unknown> = {
+			kind: err.name,
+			message: err.message
+		};
+		if (err.stack) rec.stackPreview = err.stack.split('\n').slice(0, 14).join('\n');
+		return rec;
+	}
+	return { kind: 'unknown', raw: String(err) };
+}
 
 export const actions = {
-    google: async ({ url }) => {
-        const { account } = createAdminClient();
-        
-        try {
-            const redirectUrl = await account.createOAuth2Token({
-                provider: OAuthProvider.Google,
-                success: `${url.origin}/oauth`,
-                failure: `${url.origin}/admin/login?error=google_failed`
-            });
-            
-            throw redirect(302, redirectUrl);
-        } catch (err: any) {
-            if (err.status === 302) throw err; // Handle redirect
-            console.error('Google OAuth error:', err);
-            return fail(500, { 
-                message: 'Failed to initialize Google login.',
-                error: err.message,
-                code: err.code
-            });
-        }
-    },
+	google: async ({ url, request }) => {
+		const successUrl = `${url.origin}/oauth`;
+		const failureUrl = `${url.origin}/admin/login?error=google_failed`;
+		const requestHostContext = {
+			urlHost: url.host,
+			forwardedHost: request.headers.get('x-forwarded-host'),
+			forwardedProto: request.headers.get('x-forwarded-proto'),
+			requestHost: request.headers.get('host')
+		};
+
+		const { account } = createAdminClient();
+
+		try {
+			const redirectUrl = await account.createOAuth2Token({
+				provider: OAuthProvider.Google,
+				success: successUrl,
+				failure: failureUrl
+			});
+
+			throw redirect(302, redirectUrl);
+		} catch (err: unknown) {
+			const status = typeof err === 'object' && err !== null && 'status' in err ? (err as { status?: number }).status : undefined;
+			if (status === 302) throw err;
+
+			log.error('Google OAuth createOAuth2Token failed', {
+				oauth: serializeOAuthFailure(err),
+				env: oauthEnvSnapshot(),
+				redirects: { success: successUrl, failure: failureUrl },
+				request: requestHostContext
+			});
+
+			const message =
+				err instanceof AppwriteException
+					? err.message
+					: err instanceof Error
+						? err.message
+						: String(err);
+			const code = err instanceof AppwriteException ? err.code : (err as { code?: number })?.code;
+
+			return fail(500, {
+				message: 'Failed to initialize Google login.',
+				error: message,
+				code
+			});
+		}
+	},
     
 	login: async ({ request, cookies, url }) => {
         const formData = await request.formData();
@@ -50,7 +123,7 @@ export const actions = {
             throw redirect(302, localizeHref('/admin/dashboard'));
         } catch (err: any) {
             if (err.status === 302) throw err;
-            console.error('Login error:', err);
+            log.error('Email login createEmailPasswordSession failed', err instanceof Error ? err : { err });
             return fail(401, { message: 'Login falhou. Verifique suas credenciais.' });
         }
     }
