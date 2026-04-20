@@ -1,161 +1,115 @@
-# Astrobiologia.com Setup Guide
+<!-- generated-by: gsd-doc-writer -->
+# Astrobiologia.com.br Setup Guide
+
+This guide explains how to set up the project locally for development.
 
 ## Prerequisites
 
-- Node.js 18+ and pnpm
-- An Appwrite Cloud account
+- **Node.js**: >= 20.0.0
+- **Package Manager**: npm (mandatory)
+- **Appwrite Cloud**: An account at [cloud.appwrite.io](https://cloud.appwrite.io)
 
-## Installation
+## Local Installation
 
-1. Clone or download the project
-2. Install dependencies:
-   ```bash
-   pnpm install
-   ```
+1.  **Clone the repository**:
+    ```bash
+    git clone <repository-url>
+    cd astrobiologia
+    ```
 
-## Appwrite Cloud Setup
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
 
-### 1. Create an Appwrite Cloud Project
-- Go to [Appwrite Cloud](https://cloud.appwrite.io)
-- Create a new project
-- Note your Project ID and API Key
-
-### 2. Create Database and Collections
-In your Appwrite Console:
-
-1. Create a Database named: `astrobiology_db`
-2. Create a Collection: `articles`
-
-Add these attributes to the articles collection:
-- `title` (String, required, max 255)
-- `slug` (String, required, unique, max 255)
-- `excerpt` (String, required, max 500)
-- `content` (String, required, for rich text HTML)
-- `category` (String, required)
-- `tags` (String array)
-- `featuredImage` (String, URL to image)
-- `featured` (Boolean, default: false)
-- `status` (String, enum: published/draft, default: draft)
-- `author` (String, default: "Danilo Couto")
-- `publishedAt` (DateTime)
-- `createdAt` (DateTime)
-- `updatedAt` (DateTime)
-
-### 3. Create Storage Bucket
-In Appwrite Console:
-1. Go to Storage
-2. Create a bucket named: `article_images`
-3. Set permissions to allow uploads from authenticated users
-
-### 4. Create Admin User
-Use Appwrite Console to create an admin user account.
+3.  **Compile i18n messages**:
+    The project uses Paraglide-js for internationalization. While the Vite plugin handles compilation during development, you should run the initial compilation:
+    ```bash
+    npx paraglide-js compile --project ./project.inlang
+    ```
 
 ## Environment Configuration
 
-Copy `.env.example` to `.env.local`:
+1.  Copy the example environment file:
+    ```bash
+    cp .env.example .env
+    ```
+
+2.  Fill in your **Appwrite Cloud** credentials in `.env`:
+    - `PUBLIC_APPWRITE_ENDPOINT`: Usually `https://cloud.appwrite.io/v1`
+    - `PUBLIC_APPWRITE_PROJECT_ID`: Your Appwrite project ID.
+    - `APPWRITE_API_KEY`: An API key with full permissions (Database, Collections, Attributes, Indexes, Storage, Users).
+    - `APPWRITE_ADMIN_EMAIL`: The email for your admin user.
+    - `APPWRITE_ADMIN_PASSWORD`: The password for your admin user.
+
+    *Note: The project uses `PUBLIC_` prefix for variables that need to be accessible to the frontend.*
+
+## Appwrite Infrastructure Setup
+
+The project includes automated scripts to set up the database schema and storage.
+
+### 1. Initial Infrastructure Setup
+This script creates the database, the `articles` collection, required attributes, indexes, and the admin user.
 ```bash
-cp .env.example .env.local
+node scripts/setup-appwrite.js
 ```
 
-Fill in your Appwrite credentials:
+### 2. Update Schema for i18n
+If you are upgrading an existing installation or after the initial setup, run the i18n schema update script to create the `article_translations` collection and add multi-language fields:
+```bash
+node scripts/update-schema-i18n.js
 ```
-VITE_APPWRITE_ENDPOINT=https://nyc.cloud.appwrite.io/v1
-VITE_APPWRITE_PROJECT_ID=your_project_id
-VITE_APPWRITE_API_KEY=your_api_key
-VITE_APPWRITE_DATABASE_ID=astrobiology_db
-VITE_APPWRITE_ARTICLES_COLLECTION_ID=articles
-VITE_APPWRITE_STORAGE_BUCKET_ID=article_images
+
+### 3. Migrating Content (Optional)
+If you have existing articles that need to be moved to the new i18n structure:
+```bash
+node scripts/migrate-articles-i18n.js
 ```
 
 ## Development
 
 Start the development server:
 ```bash
-pnpm dev
+npm run dev
 ```
 
-Open http://localhost:5173 in your browser.
+The site will be available at `http://localhost:5173`.
 
-## File Structure
+### i18n Workflow
+- Source messages are located in `messages/` (JSON files).
+- The Inlang project configuration is in `project.inlang/`.
+- Compiled runtime is generated in `src/lib/paraglide/`.
+- To add a new language, update `project.inlang/settings.json` and add the corresponding JSON file in `messages/`.
 
+## Quality Checks
+
+Run the full preflight check before committing:
+```bash
+npm run preflight
 ```
-src/
-├── lib/
-│   ├── appwrite.ts          # Appwrite client configuration
-│   ├── seo.ts               # SEO utilities
-│   ├── utils.ts             # Helper functions
-│   ├── components/          # Reusable components
-│   └── stores/              # Svelte stores
-├── routes/
-│   ├── +layout.svelte       # Root layout
-│   ├── +page.svelte         # Homepage
-│   ├── articles/            # Public articles pages
-│   ├── categories/          # Category pages
-│   ├── about/               # About page
-│   ├── admin/               # Admin panel (protected)
-│   ├── api/                 # API routes
-│   └── sitemap.xml/         # SEO sitemap
-└── app.css                  # Global styles
-```
-
-## Admin Panel
-
-1. Navigate to `/admin/login`
-2. Log in with your admin credentials
-3. Access article management at `/admin/dashboard`
-
-### Features
-- Create, edit, delete articles
-- Upload featured images
-- Preview articles
-- Manage article status (published/draft)
-- Add tags and categories
-
-## Deployment
-
-### To Vercel
-1. Push code to GitHub
-2. Connect repo to Vercel
-3. Add environment variables in Vercel project settings
-4. Deploy
-
-### To Other Platforms
-Configure your hosting to:
-1. Use Node.js 18+
-2. Run `pnpm build` during build
-3. Set environment variables
-4. Start with `node build/index.js`
-
-## SEO Features
-
-- Automatic sitemap generation at `/sitemap.xml`
-- robots.txt configuration at `/robots.txt`
-- Dynamic meta tags for articles
-- Schema.org structured data
-- Open Graph tags for social sharing
+This command runs: `npm install`, `npm run check` (Svelte-check), `npm run test`, and `npm run build`.
 
 ## Troubleshooting
 
-### Articles not loading
-- Verify Appwrite credentials in `.env.local`
-- Check that database and collection IDs match your setup
-- Ensure articles exist and have `status = "published"`
+### Appwrite Permission Denied
+Ensure your `APPWRITE_API_KEY` has the following scopes:
+- `databases.read`, `databases.write`
+- `collections.read`, `collections.write`
+- `attributes.read`, `attributes.write`
+- `indexes.read`, `indexes.write`
+- `files.read`, `files.write`
+- `users.read`, `users.write`
 
-### Images not uploading
-- Verify storage bucket permissions
-- Check that bucket ID is correct in environment variables
-- Ensure file size is within limits
+### Paraglide compilation errors
+If you see errors related to `$lib/paraglide`, ensure you have run:
+```bash
+npx paraglide-js compile --project ./project.inlang
+```
 
-### Admin login not working
-- Verify user exists in Appwrite Console
-- Check email and password are correct
-- Ensure API key has appropriate permissions
+### Database ID mismatch
+The scripts default to specific IDs. If you prefer to use your own, ensure `PUBLIC_DATABASE_ID` and `PUBLIC_ARTICLES_COLLECTION_ID` are set in your `.env` file.
 
-## Support
+## Next Steps
 
-For issues with Appwrite, visit: https://appwrite.io/docs
-For SvelteKit documentation: https://kit.svelte.dev
-
-## License
-
-This project is open source and available under the MIT License.
+- For production deployment instructions, see **DEPLOYMENT.md**.
+- To understand the overall system structure, see **PROJECT_SUMMARY.md**.

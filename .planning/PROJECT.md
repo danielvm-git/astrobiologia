@@ -1,3 +1,4 @@
+<!-- generated-by: gsd-doc-writer -->
 # Project: Astrobiologia.com.br
 
 ## What This Is
@@ -20,10 +21,10 @@ Maximum simplicity, minimum maintenance (under 1 hour/month), low cost (free tie
 - ✓ [Public Interface] — v1.0 (Home + Detail + Category Filter)
 - ✓ [Author Profile] — v1.0 (Integrated in "Sobre" page)
 - ✓ [SEO & Social Sharing] — v1.0 (Meta tags + Schema.org)
+- ✓ [Multilingual Support (i18n)] — Implementation for global audience (Phase 5 complete).
 
 ### Active
-- [ ] [Multilingual Support (i18n)] — Implementation for global audience (Phase 5).
-- [ ] [Server-side Global Search] — Database-indexed discovery (Phase 6).
+- [ ] [Server-side Global Search] — Database-indexed discovery (Phase 6 next priority).
 - [ ] [Performance Audit] — Formal Lighthouse optimization and lazy loading (Phase 7).
 - [ ] [Newsletter] — Simple subscription form for engagement.
 
@@ -39,12 +40,12 @@ Maximum simplicity, minimum maintenance (under 1 hour/month), low cost (free tie
 | Google OAuth Only | Simplifies admin auth while maintaining security. | ✓ Good |
 | Tiptap Editor | Flexible rich text without heavy dependencies. | ✓ Good |
 | Client-side Filter | Quick discovery for MVP without complex backend logic. | ✓ Good |
-| i18n via DeepL | Automates translations for a global audience. | Pending |
+| i18n via Paraglide | High-performance, typesafe i18n for Svelte 5. | ✓ Good |
 
 ## Context
-- **Current State**: v1.0 shipped (MVP). Core CMS and Portal functional.
-- **Codebase**: ~3.7k insertions, 85 files changed in v1.0.
+- **Current State**: v1.0 shipped, v1.1 Phase 5 complete.
+- **Next Goal**: Phase 6: Search Engine Integration.
 - **Tone**: Professional, journalistic, and scientifically accurate.
 
 ---
-*Last updated: 2026-04-19 after v1.0 milestone*
+*Last updated: 2026-04-20 after completion of Phase 5.*

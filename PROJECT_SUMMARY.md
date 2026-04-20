@@ -1,126 +1,113 @@
+<!-- generated-by: gsd-doc-writer -->
 # Astrobiologia.com - Project Summary
 
 ## Overview
 
-Astrobiologia.com.br is a professional science journalism platform focused on astrobiology and the search for life in the universe. Maintained by journalist and researcher Danilo Albergaria, it features news, interviews, and analyses with a special focus on Brazilian research. Built with SvelteKit and Appwrite Cloud.
+Astrobiologia.com.br is a professional science journalism platform focused on astrobiology and the search for life in the universe. Maintained by journalist and researcher Danilo Albergaria, it features news, interviews, and analyses with a special focus on Brazilian research. Built with SvelteKit 5 and Appwrite Cloud.
 
 ## Technology Stack
 
-- **Frontend**: SvelteKit with TypeScript
+- **Frontend**: SvelteKit 5 (Runes) with TypeScript
+- **i18n**: @inlang/paraglide-js for UI and routing
 - **Styling**: Tailwind CSS v4
-- **Backend**: Appwrite Cloud
-- **Database**: Appwrite Database
-- **Storage**: Appwrite Storage Buckets
-- **Deployment**: Vercel-ready (or any Node.js host)
+- **Backend**: Appwrite Cloud (Auth, Database, Storage)
+- **Database**: Appwrite Database (Relational i18n Architecture)
+- **Deployment**: Appwrite Sites / Node.js compatible
+
+## Project Status
+
+- **Current Milestone**: Milestone 1 (MVP) - **Completed**
+- **Phase 5 (Multilingual)**: **Completed**
+- **Health**: Stable. All 22 tests passing. Core features (Articles CRUD, Auth, i18n) are functional.
 
 ## Project Structure
 
-### Estrutura de Rotas (SvelteKit)
-- `/`: Homepage com artigos em destaque e últimas notícias.
-- `/artigos`: Listagem completa de artigos com filtros.
-- `/artigos/[slug]`: Página de leitura do artigo (estilo New Scientist).
-- `/categorias/[category]`: Listagem de artigos por categoria.
-- `/sobre`: Página biográfica e missão do autor.
-- `/admin`: Área administrativa (Login, Dashboard, Gerenciamento de Artigos).
-- `/admin/artigos`: Listagem e ações de artigos.
-- `/admin/artigos/new`: Editor de novo artigo.
-- `/admin/artigos/[id]/edit`: Edição de artigo existente.
-
-### Categorias Jornalísticas
-As categorias foram simplificadas para um fluxo editorial:
-- `noticias`: Fatos e descobertas recentes.
-- `entrevistas`: Diálogos com pesquisadores.
-- `analises`: Opinião e profundidade sobre temas.
-- `pesquisas-brasileiras`: Ciência nacional em foco.
-- `exoplanetas` & `extremofilos`: Temas técnicos de alto interesse.
+### Estrutura de Rotas (SvelteKit + Paraglide)
+All routes are automatically localized by Paraglide:
+- `/`: Homepage with featured articles and latest news.
+- `/artigos`: Full listing of articles with filters.
+- `/artigos/[slug]`: Article reading page (New Scientist style).
+- `/categorias/[category]`: Article listing by category.
+- `/sobre`: Biography and author mission.
+- `/admin`: Administrative area (Login, Dashboard, Article Management).
+- `/admin/artigos`: List and actions for articles.
+- `/admin/artigos/new`: Editor for new articles.
+- `/admin/artigos/[id]/edit`: Editing existing articles (supports multiple languages).
 
 ### API Routes
-- `/api/articles/[id]/delete` - Delete articles via POST
+- `/api/articles/[id]/delete` - Delete articles and their translations via POST
 - `/api/upload` - Image upload to Appwrite storage
 - `/sitemap.xml` - Dynamic SEO sitemap
 - `/robots.txt` - Search engine directives
 
 ## Key Features
 
+### Multi-language Support (i18n)
+- **Relational i18n**: Master articles are linked to language-specific translation documents.
+- **Routing**: Locale-aware routing (e.g., `/en/articles` vs `/artigos`).
+- **Dynamic Content**: Articles can be published in multiple languages with independent slugs and metadata.
+
 ### Content Management
-- Create, read, update, delete articles
-- Rich text editor with HTML support
-- Upload and manage featured images
-- Organize articles by category and tags
-- Publish/draft status management
+- Create, read, update, delete articles with multi-language support.
+- Rich text editor (Tiptap) with HTML support.
+- Upload and manage featured images.
+- Organize articles by category and tags.
+- Publish/draft status management.
 
-### Public Interface
-- Responsive design (mobile-first)
-- Fast page loads with SvelteKit SSR
-- Advanced search and filtering
-- Category browsing
-- Related articles suggestions
+### SEO & Public Interface
+- Dynamic meta tags per language.
+- Schema.org JSON-LD structured data.
+- Responsive design (mobile-first).
+- Fast page loads with SvelteKit SSR.
 
-### SEO
-- Dynamic meta tags for each page
-- Schema.org JSON-LD structured data
-- Automatic sitemap generation
-- robots.txt configuration
-- Open Graph tags for social sharing
-- Responsive meta images
+## Database Schema (Relational i18n)
 
-### Security
-- Appwrite authentication
-- Protected admin routes
-- Secure file uploads with validation
-- Session-based authorization
-- CSRF protection
-
-## Database Schema
-
-### articles Collection
-```
+### articles Collection (Master)
+Stores metadata shared across all translations.
+```json
 {
-  title: string,
-  slug: string (unique),
-  excerpt: string,
-  content: string (HTML),
-  category: string,
-  tags: string[],
-  featuredImage: string (URL),
-  featured: boolean,
-  status: "published" | "draft",
-  author: string,
-  publishedAt: datetime,
-  createdAt: datetime,
-  updatedAt: datetime
+  "category": "string",
+  "tags": "string[]",
+  "featuredImage": "string (Appwrite File ID)",
+  "featuredImageAlt": "string",
+  "featured": "boolean",
+  "status": "published | draft",
+  "authorId": "string",
+  "authorName": "string",
+  "publishedAt": "datetime",
+  "ogImage": "string",
+  "createdAt": "datetime",
+  "updatedAt": "datetime"
+}
+```
+
+### article_translations Collection
+Stores content for a specific language.
+```json
+{
+  "article_id": "string (reference to articles.$id)",
+  "language": "string (e.g., 'pt-br', 'en')",
+  "title": "string",
+  "slug": "string (unique per language)",
+  "excerpt": "string",
+  "content": "string (HTML)",
+  "metaTitle": "string",
+  "metaDescription": "string"
 }
 ```
 
 ## Component Architecture
 
 ### Reusable Components
-- `Header.svelte` - Navigation header with responsive menu
-- `Footer.svelte` - Site footer with links and social
-- `ArticleCard.svelte` - Article preview card for grids
-- `ArticleEditor.svelte` - WYSIWYG article editor
-- `SearchBox.svelte` - Search input component
-- `Loading.svelte` - Loading spinner
-- `NotFound.svelte` - 404 page component
+- `Header.svelte` - Navigation header with language switcher.
+- `Footer.svelte` - Site footer with links and social.
+- `ArticleCard.svelte` - Article preview card for grids.
+- `ArticleEditor.svelte` - WYSIWYG article editor with translation tabs.
+- `SearchBox.svelte` - Search input component.
 
-### Stores
-- `auth.ts` - Authentication state management
-
-## Styling Approach
-
-- **Color Palette**: 
-  - Primary: Blue (`#2563eb`)
-  - Neutrals: Slate grays (`#0f172a`, `#e2e8f0`)
-  - Accents: Green for success states
-  
-- **Typography**:
-  - Sans-serif for body and headings
-  - Line height: 1.5-1.6 for readability
-  
-- **Layout**:
-  - Flexbox for most layouts
-  - CSS Grid for multi-column article layouts
-  - Max width containers (1280px)
+### Stores & Hooks
+- `auth.ts` - Authentication state management.
+- `hooks.server.ts` - Paraglide middleware and Admin session validation.
 
 ## Getting Started
 
@@ -129,31 +116,14 @@ As categorias foram simplificadas para um fluxo editorial:
 # Install dependencies
 pnpm install
 
-# Create .env.local with Appwrite credentials
-cp .env.example .env.local
-
 # Start dev server
 pnpm dev
-
-# Open http://localhost:5174
 ```
 
 ### Admin Access
-1. Set up admin user in Appwrite Console
-2. Go to `/admin/login`
-3. Enter credentials
-4. Access `/admin/dashboard`
-
-## Environment Variables Required
-
-```
-VITE_APPWRITE_ENDPOINT=https://nyc.cloud.appwrite.io/v1
-VITE_APPWRITE_PROJECT_ID=your_project_id
-VITE_APPWRITE_API_KEY=your_api_key
-VITE_APPWRITE_DATABASE_ID=astrobiology_db
-VITE_APPWRITE_ARTICLES_COLLECTION_ID=articles
-VITE_APPWRITE_STORAGE_BUCKET_ID=article_images
-```
+1. Set up admin user in Appwrite Console.
+2. Go to `/admin/login`.
+3. Access `/admin/dashboard`.
 
 ## Build & Deployment
 
@@ -162,93 +132,20 @@ VITE_APPWRITE_STORAGE_BUCKET_ID=article_images
 pnpm build
 ```
 
-### Deploy to Vercel
-```bash
-vercel deploy
-```
-
-### Deploy to Other Platforms
-See `DEPLOYMENT.md` for detailed instructions for Netlify, Heroku, and self-hosted options.
-
-## Performance Metrics
-
-- **Lighthouse Score**: Target 90+
-- **Time to First Contentful Paint**: < 1.5s
-- **Largest Contentful Paint**: < 2.5s
-- **Cumulative Layout Shift**: < 0.1
+### Deployment
+The project is optimized for Appwrite Sites or any Node.js compatible environment.
 
 ## Future Enhancements
 
-### Phase 2
-- User comments and discussions
-- Email newsletter subscription
-- Reading time estimates
-- Article recommendation engine
-- Social sharing buttons
-
-### Phase 3
-- Multi-language support (Portuguese, English, Spanish)
-- Learning paths and courses
-- Gamification (badges, points)
-- User profiles and saved articles
-- Advanced search with filters
-
-### Phase 4
-- Podcast transcription integration
-- Video content embedding
-- Interactive visualizations
-- Community forums
-- Expert contributor profiles
-
-## File Navigation Guide
-
-```
-astrobiologia/
-├── src/
-│   ├── app.html              # HTML template
-│   ├── app.css               # Global styles
-│   ├── app.d.ts              # TypeScript types
-│   ├── lib/
-│   │   ├── appwrite.ts       # Appwrite SDK initialization
-│   │   ├── seo.ts            # SEO utilities
-│   │   ├── utils.ts          # Helper functions
-│   │   ├── components/       # Reusable Svelte components
-│   │   └── stores/           # Svelte stores
-│   └── routes/
-│       ├── +page.svelte      # Homepage
-│       ├── +layout.svelte    # Root layout
-│       ├── articles/         # Article routes
-│       ├── categories/       # Category routes
-│       ├── about/            # About page
-│       ├── admin/            # Admin routes (protected)
-│       ├── api/              # API endpoints
-│       └── sitemap.xml/      # SEO sitemap
-├── .env.example              # Environment variables template
-├── svelte.config.js          # SvelteKit configuration
-├── vite.config.ts            # Vite configuration
-├── tailwind.config.ts        # Tailwind configuration
-├── tsconfig.json             # TypeScript configuration
-├── package.json              # Dependencies and scripts
-├── README.md                 # Project overview
-├── SETUP.md                  # Setup instructions
-├── DEPLOYMENT.md             # Deployment guide
-└── PROJECT_SUMMARY.md        # This file
-
-```
-
-## Support & Resources
-
-- **SvelteKit Docs**: https://kit.svelte.dev
-- **Appwrite Docs**: https://appwrite.io/docs
-- **Tailwind CSS**: https://tailwindcss.com/docs
-- **TypeScript**: https://www.typescriptlang.org/docs
-
-## License
-
-Open source project available under MIT License.
+### Upcoming Phases
+- User comments and discussions.
+- Email newsletter subscription.
+- Reading time estimates.
+- Article recommendation engine.
+- Interactive visualizations.
 
 ---
 
-**Status**: MVP in Development
-**Last Updated**: 2026-04-19
+**Status**: Stable - Milestone 1 (MVP) & Phase 5 (i18n) Complete
+**Last Updated**: 2026-05-20
 **Maintainer**: Danilo Albergaria
