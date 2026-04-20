@@ -1,5 +1,5 @@
 import { json, error } from '@sveltejs/kit';
-import { translateHtmlToEnglish, translateToEnglish } from '$lib/server/deepl';
+import { translateText } from '$lib/server/deepl';
 
 export const POST = async ({ request, locals }) => {
     // Only allow authenticated users (admins) to use the translation API
@@ -8,17 +8,18 @@ export const POST = async ({ request, locals }) => {
     }
 
     const body = await request.json();
-    const { text, isHtml } = body;
+    const { text, isHtml, targetLang } = body;
 
     if (!text) {
         throw error(400, 'Texto não fornecido');
     }
 
+    if (!targetLang) {
+        throw error(400, 'Idioma de destino não fornecido');
+    }
+
     try {
-        const translated = isHtml 
-            ? await translateHtmlToEnglish(text)
-            : await translateToEnglish(text);
-        
+        const translated = await translateText(text, targetLang, isHtml);
         return json({ translated });
     } catch (e: any) {
         console.error('API Translation error:', e);

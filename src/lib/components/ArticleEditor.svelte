@@ -37,7 +37,7 @@
     const languageNames: Record<string, string> = {
         'pt-br': 'Português',
         'en': 'English',
-        'nl': 'Nederlands',
+        'nl': 'Dutch',
         'es': 'Español',
         'ja': '日本語',
         'zh': '中文'
@@ -142,7 +142,7 @@
     function copyFromBase() {
         const base = transState['pt-br'];
         transState[activeLang].title = base.title;
-        transState[activeLang].slug = base.slug + '-en';
+        transState[activeLang].slug = base.slug + '-' + activeLang;
         transState[activeLang].excerpt = base.excerpt;
         transState[activeLang].content = base.content;
         if (editor) {
@@ -164,7 +164,7 @@
             // Translate Title
             const titleRes = await fetch('/api/translate', {
                 method: 'POST',
-                body: JSON.stringify({ text: base.title, isHtml: false })
+                body: JSON.stringify({ text: base.title, isHtml: false, targetLang: activeLang })
             });
             const titleData = await titleRes.json();
             if (titleData.error) throw new Error(titleData.error);
@@ -174,7 +174,7 @@
             if (base.excerpt) {
                 const excerptRes = await fetch('/api/translate', {
                     method: 'POST',
-                    body: JSON.stringify({ text: base.excerpt, isHtml: false })
+                    body: JSON.stringify({ text: base.excerpt, isHtml: false, targetLang: activeLang })
                 });
                 const excerptData = await excerptRes.json();
                 if (excerptData.translated) transState[activeLang].excerpt = excerptData.translated;
@@ -184,7 +184,7 @@
             if (base.content) {
                 const contentRes = await fetch('/api/translate', {
                     method: 'POST',
-                    body: JSON.stringify({ text: base.content, isHtml: true })
+                    body: JSON.stringify({ text: base.content, isHtml: true, targetLang: activeLang })
                 });
                 const contentData = await contentRes.json();
                 if (contentData.translated) {
@@ -202,6 +202,69 @@
         } catch (err: any) {
             console.error('Translation error:', err);
             alert(err.message || 'Erro ao traduzir. Verifique a chave da API do DeepL em .env');
+        } finally {
+            isLoading = false;
+        }
+    }
+
+    async function translateAllWithDeepL() {
+        const otherLocales = locales.filter(l => l !== 'pt-br');
+        const base = transState['pt-br'];
+        
+        if (!base.title) {
+            alert('Por favor, preencha o título em Português antes de traduzir.');
+            return;
+        }
+
+        if (!confirm(`Isso irá traduzir o artigo para ${otherLocales.length} idiomas. Deseja continuar?`)) {
+            return;
+        }
+
+        isLoading = true;
+        try {
+            for (const lang of otherLocales) {
+                // Translate Title
+                const titleRes = await fetch('/api/translate', {
+                    method: 'POST',
+                    body: JSON.stringify({ text: base.title, isHtml: false, targetLang: lang })
+                });
+                const titleData = await titleRes.json();
+                if (titleData.translated) transState[lang].title = titleData.translated;
+
+                // Translate Excerpt
+                if (base.excerpt) {
+                    const excerptRes = await fetch('/api/translate', {
+                        method: 'POST',
+                        body: JSON.stringify({ text: base.excerpt, isHtml: false, targetLang: lang })
+                    });
+                    const excerptData = await excerptRes.json();
+                    if (excerptData.translated) transState[lang].excerpt = excerptData.translated;
+                }
+
+                // Translate Content (HTML)
+                if (base.content) {
+                    const contentRes = await fetch('/api/translate', {
+                        method: 'POST',
+                        body: JSON.stringify({ text: base.content, isHtml: true, targetLang: lang })
+                    });
+                    const contentData = await contentRes.json();
+                    if (contentData.translated) {
+                        transState[lang].content = contentData.translated;
+                        // If current active lang, update editor
+                        if (activeLang === lang && editor) {
+                            editor.commands.setContent(contentData.translated);
+                        }
+                    }
+                }
+
+                // Auto-generate slug
+                if (titleData.translated && !transState[lang].slug) {
+                    transState[lang].slug = generateSlug(titleData.translated);
+                }
+            }
+        } catch (err: any) {
+            console.error('Batch translation error:', err);
+            alert('Erro durante a tradução em lote. Algumas traduções podem estar incompletas.');
         } finally {
             isLoading = false;
         }
@@ -296,6 +359,17 @@
                 {/if}
             </button>
         {/each}
+        <div class="w-px h-6 bg-slate-200 mx-2"></div>
+        <button
+            type="button"
+            onclick={translateAllWithDeepL}
+            disabled={isLoading}
+            class="flex items-center gap-2 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-primary hover:bg-primary/5 rounded-lg transition-all disabled:opacity-50"
+            title="Traduzir para todos os idiomas"
+        >
+            <Sparkles class="w-3 h-3" />
+            Traduzir Todos
+        </button>
     </div>
 
 	<!-- Content Area -->

@@ -34,7 +34,7 @@
 	const languageNames: Record<string, string> = {
 		'pt-br': 'Português',
 		'en': 'English',
-		'nl': 'Nederlands',
+		'nl': 'Dutch',
 		'es': 'Español',
 		'ja': '日本語',
 		'zh': '中文'
