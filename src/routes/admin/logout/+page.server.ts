@@ -5,6 +5,6 @@ import { localizeHref } from '$lib/paraglide/runtime';
 export const actions = {
 	default: async ({ cookies }) => {
 		cookies.delete(SESSION_COOKIE, { path: '/' });
-		throw redirect(302, localizeHref('/admin/login'));
+		throw redirect(302, localizeHref('/'));
 	}
 };
