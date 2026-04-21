@@ -57,5 +57,12 @@
 	"label_language": "Taal",
 	"search_button": "Zoeken",
 	"label_featured": "Uitgelicht",
-	"form_email_password_required": "E-mail en wachtwoord zijn verplicht."
+	"form_email_password_required": "E-mail en wachtwoord zijn verplicht.",
+	"wip_title": "In aanbouw",
+	"wip_body": "Deze sectie is nog in ontwikkeling. Kom later terug.",
+	"wip_badge": "Work in progress",
+	"admin_seo_document_title": "SEO-zoeken · Admin",
+	"admin_settings_document_title": "Instellingen · Admin",
+	"error_wip_kicker": "Er ging iets mis — het kan tijdelijk zijn. We werken eraan.",
+	"not_found_wip_hint": "Deze pagina wordt mogelijk nog voorbereid of het adres is gewijzigd."
 }

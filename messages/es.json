@@ -57,5 +57,12 @@
 	"label_language": "Idioma",
 	"search_button": "Buscar",
 	"label_featured": "Destacado",
-	"form_email_password_required": "El correo y la contraseña son obligatorios."
+	"form_email_password_required": "El correo y la contraseña son obligatorios.",
+	"wip_title": "En construcción",
+	"wip_body": "Esta sección está en desarrollo. Vuelve pronto.",
+	"wip_badge": "Work in progress",
+	"admin_seo_document_title": "Búsqueda SEO · Admin",
+	"admin_settings_document_title": "Configuración · Admin",
+	"error_wip_kicker": "Algo salió mal — puede ser temporal. Estamos en ello.",
+	"not_found_wip_hint": "Esta página puede estar en preparación o la dirección haber cambiado."
 }

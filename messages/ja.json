@@ -57,5 +57,12 @@
 	"label_language": "言語",
 	"search_button": "検索",
 	"label_featured": "注目",
-	"form_email_password_required": "メールアドレスとパスワードが必要です。"
+	"form_email_password_required": "メールアドレスとパスワードが必要です。",
+	"wip_title": "準備中",
+	"wip_body": "この機能は開発中です。しばらくしてからまたお試しください。",
+	"wip_badge": "Work in progress",
+	"admin_seo_document_title": "SEO検索 · 管理",
+	"admin_settings_document_title": "設定 · 管理",
+	"error_wip_kicker": "問題が発生しました。一時的なものかもしれません。対応中です。",
+	"not_found_wip_hint": "このページは準備中か、URLが変更された可能性があります。"
 }

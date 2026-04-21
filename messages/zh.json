@@ -57,5 +57,12 @@
 	"label_language": "语言",
 	"search_button": "搜索",
 	"label_featured": "精选",
-	"form_email_password_required": "必须填写电子邮件和密码。"
+	"form_email_password_required": "必须填写电子邮件和密码。",
+	"wip_title": "建设中",
+	"wip_body": "此功能仍在开发中，请稍后再试。",
+	"wip_badge": "Work in progress",
+	"admin_seo_document_title": "SEO 搜索 · 后台",
+	"admin_settings_document_title": "设置 · 后台",
+	"error_wip_kicker": "出现了问题 — 可能是暂时的，我们正在处理。",
+	"not_found_wip_hint": "该页面可能在准备中，或地址已更改。"
 }

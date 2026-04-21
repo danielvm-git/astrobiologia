@@ -17,6 +17,7 @@
 		<p class="text-xl text-slate-600 mb-2 font-serif italic">
 			{page.error?.message || m.error_default_message()}
 		</p>
+		<p class="text-slate-600 mb-3 max-w-md mx-auto text-sm font-medium">{m.error_wip_kicker()}</p>
 		<p class="text-slate-500 mb-8 uppercase tracking-widest text-xs font-bold">{m.error_detail()}</p>
 		<a
 			href={localizeHref('/')}

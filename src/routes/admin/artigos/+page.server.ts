@@ -25,13 +25,25 @@ export const load: PageServerLoad = async (event) => {
         let availability: Record<string, Record<string, boolean>> = {};
 
         if (articleIds.length > 0) {
-            const transResponse = await databases.listDocuments(
-                DATABASE_ID,
-                COLLECTIONS.ARTICLES_TRANSLATIONS,
-                [Query.equal('article_id', articleIds)]
-            );
-            
-            transResponse.documents.forEach((t: any) => {
+			// Appwrite default list limit ~25; paginate to load all translation rows for the badge grid
+			const allTrans: any[] = [];
+			const batchSize = 200;
+			let lastId: string | null = null;
+			for (;;) {
+				const q: string[] = [
+					Query.equal('article_id', articleIds),
+					Query.orderAsc('$id'),
+					Query.limit(batchSize)
+				];
+				if (lastId) q.push(Query.cursorAfter(lastId));
+				const page = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, q);
+				if (page.documents.length === 0) break;
+				allTrans.push(...page.documents);
+				if (page.documents.length < batchSize) break;
+				lastId = page.documents[page.documents.length - 1].$id;
+			}
+
+            allTrans.forEach((t: any) => {
                 // Initialize availability for this article if not present
                 if (!availability[t.article_id]) {
                     availability[t.article_id] = {};
@@ -73,11 +85,24 @@ export const actions: Actions = {
 			if (!id) throw new Error('ID não fornecido');
 
 			// 1. Delete all translations
-			const trans = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, [
-				Query.equal('article_id', id)
-			]);
-			
-			for (const t of trans.documents) {
+			const transDocs: any[] = [];
+			let transLastId: string | null = null;
+			const tb = 100;
+			for (;;) {
+				const transQ: string[] = [
+					Query.equal('article_id', id),
+					Query.orderAsc('$id'),
+					Query.limit(tb)
+				];
+				if (transLastId) transQ.push(Query.cursorAfter(transLastId));
+				const trans = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, transQ);
+				if (trans.documents.length === 0) break;
+				transDocs.push(...trans.documents);
+				if (trans.documents.length < tb) break;
+				transLastId = trans.documents[trans.documents.length - 1].$id;
+			}
+
+			for (const t of transDocs) {
 				await databases.deleteDocument(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, t.$id);
 			}
 

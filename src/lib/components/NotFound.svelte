@@ -15,7 +15,8 @@
 	<div class="text-center">
 		<h1 class="text-6xl font-bold text-slate-900 mb-4">404</h1>
 		<h2 class="text-2xl font-semibold text-slate-700 mb-2">{title ?? m.not_found_title()}</h2>
-		<p class="text-slate-600 mb-8 max-w-md mx-auto">{message ?? m.not_found_message()}</p>
+		<p class="text-slate-600 mb-3 max-w-md mx-auto">{message ?? m.not_found_message()}</p>
+		<p class="text-slate-500 mb-8 max-w-md mx-auto text-sm">{m.not_found_wip_hint()}</p>
 		{#if showHome}
 			<a
 				href={localizeHref('/')}

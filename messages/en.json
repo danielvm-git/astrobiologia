@@ -57,5 +57,12 @@
 	"label_language": "Language",
 	"search_button": "Search",
 	"label_featured": "Featured",
-	"form_email_password_required": "Email and password are required."
+	"form_email_password_required": "Email and password are required.",
+	"wip_title": "Under construction",
+	"wip_body": "This section is still in development. Check back soon.",
+	"wip_badge": "Work in progress",
+	"admin_seo_document_title": "SEO search · Admin",
+	"admin_settings_document_title": "Settings · Admin",
+	"error_wip_kicker": "Something went sideways — it may be temporary. We're on it.",
+	"not_found_wip_hint": "This page may be in preparation or the address may have changed."
 }

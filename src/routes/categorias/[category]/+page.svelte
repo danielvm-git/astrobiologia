@@ -8,7 +8,8 @@
 
 	let { data } = $props();
 
-	const category = CATEGORIES.find((c) => c.slug === data.categorySlug);
+	// $derived: same [category] page is reused on client nav; const would stay stuck on first slug
+	const category = $derived(CATEGORIES.find((c) => c.slug === data.categorySlug));
 	const articles = $derived(data.articles as unknown as Article[]);
 </script>
 
