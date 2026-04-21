@@ -16,7 +16,8 @@
     "test:e2e:p0": "playwright test tests/e2e/p0 --project=chromium",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
-    "preflight": "npm install && npm run check && npm run test && npm run build",
+    "preflight": "npm install && npm run paraglide:compile && npm run check && npm run test && npm run build",
+    "paraglide:compile": "paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
   },

@@ -19,11 +19,11 @@ A professional journalistic portal covering astrobiology, maintained by Danilo A
 - **Simplicity**: Prioritize low maintenance and free tier usage.
 - **Language**: Core content is in Portuguese, but the project supports multi-language (i18n).
 - **Backend**: Use Appwrite Cloud for all backend needs. Do not introduce self-hosted components.
-- **Authentication**: Always use project-specific session cookies (`a_session_${PROJECT_ID}`) for SSR to maintain sync with the client-side SDK. Server OAuth (`createOAuth2Token`) **success/failure** URLs must use the real **HTTPS** public origin — build them with `getPublicOrigin()` from `$lib/server/public-origin.ts` (Appwrite Sites can send `X-Forwarded-Proto: http` while `event.url` is already `https:`). Optionally set **`PUBLIC_ORIGIN`** or adapter-node **`ORIGIN`** if needed.
+- **Authentication**: Always use project-specific session cookies (`a_session_${PROJECT_ID}`) for SSR to maintain sync with the client-side SDK. **Google OAuth** is started in the browser via `$lib/auth/google-oauth-browser.ts` using **`account.createOAuth2Token(provider, success, failure)`** (positional); success URL is **`/oauth`** so `src/routes/oauth/+server.ts` can exchange `userId`/`secret` and set the httpOnly cookie. **Email/password** login uses server actions only. For **`secure`** cookies behind proxies, `$lib/server/public-origin.ts` (`isPublicHttps`, optional **`PUBLIC_ORIGIN`** / adapter **`ORIGIN`**) applies.
 - **Admin Routing**: Use server-side load functions (`+page.server.ts`) for all authenticated admin data fetching to avoid 401 errors in the browser.
 - **Appwrite SDK Split**: Two SDKs with DIFFERENT APIs are in use:
-  - `appwrite` (client, v17, browser): positional args — `createEmailPasswordSession(email, password)`
-  - `node-appwrite` (server, v24, SSR): named params — `createEmailPasswordSession({ email, password })`, `createOAuth2Token({ provider, success, failure })`, `createSession({ userId, secret })`
+  - `appwrite` (client, v17, browser): positional args — `createEmailPasswordSession(email, password)`, **`createOAuth2Token(OAuthProvider.Google, successUrl, failureUrl)`** for Google login
+  - `node-appwrite` (server, v24, SSR): named params — `createEmailPasswordSession({ email, password })`, `createSession({ userId, secret })` on the OAuth callback route only — **do not** call `createOAuth2Token` from server form actions for browser OAuth
 - **Svelte 5**: Use runes (`$state`, `$derived`, etc.) and modern Svelte 5 patterns.
 
 ## Current Status

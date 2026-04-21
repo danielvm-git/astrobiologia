@@ -49,6 +49,8 @@ To ensure the build process is resilient and secure on Appwrite Cloud, we use **
 
 ### OAuth / Google login on Appwrite Sites
 
+The admin UI starts Google OAuth in the **browser** (Appwrite web SDK `createOAuth2Token` → success URL **`/oauth`**); the **`/oauth`** route completes the session with the server SDK. Platform / redirect rules below apply to those URLs.
+
 Google OAuth (`createOAuth2Token`) rejects redirects that are not allowlisted and must use the same scheme as configured (typically **`https`**).
 
 - **Symptom:** Appwrite API error **`Invalid redirect`** when clicking “Continue with Google” in production only.

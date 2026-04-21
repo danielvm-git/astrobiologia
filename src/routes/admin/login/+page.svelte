@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 	import { Telescope, Lock, Mail, Chrome } from 'lucide-svelte';
 	import type { ActionData } from './$types';
+	import { startGoogleOAuth } from '$lib/auth/google-oauth-browser';
 
 	function loginEnhance() {
 		return async ({ result }: { result: { type: string; location?: string } }) => {
@@ -21,6 +22,13 @@
 			errorMessage = form.message;
 		}
 	});
+
+	function onGoogleClick() {
+		const { error } = startGoogleOAuth();
+		if (error) {
+			errorMessage = error;
+		}
+	}
 </script>
 
 <svelte:head>
@@ -63,15 +71,14 @@
 						</div>
 					{/if}
 
-					<form action="?/google" method="POST">
-						<button
-							type="submit"
-							class="w-full flex items-center justify-center gap-4 px-6 py-4 bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl hover:bg-slate-100 transition-all font-black uppercase tracking-widest text-[10px] shadow-sm group"
-						>
-							<Chrome class="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
-							Continuar com Google
-						</button>
-					</form>
+					<button
+						type="button"
+						onclick={onGoogleClick}
+						class="w-full flex items-center justify-center gap-4 px-6 py-4 bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl hover:bg-slate-100 transition-all font-black uppercase tracking-widest text-[10px] shadow-sm group"
+					>
+						<Chrome class="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
+						Continuar com Google
+					</button>
 					
 					<div class="relative py-2 flex items-center">
 						<div class="flex-1 border-t border-slate-100"></div>
