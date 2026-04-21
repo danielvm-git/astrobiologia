@@ -28,5 +28,21 @@
 	"reading_time": "{minutes} 分で読めます",
 	"reading_time_short": "{minutes} 分",
 	"share": "共有",
-	"continue_exploring": "探索を続ける"
+	"continue_exploring": "探索を続ける",
+	"footer_section_categories": "カテゴリー",
+	"footer_section_links": "リンク",
+	"footer_section_professional": "関連リンク",
+	"footer_contact_link": "お問い合わせ",
+	"footer_privacy_link": "プライバシー",
+	"footer_copyright_suffix": "Danilo Albergaria.",
+	"page_contact_title": "お問い合わせ",
+	"page_contact_intro": "ご質問、ご提案、提携のご相談はこちらから。",
+	"page_contact_email_prefix": "メール：",
+	"page_privacy_title": "プライバシー",
+	"page_privacy_intro": "お客様のプライバシーを尊重します。",
+	"page_privacy_body": "このページには近日中にプライバシー規約を掲載します。",
+	"page_about_kicker": "プロジェクト",
+	"page_about_hero_title": "宇宙の生命を探求する",
+	"page_about_hero_quote": "最先端の科学と一般読者をつなぎ、宇宙における私たちの位置を再定義する発見を伝えます。",
+	"page_artigos_heading": "すべての記事"
 }

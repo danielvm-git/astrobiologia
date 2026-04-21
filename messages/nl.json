@@ -28,5 +28,21 @@
 	"reading_time": "{minutes} min leestijd",
 	"reading_time_short": "{minutes} min",
 	"share": "Delen",
-	"continue_exploring": "Blijf ontdekken"
+	"continue_exploring": "Blijf ontdekken",
+	"footer_section_categories": "Categorieën",
+	"footer_section_links": "Links",
+	"footer_section_professional": "Professionele links",
+	"footer_contact_link": "Contact",
+	"footer_privacy_link": "Privacy",
+	"footer_copyright_suffix": "Danilo Albergaria.",
+	"page_contact_title": "Contact",
+	"page_contact_intro": "Vragen, suggesties of samenwerking? Neem contact op.",
+	"page_contact_email_prefix": "E-mail:",
+	"page_privacy_title": "Privacy",
+	"page_privacy_intro": "We respecteren uw privacy.",
+	"page_privacy_body": "Deze pagina wordt binnenkort bijgewerkt met privacyvoorwaarden.",
+	"page_about_kicker": "Het project",
+	"page_about_hero_title": "Leven in het universum verkennen",
+	"page_about_hero_quote": "Een brug tussen geavanceerde wetenschap en het publiek—ontdekkingen die onze plaats in het heelal opnieuw definiëren.",
+	"page_artigos_heading": "Alle artikelen"
 }

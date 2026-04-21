@@ -99,9 +99,39 @@ export async function logout(): Promise<void> {
 
 // Article helpers
 
+function pickTranslationForArticle(
+	translations: ArticleTranslation[],
+	preferredLanguage: string
+): ArticleTranslation | undefined {
+	if (translations.length === 0) return undefined;
+	return (
+		translations.find((t) => t.language === preferredLanguage) ||
+		translations.find((t) => t.language === 'pt-br') ||
+		translations.find((t) => t.language === 'en') ||
+		translations[0]
+	);
+}
+
+function joinTranslationsByArticle(
+	articles: Article[],
+	allTranslations: ArticleTranslation[],
+	preferredLanguage: string
+): Article[] {
+	const byArticle = new Map<string, ArticleTranslation[]>();
+	for (const t of allTranslations) {
+		const list = byArticle.get(t.article_id) ?? [];
+		list.push(t);
+		byArticle.set(t.article_id, list);
+	}
+	return articles.map((article) => ({
+		...article,
+		translation: pickTranslationForArticle(byArticle.get(article.$id) ?? [], preferredLanguage)
+	}));
+}
+
 /**
  * Fetches published articles. If a translation for the requested language exists, it is joined.
- * If no translation exists, returns the master article (legacy support).
+ * Otherwise picks pt-br, then en, then any available translation so cards never render empty titles.
  */
 export async function getPublishedArticles(language = 'pt-br', limit = 20, offset = 0): Promise<Article[]> {
 	// 1. Get published master articles first (source of truth for existence)
@@ -117,19 +147,13 @@ export async function getPublishedArticles(language = 'pt-br', limit = 20, offse
 	const articles = articlesResponse.documents as unknown as Article[];
 	const articleIds = articles.map(a => a.$id);
 
-	// 2. Get translations for the language for these articles
 	const transResponse = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, [
-		Query.equal('language', language),
 		Query.equal('article_id', articleIds)
 	]);
 
 	const translations = transResponse.documents as unknown as ArticleTranslation[];
 
-	// 3. Join, fallback to master fields if no translation found
-	return articles.map(article => ({
-		...article,
-		translation: translations.find(t => t.article_id === article.$id)
-	}));
+	return joinTranslationsByArticle(articles, translations, language);
 }
 
 export async function getFeaturedArticles(language = 'pt-br', limit = 5): Promise<Article[]> {
@@ -145,16 +169,12 @@ export async function getFeaturedArticles(language = 'pt-br', limit = 5): Promis
 
 	const articleIds = articles.map(a => a.$id);
 	const transResponse = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, [
-		Query.equal('article_id', articleIds),
-		Query.equal('language', language)
+		Query.equal('article_id', articleIds)
 	]);
 
 	const translations = transResponse.documents as unknown as ArticleTranslation[];
 
-	return articles.map(article => ({
-		...article,
-		translation: translations.find(t => t.article_id === article.$id)
-	}));
+	return joinTranslationsByArticle(articles, translations, language);
 }
 
 export async function getArticleBySlug(slug: string, language = 'pt-br'): Promise<Article | null> {
@@ -186,16 +206,16 @@ export async function getArticleBySlug(slug: string, language = 'pt-br'): Promis
 
     if (masterResponse && masterResponse.total > 0) {
         const article = masterResponse.documents[0] as unknown as Article;
-        // Even if we found by master slug, try to get the translation for the current language
         const tResp = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, [
             Query.equal('article_id', article.$id),
-            Query.equal('language', language),
-            Query.limit(1)
+            Query.limit(100)
         ]);
-        
+        const allForArticle = tResp.documents as unknown as ArticleTranslation[];
+        const translation = pickTranslationForArticle(allForArticle, language);
+
         return {
             ...article,
-            translation: tResp.total > 0 ? (tResp.documents[0] as unknown as ArticleTranslation) : undefined
+            translation
         };
     }
 
@@ -215,16 +235,12 @@ export async function getArticlesByCategory(category: string, language = 'pt-br'
 
 	const articleIds = articles.map(a => a.$id);
 	const transResponse = await databases.listDocuments(DATABASE_ID, COLLECTIONS.ARTICLES_TRANSLATIONS, [
-		Query.equal('article_id', articleIds),
-		Query.equal('language', language)
+		Query.equal('article_id', articleIds)
 	]);
 
 	const translations = transResponse.documents as unknown as ArticleTranslation[];
 
-	return articles.map(article => ({
-		...article,
-		translation: translations.find(t => t.article_id === article.$id)
-	}));
+	return joinTranslationsByArticle(articles, translations, language);
 }
 
 export async function getAllArticles(): Promise<Article[]> {

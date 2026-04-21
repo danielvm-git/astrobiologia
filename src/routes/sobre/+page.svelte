@@ -1,42 +1,27 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { Microscope, Globe, Telescope, Newspaper, Search, BookOpen } from 'lucide-svelte';
+	import { page } from '$app/state';
+	import { Globe, Newspaper, Search } from 'lucide-svelte';
+	import PageHeroShell from '$lib/components/PageHeroShell.svelte';
 	import { localizeHref } from '$lib/paraglide/runtime';
-
-	async function navigateToAdmin() {
-		await goto('/admin/login');
-	}
+	import * as m from '$lib/paraglide/messages';
 </script>
 
 <svelte:head>
-	<title>Sobre Danilo Albergaria - Astrobiologia.com.br</title>
-	<meta
-		name="description"
-		content="Conheça Danilo Albergaria, jornalista e pesquisador em astrobiologia, e sua missão de comunicar a busca por vida no universo."
-	/>
+	<title>{m.nav_about()} — {m.site_title()}</title>
+	<meta name="description" content={m.page_about_hero_quote()} />
 </svelte:head>
 
-<main class="min-h-screen bg-background pt-20">
-	<!-- Hero Section -->
-	<section class="relative py-24 md:py-48 overflow-hidden bg-[#0a0a0c]">
-		<div class="absolute inset-0 z-0 opacity-40">
-			<div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30"></div>
-			<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-accent/20 rounded-full blur-[150px]"></div>
-		</div>
-		
-		<div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-			<div class="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-accent text-white text-[10px] font-bold mb-10 uppercase tracking-[0.2em]">
-				O Projeto
-			</div>
-			<h1 class="text-5xl md:text-8xl font-black text-white mb-10 font-sans tracking-tight leading-[0.95]">Explorando a Vida no Universo</h1>
-			<p class="text-xl md:text-3xl text-slate-400 font-serif leading-relaxed italic max-w-3xl mx-auto">
-				"Uma ponte entre a ciência de ponta e o público, comunicando as descobertas que redefinem nosso lugar no cosmos."
-			</p>
-		</div>
-	</section>
+<main class="min-h-screen bg-background">
+	{#key page.url.pathname}
+		<PageHeroShell
+			kicker={m.page_about_kicker()}
+			title={m.page_about_hero_title()}
+			quote={m.page_about_hero_quote()}
+		/>
+	{/key}
 
 	<!-- About Danilo -->
-	<section class="py-24 md:py-40 border-b border-slate-100">
+	<section class="border-t border-slate-200 py-24 md:py-32">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
 				<div class="lg:col-span-7">
@@ -80,7 +65,7 @@
 	</section>
 
 	<!-- Mission Section -->
-	<section class="py-24 md:py-40 bg-slate-50/50">
+	<section class="border-t border-slate-200 bg-slate-50/80 py-24 md:py-32">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="text-center mb-24">
 				<div class="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-6">Nossos Pilares</div>
@@ -122,25 +107,27 @@
 	</section>
 
 	<!-- CTA -->
-	<section class="py-24 md:py-48 bg-[#0a0a0c] relative overflow-hidden">
-		<div class="absolute inset-0 bg-primary/5 pointer-events-none"></div>
-		<div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-			<h2 class="text-4xl md:text-8xl font-black mb-12 font-sans tracking-tight leading-none uppercase">Acompanhe a <br/> Jornada</h2>
-			<p class="text-xl md:text-3xl mb-16 text-slate-400 font-serif max-w-3xl mx-auto leading-relaxed italic">
-				Receba as últimas descobertas sobre a vida no universo diretamente na sua fonte de informação preferida.
+	<section class="relative overflow-hidden bg-slate-900 py-24 md:py-36">
+		<div class="pointer-events-none absolute inset-0 bg-primary/5"></div>
+		<div class="relative z-10 mx-auto max-w-5xl px-4 text-center text-white sm:px-6 lg:px-8">
+			<h2 class="mb-12 font-sans text-4xl font-black uppercase leading-none tracking-tight md:text-6xl">
+				{m.continue_exploring()}
+			</h2>
+			<p class="mx-auto mb-16 max-w-3xl font-serif text-xl italic leading-relaxed text-slate-400 md:text-2xl">
+				{m.newsletter_subtitle()}
 			</p>
-			<div class="flex flex-wrap justify-center gap-8">
+			<div class="flex flex-wrap justify-center gap-6">
 				<a
 					href={localizeHref('/artigos')}
-					class="px-12 py-6 bg-white text-black font-black uppercase tracking-widest text-sm hover:bg-accent hover:text-white transition-all duration-300"
+					class="px-10 py-5 text-sm font-black uppercase tracking-widest text-slate-900 transition-all duration-300 bg-white hover:bg-accent hover:text-white"
 				>
-					Explorar Artigos
+					{m.nav_articles()}
 				</a>
 				<a
 					href={localizeHref('/#newsletter')}
-					class="px-12 py-6 bg-transparent text-white border border-white/20 font-black uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-all duration-300"
+					class="border border-white/25 bg-transparent px-10 py-5 text-sm font-black uppercase tracking-widest text-white transition-all duration-300 hover:bg-white hover:text-slate-900"
 				>
-					Assinar Newsletter
+					{m.newsletter_button()}
 				</a>
 			</div>
 		</div>

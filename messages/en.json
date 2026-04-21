@@ -28,5 +28,21 @@
 	"reading_time": "{minutes} min read",
 	"reading_time_short": "{minutes} min",
 	"share": "Share",
-	"continue_exploring": "Continue Exploring"
+	"continue_exploring": "Continue Exploring",
+	"footer_section_categories": "Categories",
+	"footer_section_links": "Links",
+	"footer_section_professional": "Professional links",
+	"footer_contact_link": "Contact",
+	"footer_privacy_link": "Privacy",
+	"footer_copyright_suffix": "Danilo Albergaria.",
+	"page_contact_title": "Contact",
+	"page_contact_intro": "Questions, suggestions, or partnerships? Get in touch.",
+	"page_contact_email_prefix": "Email:",
+	"page_privacy_title": "Privacy",
+	"page_privacy_intro": "We respect your privacy.",
+	"page_privacy_body": "This page will be updated with privacy terms soon.",
+	"page_about_kicker": "The project",
+	"page_about_hero_title": "Exploring Life in the Universe",
+	"page_about_hero_quote": "A bridge between cutting-edge science and the public—communicating discoveries that redefine our place in the cosmos.",
+	"page_artigos_heading": "All articles"
 }

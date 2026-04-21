@@ -43,6 +43,7 @@ To ensure the build process is resilient and secure on Appwrite Cloud, we use **
 | `PUBLIC_ARTICLES_TRANSLATIONS_COLLECTION_ID` | No | Public | Translations collection (default `article_translations`); set to a parallel collection for E2E/CI in the same project. |
 | `PUBLIC_CATEGORIES_COLLECTION_ID` | No | Public | Categories collection (default `categories`). |
 | `PUBLIC_STORAGE_BUCKET_ID` | No | Public | Image storage bucket (default `images`); use a second bucket for automation if needed. |
+| `DEEPL_API_KEY` | No | Private (Secret) | [DeepL](https://www.deepl.com/pro-api) API key for admin “Traduzir com DeepL” in the article editor (Pro or `:fx` free-tier suffix). Omit in production if you only use copy-from-language fallbacks. |
 
 > [!IMPORTANT]
 > You MUST set these variables in the **Settings > Environment Variables** section of your site in the Appwrite Console. Mark `APPWRITE_API_KEY` as a **Secret**.

@@ -2,6 +2,11 @@ import { env } from '$env/dynamic/private';
 
 const authKey = env.DEEPL_API_KEY;
 
+/** True when DeepL API key is set (runtime). */
+export function isDeepLConfigured(): boolean {
+	return !!env.DEEPL_API_KEY?.trim();
+}
+
 // Map our locale tags to DeepL target language codes
 const TARGET_LANG_MAP: Record<string, string> = {
     'pt-br': 'PT-BR',

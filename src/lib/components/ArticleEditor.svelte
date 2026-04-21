@@ -139,15 +139,49 @@
 		}
 	}
 
-    function copyFromBase() {
+    function copyPortugueseTo(lang: string) {
         const base = transState['pt-br'];
-        transState[activeLang].title = base.title;
-        transState[activeLang].slug = base.slug + '-' + activeLang;
-        transState[activeLang].excerpt = base.excerpt;
-        transState[activeLang].content = base.content;
-        if (editor) {
+        if (!base.title) return false;
+        transState[lang].title = base.title;
+        transState[lang].slug = base.slug ? `${base.slug}-${lang}` : `${generateSlug(base.title)}-${lang}`;
+        transState[lang].excerpt = base.excerpt;
+        transState[lang].content = base.content;
+        transState[lang].metaTitle = base.metaTitle ?? '';
+        transState[lang].metaDescription = base.metaDescription ?? '';
+        if (editor && activeLang === lang) {
             editor.commands.setContent(base.content);
         }
+        return true;
+    }
+
+    function copyEnglishTo(lang: string) {
+        if (lang === 'en') return false;
+        const src = transState['en'];
+        if (!src.title) return false;
+        transState[lang].title = src.title;
+        transState[lang].slug = src.slug ? `${src.slug}-${lang}` : `${generateSlug(src.title)}-${lang}`;
+        transState[lang].excerpt = src.excerpt;
+        transState[lang].content = src.content;
+        transState[lang].metaTitle = src.metaTitle ?? '';
+        transState[lang].metaDescription = src.metaDescription ?? '';
+        if (editor && activeLang === lang) {
+            editor.commands.setContent(src.content);
+        }
+        return true;
+    }
+
+    function copyFromBase() {
+        copyPortugueseTo(activeLang);
+    }
+
+    function copyFromEnglish() {
+        copyEnglishTo(activeLang);
+    }
+
+    /** When DeepL fails: prefer English tab, then Portuguese. */
+    function applyTranslationFallback(lang: string): boolean {
+        if (lang !== 'en' && copyEnglishTo(lang)) return true;
+        return copyPortugueseTo(lang);
     }
     
     async function translateWithDeepL() {
@@ -161,14 +195,23 @@
 
         isLoading = true;
         try {
-            // Translate Title
             const titleRes = await fetch('/api/translate', {
                 method: 'POST',
                 body: JSON.stringify({ text: base.title, isHtml: false, targetLang: activeLang })
             });
             const titleData = await titleRes.json();
-            if (titleData.error) throw new Error(titleData.error);
-            if (titleData.translated) transState[activeLang].title = titleData.translated;
+            const titleFailed = !titleRes.ok || titleData.error || !titleData.translated;
+
+            if (titleFailed) {
+                if (applyTranslationFallback(activeLang)) {
+                    alert('DeepL indisponível ou erro na API. Conteúdo copiado do inglês ou do português.');
+                } else {
+                    alert(titleData.error || 'Erro ao traduzir o título. Verifique DEEPL_API_KEY ou preencha manualmente.');
+                }
+                return;
+            }
+
+            transState[activeLang].title = titleData.translated;
 
             // Translate Excerpt
             if (base.excerpt) {
@@ -177,7 +220,13 @@
                     body: JSON.stringify({ text: base.excerpt, isHtml: false, targetLang: activeLang })
                 });
                 const excerptData = await excerptRes.json();
-                if (excerptData.translated) transState[activeLang].excerpt = excerptData.translated;
+                if (excerptRes.ok && excerptData.translated && !excerptData.error) {
+                    transState[activeLang].excerpt = excerptData.translated;
+                } else if (activeLang !== 'en' && transState['en'].excerpt) {
+                    transState[activeLang].excerpt = transState['en'].excerpt;
+                } else {
+                    transState[activeLang].excerpt = base.excerpt;
+                }
             }
 
             // Translate Content (HTML)
@@ -187,21 +236,30 @@
                     body: JSON.stringify({ text: base.content, isHtml: true, targetLang: activeLang })
                 });
                 const contentData = await contentRes.json();
-                if (contentData.translated) {
+                if (contentRes.ok && contentData.translated && !contentData.error) {
                     transState[activeLang].content = contentData.translated;
                     if (editor) {
                         editor.commands.setContent(contentData.translated);
                     }
+                } else if (activeLang !== 'en' && transState['en'].content) {
+                    transState[activeLang].content = transState['en'].content;
+                    if (editor) editor.commands.setContent(transState['en'].content);
+                } else {
+                    transState[activeLang].content = base.content;
+                    if (editor) editor.commands.setContent(base.content);
                 }
             }
 
-            // Auto-generate slug if title translated
-            if (titleData.translated && !transState[activeLang].slug) {
-                transState[activeLang].slug = generateSlug(titleData.translated);
+            if (!transState[activeLang].slug) {
+                transState[activeLang].slug = generateSlug(transState[activeLang].title);
             }
         } catch (err: any) {
             console.error('Translation error:', err);
-            alert(err.message || 'Erro ao traduzir. Verifique a chave da API do DeepL em .env');
+            if (applyTranslationFallback(activeLang)) {
+                alert('Erro na API; conteúdo copiado do inglês ou do português.');
+            } else {
+                alert(err.message || 'Erro ao traduzir. Verifique a chave da API do DeepL em .env');
+            }
         } finally {
             isLoading = false;
         }
@@ -220,47 +278,62 @@
             return;
         }
 
+        const editorLang = activeLang;
+
         isLoading = true;
         try {
             for (const lang of otherLocales) {
-                // Translate Title
                 const titleRes = await fetch('/api/translate', {
                     method: 'POST',
                     body: JSON.stringify({ text: base.title, isHtml: false, targetLang: lang })
                 });
                 const titleData = await titleRes.json();
-                if (titleData.translated) transState[lang].title = titleData.translated;
+                const titleFailed = !titleRes.ok || titleData.error || !titleData.translated;
 
-                // Translate Excerpt
+                if (titleFailed) {
+                    applyTranslationFallback(lang);
+                    continue;
+                }
+
+                transState[lang].title = titleData.translated;
+
                 if (base.excerpt) {
                     const excerptRes = await fetch('/api/translate', {
                         method: 'POST',
                         body: JSON.stringify({ text: base.excerpt, isHtml: false, targetLang: lang })
                     });
                     const excerptData = await excerptRes.json();
-                    if (excerptData.translated) transState[lang].excerpt = excerptData.translated;
+                    if (excerptRes.ok && excerptData.translated && !excerptData.error) {
+                        transState[lang].excerpt = excerptData.translated;
+                    } else if (lang !== 'en' && transState['en'].excerpt) {
+                        transState[lang].excerpt = transState['en'].excerpt;
+                    } else {
+                        transState[lang].excerpt = base.excerpt;
+                    }
                 }
 
-                // Translate Content (HTML)
                 if (base.content) {
                     const contentRes = await fetch('/api/translate', {
                         method: 'POST',
                         body: JSON.stringify({ text: base.content, isHtml: true, targetLang: lang })
                     });
                     const contentData = await contentRes.json();
-                    if (contentData.translated) {
+                    if (contentRes.ok && contentData.translated && !contentData.error) {
                         transState[lang].content = contentData.translated;
-                        // If current active lang, update editor
-                        if (activeLang === lang && editor) {
-                            editor.commands.setContent(contentData.translated);
-                        }
+                    } else if (lang !== 'en' && transState['en'].content) {
+                        transState[lang].content = transState['en'].content;
+                    } else {
+                        transState[lang].content = base.content;
                     }
                 }
 
-                // Auto-generate slug
-                if (titleData.translated && !transState[lang].slug) {
-                    transState[lang].slug = generateSlug(titleData.translated);
+                if (!transState[lang].slug) {
+                    transState[lang].slug = generateSlug(transState[lang].title);
                 }
+            }
+
+            if (editor) {
+                editor.commands.setContent(transState[editorLang].content);
             }
         } catch (err: any) {
             console.error('Batch translation error:', err);
@@ -402,6 +475,16 @@
                                 <Copy class="w-3 h-3" />
                                 Copiar do Original
                             </button>
+                            {#if transState['en'].title}
+                                <button 
+                                    type="button"
+                                    onclick={copyFromEnglish}
+                                    class="flex items-center gap-2 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-primary border border-slate-200 rounded-lg hover:border-primary/20 transition-all"
+                                >
+                                    <Copy class="w-3 h-3" />
+                                    Copiar do Inglês
+                                </button>
+                            {/if}
                         </div>
                     {/if}
                 </div>

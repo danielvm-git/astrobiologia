@@ -4,7 +4,7 @@
 	import { Lock, Mail, Menu, Search, ShieldCheck, Telescope, X } from 'lucide-svelte';
 	import { authStore } from '$lib/stores/auth';
 
-	import { localizeHref } from '$lib/paraglide/runtime';
+	import { deLocalizeHref, localizeHref } from '$lib/paraglide/runtime';
 	import { startGoogleOAuth } from '$lib/auth/google-oauth-browser';
 	import * as m from '$lib/paraglide/messages';
 	import LanguageSwitcher from './LanguageSwitcher.svelte';
@@ -30,6 +30,18 @@
 		const _ = page.url;
 		return m.search_placeholder();
 	});
+
+	function normalizePath(path: string): string {
+		const trimmed = path.replace(/\/+$/, '');
+		return trimmed === '' ? '/' : trimmed;
+	}
+
+	function navLinkIsActive(href: string): boolean {
+		void page.url;
+		const current = normalizePath(deLocalizeHref(page.url.pathname));
+		const target = normalizePath(deLocalizeHref(href));
+		return current === target;
+	}
 
 	function toggleMobileMenu() {
 		mobileMenuOpen = !mobileMenuOpen;
@@ -79,7 +91,7 @@
 			{#each navLinks as link}
 				<a
 					href={link.href}
-					class="text-sm font-semibold transition-colors font-sans {page.url.pathname === link.href
+					class="text-sm font-semibold transition-colors font-sans {navLinkIsActive(link.href)
 						? 'text-primary'
 						: 'text-muted-foreground hover:text-foreground'}"
 				>
@@ -141,7 +153,7 @@
 					{#each navLinks as link}
 						<a
 							href={link.href}
-							class="rounded-md px-3 py-2 text-base font-medium transition-colors {page.url.pathname === link.href
+							class="rounded-md px-3 py-2 text-base font-medium transition-colors {navLinkIsActive(link.href)
 								? 'bg-primary/10 text-primary'
 								: 'text-muted-foreground hover:bg-muted hover:text-foreground'}"
 							onclick={closeMobileMenu}

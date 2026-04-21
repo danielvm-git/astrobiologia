@@ -8,11 +8,21 @@
 
 	const currentYear = new Date().getFullYear();
 	const labels = $derived.by(() => {
-		const _ = page.url;
+		void page.url;
 		return {
 			tagline: m.footer_tagline(),
 			about: m.nav_about(),
-			articles: m.nav_articles()
+			articles: m.nav_articles(),
+			sectionCategories: m.footer_section_categories(),
+			sectionLinks: m.footer_section_links(),
+			sectionProfessional: m.footer_section_professional(),
+			contact: m.footer_contact_link(),
+			privacy: m.footer_privacy_link(),
+			newsletterTitle: m.newsletter_title(),
+			newsletterSubtitle: m.newsletter_subtitle(),
+			newsletterPlaceholder: m.newsletter_placeholder(),
+			newsletterButton: m.newsletter_button(),
+			copyrightSuffix: m.footer_copyright_suffix()
 		};
 	});
 </script>
@@ -38,7 +48,7 @@
 
 			<!-- Categories -->
 			<div>
-				<h3 class="text-sm font-semibold uppercase tracking-wider text-foreground">Categorias</h3>
+				<h3 class="text-sm font-semibold uppercase tracking-wider text-foreground">{labels.sectionCategories}</h3>
 				<ul class="mt-4 flex flex-col gap-2">
 					{#each CATEGORIES.slice(0, 4) as category}
 						<li>
@@ -55,7 +65,7 @@
 
 			<!-- Links -->
 			<div>
-				<h3 class="text-sm font-semibold uppercase tracking-wider text-foreground">Links</h3>
+				<h3 class="text-sm font-semibold uppercase tracking-wider text-foreground">{labels.sectionLinks}</h3>
 				<ul class="mt-4 flex flex-col gap-2">
 					<li>
 						<a href={localizeHref('/sobre')} class="text-sm text-muted-foreground transition-colors hover:text-primary">
@@ -69,12 +79,12 @@
 					</li>
 					<li>
 						<a href={localizeHref('/contato')} class="text-sm text-muted-foreground transition-colors hover:text-primary">
-							Contato
+							{labels.contact}
 						</a>
 					</li>
 					<li>
 						<a href={localizeHref('/privacidade')} class="text-sm text-muted-foreground transition-colors hover:text-primary">
-							Privacidade
+							{labels.privacy}
 						</a>
 					</li>
 				</ul>
@@ -82,7 +92,7 @@
 
 			<!-- Professional Links -->
 			<div>
-				<h3 class="text-sm font-semibold uppercase tracking-wider text-foreground">Links Profissionais</h3>
+				<h3 class="text-sm font-semibold uppercase tracking-wider text-foreground">{labels.sectionProfessional}</h3>
 				<ul class="mt-4 flex flex-col gap-2">
 					<li>
 						<a href="https://www.universiteitleiden.nl/en/staffmembers/danilo-nogueira-albergaria-pereira" target="_blank" class="text-xs text-muted-foreground transition-colors hover:text-primary">
@@ -109,21 +119,21 @@
 
 			<!-- Newsletter -->
 			<div>
-				<h3 id="newsletter" class="text-sm font-semibold uppercase tracking-wider text-foreground">Newsletter</h3>
+				<h3 id="newsletter" class="text-sm font-semibold uppercase tracking-wider text-foreground">{labels.newsletterTitle}</h3>
 				<p class="mt-4 text-sm text-muted-foreground">
-					Receba as últimas novidades sobre astrobiologia diretamente no seu e-mail.
+					{labels.newsletterSubtitle}
 				</p>
 				<form class="mt-4 flex gap-2">
 					<input
 						type="email"
-						placeholder="seu@email.com"
+						placeholder={labels.newsletterPlaceholder}
 						class="flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
 					/>
 					<button
 						type="submit"
 						class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
 					>
-						Assinar
+						{labels.newsletterButton}
 					</button>
 				</form>
 			</div>
@@ -132,7 +142,7 @@
 		<!-- Bottom -->
 		<div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row">
 			<p class="text-sm text-muted-foreground">
-				&copy; {currentYear} Astrobiologia.com.br - Danilo Albergaria.
+				&copy; {currentYear} Astrobiologia.com.br — {labels.copyrightSuffix}
 			</p>
 			<div class="flex items-center gap-4">
 				<a
