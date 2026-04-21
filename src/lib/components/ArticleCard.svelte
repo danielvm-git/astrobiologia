@@ -137,7 +137,7 @@
 				{#if article.featured}
 					<div class="absolute top-4 left-4">
 						<span class="bg-accent text-white text-[9px] font-black uppercase tracking-widest px-2 py-1 shadow-lg">
-							Destaque
+							{m.label_featured()}
 						</span>
 					</div>
 				{/if}

@@ -44,5 +44,18 @@
 	"page_about_kicker": "项目",
 	"page_about_hero_title": "探索宇宙中的生命",
 	"page_about_hero_quote": "连接尖端科学与公众，呈现重新定义我们在宇宙中位置的发现。",
-	"page_artigos_heading": "全部文章"
+	"page_artigos_heading": "全部文章",
+	"error_page_title": "错误",
+	"error_default_message": "出现问题",
+	"error_detail": "抱歉，发生了错误，请稍后重试。",
+	"error_back_home": "返回首页",
+	"not_found_title": "页面未找到",
+	"not_found_message": "您访问的页面不存在。",
+	"not_found_back_home": "返回首页",
+	"aria_select_language": "选择语言",
+	"aria_close_menu": "关闭菜单",
+	"label_language": "语言",
+	"search_button": "搜索",
+	"label_featured": "精选",
+	"form_email_password_required": "必须填写电子邮件和密码。"
 }

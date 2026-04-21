@@ -31,6 +31,10 @@ vi.mock('$lib/paraglide/runtime', () => ({
 	localizeHref: vi.fn((path: string) => path)
 }));
 
+vi.mock('$lib/paraglide/messages', () => ({
+	form_email_password_required: () => 'E-mail e senha são obrigatórios.'
+}));
+
 vi.mock('@sveltejs/kit', async (importOriginal) => {
 	const original = await importOriginal<typeof import('@sveltejs/kit')>();
 	return {

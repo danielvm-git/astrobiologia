@@ -1,4 +1,5 @@
 <script lang="ts">
+	import * as m from '$lib/paraglide/messages';
 	import { Search } from 'lucide-svelte';
 	let { onsearch } = $props();
 	let query = $state('');
@@ -21,7 +22,7 @@
 		</div>
 		<input
 			type="text"
-			placeholder="Buscar artigos..."
+			placeholder={m.search_placeholder()}
 			bind:value={query}
 			onkeydown={handleKeydown}
 			class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-slate-900 placeholder-slate-500 transition-all"
@@ -30,7 +31,7 @@
 			onclick={handleSearch}
 			class="absolute right-2 top-1.5 px-4 py-1.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition text-sm font-medium"
 		>
-			Buscar
+			{m.search_button()}
 		</button>
 	</div>
 </div>

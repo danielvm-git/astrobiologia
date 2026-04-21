@@ -2,6 +2,9 @@ import { createAdminClient, SESSION_COOKIE } from '$lib/server/appwrite';
 import { redirect } from '@sveltejs/kit';
 import { localizeHref } from '$lib/paraglide/runtime';
 import { isPublicHttps } from '$lib/server/public-origin';
+import { createLogger } from '$lib/server/logger';
+
+const log = createLogger('OAUTH');
 
 export async function GET({ url, cookies, request }) {
     const userId = url.searchParams.get('userId');
@@ -12,10 +15,10 @@ export async function GET({ url, cookies, request }) {
     }
 
     try {
-        console.log('OAuth Callback: userId=', userId);
+        log.info('OAuth callback: exchanging OAuth params for session');
         const { account } = createAdminClient();
         const session = await account.createSession({ userId, secret });
-        console.log('OAuth Session Created: expires=', session.expire);
+        log.debug('OAuth session cookie set', { expire: session.expire });
 
         cookies.set(SESSION_COOKIE, session.secret, {
             path: '/',
@@ -27,7 +30,7 @@ export async function GET({ url, cookies, request }) {
     } catch (err: any) {
         // Re-throw SvelteKit redirects so they aren't swallowed
         if (err?.status && err.status >= 300 && err.status < 400) throw err;
-        console.error('OAuth session creation failed:', err?.message ?? err);
+        log.error('OAuth session creation failed', err instanceof Error ? err : { err });
         throw redirect(302, localizeHref('/admin/login?error=session_creation_failed'));
     }
 

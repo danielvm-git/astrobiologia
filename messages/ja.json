@@ -44,5 +44,18 @@
 	"page_about_kicker": "プロジェクト",
 	"page_about_hero_title": "宇宙の生命を探求する",
 	"page_about_hero_quote": "最先端の科学と一般読者をつなぎ、宇宙における私たちの位置を再定義する発見を伝えます。",
-	"page_artigos_heading": "すべての記事"
+	"page_artigos_heading": "すべての記事",
+	"error_page_title": "エラー",
+	"error_default_message": "問題が発生しました",
+	"error_detail": "申し訳ありません。後でもう一度お試しください。",
+	"error_back_home": "ホームに戻る",
+	"not_found_title": "ページが見つかりません",
+	"not_found_message": "お探しのページは存在しません。",
+	"not_found_back_home": "ホームに戻る",
+	"aria_select_language": "言語を選択",
+	"aria_close_menu": "メニューを閉じる",
+	"label_language": "言語",
+	"search_button": "検索",
+	"label_featured": "注目",
+	"form_email_password_required": "メールアドレスとパスワードが必要です。"
 }

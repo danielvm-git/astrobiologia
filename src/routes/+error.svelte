@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { localizeHref } from '$lib/paraglide/runtime';
+	import * as m from '$lib/paraglide/messages';
 </script>
 
 <svelte:head>
-	<title>Error</title>
+	<title>{m.error_page_title()} {page.status || 500}</title>
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
@@ -13,11 +15,13 @@
 			{page.status || 500}
 		</h1>
 		<p class="text-xl text-slate-600 mb-2 font-serif italic">
-			{page.error?.message || 'Algo deu errado'}
+			{page.error?.message || m.error_default_message()}
 		</p>
-		<p class="text-slate-500 mb-8 uppercase tracking-widest text-xs font-bold">Desculpe, encontramos um erro. Por favor, tente novamente mais tarde.</p>
-		<a href="/" class="inline-block px-8 py-3 bg-primary text-white rounded-xl font-black uppercase tracking-widest text-xs hover:bg-primary/90 transition shadow-lg shadow-primary/20"
-			>Voltar para o Início</a
+		<p class="text-slate-500 mb-8 uppercase tracking-widest text-xs font-bold">{m.error_detail()}</p>
+		<a
+			href={localizeHref('/')}
+			class="inline-block px-8 py-3 bg-primary text-white rounded-xl font-black uppercase tracking-widest text-xs hover:bg-primary/90 transition shadow-lg shadow-primary/20"
+			>{m.error_back_home()}</a
 		>
 	</div>
 </div>

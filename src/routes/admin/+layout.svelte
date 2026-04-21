@@ -40,7 +40,7 @@
             )}
         >
             <div class="h-16 flex items-center px-6 border-b border-slate-800 shrink-0 overflow-hidden">
-                <a href="/admin/dashboard" class="flex items-center gap-3 shrink-0">
+                <a href={localizeHref('/admin/dashboard')} class="flex items-center gap-3 shrink-0">
                     <Telescope class="w-8 h-8 text-accent shrink-0" />
                     {#if isSidebarOpen}
                         <span class="font-black text-lg tracking-tighter text-white uppercase truncate">Astro Admin</span>
@@ -89,7 +89,7 @@
                     </div>
                 {/if}
 
-                <form method="POST" action="/admin/logout" use:enhance>
+                <form method="POST" action={localizeHref('/admin/logout')} use:enhance>
                     <button
                         type="submit"
                         class={cn(
@@ -119,7 +119,7 @@
 
 		<!-- Mobile Header -->
 		<header class="md:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-slate-200 px-4 flex items-center justify-between z-40">
-			<a href="/admin/dashboard" class="flex items-center gap-2">
+			<a href={localizeHref('/admin/dashboard')} class="flex items-center gap-2">
 				<Telescope class="w-6 h-6 text-primary" />
 				<span class="font-black text-sm tracking-tighter uppercase">Astro Admin</span>
 			</a>
@@ -189,7 +189,7 @@
                     {/each}
                 </nav>
                 <div class="p-6 border-t border-slate-800">
-                    <form method="POST" action="/admin/logout" use:enhance>
+                    <form method="POST" action={localizeHref('/admin/logout')} use:enhance>
                         <button type="submit" class="flex items-center gap-3 text-red-400 font-bold uppercase tracking-widest text-xs">
                             <LogOut class="w-4 h-4" />
                             Sair da Sessão

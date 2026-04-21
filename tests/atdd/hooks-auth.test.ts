@@ -67,4 +67,29 @@ describe('Admin Auth Hooks (ATDD)', () => {
         expect(event.locals.user).toBeDefined();
         expect(event.locals.user.email).toBe('admin@astrobiologia.com.br');
     });
+
+    it('should not treat /administration as an admin path (no auth redirect)', async () => {
+        const event = {
+            url: new URL('http://localhost/administration'),
+            cookies: {
+                get: vi.fn().mockReturnValue(undefined),
+                getAll: vi.fn().mockReturnValue([])
+            },
+            locals: {},
+            request: { headers: new Headers() }
+        } as any;
+
+        const resolve = vi.fn().mockResolvedValue('ok');
+
+        const { createSessionClient } = appwriteServer as any;
+        createSessionClient.mockReturnValue({
+            account: {
+                get: vi.fn().mockResolvedValue(null)
+            }
+        });
+
+        const result = await handleAdminAuth({ event, resolve });
+        expect(result).toBe('ok');
+        expect(resolve).toHaveBeenCalled();
+    });
 });

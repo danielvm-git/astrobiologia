@@ -44,5 +44,18 @@
 	"page_about_kicker": "The project",
 	"page_about_hero_title": "Exploring Life in the Universe",
 	"page_about_hero_quote": "A bridge between cutting-edge science and the public—communicating discoveries that redefine our place in the cosmos.",
-	"page_artigos_heading": "All articles"
+	"page_artigos_heading": "All articles",
+	"error_page_title": "Error",
+	"error_default_message": "Something went wrong",
+	"error_detail": "Sorry, we ran into an error. Please try again later.",
+	"error_back_home": "Back to home",
+	"not_found_title": "Page not found",
+	"not_found_message": "The page you're looking for does not exist.",
+	"not_found_back_home": "Return to home",
+	"aria_select_language": "Select language",
+	"aria_close_menu": "Close menu",
+	"label_language": "Language",
+	"search_button": "Search",
+	"label_featured": "Featured",
+	"form_email_password_required": "Email and password are required."
 }

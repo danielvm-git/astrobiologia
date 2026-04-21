@@ -1,11 +1,17 @@
 import { createAdminClient, SESSION_COOKIE } from '$lib/server/appwrite';
 import { redirect, fail } from '@sveltejs/kit';
 import { localizeHref } from '$lib/paraglide/runtime';
+import * as m from '$lib/paraglide/messages';
 import { createLogger } from '$lib/server/logger';
 import { isPublicHttps } from '$lib/server/public-origin';
 
 const log = createLogger('ADMIN-LOGIN');
 
+/**
+ * Email/password only. Google OAuth MUST be started from the browser via
+ * `startGoogleOAuth()` (web SDK `createOAuth2Token`) — never from a server
+ * action using node-appwrite (Invalid redirect / silent failure).
+ */
 export const actions = {
 	login: async ({ request, cookies, url }) => {
 		const formData = await request.formData();
@@ -13,7 +19,7 @@ export const actions = {
 		const password = formData.get('password') as string;
 
 		if (!email || !password) {
-			return fail(400, { message: 'Email and password are required.' });
+			return fail(400, { message: m.form_email_password_required() });
 		}
 
 		try {

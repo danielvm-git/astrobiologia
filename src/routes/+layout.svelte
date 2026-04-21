@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { page, navigating } from '$app/state';
-	import { getLocale, locales, localizeHref } from '$lib/paraglide/runtime';
+	import { deLocalizeHref } from '$lib/paraglide/runtime';
 	import '../app.css';
 	import Header from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 
 	let { children } = $props();
 
-    const isAdmin = $derived(page.url.pathname.startsWith('/admin'));
+	const isAdmin = $derived(deLocalizeHref(page.url.pathname).startsWith('/admin'));
 </script>
 
 <svelte:head>

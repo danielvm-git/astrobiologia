@@ -44,5 +44,18 @@
 	"page_about_kicker": "El proyecto",
 	"page_about_hero_title": "Explorando la vida en el universo",
 	"page_about_hero_quote": "Un puente entre la ciencia de vanguardia y el público: comunicar los hallazgos que redefinen nuestro lugar en el cosmos.",
-	"page_artigos_heading": "Todos los artículos"
+	"page_artigos_heading": "Todos los artículos",
+	"error_page_title": "Error",
+	"error_default_message": "Algo salió mal",
+	"error_detail": "Lo sentimos, hubo un error. Inténtelo de nuevo más tarde.",
+	"error_back_home": "Volver al inicio",
+	"not_found_title": "Página no encontrada",
+	"not_found_message": "La página que busca no existe.",
+	"not_found_back_home": "Volver al inicio",
+	"aria_select_language": "Seleccionar idioma",
+	"aria_close_menu": "Cerrar menú",
+	"label_language": "Idioma",
+	"search_button": "Buscar",
+	"label_featured": "Destacado",
+	"form_email_password_required": "El correo y la contraseña son obligatorios."
 }

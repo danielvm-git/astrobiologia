@@ -19,7 +19,7 @@ import { createSessionClient, SESSION_COOKIE } from '$lib/server/appwrite';
 
 export const handleAdminAuth: Handle = async ({ event, resolve }) => {
 	const path = deLocalizeHref(event.url.pathname).replace(/\/$/, '') || '/';
-	const isAdminPath = path.startsWith('/admin');
+	const isAdminPath = path === '/admin' || path.startsWith('/admin/');
 
 	// Attempt to populate user for all requests if session cookie exists
 	const { account } = createSessionClient(event);

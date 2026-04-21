@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import { afterNavigate } from '$app/navigation';
 	import { getLocale, locales, localizeHref, deLocalizeHref } from '$lib/paraglide/runtime';
+	import * as m from '$lib/paraglide/messages';
 	import { Languages, ChevronDown } from 'lucide-svelte';
 	import { cn } from '$lib/utils';
 
@@ -48,7 +49,7 @@
 			onclick={toggleMenu}
 			class="flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-primary transition-colors rounded-md hover:bg-slate-50"
 			aria-expanded={isOpen}
-			aria-label="Selecionar idioma"
+			aria-label={m.aria_select_language()}
 		>
 			<Languages class="h-3.5 w-3.5" />
 			{currentLang}
@@ -75,13 +76,13 @@
 			<button 
 				class="fixed inset-0 z-[-1] cursor-default bg-transparent w-full h-full border-none" 
 				onclick={closeMenu}
-				aria-label="Fechar menu"
+				aria-label={m.aria_close_menu()}
 			></button>
 		{/if}
 	</div>
 {:else if variant === 'mobile'}
 	<div class={cn('flex flex-col gap-4 py-2', className)}>
-		<span class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-3">Idioma</span>
+		<span class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-3">{m.label_language()}</span>
 		<div class="flex flex-wrap gap-2 px-3">
 			{#each locales as tag (tag)}
 				<a

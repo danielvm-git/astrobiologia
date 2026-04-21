@@ -7,6 +7,15 @@
 	import LanguageSwitcher from './LanguageSwitcher.svelte';
 
 	const currentYear = new Date().getFullYear();
+	const categoryLabels: Record<string, () => string> = {
+		noticias: m.category_noticias,
+		entrevistas: m.category_entrevistas,
+		analises: m.category_analises,
+		'pesquisas-brasileiras': m.category_pesquisas,
+		exoplanetas: m.category_exoplanetas,
+		extremofilos: m.category_extremofilos
+	};
+
 	const labels = $derived.by(() => {
 		void page.url;
 		return {
@@ -56,7 +65,7 @@
 								href={localizeHref(`/categorias/${category.slug}`)}
 								class="text-sm text-muted-foreground transition-colors hover:text-primary"
 							>
-								{category.name}
+								{categoryLabels[category.slug]?.() ?? category.name}
 							</a>
 						</li>
 					{/each}

@@ -44,5 +44,18 @@
 	"page_about_kicker": "Het project",
 	"page_about_hero_title": "Leven in het universum verkennen",
 	"page_about_hero_quote": "Een brug tussen geavanceerde wetenschap en het publiek—ontdekkingen die onze plaats in het heelal opnieuw definiëren.",
-	"page_artigos_heading": "Alle artikelen"
+	"page_artigos_heading": "Alle artikelen",
+	"error_page_title": "Fout",
+	"error_default_message": "Er is iets misgegaan",
+	"error_detail": "Sorry, er is een fout opgetreden. Probeer het later opnieuw.",
+	"error_back_home": "Terug naar home",
+	"not_found_title": "Pagina niet gevonden",
+	"not_found_message": "De pagina die u zoekt bestaat niet.",
+	"not_found_back_home": "Terug naar home",
+	"aria_select_language": "Taal selecteren",
+	"aria_close_menu": "Menu sluiten",
+	"label_language": "Taal",
+	"search_button": "Zoeken",
+	"label_featured": "Uitgelicht",
+	"form_email_password_required": "E-mail en wachtwoord zijn verplicht."
 }
