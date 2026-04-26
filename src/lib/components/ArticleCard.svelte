@@ -1,178 +1,278 @@
 <script lang="ts">
-	import { page } from '$app/state';
-	import type { Article } from '$lib/appwrite';
-	import { getImageUrl, CATEGORIES } from '$lib/appwrite';
-	import { formatDate, readingTime, cn } from '$lib/utils';
-	import { Clock } from 'lucide-svelte';
-	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
-	import * as m from '$lib/paraglide/messages';
+  import { page } from "$app/state";
+  import type { Article } from "$lib/appwrite";
+  import { getImageUrl, CATEGORIES } from "$lib/appwrite";
+  import { shouldShowTranslationFallbackBadge } from "$lib/i18n/translation-fallback-badge";
+  import { formatDate, readingTime, cn } from "$lib/utils";
+  import { Clock } from "lucide-svelte";
+  import * as m from "$lib/paraglide/messages";
+  import { getLocale, localizeHref } from "$lib/paraglide/runtime";
 
-	interface Props {
-		article: Article;
-		variant?: 'default' | 'featured' | 'compact';
-		class?: string;
-	}
+  interface Props {
+    article: Article;
+    variant?: "default" | "featured" | "compact";
+    class?: string;
+  }
 
-	let { article, variant = 'default', class: className }: Props = $props();
+  let { article, variant = "default", class: className }: Props = $props();
 
-	// Use translation data if available, fallback to master (legacy support during migration)
-	const title = $derived(article.translation?.title || (article as any).title);
-	const slug = $derived(article.translation?.slug || (article as any).slug);
-	const excerpt = $derived(article.translation?.excerpt || (article as any).excerpt);
-	const content = $derived(article.translation?.content || (article as any).content || '');
-	const lang = $derived(getLocale());
+  // Use translation data if available, fallback to master (legacy support during migration)
+  const title = $derived(article.translation?.title || (article as any).title);
+  const slug = $derived(article.translation?.slug || (article as any).slug);
+  const excerpt = $derived(
+    article.translation?.excerpt || (article as any).excerpt
+  );
+  const content = $derived(
+    article.translation?.content || (article as any).content || ""
+  );
+  const lang = $derived(getLocale());
 
-	const category = $derived(article ? CATEGORIES.find((c) => c.slug === article.category) : null);
-	const imageUrl = $derived(
-		article?.featuredImage 
-			? (article.featuredImage.startsWith('http') 
-				? article.featuredImage 
-				: `${getImageUrl(article.featuredImage, 800, 500)}&output=webp&quality=80`)
-			: null
-	);
+  const missingTranslationBadgeLabel = $derived.by(() => {
+    void page.url;
+    return m.article_missing_locale_badge();
+  });
 
-	const categoryLabels = $derived.by(() => {
-		const _ = page.url;
-		return {
-			noticias: m.category_noticias(),
-			entrevistas: m.category_entrevistas(),
-			analises: m.category_analises(),
-			'pesquisas-brasileiras': m.category_pesquisas(),
-			exoplanetas: m.category_exoplanetas(),
-			extremofilos: m.category_extremofilos()
-		} as Record<string, string>;
-	});
+  const showMissingTranslationBadge = $derived.by(() => {
+    void page.url;
+    return shouldShowTranslationFallbackBadge(lang, article.translation);
+  });
 
-	function categoryLabel(slug: string) {
-		return categoryLabels[slug] ?? slug;
-	}
+  const category = $derived(
+    article ? CATEGORIES.find((c) => c.slug === article.category) : null
+  );
+  const imageUrl = $derived(
+    article?.featuredImage
+      ? article.featuredImage.startsWith("http")
+        ? article.featuredImage
+        : `${getImageUrl(article.featuredImage, 800, 500)}&output=webp&quality=80`
+      : null
+  );
+
+  const categoryLabels = $derived.by(() => {
+    const _ = page.url;
+    return {
+      noticias: m.category_noticias(),
+      entrevistas: m.category_entrevistas(),
+      analises: m.category_analises(),
+      "pesquisas-brasileiras": m.category_pesquisas(),
+      exoplanetas: m.category_exoplanetas(),
+      extremofilos: m.category_extremofilos(),
+    } as Record<string, string>;
+  });
+
+  function categoryLabel(slug: string) {
+    return categoryLabels[slug] ?? slug;
+  }
 </script>
 
 {#if article}
-	{#if variant === 'featured'}
-	<article class={cn('group relative overflow-hidden rounded-xl bg-card shadow-sm transition-shadow hover:shadow-md', className)}>
-		<a href={localizeHref(`/artigos/${slug}`)} class="block">
-			<div class="relative aspect-[16/9] overflow-hidden">
-				{#if imageUrl}
-					<img
-						src={imageUrl}
-						alt={article.featuredImageAlt || title}
-						class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-						fetchpriority="high"
-					/>
-				{:else}
-					<div class="flex h-full w-full items-center justify-center bg-muted">
-						<span class="text-4xl text-muted-foreground">🔭</span>
-					</div>
-				{/if}
-				<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-				<div class="absolute bottom-0 left-0 right-0 p-6">
-					{#if category}
-						<span class="inline-flex rounded-full bg-primary/90 px-3 py-1 text-xs font-medium text-primary-foreground">
-							{categoryLabel(category.slug)}
-						</span>
-					{/if}
-					<h2 class="mt-3 text-2xl font-bold leading-tight text-white text-balance md:text-3xl font-serif">
-						{title}
-					</h2>
-					<p class="mt-2 line-clamp-2 text-sm text-white/80">
-						{excerpt}
-					</p>
-					<div class="mt-4 flex items-center gap-4 text-xs text-white/70">
-						<span>{formatDate(article.publishedAt || article.$createdAt, lang)}</span>
-						<span class="flex items-center gap-1">
-							<Clock class="h-3 w-3" />
-							{m.reading_time({ minutes: readingTime(content).toString() })}
-						</span>
-					</div>
-				</div>
-			</div>
-		</a>
-	</article>
-{:else if variant === 'compact'}
-	<article class={cn('group flex gap-4', className)}>
-		<a href={localizeHref(`/artigos/${slug}`)} class="shrink-0">
-			<div class="relative h-20 w-28 overflow-hidden rounded-lg">
-				{#if imageUrl}
-					<img
-						src={imageUrl}
-						alt={article.featuredImageAlt || title}
-						class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-						loading="lazy"
-					/>
-				{:else}
-					<div class="flex h-full w-full items-center justify-center bg-muted">
-						<span class="text-xl text-muted-foreground">🔭</span>
-					</div>
-				{/if}
-			</div>
-		</a>
-		<div class="flex flex-col justify-center">
-			<a href={localizeHref(`/artigos/${slug}`)}>
-				<h3 class="font-medium leading-snug text-foreground transition-colors group-hover:text-primary font-serif">
-					{title}
-				</h3>
-			</a>
-			<p class="mt-1 text-xs text-muted-foreground">
-				{formatDate(article.publishedAt || article.$createdAt, lang)}
-			</p>
-		</div>
-	</article>
-{:else}
-	<article class={cn('group overflow-hidden bg-white border border-slate-100 transition-all duration-500 hover:shadow-[0_32px_64px_-12px_rgba(0,0,0,0.08)] hover:border-primary/20 flex flex-col h-full', className)}>
-		<a href={localizeHref(`/artigos/${slug}`)} class="block overflow-hidden">
-			<div class="relative aspect-[16/10] overflow-hidden bg-slate-50">
-				{#if imageUrl}
-					<img
-						src={imageUrl}
-						alt={article.featuredImageAlt || title}
-						class="h-full w-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
-						loading="lazy"
-					/>
-				{:else}
-					<div class="flex h-full w-full items-center justify-center">
-						<span class="text-3xl grayscale opacity-30">🔭</span>
-					</div>
-				{/if}
-				{#if article.featured}
-					<div class="absolute top-4 left-4">
-						<span class="bg-accent text-white text-[9px] font-black uppercase tracking-widest px-2 py-1 shadow-lg">
-							{m.label_featured()}
-						</span>
-					</div>
-				{/if}
-			</div>
-		</a>
-		<div class="p-6 flex flex-col flex-1">
-			{#if category}
-				<a
-					href={localizeHref(`/categorias/${category.slug}`)}
-					class="text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-4 hover:underline"
-				>
-					{categoryLabel(category.slug)}
-				</a>
-			{/if}
-			<a href={localizeHref(`/artigos/${slug}`)} class="group-hover:text-primary transition-colors duration-300">
-				<h3 class="text-xl md:text-2xl font-bold leading-[1.15] text-slate-900 mb-4 font-serif group-hover:underline decoration-accent/30 decoration-2 underline-offset-4 transition-all">
-					{title}
-				</h3>
-			</a>
-			<p class="text-slate-600 text-base leading-relaxed font-serif line-clamp-3 mb-8 italic">
-				{excerpt}
-			</p>
-			
-			<div class="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between">
-				<div class="flex items-center gap-3">
-					<div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-						{formatDate(article.publishedAt || article.$createdAt, lang)}
-					</div>
-				</div>
-				<div class="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-					<Clock class="h-3 w-3" />
-					{m.reading_time_short({ minutes: readingTime(content).toString() })}
-				</div>
-			</div>
-		</div>
-	</article>
-	{/if}
+  {#if variant === "featured"}
+    <article
+      class={cn(
+        "group relative overflow-hidden rounded-xl bg-card shadow-sm transition-shadow hover:shadow-md",
+        className
+      )}
+    >
+      <a href={localizeHref(`/artigos/${slug}`)} class="block">
+        <div class="relative aspect-[16/9] overflow-hidden">
+          {#if imageUrl}
+            <img
+              src={imageUrl}
+              alt={article.featuredImageAlt || title}
+              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              fetchpriority="high"
+            />
+          {:else}
+            <div
+              class="flex h-full w-full items-center justify-center bg-muted"
+            >
+              <span class="text-4xl text-muted-foreground">🔭</span>
+            </div>
+          {/if}
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+          ></div>
+          <div class="absolute bottom-0 left-0 right-0 p-6">
+            {#if category || showMissingTranslationBadge}
+              <div class="flex flex-wrap items-center gap-2">
+                {#if category}
+                  <span
+                    class="inline-flex rounded-full bg-primary/90 px-3 py-1 text-xs font-medium text-primary-foreground"
+                  >
+                    {categoryLabel(category.slug)}
+                  </span>
+                {/if}
+                {#if showMissingTranslationBadge}
+                  <span
+                    class="inline-flex rounded-full bg-amber-500/95 px-2.5 py-1 text-[10px] font-black uppercase tracking-widest text-white shadow-md"
+                    role="status"
+                  >
+                    {missingTranslationBadgeLabel}
+                  </span>
+                {/if}
+              </div>
+            {/if}
+            <h2
+              class="mt-3 text-2xl font-bold leading-tight text-white text-balance md:text-3xl font-serif"
+            >
+              {title}
+            </h2>
+            <p class="mt-2 line-clamp-2 text-sm text-white/80">
+              {excerpt}
+            </p>
+            <div class="mt-4 flex items-center gap-4 text-xs text-white/70">
+              <span
+                >{formatDate(
+                  article.publishedAt || article.$createdAt,
+                  lang
+                )}</span
+              >
+              <span class="flex items-center gap-1">
+                <Clock class="h-3 w-3" />
+                {m.reading_time({ minutes: readingTime(content).toString() })}
+              </span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </article>
+  {:else if variant === "compact"}
+    <article class={cn("group flex gap-4", className)}>
+      <a href={localizeHref(`/artigos/${slug}`)} class="shrink-0">
+        <div class="relative h-20 w-28 overflow-hidden rounded-lg">
+          {#if imageUrl}
+            <img
+              src={imageUrl}
+              alt={article.featuredImageAlt || title}
+              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+          {:else}
+            <div
+              class="flex h-full w-full items-center justify-center bg-muted"
+            >
+              <span class="text-xl text-muted-foreground">🔭</span>
+            </div>
+          {/if}
+        </div>
+      </a>
+      <div class="flex flex-col justify-center">
+        <a href={localizeHref(`/artigos/${slug}`)}>
+          <h3
+            class="font-medium leading-snug text-foreground transition-colors group-hover:text-primary font-serif"
+          >
+            {title}
+          </h3>
+        </a>
+        <div class="mt-1 flex flex-wrap items-center gap-2">
+          <p class="text-xs text-muted-foreground">
+            {formatDate(article.publishedAt || article.$createdAt, lang)}
+          </p>
+          {#if showMissingTranslationBadge}
+            <span
+              class="inline-flex rounded-full bg-amber-100 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-amber-950 ring-1 ring-amber-200/80"
+              role="status"
+            >
+              {missingTranslationBadgeLabel}
+            </span>
+          {/if}
+        </div>
+      </div>
+    </article>
+  {:else}
+    <article
+      class={cn(
+        "group overflow-hidden bg-white border border-slate-100 transition-all duration-500 hover:shadow-[0_32px_64px_-12px_rgba(0,0,0,0.08)] hover:border-primary/20 flex flex-col h-full",
+        className
+      )}
+    >
+      <a href={localizeHref(`/artigos/${slug}`)} class="block overflow-hidden">
+        <div class="relative aspect-[16/10] overflow-hidden bg-slate-50">
+          {#if imageUrl}
+            <img
+              src={imageUrl}
+              alt={article.featuredImageAlt || title}
+              class="h-full w-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+              loading="lazy"
+            />
+          {:else}
+            <div class="flex h-full w-full items-center justify-center">
+              <span class="text-3xl grayscale opacity-30">🔭</span>
+            </div>
+          {/if}
+          {#if article.featured}
+            <div class="absolute top-4 left-4">
+              <span
+                class="bg-accent text-white text-[9px] font-black uppercase tracking-widest px-2 py-1 shadow-lg"
+              >
+                {m.label_featured()}
+              </span>
+            </div>
+          {/if}
+        </div>
+      </a>
+      <div class="p-6 flex flex-col flex-1">
+        {#if category}
+          <div class="mb-4 flex flex-wrap items-center gap-2">
+            <a
+              href={localizeHref(`/categorias/${category.slug}`)}
+              class="text-primary text-[10px] font-black uppercase tracking-[0.2em] hover:underline"
+            >
+              {categoryLabel(category.slug)}
+            </a>
+            {#if showMissingTranslationBadge}
+              <span
+                class="inline-flex rounded-full bg-amber-100 px-2.5 py-1 text-[9px] font-black uppercase tracking-widest text-amber-950 ring-1 ring-amber-200"
+                role="status"
+              >
+                {missingTranslationBadgeLabel}
+              </span>
+            {/if}
+          </div>
+        {:else if showMissingTranslationBadge}
+          <div class="mb-4">
+            <span
+              class="inline-flex rounded-full bg-amber-100 px-2.5 py-1 text-[9px] font-black uppercase tracking-widest text-amber-950 ring-1 ring-amber-200"
+              role="status"
+            >
+              {missingTranslationBadgeLabel}
+            </span>
+          </div>
+        {/if}
+        <a
+          href={localizeHref(`/artigos/${slug}`)}
+          class="group-hover:text-primary transition-colors duration-300"
+        >
+          <h3
+            class="text-xl md:text-2xl font-bold leading-[1.15] text-slate-900 mb-4 font-serif group-hover:underline decoration-accent/30 decoration-2 underline-offset-4 transition-all"
+          >
+            {title}
+          </h3>
+        </a>
+        <p
+          class="text-slate-600 text-base leading-relaxed font-serif line-clamp-3 mb-8 italic"
+        >
+          {excerpt}
+        </p>
+
+        <div
+          class="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="text-[10px] font-bold text-slate-400 uppercase tracking-widest"
+            >
+              {formatDate(article.publishedAt || article.$createdAt, lang)}
+            </div>
+          </div>
+          <div
+            class="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-widest"
+          >
+            <Clock class="h-3 w-3" />
+            {m.reading_time_short({ minutes: readingTime(content).toString() })}
+          </div>
+        </div>
+      </div>
+    </article>
+  {/if}
 {/if}

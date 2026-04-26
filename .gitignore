@@ -40,3 +40,27 @@ Thumbs.db
 # Paraglide
 src/lib/paraglide
 project.inlang/cache/
+
+# Ctxo local cache (auto-rebuilt, never committed)
+.ctxo/.cache/
+.openhands
+.github
+.agents
+
+# ── GSD baseline (auto-generated) ──
+.gsd
+.gsd-id
+.mcp.json
+.bg-shell/
+*.code-workspace
+.env.*
+!.env.example
+.next/
+__pycache__/
+*.pyc
+.venv/
+venv/
+target/
+vendor/
+coverage/
+tmp/

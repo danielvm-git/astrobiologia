@@ -36,6 +36,7 @@
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
+    "@ctxo/lang-typescript": "^0.7.1",
     "@inlang/paraglide-js": "^2.15.2",
     "@playwright/test": "^1.50.0",
     "@sveltejs/adapter-node": "^5.5.4",

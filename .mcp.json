@@ -27,6 +27,24 @@
     },
     "svelte-mcp": {
       "url": "https://mcp.svelte.dev/mcp"
+    },
+    "ctxo": {
+      "command": "npx",
+      "args": [
+        "@ctxo/cli",
+        "mcp"
+      ]
+    },
+    "context-mode": {
+      "command": "context-mode"
+    },
+    "neon": {
+      "type": "http",
+      "url": "https://mcp.neon.tech/mcp"
+    },
+    "nuxt": {
+      "type": "http",
+      "url": "https://nuxt.com/mcp"
     }
   }
 }
