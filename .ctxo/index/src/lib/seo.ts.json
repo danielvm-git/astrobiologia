@@ -1,0 +1,66 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 3,
+      "symbolId": "src/lib/seo.ts::generateMetaTags::function"
+    },
+    {
+      "cyclomatic": 6,
+      "symbolId": "src/lib/seo.ts::generateSchemaMarkup::function"
+    }
+  ],
+  "contentHash": "70ab0af268a0a592eff0c849f10a746e353ab6bc818ea43ca80b65d289a76dad",
+  "edges": [],
+  "file": "src/lib/seo.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T18:05:08-03:00",
+      "hash": "b0f3e51d9c7c501fcb6658c296138351f4709d3c",
+      "kind": "commit",
+      "message": "feat(seo): implement sitemap, robots.txt and refine public article layouts"
+    },
+    {
+      "date": "2026-04-19T15:57:08-03:00",
+      "hash": "c0f0b3a2c5bc5c122cbc9eecc08b5f584b4dfca4",
+      "kind": "commit",
+      "message": "feat(03-04): finalize dynamic SEO and sharing"
+    },
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 35,
+      "endOffset": 652,
+      "kind": "function",
+      "name": "generateMetaTags",
+      "startLine": 8,
+      "startOffset": 120,
+      "symbolId": "src/lib/seo.ts::generateMetaTags::function"
+    },
+    {
+      "endLine": 61,
+      "endOffset": 1319,
+      "kind": "function",
+      "name": "generateSchemaMarkup",
+      "startLine": 37,
+      "startOffset": 654,
+      "symbolId": "src/lib/seo.ts::generateSchemaMarkup::function"
+    },
+    {
+      "endLine": 6,
+      "endOffset": 118,
+      "kind": "interface",
+      "name": "SEOMetaTags",
+      "startLine": 0,
+      "startOffset": 0,
+      "symbolId": "src/lib/seo.ts::SEOMetaTags::interface"
+    }
+  ]
+}

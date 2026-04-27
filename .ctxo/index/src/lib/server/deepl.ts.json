@@ -1,0 +1,100 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/lib/server/deepl.ts::isDeepLConfigured::function"
+    },
+    {
+      "cyclomatic": 7,
+      "symbolId": "src/lib/server/deepl.ts::translateText::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/lib/server/deepl.ts::translateToEnglish::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/lib/server/deepl.ts::translateHtmlToEnglish::function"
+    }
+  ],
+  "contentHash": "e282e43898cf6f79f1308f57f38071bcf504eec932775566bd93ebca30903621",
+  "edges": [
+    {
+      "from": "src/lib/server/deepl.ts::translateToEnglish::function",
+      "kind": "calls",
+      "to": "src/lib/server/deepl.ts::translateText::function"
+    },
+    {
+      "from": "src/lib/server/deepl.ts::translateHtmlToEnglish::function",
+      "kind": "calls",
+      "to": "src/lib/server/deepl.ts::translateText::function"
+    }
+  ],
+  "file": "src/lib/server/deepl.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T22:36:43-03:00",
+      "hash": "783694e3a7235c62e08375c5f4470c6913f13582",
+      "kind": "commit",
+      "message": "feat(i18n): enhance localization and DeepL integration across components"
+    },
+    {
+      "date": "2026-04-20T20:40:38-03:00",
+      "hash": "0c21bccbf7b167e9edc1d9c43dff16c7d285e115",
+      "kind": "commit",
+      "message": "feat: extend DeepL integration to support multiple target languages and batch translation in the article editor"
+    },
+    {
+      "date": "2026-04-20T00:29:38-03:00",
+      "hash": "0d39272b81db98b68da8163f50785bcf8adc4bf2",
+      "kind": "commit",
+      "message": "refactor: migrate article management to server actions, remove unused deletion endpoint, and implement end-to-end testing infrastructure"
+    },
+    {
+      "date": "2026-04-19T22:05:16-03:00",
+      "hash": "8c75ae4ec8a45e12c2c9663aaebde62be6685ac1",
+      "kind": "commit",
+      "message": "refactor: migrate client-side loaders to server-side, implement DeepL integration, and update auth hooks and paraglide strategy."
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 7,
+      "endOffset": 215,
+      "kind": "function",
+      "name": "isDeepLConfigured",
+      "startLine": 5,
+      "startOffset": 130,
+      "symbolId": "src/lib/server/deepl.ts::isDeepLConfigured::function"
+    },
+    {
+      "endLine": 61,
+      "endOffset": 1907,
+      "kind": "function",
+      "name": "translateText",
+      "startLine": 22,
+      "startOffset": 515,
+      "symbolId": "src/lib/server/deepl.ts::translateText::function"
+    },
+    {
+      "endLine": 66,
+      "endOffset": 2062,
+      "kind": "function",
+      "name": "translateToEnglish",
+      "startLine": 64,
+      "startOffset": 1949,
+      "symbolId": "src/lib/server/deepl.ts::translateToEnglish::function"
+    },
+    {
+      "endLine": 70,
+      "endOffset": 2187,
+      "kind": "function",
+      "name": "translateHtmlToEnglish",
+      "startLine": 68,
+      "startOffset": 2064,
+      "symbolId": "src/lib/server/deepl.ts::translateHtmlToEnglish::function"
+    }
+  ]
+}

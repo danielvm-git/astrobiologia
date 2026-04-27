@@ -1,0 +1,149 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/item.tsx::ItemGroup::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/item.tsx::ItemSeparator::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/item.tsx::Item::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/item.tsx::ItemMedia::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/item.tsx::ItemContent::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/item.tsx::ItemTitle::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/item.tsx::ItemDescription::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/item.tsx::ItemActions::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/item.tsx::ItemHeader::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/item.tsx::ItemFooter::function"
+    }
+  ],
+  "contentHash": "c4f50ecab61ee02224a432f2e5e7cafc1941913640134abade00e3db82512baf",
+  "edges": [],
+  "file": "components/ui/item.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 16,
+      "endOffset": 467,
+      "kind": "function",
+      "name": "ItemGroup",
+      "startLine": 7,
+      "startOffset": 230,
+      "symbolId": "components/ui/item.tsx::ItemGroup::function"
+    },
+    {
+      "endLine": 30,
+      "endOffset": 722,
+      "kind": "function",
+      "name": "ItemSeparator",
+      "startLine": 18,
+      "startOffset": 469,
+      "symbolId": "components/ui/item.tsx::ItemSeparator::function"
+    },
+    {
+      "endLine": 71,
+      "endOffset": 1760,
+      "kind": "function",
+      "name": "Item",
+      "startLine": 53,
+      "startOffset": 1334,
+      "symbolId": "components/ui/item.tsx::Item::function"
+    },
+    {
+      "endLine": 103,
+      "endOffset": 2649,
+      "kind": "function",
+      "name": "ItemMedia",
+      "startLine": 90,
+      "startOffset": 2335,
+      "symbolId": "components/ui/item.tsx::ItemMedia::function"
+    },
+    {
+      "endLine": 116,
+      "endOffset": 2934,
+      "kind": "function",
+      "name": "ItemContent",
+      "startLine": 105,
+      "startOffset": 2651,
+      "symbolId": "components/ui/item.tsx::ItemContent::function"
+    },
+    {
+      "endLine": 129,
+      "endOffset": 3212,
+      "kind": "function",
+      "name": "ItemTitle",
+      "startLine": 118,
+      "startOffset": 2936,
+      "symbolId": "components/ui/item.tsx::ItemTitle::function"
+    },
+    {
+      "endLine": 143,
+      "endOffset": 3595,
+      "kind": "function",
+      "name": "ItemDescription",
+      "startLine": 131,
+      "startOffset": 3214,
+      "symbolId": "components/ui/item.tsx::ItemDescription::function"
+    },
+    {
+      "endLine": 153,
+      "endOffset": 3813,
+      "kind": "function",
+      "name": "ItemActions",
+      "startLine": 145,
+      "startOffset": 3597,
+      "symbolId": "components/ui/item.tsx::ItemActions::function"
+    },
+    {
+      "endLine": 166,
+      "endOffset": 4081,
+      "kind": "function",
+      "name": "ItemHeader",
+      "startLine": 155,
+      "startOffset": 3815,
+      "symbolId": "components/ui/item.tsx::ItemHeader::function"
+    },
+    {
+      "endLine": 179,
+      "endOffset": 4349,
+      "kind": "function",
+      "name": "ItemFooter",
+      "startLine": 168,
+      "startOffset": 4083,
+      "symbolId": "components/ui/item.tsx::ItemFooter::function"
+    }
+  ]
+}

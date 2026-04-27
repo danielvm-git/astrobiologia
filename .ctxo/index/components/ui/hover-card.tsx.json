@@ -1,0 +1,58 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/hover-card.tsx::HoverCard::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/hover-card.tsx::HoverCardTrigger::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/hover-card.tsx::HoverCardContent::function"
+    }
+  ],
+  "contentHash": "3a05918eaf7436596e09562f4d5371384e15f2f27c9ef0788354035282d96064",
+  "edges": [],
+  "file": "components/ui/hover-card.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 11,
+      "endOffset": 308,
+      "kind": "function",
+      "name": "HoverCard",
+      "startLine": 7,
+      "startOffset": 145,
+      "symbolId": "components/ui/hover-card.tsx::HoverCard::function"
+    },
+    {
+      "endLine": 19,
+      "endOffset": 504,
+      "kind": "function",
+      "name": "HoverCardTrigger",
+      "startLine": 13,
+      "startOffset": 310,
+      "symbolId": "components/ui/hover-card.tsx::HoverCardTrigger::function"
+    },
+    {
+      "endLine": 41,
+      "endOffset": 1474,
+      "kind": "function",
+      "name": "HoverCardContent",
+      "startLine": 21,
+      "startOffset": 506,
+      "symbolId": "components/ui/hover-card.tsx::HoverCardContent::function"
+    }
+  ]
+}

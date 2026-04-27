@@ -1,0 +1,38 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/routes/admin/+page.server.ts::load::function"
+    }
+  ],
+  "contentHash": "9898d7c5510565deade313175471216e1823424863b40a1b03d36e90ae47cca1",
+  "edges": [],
+  "file": "src/routes/admin/+page.server.ts",
+  "intent": [
+    {
+      "date": "2026-04-19T22:05:16-03:00",
+      "hash": "8c75ae4ec8a45e12c2c9663aaebde62be6685ac1",
+      "kind": "commit",
+      "message": "refactor: migrate client-side loaders to server-side, implement DeepL integration, and update auth hooks and paraglide strategy."
+    },
+    {
+      "date": "2026-04-19T13:09:22-03:00",
+      "hash": "1f8ff39ad85303b1150b19df68319ed061780ed1",
+      "kind": "commit",
+      "message": "fix(build): resolve env variables error using dynamic public env and fallbacks"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 5,
+      "endOffset": 183,
+      "kind": "function",
+      "name": "load",
+      "startLine": 3,
+      "startOffset": 98,
+      "symbolId": "src/routes/admin/+page.server.ts::load::function"
+    }
+  ]
+}

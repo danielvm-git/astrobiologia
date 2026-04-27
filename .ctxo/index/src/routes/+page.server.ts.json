@@ -1,0 +1,64 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "739dba1b9518935d43457483e9526e621b314e1a9e2ff186f52b2880c17deaaa",
+  "edges": [
+    {
+      "from": "src/routes/+page.server.ts::load::variable",
+      "kind": "imports",
+      "to": "src/routes/$types.ts::PageServerLoad::class",
+      "typeOnly": true
+    }
+  ],
+  "file": "src/routes/+page.server.ts",
+  "intent": [
+    {
+      "date": "2026-04-19T19:35:43-03:00",
+      "hash": "1d7d552e6516708f6350b1e6191d9b21d7cf3d04",
+      "kind": "commit",
+      "message": "feat(i18n): implement relational database schema and migrate content"
+    },
+    {
+      "date": "2026-04-19T15:55:40-03:00",
+      "hash": "a1d63fa9f367b268f518c6abcca1835ec12ef96c",
+      "kind": "commit",
+      "message": "feat(03-01): refine featured article hero and fix type casting"
+    },
+    {
+      "date": "2026-04-19T15:12:05-03:00",
+      "hash": "7bc5ce9360f484e96bacaf001d7079642b81cf07",
+      "kind": "commit",
+      "message": "feat: improve admin auth flow with SSR checks, add remote image support, and update article fetch limits"
+    },
+    {
+      "date": "2026-04-19T14:23:10-03:00",
+      "hash": "6196caaccaaec0bade23e876abc9f8f45c43aecd",
+      "kind": "commit",
+      "message": "feat: novo design estilo jornal, filtros de categoria e correções no admin"
+    },
+    {
+      "date": "2026-04-19T13:09:22-03:00",
+      "hash": "1f8ff39ad85303b1150b19df68319ed061780ed1",
+      "kind": "commit",
+      "message": "fix(build): resolve env variables error using dynamic public env and fallbacks"
+    },
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 23,
+      "endOffset": 668,
+      "kind": "variable",
+      "name": "load",
+      "startLine": 4,
+      "startOffset": 204,
+      "symbolId": "src/routes/+page.server.ts::load::variable"
+    }
+  ]
+}

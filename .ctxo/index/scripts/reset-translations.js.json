@@ -1,0 +1,17 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "544b0553f1c11d574d96797a2e5a7a5f61c8d0de48bde9558283c7747f456239",
+  "edges": [],
+  "file": "scripts/reset-translations.js",
+  "intent": [
+    {
+      "date": "2026-04-19T21:02:26-03:00",
+      "hash": "daac352915829d4989292bab5893128b03122cfc",
+      "kind": "commit",
+      "message": "feat: refactor authentication to use server-side sessions with Appwrite and update admin layout structure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

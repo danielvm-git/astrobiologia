@@ -1,0 +1,47 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "6b6443762558d6e24295fe3bf3b5b236a2c7125fb1185cc1110d8934a3dee824",
+  "edges": [
+    {
+      "from": "src/test-setup.ts::test-setup::variable",
+      "kind": "imports",
+      "to": "tests/mocks/appwrite.ts::appwriteMockImplementation::variable"
+    }
+  ],
+  "file": "src/test-setup.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T18:05:23-03:00",
+      "hash": "68a95723508887b1576ac56f53312f20b4e42874",
+      "kind": "commit",
+      "message": "chore(test): configure playwright E2E suite and P0/P1 test structure"
+    },
+    {
+      "date": "2026-04-20T00:29:38-03:00",
+      "hash": "0d39272b81db98b68da8163f50785bcf8adc4bf2",
+      "kind": "commit",
+      "message": "refactor: migrate article management to server actions, remove unused deletion endpoint, and implement end-to-end testing infrastructure"
+    },
+    {
+      "date": "2026-04-19T19:49:53-03:00",
+      "hash": "88fe82b4ff6a7e12067303dfcce42aadf41525b0",
+      "kind": "commit",
+      "message": "fix(tests): resolve vitest mock error and verify full preflight"
+    },
+    {
+      "date": "2026-04-19T19:46:47-03:00",
+      "hash": "3abb5ac5fe5a1d1a3a7993705a834963f2ae6f19",
+      "kind": "commit",
+      "message": "fix(build): resolve prerender 404s by switching to static env vars"
+    },
+    {
+      "date": "2026-04-19T19:01:50-03:00",
+      "hash": "8d621b895778da9e4248c61e87002c7d36ee3a56",
+      "kind": "commit",
+      "message": "chore(tests): setup vitest infrastructure and fix auth guard"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

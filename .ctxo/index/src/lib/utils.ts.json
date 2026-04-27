@@ -1,0 +1,103 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/lib/utils.ts::cn::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "src/lib/utils.ts::formatDate::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "src/lib/utils.ts::formatShortDate::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/lib/utils.ts::slugify::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "src/lib/utils.ts::truncate::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/lib/utils.ts::readingTime::function"
+    }
+  ],
+  "contentHash": "cf68ba95595103122b3a6ee77e5502ea5ecfb0a277f0c3f4a752abb8ead25033",
+  "edges": [],
+  "file": "src/lib/utils.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T18:05:18-03:00",
+      "hash": "de0dfec42d7a9ec7e253ab25bbf9e1843efc26c2",
+      "kind": "commit",
+      "message": "refactor(core): centralized appwrite config and implement health check endpoint"
+    },
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 5,
+      "endOffset": 167,
+      "kind": "function",
+      "name": "cn",
+      "startLine": 3,
+      "startOffset": 89,
+      "symbolId": "src/lib/utils.ts::cn::function"
+    },
+    {
+      "endLine": 14,
+      "endOffset": 417,
+      "kind": "function",
+      "name": "formatDate",
+      "startLine": 7,
+      "startOffset": 169,
+      "symbolId": "src/lib/utils.ts::formatDate::function"
+    },
+    {
+      "endLine": 23,
+      "endOffset": 673,
+      "kind": "function",
+      "name": "formatShortDate",
+      "startLine": 16,
+      "startOffset": 419,
+      "symbolId": "src/lib/utils.ts::formatShortDate::function"
+    },
+    {
+      "endLine": 34,
+      "endOffset": 895,
+      "kind": "function",
+      "name": "slugify",
+      "startLine": 25,
+      "startOffset": 675,
+      "symbolId": "src/lib/utils.ts::slugify::function"
+    },
+    {
+      "endLine": 39,
+      "endOffset": 1050,
+      "kind": "function",
+      "name": "truncate",
+      "startLine": 36,
+      "startOffset": 897,
+      "symbolId": "src/lib/utils.ts::truncate::function"
+    },
+    {
+      "endLine": 45,
+      "endOffset": 1224,
+      "kind": "function",
+      "name": "readingTime",
+      "startLine": 41,
+      "startOffset": 1052,
+      "symbolId": "src/lib/utils.ts::readingTime::function"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "db6a9e76fe1cdd818ed64c1d84772f8eb550eb027e1beca18f5b45ea0a1e641f",
+  "edges": [],
+  "file": "src/lib/appwrite-datasets.ts",
+  "intent": [],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 10,
+      "endOffset": 371,
+      "kind": "variable",
+      "name": "account",
+      "startLine": 10,
+      "startOffset": 342,
+      "symbolId": "src/lib/appwrite-datasets.ts::account::variable"
+    },
+    {
+      "endLine": 11,
+      "endOffset": 419,
+      "kind": "variable",
+      "name": "databases",
+      "startLine": 11,
+      "startOffset": 386,
+      "symbolId": "src/lib/appwrite-datasets.ts::databases::variable"
+    },
+    {
+      "endLine": 12,
+      "endOffset": 463,
+      "kind": "variable",
+      "name": "storage",
+      "startLine": 12,
+      "startOffset": 434,
+      "symbolId": "src/lib/appwrite-datasets.ts::storage::variable"
+    },
+    {
+      "endLine": 14,
+      "endOffset": 521,
+      "kind": "variable",
+      "name": "DATABASE_ID",
+      "startLine": 14,
+      "startOffset": 479,
+      "symbolId": "src/lib/appwrite-datasets.ts::DATABASE_ID::variable"
+    },
+    {
+      "endLine": 20,
+      "endOffset": 787,
+      "kind": "variable",
+      "name": "COLLECTIONS",
+      "startLine": 15,
+      "startOffset": 536,
+      "symbolId": "src/lib/appwrite-datasets.ts::COLLECTIONS::variable"
+    },
+    {
+      "endLine": 22,
+      "endOffset": 863,
+      "kind": "variable",
+      "name": "STORAGE_BUCKET_ID",
+      "startLine": 22,
+      "startOffset": 803,
+      "symbolId": "src/lib/appwrite-datasets.ts::STORAGE_BUCKET_ID::variable"
+    }
+  ]
+}

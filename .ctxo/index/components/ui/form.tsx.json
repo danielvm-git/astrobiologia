@@ -1,0 +1,84 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/form.tsx::FormItem::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/form.tsx::FormLabel::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/form.tsx::FormControl::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/form.tsx::FormDescription::function"
+    },
+    {
+      "cyclomatic": 4,
+      "symbolId": "components/ui/form.tsx::FormMessage::function"
+    }
+  ],
+  "contentHash": "e308b9b592b4c89895a14077bd3254811cab67bb580286b1bd7428cb476b6df3",
+  "edges": [],
+  "file": "components/ui/form.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 87,
+      "endOffset": 2138,
+      "kind": "function",
+      "name": "FormItem",
+      "startLine": 75,
+      "startOffset": 1825,
+      "symbolId": "components/ui/form.tsx::FormItem::function"
+    },
+    {
+      "endLine": 104,
+      "endOffset": 2492,
+      "kind": "function",
+      "name": "FormLabel",
+      "startLine": 89,
+      "startOffset": 2140,
+      "symbolId": "components/ui/form.tsx::FormLabel::function"
+    },
+    {
+      "endLine": 122,
+      "endOffset": 2915,
+      "kind": "function",
+      "name": "FormControl",
+      "startLine": 106,
+      "startOffset": 2494,
+      "symbolId": "components/ui/form.tsx::FormControl::function"
+    },
+    {
+      "endLine": 135,
+      "endOffset": 3220,
+      "kind": "function",
+      "name": "FormDescription",
+      "startLine": 124,
+      "startOffset": 2917,
+      "symbolId": "components/ui/form.tsx::FormDescription::function"
+    },
+    {
+      "endLine": 155,
+      "endOffset": 3637,
+      "kind": "function",
+      "name": "FormMessage",
+      "startLine": 137,
+      "startOffset": 3222,
+      "symbolId": "components/ui/form.tsx::FormMessage::function"
+    }
+  ]
+}

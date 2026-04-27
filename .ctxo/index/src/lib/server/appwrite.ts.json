@@ -1,0 +1,87 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 4,
+      "symbolId": "src/lib/server/appwrite.ts::createAdminClient::function"
+    },
+    {
+      "cyclomatic": 7,
+      "symbolId": "src/lib/server/appwrite.ts::createSessionClient::function"
+    }
+  ],
+  "contentHash": "65ff261413b286d79b5208066209a969079be208ed069e842610eccb63bdb451",
+  "edges": [
+    {
+      "from": "src/lib/server/appwrite.ts::createAdminClient::function",
+      "kind": "imports",
+      "to": "src/lib/server/logger.ts::createLogger::function"
+    }
+  ],
+  "file": "src/lib/server/appwrite.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T00:29:38-03:00",
+      "hash": "0d39272b81db98b68da8163f50785bcf8adc4bf2",
+      "kind": "commit",
+      "message": "refactor: migrate article management to server actions, remove unused deletion endpoint, and implement end-to-end testing infrastructure"
+    },
+    {
+      "date": "2026-04-19T22:05:16-03:00",
+      "hash": "8c75ae4ec8a45e12c2c9663aaebde62be6685ac1",
+      "kind": "commit",
+      "message": "refactor: migrate client-side loaders to server-side, implement DeepL integration, and update auth hooks and paraglide strategy."
+    },
+    {
+      "date": "2026-04-19T21:14:10-03:00",
+      "hash": "3ca81c1ee8cdc7f69a9796b224bb857b2166d6f6",
+      "kind": "commit",
+      "message": "refactor: migrate to dynamic environment variables for Appwrite configuration and improve ArticleEditor accessibility and state management."
+    },
+    {
+      "date": "2026-04-19T21:02:26-03:00",
+      "hash": "daac352915829d4989292bab5893128b03122cfc",
+      "kind": "commit",
+      "message": "feat: refactor authentication to use server-side sessions with Appwrite and update admin layout structure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 31,
+      "endOffset": 1094,
+      "kind": "function",
+      "name": "createAdminClient",
+      "startLine": 13,
+      "startOffset": 524,
+      "symbolId": "src/lib/server/appwrite.ts::createAdminClient::function"
+    },
+    {
+      "endLine": 71,
+      "endOffset": 2450,
+      "kind": "function",
+      "name": "createSessionClient",
+      "startLine": 37,
+      "startOffset": 1243,
+      "symbolId": "src/lib/server/appwrite.ts::createSessionClient::function"
+    },
+    {
+      "endLine": 7,
+      "endOffset": 368,
+      "kind": "variable",
+      "name": "SESSION_COOKIE",
+      "startLine": 7,
+      "startOffset": 287,
+      "symbolId": "src/lib/server/appwrite.ts::SESSION_COOKIE::variable"
+    },
+    {
+      "endLine": 73,
+      "endOffset": 2513,
+      "kind": "variable",
+      "name": "DATABASE_ID",
+      "startLine": 73,
+      "startOffset": 2465,
+      "symbolId": "src/lib/server/appwrite.ts::DATABASE_ID::variable"
+    }
+  ]
+}

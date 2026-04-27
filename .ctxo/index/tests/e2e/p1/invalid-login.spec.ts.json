@@ -1,0 +1,17 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "a1f5574b1486f8ed4581e7f72538a5dc8dcc1138bd152ac95c383cfefb395215",
+  "edges": [],
+  "file": "tests/e2e/p1/invalid-login.spec.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T18:05:23-03:00",
+      "hash": "68a95723508887b1576ac56f53312f20b4e42874",
+      "kind": "commit",
+      "message": "chore(test): configure playwright E2E suite and P0/P1 test structure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

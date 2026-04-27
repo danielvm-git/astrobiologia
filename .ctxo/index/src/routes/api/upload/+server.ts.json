@@ -1,0 +1,39 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "5c974fa001027c193ffc39b17f5a4efcee0203e41fe3d125886682e5f3663cfa",
+  "edges": [],
+  "file": "src/routes/api/upload/+server.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T00:29:38-03:00",
+      "hash": "0d39272b81db98b68da8163f50785bcf8adc4bf2",
+      "kind": "commit",
+      "message": "refactor: migrate article management to server actions, remove unused deletion endpoint, and implement end-to-end testing infrastructure"
+    },
+    {
+      "date": "2026-04-19T13:09:22-03:00",
+      "hash": "1f8ff39ad85303b1150b19df68319ed061780ed1",
+      "kind": "commit",
+      "message": "fix(build): resolve env variables error using dynamic public env and fallbacks"
+    },
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 32,
+      "endOffset": 1108,
+      "kind": "variable",
+      "name": "POST",
+      "startLine": 6,
+      "startOffset": 278,
+      "symbolId": "src/routes/api/upload/+server.ts::POST::variable"
+    }
+  ]
+}

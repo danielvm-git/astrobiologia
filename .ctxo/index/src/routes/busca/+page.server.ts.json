@@ -1,0 +1,43 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "a4874fa7d1d27ce79487bf96c7511cbe4704d169430d829debc231a25411c1ba",
+  "edges": [
+    {
+      "from": "src/routes/busca/+page.server.ts::prerender::variable",
+      "kind": "imports",
+      "to": "src/routes/busca/$types.ts::PageServerLoad::class",
+      "typeOnly": true
+    }
+  ],
+  "file": "src/routes/busca/+page.server.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T18:05:08-03:00",
+      "hash": "b0f3e51d9c7c501fcb6658c296138351f4709d3c",
+      "kind": "commit",
+      "message": "feat(seo): implement sitemap, robots.txt and refine public article layouts"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 5,
+      "endOffset": 302,
+      "kind": "variable",
+      "name": "prerender",
+      "startLine": 5,
+      "startOffset": 285,
+      "symbolId": "src/routes/busca/+page.server.ts::prerender::variable"
+    },
+    {
+      "endLine": 26,
+      "endOffset": 756,
+      "kind": "variable",
+      "name": "load",
+      "startLine": 7,
+      "startOffset": 318,
+      "symbolId": "src/routes/busca/+page.server.ts::load::variable"
+    }
+  ]
+}

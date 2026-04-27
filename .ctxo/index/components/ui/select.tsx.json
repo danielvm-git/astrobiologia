@@ -1,0 +1,149 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/select.tsx::Select::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/select.tsx::SelectGroup::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/select.tsx::SelectValue::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/select.tsx::SelectTrigger::function"
+    },
+    {
+      "cyclomatic": 3,
+      "symbolId": "components/ui/select.tsx::SelectContent::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/select.tsx::SelectLabel::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/select.tsx::SelectItem::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/select.tsx::SelectSeparator::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/select.tsx::SelectScrollUpButton::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/select.tsx::SelectScrollDownButton::function"
+    }
+  ],
+  "contentHash": "e2b4198bbf3968eae76d71fd04074b43f802357d997dbd01a1721a96e5895383",
+  "edges": [],
+  "file": "components/ui/select.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 12,
+      "endOffset": 361,
+      "kind": "function",
+      "name": "Select",
+      "startLine": 8,
+      "startOffset": 211,
+      "symbolId": "components/ui/select.tsx::Select::function"
+    },
+    {
+      "endLine": 18,
+      "endOffset": 526,
+      "kind": "function",
+      "name": "SelectGroup",
+      "startLine": 14,
+      "startOffset": 363,
+      "symbolId": "components/ui/select.tsx::SelectGroup::function"
+    },
+    {
+      "endLine": 24,
+      "endOffset": 691,
+      "kind": "function",
+      "name": "SelectValue",
+      "startLine": 20,
+      "startOffset": 528,
+      "symbolId": "components/ui/select.tsx::SelectValue::function"
+    },
+    {
+      "endLine": 50,
+      "endOffset": 2035,
+      "kind": "function",
+      "name": "SelectTrigger",
+      "startLine": 26,
+      "startOffset": 693,
+      "symbolId": "components/ui/select.tsx::SelectTrigger::function"
+    },
+    {
+      "endLine": 85,
+      "endOffset": 3593,
+      "kind": "function",
+      "name": "SelectContent",
+      "startLine": 52,
+      "startOffset": 2037,
+      "symbolId": "components/ui/select.tsx::SelectContent::function"
+    },
+    {
+      "endLine": 98,
+      "endOffset": 3874,
+      "kind": "function",
+      "name": "SelectLabel",
+      "startLine": 87,
+      "startOffset": 3595,
+      "symbolId": "components/ui/select.tsx::SelectLabel::function"
+    },
+    {
+      "endLine": 122,
+      "endOffset": 4891,
+      "kind": "function",
+      "name": "SelectItem",
+      "startLine": 100,
+      "startOffset": 3876,
+      "symbolId": "components/ui/select.tsx::SelectItem::function"
+    },
+    {
+      "endLine": 135,
+      "endOffset": 5192,
+      "kind": "function",
+      "name": "SelectSeparator",
+      "startLine": 124,
+      "startOffset": 4893,
+      "symbolId": "components/ui/select.tsx::SelectSeparator::function"
+    },
+    {
+      "endLine": 153,
+      "endOffset": 5627,
+      "kind": "function",
+      "name": "SelectScrollUpButton",
+      "startLine": 137,
+      "startOffset": 5194,
+      "symbolId": "components/ui/select.tsx::SelectScrollUpButton::function"
+    },
+    {
+      "endLine": 171,
+      "endOffset": 6074,
+      "kind": "function",
+      "name": "SelectScrollDownButton",
+      "startLine": 155,
+      "startOffset": 5629,
+      "symbolId": "components/ui/select.tsx::SelectScrollDownButton::function"
+    }
+  ]
+}

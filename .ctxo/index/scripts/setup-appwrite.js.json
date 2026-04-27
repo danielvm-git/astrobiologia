@@ -1,0 +1,17 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "bb6b31715cf7fcf23a1be21b5797f27a58064fc5a88d47dabdfa5357a6e7960e",
+  "edges": [],
+  "file": "scripts/setup-appwrite.js",
+  "intent": [
+    {
+      "date": "2026-04-19T13:09:22-03:00",
+      "hash": "1f8ff39ad85303b1150b19df68319ed061780ed1",
+      "kind": "commit",
+      "message": "fix(build): resolve env variables error using dynamic public env and fallbacks"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

@@ -1,0 +1,93 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/chart.tsx::ChartContainer::function"
+    },
+    {
+      "cyclomatic": 31,
+      "symbolId": "components/ui/chart.tsx::ChartTooltipContent::function"
+    },
+    {
+      "cyclomatic": 7,
+      "symbolId": "components/ui/chart.tsx::ChartLegendContent::function"
+    }
+  ],
+  "contentHash": "188d2cd291ae53d8121361cd706e4c8ce4938132955de62842edc860cbc851f4",
+  "edges": [
+    {
+      "from": "components/ui/chart.tsx::ChartTooltipContent::function",
+      "kind": "calls",
+      "to": "components/ui/chart.tsx::useChart::function"
+    },
+    {
+      "from": "components/ui/chart.tsx::ChartTooltipContent::function",
+      "kind": "calls",
+      "to": "components/ui/chart.tsx::getPayloadConfigFromPayload::function"
+    },
+    {
+      "from": "components/ui/chart.tsx::ChartTooltipContent::function",
+      "kind": "calls",
+      "to": "components/ui/chart.tsx::getPayloadConfigFromPayload::function"
+    },
+    {
+      "from": "components/ui/chart.tsx::ChartLegendContent::function",
+      "kind": "calls",
+      "to": "components/ui/chart.tsx::useChart::function"
+    },
+    {
+      "from": "components/ui/chart.tsx::ChartLegendContent::function",
+      "kind": "calls",
+      "to": "components/ui/chart.tsx::getPayloadConfigFromPayload::function"
+    }
+  ],
+  "file": "components/ui/chart.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 69,
+      "endOffset": 2202,
+      "kind": "function",
+      "name": "ChartContainer",
+      "startLine": 36,
+      "startOffset": 763,
+      "symbolId": "components/ui/chart.tsx::ChartContainer::function"
+    },
+    {
+      "endLine": 248,
+      "endOffset": 7383,
+      "kind": "function",
+      "name": "ChartTooltipContent",
+      "startLine": 106,
+      "startOffset": 2958,
+      "symbolId": "components/ui/chart.tsx::ChartTooltipContent::function"
+    },
+    {
+      "endLine": 302,
+      "endOffset": 8683,
+      "kind": "function",
+      "name": "ChartLegendContent",
+      "startLine": 252,
+      "startOffset": 7431,
+      "symbolId": "components/ui/chart.tsx::ChartLegendContent::function"
+    },
+    {
+      "endLine": 18,
+      "endOffset": 447,
+      "kind": "type",
+      "name": "ChartConfig",
+      "startLine": 10,
+      "startOffset": 220,
+      "symbolId": "components/ui/chart.tsx::ChartConfig::type"
+    }
+  ]
+}

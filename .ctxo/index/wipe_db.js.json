@@ -1,0 +1,23 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "e00b03e89dc8cca490e29ebe4f5cbd54cc81c2263a84264ff1539d324d1a3247",
+  "edges": [],
+  "file": "wipe_db.js",
+  "intent": [
+    {
+      "date": "2026-04-20T18:23:41-03:00",
+      "hash": "be48057df2e03527bc727cfb8838a4cfbdffbc37",
+      "kind": "commit",
+      "message": "chore: update Appwrite project ID and enhance Google login error reporting"
+    },
+    {
+      "date": "2026-04-19T18:18:57-03:00",
+      "hash": "d0a6bcdddb3f9c21a8b8255895e4aa066209f59b",
+      "kind": "commit",
+      "message": "feat: update Appwrite endpoint, add database cleanup utility, and implement automated rate-limited content population script."
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

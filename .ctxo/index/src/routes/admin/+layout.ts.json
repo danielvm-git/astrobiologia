@@ -1,0 +1,42 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "3592fc04a3f55474a2ef418bb0edc98e6441c5f47c9b5f178004e072a2ea89ce",
+  "edges": [],
+  "file": "src/routes/admin/+layout.ts",
+  "intent": [
+    {
+      "date": "2026-04-19T21:02:26-03:00",
+      "hash": "daac352915829d4989292bab5893128b03122cfc",
+      "kind": "commit",
+      "message": "feat: refactor authentication to use server-side sessions with Appwrite and update admin layout structure"
+    },
+    {
+      "date": "2026-04-19T16:35:48-03:00",
+      "hash": "bda5a4249df5c215e7a5cf09b8678c1a2285c1a5",
+      "kind": "commit",
+      "message": "feat(03-04): finalize public portal and initial content seeding"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 0,
+      "endOffset": 30,
+      "kind": "variable",
+      "name": "prerender",
+      "startLine": 0,
+      "startOffset": 13,
+      "symbolId": "src/routes/admin/+layout.ts::prerender::variable"
+    },
+    {
+      "endLine": 1,
+      "endOffset": 55,
+      "kind": "variable",
+      "name": "ssr",
+      "startLine": 1,
+      "startOffset": 45,
+      "symbolId": "src/routes/admin/+layout.ts::ssr::variable"
+    }
+  ]
+}

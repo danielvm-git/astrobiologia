@@ -1,0 +1,39 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "ac2f3fdba0219adb6a10907cd42082dde5e153f479ecbc42d7ae817225e13474",
+  "edges": [],
+  "file": "src/routes/admin/logout/+page.server.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T23:11:46-03:00",
+      "hash": "4b45ba0b34eec59888dc5277cd8a6cc3d665c4cb",
+      "kind": "commit",
+      "message": "fix(i18n-auth): locale-aware admin routing, translations, OAuth logging"
+    },
+    {
+      "date": "2026-04-20T22:25:59-03:00",
+      "hash": "6f1a1a98f75b3ca39b8de13073927e060ac6307b",
+      "kind": "commit",
+      "message": "fix(logout): update redirect path after logout to improve user experience"
+    },
+    {
+      "date": "2026-04-19T21:02:26-03:00",
+      "hash": "daac352915829d4989292bab5893128b03122cfc",
+      "kind": "commit",
+      "message": "feat: refactor authentication to use server-side sessions with Appwrite and update admin layout structure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 15,
+      "endOffset": 521,
+      "kind": "variable",
+      "name": "actions",
+      "startLine": 4,
+      "startOffset": 187,
+      "symbolId": "src/routes/admin/logout/+page.server.ts::actions::variable"
+    }
+  ]
+}

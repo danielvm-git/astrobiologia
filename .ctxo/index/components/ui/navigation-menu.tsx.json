@@ -1,0 +1,123 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/navigation-menu.tsx::NavigationMenu::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/navigation-menu.tsx::NavigationMenuList::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/navigation-menu.tsx::NavigationMenuItem::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/navigation-menu.tsx::NavigationMenuTrigger::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/navigation-menu.tsx::NavigationMenuContent::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/navigation-menu.tsx::NavigationMenuViewport::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/navigation-menu.tsx::NavigationMenuLink::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/navigation-menu.tsx::NavigationMenuIndicator::function"
+    }
+  ],
+  "contentHash": "c0f759689e24aaa36d62d2de868ddab35b12c5e4a8c8c035582c46a963e4b56f",
+  "edges": [],
+  "file": "components/ui/navigation-menu.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 29,
+      "endOffset": 786,
+      "kind": "function",
+      "name": "NavigationMenu",
+      "startLine": 7,
+      "startOffset": 235,
+      "symbolId": "components/ui/navigation-menu.tsx::NavigationMenu::function"
+    },
+    {
+      "endLine": 45,
+      "endOffset": 1141,
+      "kind": "function",
+      "name": "NavigationMenuList",
+      "startLine": 31,
+      "startOffset": 788,
+      "symbolId": "components/ui/navigation-menu.tsx::NavigationMenuList::function"
+    },
+    {
+      "endLine": 58,
+      "endOffset": 1418,
+      "kind": "function",
+      "name": "NavigationMenuItem",
+      "startLine": 47,
+      "startOffset": 1143,
+      "symbolId": "components/ui/navigation-menu.tsx::NavigationMenuItem::function"
+    },
+    {
+      "endLine": 82,
+      "endOffset": 2532,
+      "kind": "function",
+      "name": "NavigationMenuTrigger",
+      "startLine": 64,
+      "startOffset": 1977,
+      "symbolId": "components/ui/navigation-menu.tsx::NavigationMenuTrigger::function"
+    },
+    {
+      "endLine": 99,
+      "endOffset": 4251,
+      "kind": "function",
+      "name": "NavigationMenuContent",
+      "startLine": 84,
+      "startOffset": 2534,
+      "symbolId": "components/ui/navigation-menu.tsx::NavigationMenuContent::function"
+    },
+    {
+      "endLine": 119,
+      "endOffset": 5017,
+      "kind": "function",
+      "name": "NavigationMenuViewport",
+      "startLine": 101,
+      "startOffset": 4253,
+      "symbolId": "components/ui/navigation-menu.tsx::NavigationMenuViewport::function"
+    },
+    {
+      "endLine": 135,
+      "endOffset": 5780,
+      "kind": "function",
+      "name": "NavigationMenuLink",
+      "startLine": 121,
+      "startOffset": 5019,
+      "symbolId": "components/ui/navigation-menu.tsx::NavigationMenuLink::function"
+    },
+    {
+      "endLine": 153,
+      "endOffset": 6419,
+      "kind": "function",
+      "name": "NavigationMenuIndicator",
+      "startLine": 137,
+      "startOffset": 5782,
+      "symbolId": "components/ui/navigation-menu.tsx::NavigationMenuIndicator::function"
+    }
+  ]
+}

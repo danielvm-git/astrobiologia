@@ -1,0 +1,17 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "522735770acc3a8cae522d06513be071e612151e9759cec2754c31d7772a1dcb",
+  "edges": [],
+  "file": "tests/e2e/p0/article-not-found.spec.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T18:05:23-03:00",
+      "hash": "68a95723508887b1576ac56f53312f20b4e42874",
+      "kind": "commit",
+      "message": "chore(test): configure playwright E2E suite and P0/P1 test structure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

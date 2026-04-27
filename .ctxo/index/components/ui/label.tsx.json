@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/label.tsx::Label::function"
+    }
+  ],
+  "contentHash": "dfd466a53a86f0bd002050d33e96b5385ac4e102e93485ff8d9943fdc2fbeb12",
+  "edges": [],
+  "file": "components/ui/label.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 21,
+      "endOffset": 593,
+      "kind": "function",
+      "name": "Label",
+      "startLine": 7,
+      "startOffset": 136,
+      "symbolId": "components/ui/label.tsx::Label::function"
+    }
+  ]
+}

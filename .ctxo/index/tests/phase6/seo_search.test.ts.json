@@ -1,0 +1,23 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "30cf059b1bcd870ed8d350b0d72fdef041c335703a00680c6375a5269378dd5a",
+  "edges": [
+    {
+      "from": "tests/phase6/seo_search.test.ts::seo_search.test::variable",
+      "kind": "imports",
+      "to": "src/lib/seo.ts::generateSchemaMarkup::function"
+    }
+  ],
+  "file": "tests/phase6/seo_search.test.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T18:05:23-03:00",
+      "hash": "68a95723508887b1576ac56f53312f20b4e42874",
+      "kind": "commit",
+      "message": "chore(test): configure playwright E2E suite and P0/P1 test structure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

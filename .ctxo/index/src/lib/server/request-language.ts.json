@@ -1,0 +1,34 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 3,
+      "symbolId": "src/lib/server/request-language.ts::getRequestLanguage::function"
+    }
+  ],
+  "contentHash": "ee3354b49a283cb105b63f580988a4b7835f935468e158ad244a6ed699b9deb4",
+  "edges": [],
+  "file": "src/lib/server/request-language.ts",
+  "intent": [],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 12,
+      "endOffset": 337,
+      "kind": "function",
+      "name": "getRequestLanguage",
+      "startLine": 6,
+      "startOffset": 124,
+      "symbolId": "src/lib/server/request-language.ts::getRequestLanguage::function"
+    },
+    {
+      "endLine": 0,
+      "endOffset": 56,
+      "kind": "variable",
+      "name": "DEFAULT_REQUEST_LANGUAGE",
+      "startLine": 0,
+      "startOffset": 13,
+      "symbolId": "src/lib/server/request-language.ts::DEFAULT_REQUEST_LANGUAGE::variable"
+    }
+  ]
+}

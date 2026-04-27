@@ -1,0 +1,58 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "f30be6beb7de573161a569e73d7bd54c4ae3af820ace48342bf6109fd59dd305",
+  "edges": [
+    {
+      "from": "src/routes/categorias/[category]/+page.server.ts::load::variable",
+      "kind": "imports",
+      "to": "src/routes/categorias/[category]/$types.ts::PageServerLoad::class",
+      "typeOnly": true
+    }
+  ],
+  "file": "src/routes/categorias/[category]/+page.server.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T23:11:46-03:00",
+      "hash": "4b45ba0b34eec59888dc5277cd8a6cc3d665c4cb",
+      "kind": "commit",
+      "message": "fix(i18n-auth): locale-aware admin routing, translations, OAuth logging"
+    },
+    {
+      "date": "2026-04-19T19:35:43-03:00",
+      "hash": "1d7d552e6516708f6350b1e6191d9b21d7cf3d04",
+      "kind": "commit",
+      "message": "feat(i18n): implement relational database schema and migrate content"
+    },
+    {
+      "date": "2026-04-19T16:35:48-03:00",
+      "hash": "bda5a4249df5c215e7a5cf09b8678c1a2285c1a5",
+      "kind": "commit",
+      "message": "feat(03-04): finalize public portal and initial content seeding"
+    },
+    {
+      "date": "2026-04-19T14:23:10-03:00",
+      "hash": "6196caaccaaec0bade23e876abc9f8f45c43aecd",
+      "kind": "commit",
+      "message": "feat: novo design estilo jornal, filtros de categoria e correções no admin"
+    },
+    {
+      "date": "2026-04-19T13:09:22-03:00",
+      "hash": "1f8ff39ad85303b1150b19df68319ed061780ed1",
+      "kind": "commit",
+      "message": "fix(build): resolve env variables error using dynamic public env and fallbacks"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 30,
+      "endOffset": 824,
+      "kind": "variable",
+      "name": "load",
+      "startLine": 5,
+      "startOffset": 235,
+      "symbolId": "src/routes/categorias/[category]/+page.server.ts::load::variable"
+    }
+  ]
+}

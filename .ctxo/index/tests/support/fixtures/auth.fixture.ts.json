@@ -1,0 +1,27 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "962a3c66cc1e4fdfd5251fb119cc4e788c4ab3b1fe6d15c3f3e45fa1d0bcc8c3",
+  "edges": [],
+  "file": "tests/support/fixtures/auth.fixture.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T00:29:38-03:00",
+      "hash": "0d39272b81db98b68da8163f50785bcf8adc4bf2",
+      "kind": "commit",
+      "message": "refactor: migrate article management to server actions, remove unused deletion endpoint, and implement end-to-end testing infrastructure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 17,
+      "endOffset": 463,
+      "kind": "variable",
+      "name": "test",
+      "startLine": 10,
+      "startOffset": 171,
+      "symbolId": "tests/support/fixtures/auth.fixture.ts::test::variable"
+    }
+  ]
+}

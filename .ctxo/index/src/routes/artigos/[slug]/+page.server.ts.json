@@ -1,0 +1,46 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "f61773079fc718401287028333682135a413aa4c5afb9749642dda5df436d8a5",
+  "edges": [
+    {
+      "from": "src/routes/artigos/[slug]/+page.server.ts::load::variable",
+      "kind": "imports",
+      "to": "src/routes/artigos/[slug]/$types.ts::PageServerLoad::class",
+      "typeOnly": true
+    }
+  ],
+  "file": "src/routes/artigos/[slug]/+page.server.ts",
+  "intent": [
+    {
+      "date": "2026-04-19T19:43:21-03:00",
+      "hash": "93ebc37148af4c433d5b507282957b7234007f16",
+      "kind": "commit",
+      "message": "fix(build): add missing static routes and localize article list"
+    },
+    {
+      "date": "2026-04-19T19:35:43-03:00",
+      "hash": "1d7d552e6516708f6350b1e6191d9b21d7cf3d04",
+      "kind": "commit",
+      "message": "feat(i18n): implement relational database schema and migrate content"
+    },
+    {
+      "date": "2026-04-19T13:09:22-03:00",
+      "hash": "1f8ff39ad85303b1150b19df68319ed061780ed1",
+      "kind": "commit",
+      "message": "fix(build): resolve env variables error using dynamic public env and fallbacks"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 27,
+      "endOffset": 944,
+      "kind": "variable",
+      "name": "load",
+      "startLine": 5,
+      "startOffset": 241,
+      "symbolId": "src/routes/artigos/[slug]/+page.server.ts::load::variable"
+    }
+  ]
+}

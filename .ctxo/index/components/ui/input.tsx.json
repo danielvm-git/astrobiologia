@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/input.tsx::Input::function"
+    }
+  ],
+  "contentHash": "b67dea8a8d35c004c6d94c22aacbbf2340b0e536c614e4c87a69d8814a7b4502",
+  "edges": [],
+  "file": "components/ui/input.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 18,
+      "endOffset": 944,
+      "kind": "function",
+      "name": "Input",
+      "startLine": 4,
+      "startOffset": 66,
+      "symbolId": "components/ui/input.tsx::Input::function"
+    }
+  ]
+}

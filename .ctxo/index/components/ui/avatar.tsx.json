@@ -1,0 +1,58 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/avatar.tsx::Avatar::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/avatar.tsx::AvatarImage::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/avatar.tsx::AvatarFallback::function"
+    }
+  ],
+  "contentHash": "9effa6f9decfeb6230e20958c815cdfef8bd84f6ec6aafc8e2e87c5e4c64b4b2",
+  "edges": [],
+  "file": "components/ui/avatar.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 21,
+      "endOffset": 446,
+      "kind": "function",
+      "name": "Avatar",
+      "startLine": 7,
+      "startOffset": 138,
+      "symbolId": "components/ui/avatar.tsx::Avatar::function"
+    },
+    {
+      "endLine": 34,
+      "endOffset": 709,
+      "kind": "function",
+      "name": "AvatarImage",
+      "startLine": 23,
+      "startOffset": 448,
+      "symbolId": "components/ui/avatar.tsx::AvatarImage::function"
+    },
+    {
+      "endLine": 50,
+      "endOffset": 1050,
+      "kind": "function",
+      "name": "AvatarFallback",
+      "startLine": 36,
+      "startOffset": 711,
+      "symbolId": "components/ui/avatar.tsx::AvatarFallback::function"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "d54219c1377c3aeca0bbf8eaaeb185710aa7ccd669f5a26a69e6bbcd044f9dbf",
+  "edges": [
+    {
+      "from": "src/routes/admin/artigos/[id]/edit/+page.server.ts::load::variable",
+      "kind": "imports",
+      "to": "src/routes/admin/artigos/[id]/edit/$types.ts::PageServerLoad::class",
+      "typeOnly": true
+    }
+  ],
+  "file": "src/routes/admin/artigos/[id]/edit/+page.server.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T00:29:38-03:00",
+      "hash": "0d39272b81db98b68da8163f50785bcf8adc4bf2",
+      "kind": "commit",
+      "message": "refactor: migrate article management to server actions, remove unused deletion endpoint, and implement end-to-end testing infrastructure"
+    },
+    {
+      "date": "2026-04-19T22:05:16-03:00",
+      "hash": "8c75ae4ec8a45e12c2c9663aaebde62be6685ac1",
+      "kind": "commit",
+      "message": "refactor: migrate client-side loaders to server-side, implement DeepL integration, and update auth hooks and paraglide strategy."
+    },
+    {
+      "date": "2026-04-19T14:23:10-03:00",
+      "hash": "6196caaccaaec0bade23e876abc9f8f45c43aecd",
+      "kind": "commit",
+      "message": "feat: novo design estilo jornal, filtros de categoria e correções no admin"
+    },
+    {
+      "date": "2026-04-19T13:09:22-03:00",
+      "hash": "1f8ff39ad85303b1150b19df68319ed061780ed1",
+      "kind": "commit",
+      "message": "fix(build): resolve env variables error using dynamic public env and fallbacks"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 34,
+      "endOffset": 1075,
+      "kind": "variable",
+      "name": "load",
+      "startLine": 9,
+      "startOffset": 386,
+      "symbolId": "src/routes/admin/artigos/[id]/edit/+page.server.ts::load::variable"
+    },
+    {
+      "endLine": 120,
+      "endOffset": 4323,
+      "kind": "variable",
+      "name": "actions",
+      "startLine": 36,
+      "startOffset": 1091,
+      "symbolId": "src/routes/admin/artigos/[id]/edit/+page.server.ts::actions::variable"
+    }
+  ]
+}

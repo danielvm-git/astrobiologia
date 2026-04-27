@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 3,
+      "symbolId": "components/ui/toaster.tsx::Toaster::function"
+    }
+  ],
+  "contentHash": "2dfd19d81413d2eda50679dd8caa1cad25ebb34194b37fa1ddfb7dd647939f6d",
+  "edges": [],
+  "file": "components/ui/toaster.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 34,
+      "endOffset": 785,
+      "kind": "function",
+      "name": "Toaster",
+      "startLine": 12,
+      "startOffset": 191,
+      "symbolId": "components/ui/toaster.tsx::Toaster::function"
+    }
+  ]
+}

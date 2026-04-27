@@ -1,0 +1,29 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "1e4fd1439936cdd5e0ac1d29d32a5530caf5044515820a073252490dfe1b7d34",
+  "edges": [],
+  "file": "scripts/migrate-articles-i18n.js",
+  "intent": [
+    {
+      "date": "2026-04-19T21:02:26-03:00",
+      "hash": "daac352915829d4989292bab5893128b03122cfc",
+      "kind": "commit",
+      "message": "feat: refactor authentication to use server-side sessions with Appwrite and update admin layout structure"
+    },
+    {
+      "date": "2026-04-19T19:49:53-03:00",
+      "hash": "88fe82b4ff6a7e12067303dfcce42aadf41525b0",
+      "kind": "commit",
+      "message": "fix(tests): resolve vitest mock error and verify full preflight"
+    },
+    {
+      "date": "2026-04-19T19:35:43-03:00",
+      "hash": "1d7d552e6516708f6350b1e6191d9b21d7cf3d04",
+      "kind": "commit",
+      "message": "feat(i18n): implement relational database schema and migrate content"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

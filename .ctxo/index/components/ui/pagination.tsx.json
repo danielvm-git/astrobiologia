@@ -1,0 +1,110 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/pagination.tsx::Pagination::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/pagination.tsx::PaginationContent::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/pagination.tsx::PaginationItem::function"
+    },
+    {
+      "cyclomatic": 3,
+      "symbolId": "components/ui/pagination.tsx::PaginationLink::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/pagination.tsx::PaginationPrevious::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/pagination.tsx::PaginationNext::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/pagination.tsx::PaginationEllipsis::function"
+    }
+  ],
+  "contentHash": "c0306e3325a10c7377794b1b75fffb57179be1f19a3b3b3b0e0d79dde53b4ecf",
+  "edges": [],
+  "file": "components/ui/pagination.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 20,
+      "endOffset": 500,
+      "kind": "function",
+      "name": "Pagination",
+      "startLine": 10,
+      "startOffset": 222,
+      "symbolId": "components/ui/pagination.tsx::Pagination::function"
+    },
+    {
+      "endLine": 33,
+      "endOffset": 741,
+      "kind": "function",
+      "name": "PaginationContent",
+      "startLine": 22,
+      "startOffset": 502,
+      "symbolId": "components/ui/pagination.tsx::PaginationContent::function"
+    },
+    {
+      "endLine": 37,
+      "endOffset": 867,
+      "kind": "function",
+      "name": "PaginationItem",
+      "startLine": 35,
+      "startOffset": 743,
+      "symbolId": "components/ui/pagination.tsx::PaginationItem::function"
+    },
+    {
+      "endLine": 65,
+      "endOffset": 1423,
+      "kind": "function",
+      "name": "PaginationLink",
+      "startLine": 44,
+      "startOffset": 1004,
+      "symbolId": "components/ui/pagination.tsx::PaginationLink::function"
+    },
+    {
+      "endLine": 82,
+      "endOffset": 1810,
+      "kind": "function",
+      "name": "PaginationPrevious",
+      "startLine": 67,
+      "startOffset": 1425,
+      "symbolId": "components/ui/pagination.tsx::PaginationPrevious::function"
+    },
+    {
+      "endLine": 99,
+      "endOffset": 2186,
+      "kind": "function",
+      "name": "PaginationNext",
+      "startLine": 84,
+      "startOffset": 1812,
+      "symbolId": "components/ui/pagination.tsx::PaginationNext::function"
+    },
+    {
+      "endLine": 116,
+      "endOffset": 2567,
+      "kind": "function",
+      "name": "PaginationEllipsis",
+      "startLine": 101,
+      "startOffset": 2188,
+      "symbolId": "components/ui/pagination.tsx::PaginationEllipsis::function"
+    }
+  ]
+}

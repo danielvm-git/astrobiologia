@@ -1,0 +1,227 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/menubar.tsx::Menubar::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/menubar.tsx::MenubarMenu::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/menubar.tsx::MenubarGroup::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/menubar.tsx::MenubarPortal::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/menubar.tsx::MenubarRadioGroup::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/menubar.tsx::MenubarTrigger::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/menubar.tsx::MenubarContent::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/menubar.tsx::MenubarItem::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/menubar.tsx::MenubarCheckboxItem::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/menubar.tsx::MenubarRadioItem::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/menubar.tsx::MenubarLabel::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/menubar.tsx::MenubarSeparator::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/menubar.tsx::MenubarShortcut::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/menubar.tsx::MenubarSub::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/menubar.tsx::MenubarSubTrigger::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/menubar.tsx::MenubarSubContent::function"
+    }
+  ],
+  "contentHash": "da0313c01c8aedd722c4bb1cbd4723acef6187cda4de0ea230cff90d6aebcf2e",
+  "edges": [],
+  "file": "components/ui/menubar.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 22,
+      "endOffset": 538,
+      "kind": "function",
+      "name": "Menubar",
+      "startLine": 8,
+      "startOffset": 211,
+      "symbolId": "components/ui/menubar.tsx::Menubar::function"
+    },
+    {
+      "endLine": 28,
+      "endOffset": 703,
+      "kind": "function",
+      "name": "MenubarMenu",
+      "startLine": 24,
+      "startOffset": 540,
+      "symbolId": "components/ui/menubar.tsx::MenubarMenu::function"
+    },
+    {
+      "endLine": 34,
+      "endOffset": 872,
+      "kind": "function",
+      "name": "MenubarGroup",
+      "startLine": 30,
+      "startOffset": 705,
+      "symbolId": "components/ui/menubar.tsx::MenubarGroup::function"
+    },
+    {
+      "endLine": 40,
+      "endOffset": 1045,
+      "kind": "function",
+      "name": "MenubarPortal",
+      "startLine": 36,
+      "startOffset": 874,
+      "symbolId": "components/ui/menubar.tsx::MenubarPortal::function"
+    },
+    {
+      "endLine": 48,
+      "endOffset": 1245,
+      "kind": "function",
+      "name": "MenubarRadioGroup",
+      "startLine": 42,
+      "startOffset": 1047,
+      "symbolId": "components/ui/menubar.tsx::MenubarRadioGroup::function"
+    },
+    {
+      "endLine": 64,
+      "endOffset": 1721,
+      "kind": "function",
+      "name": "MenubarTrigger",
+      "startLine": 50,
+      "startOffset": 1247,
+      "symbolId": "components/ui/menubar.tsx::MenubarTrigger::function"
+    },
+    {
+      "endLine": 88,
+      "endOffset": 2656,
+      "kind": "function",
+      "name": "MenubarContent",
+      "startLine": 66,
+      "startOffset": 1723,
+      "symbolId": "components/ui/menubar.tsx::MenubarContent::function"
+    },
+    {
+      "endLine": 111,
+      "endOffset": 3688,
+      "kind": "function",
+      "name": "MenubarItem",
+      "startLine": 90,
+      "startOffset": 2658,
+      "symbolId": "components/ui/menubar.tsx::MenubarItem::function"
+    },
+    {
+      "endLine": 137,
+      "endOffset": 4629,
+      "kind": "function",
+      "name": "MenubarCheckboxItem",
+      "startLine": 113,
+      "startOffset": 3690,
+      "symbolId": "components/ui/menubar.tsx::MenubarCheckboxItem::function"
+    },
+    {
+      "endLine": 161,
+      "endOffset": 5534,
+      "kind": "function",
+      "name": "MenubarRadioItem",
+      "startLine": 139,
+      "startOffset": 4631,
+      "symbolId": "components/ui/menubar.tsx::MenubarRadioItem::function"
+    },
+    {
+      "endLine": 181,
+      "endOffset": 5910,
+      "kind": "function",
+      "name": "MenubarLabel",
+      "startLine": 163,
+      "startOffset": 5536,
+      "symbolId": "components/ui/menubar.tsx::MenubarLabel::function"
+    },
+    {
+      "endLine": 194,
+      "endOffset": 6195,
+      "kind": "function",
+      "name": "MenubarSeparator",
+      "startLine": 183,
+      "startOffset": 5912,
+      "symbolId": "components/ui/menubar.tsx::MenubarSeparator::function"
+    },
+    {
+      "endLine": 210,
+      "endOffset": 6482,
+      "kind": "function",
+      "name": "MenubarShortcut",
+      "startLine": 196,
+      "startOffset": 6197,
+      "symbolId": "components/ui/menubar.tsx::MenubarShortcut::function"
+    },
+    {
+      "endLine": 216,
+      "endOffset": 6643,
+      "kind": "function",
+      "name": "MenubarSub",
+      "startLine": 212,
+      "startOffset": 6484,
+      "symbolId": "components/ui/menubar.tsx::MenubarSub::function"
+    },
+    {
+      "endLine": 240,
+      "endOffset": 7329,
+      "kind": "function",
+      "name": "MenubarSubTrigger",
+      "startLine": 218,
+      "startOffset": 6645,
+      "symbolId": "components/ui/menubar.tsx::MenubarSubTrigger::function"
+    },
+    {
+      "endLine": 256,
+      "endOffset": 8106,
+      "kind": "function",
+      "name": "MenubarSubContent",
+      "startLine": 242,
+      "startOffset": 7331,
+      "symbolId": "components/ui/menubar.tsx::MenubarSubContent::function"
+    }
+  ]
+}

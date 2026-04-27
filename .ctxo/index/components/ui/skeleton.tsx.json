@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/skeleton.tsx::Skeleton::function"
+    }
+  ],
+  "contentHash": "c3005a6a39bd1aaecf3c0c9c61860db480ec5cbd16381556e381bdc3a59b6ac6",
+  "edges": [],
+  "file": "components/ui/skeleton.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 10,
+      "endOffset": 254,
+      "kind": "function",
+      "name": "Skeleton",
+      "startLine": 2,
+      "startOffset": 34,
+      "symbolId": "components/ui/skeleton.tsx::Skeleton::function"
+    }
+  ]
+}

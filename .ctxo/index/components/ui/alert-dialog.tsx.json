@@ -1,0 +1,162 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialog::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogTrigger::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogPortal::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogOverlay::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogContent::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogHeader::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogFooter::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogTitle::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogDescription::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogAction::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogCancel::function"
+    }
+  ],
+  "contentHash": "8181c7be76533bb5e1d721274cf16bcc07dbe25c521aa6f15e01fe8a302eb481",
+  "edges": [],
+  "file": "components/ui/alert-dialog.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 12,
+      "endOffset": 376,
+      "kind": "function",
+      "name": "AlertDialog",
+      "startLine": 8,
+      "startOffset": 205,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialog::function"
+    },
+    {
+      "endLine": 20,
+      "endOffset": 580,
+      "kind": "function",
+      "name": "AlertDialogTrigger",
+      "startLine": 14,
+      "startOffset": 378,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogTrigger::function"
+    },
+    {
+      "endLine": 28,
+      "endOffset": 780,
+      "kind": "function",
+      "name": "AlertDialogPortal",
+      "startLine": 22,
+      "startOffset": 582,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogPortal::function"
+    },
+    {
+      "endLine": 44,
+      "endOffset": 1224,
+      "kind": "function",
+      "name": "AlertDialogOverlay",
+      "startLine": 30,
+      "startOffset": 782,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogOverlay::function"
+    },
+    {
+      "endLine": 63,
+      "endOffset": 1975,
+      "kind": "function",
+      "name": "AlertDialogContent",
+      "startLine": 46,
+      "startOffset": 1226,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogContent::function"
+    },
+    {
+      "endLine": 76,
+      "endOffset": 2231,
+      "kind": "function",
+      "name": "AlertDialogHeader",
+      "startLine": 65,
+      "startOffset": 1977,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogHeader::function"
+    },
+    {
+      "endLine": 92,
+      "endOffset": 2522,
+      "kind": "function",
+      "name": "AlertDialogFooter",
+      "startLine": 78,
+      "startOffset": 2233,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogFooter::function"
+    },
+    {
+      "endLine": 105,
+      "endOffset": 2804,
+      "kind": "function",
+      "name": "AlertDialogTitle",
+      "startLine": 94,
+      "startOffset": 2524,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogTitle::function"
+    },
+    {
+      "endLine": 118,
+      "endOffset": 3118,
+      "kind": "function",
+      "name": "AlertDialogDescription",
+      "startLine": 107,
+      "startOffset": 2806,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogDescription::function"
+    },
+    {
+      "endLine": 130,
+      "endOffset": 3359,
+      "kind": "function",
+      "name": "AlertDialogAction",
+      "startLine": 120,
+      "startOffset": 3120,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogAction::function"
+    },
+    {
+      "endLine": 142,
+      "endOffset": 3622,
+      "kind": "function",
+      "name": "AlertDialogCancel",
+      "startLine": 132,
+      "startOffset": 3361,
+      "symbolId": "components/ui/alert-dialog.tsx::AlertDialogCancel::function"
+    }
+  ]
+}

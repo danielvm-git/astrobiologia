@@ -1,0 +1,58 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/resizable.tsx::ResizablePanelGroup::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/resizable.tsx::ResizablePanel::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/resizable.tsx::ResizableHandle::function"
+    }
+  ],
+  "contentHash": "8f96f309d60fb87c09afbfba79c43326324379859e2bc27e1d26594a886ec908",
+  "edges": [],
+  "file": "components/ui/resizable.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 22,
+      "endOffset": 550,
+      "kind": "function",
+      "name": "ResizablePanelGroup",
+      "startLine": 8,
+      "startOffset": 189,
+      "symbolId": "components/ui/resizable.tsx::ResizablePanelGroup::function"
+    },
+    {
+      "endLine": 28,
+      "endOffset": 727,
+      "kind": "function",
+      "name": "ResizablePanel",
+      "startLine": 24,
+      "startOffset": 552,
+      "symbolId": "components/ui/resizable.tsx::ResizablePanel::function"
+    },
+    {
+      "endLine": 53,
+      "endOffset": 1964,
+      "kind": "function",
+      "name": "ResizableHandle",
+      "startLine": 30,
+      "startOffset": 729,
+      "symbolId": "components/ui/resizable.tsx::ResizableHandle::function"
+    }
+  ]
+}

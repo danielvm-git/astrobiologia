@@ -1,0 +1,17 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "805360ccb32503b85146159d7183bd4172cee60be870619b9aa455f11ac1fe71",
+  "edges": [],
+  "file": "tests/phase2/editor_logic.test.ts",
+  "intent": [
+    {
+      "date": "2026-04-19T15:46:42-03:00",
+      "hash": "f02a0844e8b4ade7a57ea6e0e3a0b0dc8b54a67a",
+      "kind": "commit",
+      "message": "feat(phases-1-2): finalize infrastructure and administrative cms"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

@@ -1,0 +1,214 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenu::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuPortal::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuTrigger::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuContent::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuGroup::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuItem::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuCheckboxItem::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuRadioGroup::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuRadioItem::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuLabel::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuSeparator::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuShortcut::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuSub::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuSubTrigger::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuSubContent::function"
+    }
+  ],
+  "contentHash": "3124a8b0edfe90400cf4d14d438dfe6ac3af9ec9a6181feee10f48390aeb1815",
+  "edges": [],
+  "file": "components/ui/dropdown-menu.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 12,
+      "endOffset": 397,
+      "kind": "function",
+      "name": "DropdownMenu",
+      "startLine": 8,
+      "startOffset": 222,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenu::function"
+    },
+    {
+      "endLine": 20,
+      "endOffset": 601,
+      "kind": "function",
+      "name": "DropdownMenuPortal",
+      "startLine": 14,
+      "startOffset": 399,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuPortal::function"
+    },
+    {
+      "endLine": 31,
+      "endOffset": 825,
+      "kind": "function",
+      "name": "DropdownMenuTrigger",
+      "startLine": 22,
+      "startOffset": 603,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuTrigger::function"
+    },
+    {
+      "endLine": 51,
+      "endOffset": 1826,
+      "kind": "function",
+      "name": "DropdownMenuContent",
+      "startLine": 33,
+      "startOffset": 827,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuContent::function"
+    },
+    {
+      "endLine": 59,
+      "endOffset": 2026,
+      "kind": "function",
+      "name": "DropdownMenuGroup",
+      "startLine": 53,
+      "startOffset": 1828,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuGroup::function"
+    },
+    {
+      "endLine": 82,
+      "endOffset": 3079,
+      "kind": "function",
+      "name": "DropdownMenuItem",
+      "startLine": 61,
+      "startOffset": 2028,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuItem::function"
+    },
+    {
+      "endLine": 108,
+      "endOffset": 4056,
+      "kind": "function",
+      "name": "DropdownMenuCheckboxItem",
+      "startLine": 84,
+      "startOffset": 3081,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuCheckboxItem::function"
+    },
+    {
+      "endLine": 119,
+      "endOffset": 4293,
+      "kind": "function",
+      "name": "DropdownMenuRadioGroup",
+      "startLine": 110,
+      "startOffset": 4058,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuRadioGroup::function"
+    },
+    {
+      "endLine": 143,
+      "endOffset": 5234,
+      "kind": "function",
+      "name": "DropdownMenuRadioItem",
+      "startLine": 121,
+      "startOffset": 4295,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuRadioItem::function"
+    },
+    {
+      "endLine": 163,
+      "endOffset": 5631,
+      "kind": "function",
+      "name": "DropdownMenuLabel",
+      "startLine": 145,
+      "startOffset": 5236,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuLabel::function"
+    },
+    {
+      "endLine": 176,
+      "endOffset": 5937,
+      "kind": "function",
+      "name": "DropdownMenuSeparator",
+      "startLine": 165,
+      "startOffset": 5633,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuSeparator::function"
+    },
+    {
+      "endLine": 192,
+      "endOffset": 6235,
+      "kind": "function",
+      "name": "DropdownMenuShortcut",
+      "startLine": 178,
+      "startOffset": 5939,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuShortcut::function"
+    },
+    {
+      "endLine": 198,
+      "endOffset": 6417,
+      "kind": "function",
+      "name": "DropdownMenuSub",
+      "startLine": 194,
+      "startOffset": 6237,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuSub::function"
+    },
+    {
+      "endLine": 222,
+      "endOffset": 7270,
+      "kind": "function",
+      "name": "DropdownMenuSubTrigger",
+      "startLine": 200,
+      "startOffset": 6419,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuSubTrigger::function"
+    },
+    {
+      "endLine": 238,
+      "endOffset": 8074,
+      "kind": "function",
+      "name": "DropdownMenuSubContent",
+      "startLine": 224,
+      "startOffset": 7272,
+      "symbolId": "components/ui/dropdown-menu.tsx::DropdownMenuSubContent::function"
+    }
+  ]
+}

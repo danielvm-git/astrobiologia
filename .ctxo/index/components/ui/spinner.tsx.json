@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/spinner.tsx::Spinner::function"
+    }
+  ],
+  "contentHash": "006b673fb9c6922aae885173748176c0daec31d8b396a04335143808a5ec89c4",
+  "edges": [],
+  "file": "components/ui/spinner.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 13,
+      "endOffset": 310,
+      "kind": "function",
+      "name": "Spinner",
+      "startLine": 4,
+      "startOffset": 78,
+      "symbolId": "components/ui/spinner.tsx::Spinner::function"
+    }
+  ]
+}

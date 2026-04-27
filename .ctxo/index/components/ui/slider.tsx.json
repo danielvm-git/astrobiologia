@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 3,
+      "symbolId": "components/ui/slider.tsx::Slider::function"
+    }
+  ],
+  "contentHash": "1f13f7b4eaad00ce412f85a4219543db197943cdc8646b7cb54e34b360f83d18",
+  "edges": [],
+  "file": "components/ui/slider.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 56,
+      "endOffset": 1922,
+      "kind": "function",
+      "name": "Slider",
+      "startLine": 7,
+      "startOffset": 138,
+      "symbolId": "components/ui/slider.tsx::Slider::function"
+    }
+  ]
+}

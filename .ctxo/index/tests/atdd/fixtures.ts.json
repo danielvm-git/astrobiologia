@@ -1,0 +1,36 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "d7678f0935aa47fac9c1bde47b40a9179d7c9e0a1b5a30a9aace5eb0c5d65c46",
+  "edges": [],
+  "file": "tests/atdd/fixtures.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T00:29:38-03:00",
+      "hash": "0d39272b81db98b68da8163f50785bcf8adc4bf2",
+      "kind": "commit",
+      "message": "refactor: migrate article management to server actions, remove unused deletion endpoint, and implement end-to-end testing infrastructure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 7,
+      "endOffset": 151,
+      "kind": "variable",
+      "name": "adminCredentials",
+      "startLine": 4,
+      "startOffset": 54,
+      "symbolId": "tests/atdd/fixtures.ts::adminCredentials::variable"
+    },
+    {
+      "endLine": 12,
+      "endOffset": 253,
+      "kind": "variable",
+      "name": "invalidCredentials",
+      "startLine": 9,
+      "startOffset": 167,
+      "symbolId": "tests/atdd/fixtures.ts::invalidCredentials::variable"
+    }
+  ]
+}

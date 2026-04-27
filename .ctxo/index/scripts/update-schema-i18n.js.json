@@ -1,0 +1,23 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "7d1dda554436ff01d6ae6a7cf674f1e625c61afe6ef798c497bc4b8dec35ff9a",
+  "edges": [],
+  "file": "scripts/update-schema-i18n.js",
+  "intent": [
+    {
+      "date": "2026-04-19T19:49:53-03:00",
+      "hash": "88fe82b4ff6a7e12067303dfcce42aadf41525b0",
+      "kind": "commit",
+      "message": "fix(tests): resolve vitest mock error and verify full preflight"
+    },
+    {
+      "date": "2026-04-19T19:35:43-03:00",
+      "hash": "1d7d552e6516708f6350b1e6191d9b21d7cf3d04",
+      "kind": "commit",
+      "message": "feat(i18n): implement relational database schema and migrate content"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

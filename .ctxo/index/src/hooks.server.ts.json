@@ -1,0 +1,66 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "b5ba2990e5d2f24e8b001f2b1ca815a4718e224ebca8907accf3b5597d2aaf15",
+  "edges": [],
+  "file": "src/hooks.server.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T23:11:46-03:00",
+      "hash": "4b45ba0b34eec59888dc5277cd8a6cc3d665c4cb",
+      "kind": "commit",
+      "message": "fix(i18n-auth): locale-aware admin routing, translations, OAuth logging"
+    },
+    {
+      "date": "2026-04-20T00:29:38-03:00",
+      "hash": "0d39272b81db98b68da8163f50785bcf8adc4bf2",
+      "kind": "commit",
+      "message": "refactor: migrate article management to server actions, remove unused deletion endpoint, and implement end-to-end testing infrastructure"
+    },
+    {
+      "date": "2026-04-19T22:05:16-03:00",
+      "hash": "8c75ae4ec8a45e12c2c9663aaebde62be6685ac1",
+      "kind": "commit",
+      "message": "refactor: migrate client-side loaders to server-side, implement DeepL integration, and update auth hooks and paraglide strategy."
+    },
+    {
+      "date": "2026-04-19T21:02:26-03:00",
+      "hash": "daac352915829d4989292bab5893128b03122cfc",
+      "kind": "commit",
+      "message": "feat: refactor authentication to use server-side sessions with Appwrite and update admin layout structure"
+    },
+    {
+      "date": "2026-04-19T19:11:52-03:00",
+      "hash": "bc294203e407873cb8ae4004e72c006c0521afc5",
+      "kind": "commit",
+      "message": "fix(deploy): update regional appwrite endpoint and fix auth hooks for remote build"
+    },
+    {
+      "date": "2026-04-19T18:55:14-03:00",
+      "hash": "6eaee01cea50130b57008e8b8b64d90bc2ac55aa",
+      "kind": "commit",
+      "message": "feat(i18n): setup paraglide-js and localized routing infrastructure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 62,
+      "endOffset": 2419,
+      "kind": "variable",
+      "name": "handleAdminAuth",
+      "startLine": 19,
+      "startOffset": 788,
+      "symbolId": "src/hooks.server.ts::handleAdminAuth::variable"
+    },
+    {
+      "endLine": 64,
+      "endOffset": 2494,
+      "kind": "variable",
+      "name": "handle",
+      "startLine": 64,
+      "startOffset": 2435,
+      "symbolId": "src/hooks.server.ts::handle::variable"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "59b8aa4ab7ec81b9971f80dfbd5dc8b5286153b1e92e1cfca505b9cadf7f0441",
+  "edges": [],
+  "file": "src/lib/index.ts",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

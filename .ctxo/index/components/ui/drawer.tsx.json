@@ -1,0 +1,149 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/drawer.tsx::Drawer::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/drawer.tsx::DrawerTrigger::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/drawer.tsx::DrawerPortal::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/drawer.tsx::DrawerClose::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/drawer.tsx::DrawerOverlay::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/drawer.tsx::DrawerContent::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/drawer.tsx::DrawerHeader::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/drawer.tsx::DrawerFooter::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/drawer.tsx::DrawerTitle::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/drawer.tsx::DrawerDescription::function"
+    }
+  ],
+  "contentHash": "e62592bd1cea50ad95ebeba32a165f9cfdf5a5c6431067ec74e024b83a866f01",
+  "edges": [],
+  "file": "components/ui/drawer.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 11,
+      "endOffset": 279,
+      "kind": "function",
+      "name": "Drawer",
+      "startLine": 7,
+      "startOffset": 129,
+      "symbolId": "components/ui/drawer.tsx::Drawer::function"
+    },
+    {
+      "endLine": 17,
+      "endOffset": 452,
+      "kind": "function",
+      "name": "DrawerTrigger",
+      "startLine": 13,
+      "startOffset": 281,
+      "symbolId": "components/ui/drawer.tsx::DrawerTrigger::function"
+    },
+    {
+      "endLine": 23,
+      "endOffset": 621,
+      "kind": "function",
+      "name": "DrawerPortal",
+      "startLine": 19,
+      "startOffset": 454,
+      "symbolId": "components/ui/drawer.tsx::DrawerPortal::function"
+    },
+    {
+      "endLine": 29,
+      "endOffset": 786,
+      "kind": "function",
+      "name": "DrawerClose",
+      "startLine": 25,
+      "startOffset": 623,
+      "symbolId": "components/ui/drawer.tsx::DrawerClose::function"
+    },
+    {
+      "endLine": 45,
+      "endOffset": 1209,
+      "kind": "function",
+      "name": "DrawerOverlay",
+      "startLine": 31,
+      "startOffset": 788,
+      "symbolId": "components/ui/drawer.tsx::DrawerOverlay::function"
+    },
+    {
+      "endLine": 72,
+      "endOffset": 2889,
+      "kind": "function",
+      "name": "DrawerContent",
+      "startLine": 47,
+      "startOffset": 1211,
+      "symbolId": "components/ui/drawer.tsx::DrawerContent::function"
+    },
+    {
+      "endLine": 85,
+      "endOffset": 3295,
+      "kind": "function",
+      "name": "DrawerHeader",
+      "startLine": 74,
+      "startOffset": 2891,
+      "symbolId": "components/ui/drawer.tsx::DrawerHeader::function"
+    },
+    {
+      "endLine": 95,
+      "endOffset": 3523,
+      "kind": "function",
+      "name": "DrawerFooter",
+      "startLine": 87,
+      "startOffset": 3297,
+      "symbolId": "components/ui/drawer.tsx::DrawerFooter::function"
+    },
+    {
+      "endLine": 108,
+      "endOffset": 3792,
+      "kind": "function",
+      "name": "DrawerTitle",
+      "startLine": 97,
+      "startOffset": 3525,
+      "symbolId": "components/ui/drawer.tsx::DrawerTitle::function"
+    },
+    {
+      "endLine": 121,
+      "endOffset": 4085,
+      "kind": "function",
+      "name": "DrawerDescription",
+      "startLine": 110,
+      "startOffset": 3794,
+      "symbolId": "components/ui/drawer.tsx::DrawerDescription::function"
+    }
+  ]
+}

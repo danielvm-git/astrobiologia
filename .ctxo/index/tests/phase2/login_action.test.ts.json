@@ -1,0 +1,23 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "c5eefe5120d81c6a1edb861c8bf2757f8bd34b5472ba1477e9587ebff8581326",
+  "edges": [],
+  "file": "tests/phase2/login_action.test.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T23:11:46-03:00",
+      "hash": "4b45ba0b34eec59888dc5277cd8a6cc3d665c4cb",
+      "kind": "commit",
+      "message": "fix(i18n-auth): locale-aware admin routing, translations, OAuth logging"
+    },
+    {
+      "date": "2026-04-20T18:04:08-03:00",
+      "hash": "8b7a251ea3f2e8d972b4399354726dcf717269f1",
+      "kind": "commit",
+      "message": "test(auth): add regression tests for login cookie-redirect contract and E2E flow"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

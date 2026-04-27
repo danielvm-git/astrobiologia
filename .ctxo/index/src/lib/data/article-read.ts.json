@@ -1,0 +1,216 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 2,
+      "symbolId": "src/lib/data/article-read.ts::getPublishedArticles::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "src/lib/data/article-read.ts::getFeaturedArticles::function"
+    },
+    {
+      "cyclomatic": 9,
+      "symbolId": "src/lib/data/article-read.ts::getArticleBySlug::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "src/lib/data/article-read.ts::getArticlesByCategory::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/lib/data/article-read.ts::getAllArticles::function"
+    },
+    {
+      "cyclomatic": 9,
+      "symbolId": "src/lib/data/article-read.ts::searchPublishedArticles::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/lib/data/article-read.ts::getArticleTranslations::function"
+    }
+  ],
+  "contentHash": "75cac3be4b1fd626cf71803b57b12554ec570d9f0e2d78bcadb7c1c7a5db3447",
+  "edges": [
+    {
+      "from": "src/lib/data/article-read.ts::getPublishedArticles::function",
+      "kind": "imports",
+      "to": "src/lib/appwrite.ts::Article::interface",
+      "typeOnly": true
+    },
+    {
+      "from": "src/lib/data/article-read.ts::getPublishedArticles::function",
+      "kind": "imports",
+      "to": "src/lib/appwrite.ts::ArticleTranslation::interface",
+      "typeOnly": true
+    },
+    {
+      "from": "src/lib/data/article-read.ts::getPublishedArticles::function",
+      "kind": "calls",
+      "to": "src/lib/data/article-read.ts::fetchTranslationsForArticleIds::function"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::getPublishedArticles::function",
+      "kind": "calls",
+      "to": "src/lib/data/article-read.ts::joinTranslationsByArticle::function"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::getFeaturedArticles::function",
+      "kind": "calls",
+      "to": "src/lib/data/article-read.ts::fetchTranslationsForArticleIds::function"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::getFeaturedArticles::function",
+      "kind": "calls",
+      "to": "src/lib/data/article-read.ts::joinTranslationsByArticle::function"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::getArticleBySlug::function",
+      "kind": "calls",
+      "to": "src/lib/data/article-read.ts::pickTranslationForArticle::function"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::getArticleBySlug::function",
+      "kind": "calls",
+      "to": "src/lib/data/article-read.ts::articleIdFromTranslation::function"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::getArticleBySlug::function",
+      "kind": "calls",
+      "to": "src/lib/data/article-read.ts::pickTranslationForArticle::function"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::getArticlesByCategory::function",
+      "kind": "calls",
+      "to": "src/lib/data/article-read.ts::fetchTranslationsForArticleIds::function"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::getArticlesByCategory::function",
+      "kind": "calls",
+      "to": "src/lib/data/article-read.ts::joinTranslationsByArticle::function"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::searchPublishedArticles::function",
+      "kind": "calls",
+      "to": "src/lib/data/article-read.ts::getPublishedArticles::function"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::searchPublishedArticles::function",
+      "kind": "calls",
+      "to": "src/lib/data/article-read.ts::articleIdFromTranslation::function"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::getPublishedArticles::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite.ts::Article::interface"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::getFeaturedArticles::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite.ts::Article::interface"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::getArticleBySlug::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite.ts::Article::interface"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::getArticleBySlug::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite.ts::ArticleTranslation::interface"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::getArticlesByCategory::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite.ts::Article::interface"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::getAllArticles::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite.ts::Article::interface"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::searchPublishedArticles::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite.ts::Article::interface"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::searchPublishedArticles::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite.ts::ArticleTranslation::interface"
+    },
+    {
+      "from": "src/lib/data/article-read.ts::getArticleTranslations::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite.ts::ArticleTranslation::interface"
+    }
+  ],
+  "file": "src/lib/data/article-read.ts",
+  "intent": [],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 102,
+      "endOffset": 3384,
+      "kind": "function",
+      "name": "getPublishedArticles",
+      "startLine": 82,
+      "startOffset": 2745,
+      "symbolId": "src/lib/data/article-read.ts::getPublishedArticles::function"
+    },
+    {
+      "endLine": 119,
+      "endOffset": 3991,
+      "kind": "function",
+      "name": "getFeaturedArticles",
+      "startLine": 104,
+      "startOffset": 3386,
+      "symbolId": "src/lib/data/article-read.ts::getFeaturedArticles::function"
+    },
+    {
+      "endLine": 174,
+      "endOffset": 5624,
+      "kind": "function",
+      "name": "getArticleBySlug",
+      "startLine": 121,
+      "startOffset": 3993,
+      "symbolId": "src/lib/data/article-read.ts::getArticleBySlug::function"
+    },
+    {
+      "endLine": 195,
+      "endOffset": 6261,
+      "kind": "function",
+      "name": "getArticlesByCategory",
+      "startLine": 176,
+      "startOffset": 5626,
+      "symbolId": "src/lib/data/article-read.ts::getArticlesByCategory::function"
+    },
+    {
+      "endLine": 203,
+      "endOffset": 6519,
+      "kind": "function",
+      "name": "getAllArticles",
+      "startLine": 197,
+      "startOffset": 6263,
+      "symbolId": "src/lib/data/article-read.ts::getAllArticles::function"
+    },
+    {
+      "endLine": 269,
+      "endOffset": 8495,
+      "kind": "function",
+      "name": "searchPublishedArticles",
+      "startLine": 205,
+      "startOffset": 6521,
+      "symbolId": "src/lib/data/article-read.ts::searchPublishedArticles::function"
+    },
+    {
+      "endLine": 280,
+      "endOffset": 8880,
+      "kind": "function",
+      "name": "getArticleTranslations",
+      "startLine": 274,
+      "startOffset": 8557,
+      "symbolId": "src/lib/data/article-read.ts::getArticleTranslations::function"
+    }
+  ]
+}

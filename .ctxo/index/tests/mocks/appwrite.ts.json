@@ -1,0 +1,63 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "75e6205f46364107511bd5a9b69578f7a6a9d5f7c8f3935572d3ea1d80ab0217",
+  "edges": [],
+  "file": "tests/mocks/appwrite.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T00:29:38-03:00",
+      "hash": "0d39272b81db98b68da8163f50785bcf8adc4bf2",
+      "kind": "commit",
+      "message": "refactor: migrate article management to server actions, remove unused deletion endpoint, and implement end-to-end testing infrastructure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 11,
+      "endOffset": 217,
+      "kind": "variable",
+      "name": "mockAccount",
+      "startLine": 6,
+      "startOffset": 93,
+      "symbolId": "tests/mocks/appwrite.ts::mockAccount::variable"
+    },
+    {
+      "endLine": 19,
+      "endOffset": 392,
+      "kind": "variable",
+      "name": "mockDatabases",
+      "startLine": 13,
+      "startOffset": 233,
+      "symbolId": "tests/mocks/appwrite.ts::mockDatabases::variable"
+    },
+    {
+      "endLine": 25,
+      "endOffset": 567,
+      "kind": "variable",
+      "name": "mockStorage",
+      "startLine": 21,
+      "startOffset": 408,
+      "symbolId": "tests/mocks/appwrite.ts::mockStorage::variable"
+    },
+    {
+      "endLine": 32,
+      "endOffset": 763,
+      "kind": "variable",
+      "name": "mockClient",
+      "startLine": 27,
+      "startOffset": 583,
+      "symbolId": "tests/mocks/appwrite.ts::mockClient::variable"
+    },
+    {
+      "endLine": 47,
+      "endOffset": 1480,
+      "kind": "variable",
+      "name": "appwriteMockImplementation",
+      "startLine": 35,
+      "startOffset": 853,
+      "symbolId": "tests/mocks/appwrite.ts::appwriteMockImplementation::variable"
+    }
+  ]
+}

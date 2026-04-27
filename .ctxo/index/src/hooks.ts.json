@@ -1,0 +1,27 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "d5c1eb9b6258ac69e57064251c6b60523e43d3e8f56f3e5c902643221e241815",
+  "edges": [],
+  "file": "src/hooks.ts",
+  "intent": [
+    {
+      "date": "2026-04-19T18:55:14-03:00",
+      "hash": "6eaee01cea50130b57008e8b8b64d90bc2ac55aa",
+      "kind": "commit",
+      "message": "feat(i18n): setup paraglide-js and localized routing infrastructure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 3,
+      "endOffset": 183,
+      "kind": "variable",
+      "name": "reroute",
+      "startLine": 3,
+      "startOffset": 116,
+      "symbolId": "src/hooks.ts::reroute::variable"
+    }
+  ]
+}

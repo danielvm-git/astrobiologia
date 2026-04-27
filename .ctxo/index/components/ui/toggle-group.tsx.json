@@ -1,0 +1,45 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/toggle-group.tsx::ToggleGroup::function"
+    },
+    {
+      "cyclomatic": 5,
+      "symbolId": "components/ui/toggle-group.tsx::ToggleGroupItem::function"
+    }
+  ],
+  "contentHash": "4e725b44cc99b17211ca80c9306271c7dd1a9c9af0d0aba3faddad63d33992e2",
+  "edges": [],
+  "file": "components/ui/toggle-group.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 40,
+      "endOffset": 1031,
+      "kind": "function",
+      "name": "ToggleGroup",
+      "startLine": 16,
+      "startOffset": 401,
+      "symbolId": "components/ui/toggle-group.tsx::ToggleGroup::function"
+    },
+    {
+      "endLine": 70,
+      "endOffset": 1885,
+      "kind": "function",
+      "name": "ToggleGroupItem",
+      "startLine": 42,
+      "startOffset": 1033,
+      "symbolId": "components/ui/toggle-group.tsx::ToggleGroupItem::function"
+    }
+  ]
+}

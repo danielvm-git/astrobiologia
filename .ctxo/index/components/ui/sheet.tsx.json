@@ -1,0 +1,123 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sheet.tsx::Sheet::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sheet.tsx::SheetTrigger::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sheet.tsx::SheetClose::function"
+    },
+    {
+      "cyclomatic": 5,
+      "symbolId": "components/ui/sheet.tsx::SheetContent::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sheet.tsx::SheetHeader::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sheet.tsx::SheetFooter::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sheet.tsx::SheetTitle::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sheet.tsx::SheetDescription::function"
+    }
+  ],
+  "contentHash": "647b61de5cb1f53e7265022c6f60bf25a43b75ff71bde690adf9ec5f74a22688",
+  "edges": [],
+  "file": "components/ui/sheet.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 10,
+      "endOffset": 318,
+      "kind": "function",
+      "name": "Sheet",
+      "startLine": 8,
+      "startOffset": 174,
+      "symbolId": "components/ui/sheet.tsx::Sheet::function"
+    },
+    {
+      "endLine": 16,
+      "endOffset": 487,
+      "kind": "function",
+      "name": "SheetTrigger",
+      "startLine": 12,
+      "startOffset": 320,
+      "symbolId": "components/ui/sheet.tsx::SheetTrigger::function"
+    },
+    {
+      "endLine": 22,
+      "endOffset": 648,
+      "kind": "function",
+      "name": "SheetClose",
+      "startLine": 18,
+      "startOffset": 489,
+      "symbolId": "components/ui/sheet.tsx::SheetClose::function"
+    },
+    {
+      "endLine": 81,
+      "endOffset": 2960,
+      "kind": "function",
+      "name": "SheetContent",
+      "startLine": 46,
+      "startOffset": 1234,
+      "symbolId": "components/ui/sheet.tsx::SheetContent::function"
+    },
+    {
+      "endLine": 91,
+      "endOffset": 3180,
+      "kind": "function",
+      "name": "SheetHeader",
+      "startLine": 83,
+      "startOffset": 2962,
+      "symbolId": "components/ui/sheet.tsx::SheetHeader::function"
+    },
+    {
+      "endLine": 101,
+      "endOffset": 3406,
+      "kind": "function",
+      "name": "SheetFooter",
+      "startLine": 93,
+      "startOffset": 3182,
+      "symbolId": "components/ui/sheet.tsx::SheetFooter::function"
+    },
+    {
+      "endLine": 114,
+      "endOffset": 3671,
+      "kind": "function",
+      "name": "SheetTitle",
+      "startLine": 103,
+      "startOffset": 3408,
+      "symbolId": "components/ui/sheet.tsx::SheetTitle::function"
+    },
+    {
+      "endLine": 127,
+      "endOffset": 3960,
+      "kind": "function",
+      "name": "SheetDescription",
+      "startLine": 116,
+      "startOffset": 3673,
+      "symbolId": "components/ui/sheet.tsx::SheetDescription::function"
+    }
+  ]
+}

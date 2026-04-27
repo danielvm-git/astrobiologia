@@ -1,0 +1,28 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "4f114c9dd9f26328d0ddf96957a3772821b138d59e6c3ee79efb4a244d9562a1",
+  "edges": [
+    {
+      "from": "scratch/test_paraglide.js::test_paraglide::variable",
+      "kind": "imports",
+      "to": "scratch/src/lib/paraglide/runtime.ts::localizeHref::function"
+    },
+    {
+      "from": "scratch/test_paraglide.js::test_paraglide::variable",
+      "kind": "imports",
+      "to": "scratch/src/lib/paraglide/runtime.ts::deLocalizeHref::function"
+    }
+  ],
+  "file": "scratch/test_paraglide.js",
+  "intent": [
+    {
+      "date": "2026-04-19T21:02:26-03:00",
+      "hash": "daac352915829d4989292bab5893128b03122cfc",
+      "kind": "commit",
+      "message": "feat: refactor authentication to use server-side sessions with Appwrite and update admin layout structure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

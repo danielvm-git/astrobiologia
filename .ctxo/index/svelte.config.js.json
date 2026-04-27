@@ -1,0 +1,29 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "e06be87c3524a631dae220645c8b38f80fdcba2d7b17432649b9614aeb769394",
+  "edges": [],
+  "file": "svelte.config.js",
+  "intent": [
+    {
+      "date": "2026-04-19T17:32:44-03:00",
+      "hash": "7e32426cf4c709b493b78c873ed509089b38ae86",
+      "kind": "commit",
+      "message": "refactor: migrate to node adapter, fix reactivity initialization patterns, and update tsconfig and component markup"
+    },
+    {
+      "date": "2026-04-19T17:04:32-03:00",
+      "hash": "cc936a86cc6babc97ab01ebb5917d0b53782b215",
+      "kind": "commit",
+      "message": "chore: switch to static adapter, update auth flow to OAuth2 tokens, add favicon, and initialize i18n planning documents"
+    },
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

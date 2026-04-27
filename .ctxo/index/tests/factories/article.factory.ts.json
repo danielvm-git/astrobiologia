@@ -1,0 +1,58 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "097c4bc2017ada00cfd3c68b93223a58fc57867018e977abaf6d5a272e257b45",
+  "edges": [
+    {
+      "from": "tests/factories/article.factory.ts::createArticle::variable",
+      "kind": "imports",
+      "to": "src/lib/appwrite.ts::Article::interface",
+      "typeOnly": true
+    },
+    {
+      "from": "tests/factories/article.factory.ts::createArticle::variable",
+      "kind": "imports",
+      "to": "src/lib/appwrite.ts::ArticleTranslation::interface",
+      "typeOnly": true
+    }
+  ],
+  "file": "tests/factories/article.factory.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T00:29:38-03:00",
+      "hash": "0d39272b81db98b68da8163f50785bcf8adc4bf2",
+      "kind": "commit",
+      "message": "refactor: migrate article management to server actions, remove unused deletion endpoint, and implement end-to-end testing infrastructure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 18,
+      "endOffset": 571,
+      "kind": "variable",
+      "name": "createArticle",
+      "startLine": 6,
+      "startOffset": 147,
+      "symbolId": "tests/factories/article.factory.ts::createArticle::variable"
+    },
+    {
+      "endLine": 29,
+      "endOffset": 988,
+      "kind": "variable",
+      "name": "createArticleTranslation",
+      "startLine": 20,
+      "startOffset": 587,
+      "symbolId": "tests/factories/article.factory.ts::createArticleTranslation::variable"
+    },
+    {
+      "endLine": 41,
+      "endOffset": 1326,
+      "kind": "variable",
+      "name": "createFullArticle",
+      "startLine": 34,
+      "startOffset": 1057,
+      "symbolId": "tests/factories/article.factory.ts::createFullArticle::variable"
+    }
+  ]
+}

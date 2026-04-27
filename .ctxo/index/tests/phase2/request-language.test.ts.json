@@ -1,0 +1,21 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "8f08d41b8faa0fe3400b5c55944f4d71e306be3bf9561a177500234ecb8b8640",
+  "edges": [
+    {
+      "from": "tests/phase2/request-language.test.ts::request-language.test::variable",
+      "kind": "imports",
+      "to": "src/lib/server/request-language.ts::DEFAULT_REQUEST_LANGUAGE::variable"
+    },
+    {
+      "from": "tests/phase2/request-language.test.ts::request-language.test::variable",
+      "kind": "imports",
+      "to": "src/lib/server/request-language.ts::getRequestLanguage::function"
+    }
+  ],
+  "file": "tests/phase2/request-language.test.ts",
+  "intent": [],
+  "lastModified": 1777240609,
+  "symbols": []
+}

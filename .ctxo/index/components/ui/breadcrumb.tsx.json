@@ -1,0 +1,110 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/breadcrumb.tsx::Breadcrumb::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/breadcrumb.tsx::BreadcrumbList::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/breadcrumb.tsx::BreadcrumbItem::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/breadcrumb.tsx::BreadcrumbLink::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/breadcrumb.tsx::BreadcrumbPage::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/breadcrumb.tsx::BreadcrumbSeparator::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/breadcrumb.tsx::BreadcrumbEllipsis::function"
+    }
+  ],
+  "contentHash": "801c5fac01248e8e4692b58a6ee5c6a50a3cddb9b095e0bb2e04aff201313b6c",
+  "edges": [],
+  "file": "components/ui/breadcrumb.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 8,
+      "endOffset": 311,
+      "kind": "function",
+      "name": "Breadcrumb",
+      "startLine": 6,
+      "startOffset": 170,
+      "symbolId": "components/ui/breadcrumb.tsx::Breadcrumb::function"
+    },
+    {
+      "endLine": 21,
+      "endOffset": 623,
+      "kind": "function",
+      "name": "BreadcrumbList",
+      "startLine": 10,
+      "startOffset": 313,
+      "symbolId": "components/ui/breadcrumb.tsx::BreadcrumbList::function"
+    },
+    {
+      "endLine": 31,
+      "endOffset": 854,
+      "kind": "function",
+      "name": "BreadcrumbItem",
+      "startLine": 23,
+      "startOffset": 625,
+      "symbolId": "components/ui/breadcrumb.tsx::BreadcrumbItem::function"
+    },
+    {
+      "endLine": 49,
+      "endOffset": 1171,
+      "kind": "function",
+      "name": "BreadcrumbLink",
+      "startLine": 33,
+      "startOffset": 856,
+      "symbolId": "components/ui/breadcrumb.tsx::BreadcrumbLink::function"
+    },
+    {
+      "endLine": 62,
+      "endOffset": 1472,
+      "kind": "function",
+      "name": "BreadcrumbPage",
+      "startLine": 51,
+      "startOffset": 1173,
+      "symbolId": "components/ui/breadcrumb.tsx::BreadcrumbPage::function"
+    },
+    {
+      "endLine": 80,
+      "endOffset": 1810,
+      "kind": "function",
+      "name": "BreadcrumbSeparator",
+      "startLine": 64,
+      "startOffset": 1474,
+      "symbolId": "components/ui/breadcrumb.tsx::BreadcrumbSeparator::function"
+    },
+    {
+      "endLine": 98,
+      "endOffset": 2214,
+      "kind": "function",
+      "name": "BreadcrumbEllipsis",
+      "startLine": 82,
+      "startOffset": 1812,
+      "symbolId": "components/ui/breadcrumb.tsx::BreadcrumbEllipsis::function"
+    }
+  ]
+}

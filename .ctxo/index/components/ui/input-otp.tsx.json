@@ -1,0 +1,71 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/input-otp.tsx::InputOTP::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/input-otp.tsx::InputOTPGroup::function"
+    },
+    {
+      "cyclomatic": 3,
+      "symbolId": "components/ui/input-otp.tsx::InputOTPSlot::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/input-otp.tsx::InputOTPSeparator::function"
+    }
+  ],
+  "contentHash": "6a046b50c82c554699c148a9f4922c785b200fb87f067772f166e80c59e813ca",
+  "edges": [],
+  "file": "components/ui/input-otp.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 26,
+      "endOffset": 592,
+      "kind": "function",
+      "name": "InputOTP",
+      "startLine": 8,
+      "startOffset": 175,
+      "symbolId": "components/ui/input-otp.tsx::InputOTP::function"
+    },
+    {
+      "endLine": 36,
+      "endOffset": 809,
+      "kind": "function",
+      "name": "InputOTPGroup",
+      "startLine": 28,
+      "startOffset": 594,
+      "symbolId": "components/ui/input-otp.tsx::InputOTPGroup::function"
+    },
+    {
+      "endLine": 66,
+      "endOffset": 1995,
+      "kind": "function",
+      "name": "InputOTPSlot",
+      "startLine": 38,
+      "startOffset": 811,
+      "symbolId": "components/ui/input-otp.tsx::InputOTPSlot::function"
+    },
+    {
+      "endLine": 74,
+      "endOffset": 2186,
+      "kind": "function",
+      "name": "InputOTPSeparator",
+      "startLine": 68,
+      "startOffset": 1997,
+      "symbolId": "components/ui/input-otp.tsx::InputOTPSeparator::function"
+    }
+  ]
+}

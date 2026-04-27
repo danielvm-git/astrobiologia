@@ -1,0 +1,136 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/command.tsx::Command::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/command.tsx::CommandDialog::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/command.tsx::CommandInput::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/command.tsx::CommandList::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/command.tsx::CommandEmpty::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/command.tsx::CommandGroup::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/command.tsx::CommandSeparator::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/command.tsx::CommandItem::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/command.tsx::CommandShortcut::function"
+    }
+  ],
+  "contentHash": "803aa420db4170238043ca1b9f1fd88f285f1b83f3ff2c0c5abff217df316896",
+  "edges": [],
+  "file": "components/ui/command.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 29,
+      "endOffset": 626,
+      "kind": "function",
+      "name": "Command",
+      "startLine": 15,
+      "startOffset": 293,
+      "symbolId": "components/ui/command.tsx::Command::function"
+    },
+    {
+      "endLine": 60,
+      "endOffset": 1779,
+      "kind": "function",
+      "name": "CommandDialog",
+      "startLine": 31,
+      "startOffset": 628,
+      "symbolId": "components/ui/command.tsx::CommandDialog::function"
+    },
+    {
+      "endLine": 82,
+      "endOffset": 2402,
+      "kind": "function",
+      "name": "CommandInput",
+      "startLine": 62,
+      "startOffset": 1781,
+      "symbolId": "components/ui/command.tsx::CommandInput::function"
+    },
+    {
+      "endLine": 98,
+      "endOffset": 2726,
+      "kind": "function",
+      "name": "CommandList",
+      "startLine": 84,
+      "startOffset": 2404,
+      "symbolId": "components/ui/command.tsx::CommandList::function"
+    },
+    {
+      "endLine": 110,
+      "endOffset": 2964,
+      "kind": "function",
+      "name": "CommandEmpty",
+      "startLine": 100,
+      "startOffset": 2728,
+      "symbolId": "components/ui/command.tsx::CommandEmpty::function"
+    },
+    {
+      "endLine": 126,
+      "endOffset": 3447,
+      "kind": "function",
+      "name": "CommandGroup",
+      "startLine": 112,
+      "startOffset": 2966,
+      "symbolId": "components/ui/command.tsx::CommandGroup::function"
+    },
+    {
+      "endLine": 139,
+      "endOffset": 3727,
+      "kind": "function",
+      "name": "CommandSeparator",
+      "startLine": 128,
+      "startOffset": 3449,
+      "symbolId": "components/ui/command.tsx::CommandSeparator::function"
+    },
+    {
+      "endLine": 155,
+      "endOffset": 4379,
+      "kind": "function",
+      "name": "CommandItem",
+      "startLine": 141,
+      "startOffset": 3729,
+      "symbolId": "components/ui/command.tsx::CommandItem::function"
+    },
+    {
+      "endLine": 171,
+      "endOffset": 4666,
+      "kind": "function",
+      "name": "CommandShortcut",
+      "startLine": 157,
+      "startOffset": 4381,
+      "symbolId": "components/ui/command.tsx::CommandShortcut::function"
+    }
+  ]
+}

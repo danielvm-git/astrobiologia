@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 3,
+      "symbolId": "components/ui/progress.tsx::Progress::function"
+    }
+  ],
+  "contentHash": "d48446fe6380e0fb272988c37992a4633b7002dd7e8faa639993f38e010953aa",
+  "edges": [],
+  "file": "components/ui/progress.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 28,
+      "endOffset": 719,
+      "kind": "function",
+      "name": "Progress",
+      "startLine": 7,
+      "startOffset": 142,
+      "symbolId": "components/ui/progress.tsx::Progress::function"
+    }
+  ]
+}

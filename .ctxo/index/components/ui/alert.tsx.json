@@ -1,0 +1,58 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/alert.tsx::Alert::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/alert.tsx::AlertTitle::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/alert.tsx::AlertDescription::function"
+    }
+  ],
+  "contentHash": "dce4f80f612a79389688cc8f765cccde46d5af4881ea899cc694187ac386757a",
+  "edges": [],
+  "file": "components/ui/alert.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 34,
+      "endOffset": 963,
+      "kind": "function",
+      "name": "Alert",
+      "startLine": 21,
+      "startOffset": 688,
+      "symbolId": "components/ui/alert.tsx::Alert::function"
+    },
+    {
+      "endLine": 47,
+      "endOffset": 1240,
+      "kind": "function",
+      "name": "AlertTitle",
+      "startLine": 36,
+      "startOffset": 965,
+      "symbolId": "components/ui/alert.tsx::AlertTitle::function"
+    },
+    {
+      "endLine": 63,
+      "endOffset": 1568,
+      "kind": "function",
+      "name": "AlertDescription",
+      "startLine": 49,
+      "startOffset": 1242,
+      "symbolId": "components/ui/alert.tsx::AlertDescription::function"
+    }
+  ]
+}
