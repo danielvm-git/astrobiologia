@@ -1,55 +1,8 @@
 {
   "version": 1,
-  "computedAt": "2026-04-26T21:56:50.691Z",
-  "commitSha": "ed281a1",
-  "confidence": "low",
-  "snapshotsAvailable": 1,
-  "hint": "Insufficient snapshot history — enable `ctxo init` hook or add `ctxo index --check` to CI for boundary-violation signal.",
-  "violations": [
-    {
-      "from": {
-        "symbolId": "src/lib/appwrite.ts::getCurrentUser::function",
-        "communityId": 282,
-        "label": "account area"
-      },
-      "to": {
-        "symbolId": "src/lib/appwrite-datasets.ts::COLLECTIONS::variable",
-        "communityId": 281,
-        "label": "src/lib"
-      },
-      "edgeKind": "imports",
-      "historicalEdgesBetweenClusters": -1,
-      "severity": "medium"
-    },
-    {
-      "from": {
-        "symbolId": "src/lib/appwrite.ts::getCurrentUser::function",
-        "communityId": 282,
-        "label": "account area"
-      },
-      "to": {
-        "symbolId": "src/lib/appwrite-datasets.ts::DATABASE_ID::variable",
-        "communityId": 281,
-        "label": "src/lib"
-      },
-      "edgeKind": "imports",
-      "historicalEdgesBetweenClusters": -1,
-      "severity": "medium"
-    },
-    {
-      "from": {
-        "symbolId": "src/lib/appwrite.ts::getCurrentUser::function",
-        "communityId": 282,
-        "label": "account area"
-      },
-      "to": {
-        "symbolId": "src/lib/appwrite-datasets.ts::databases::variable",
-        "communityId": 281,
-        "label": "src/lib"
-      },
-      "edgeKind": "imports",
-      "historicalEdgesBetweenClusters": -1,
-      "severity": "medium"
-    }
-  ]
+  "computedAt": "2026-04-27T03:45:05.262Z",
+  "commitSha": "bc6bf16",
+  "confidence": "medium",
+  "snapshotsAvailable": 5,
+  "violations": []
 }

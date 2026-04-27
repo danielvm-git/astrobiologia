@@ -10,8 +10,15 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "test": "npm run test:e2e:p0",
-    "test:e2e": "playwright test --config=playwright.config.ts",
-    "test:e2e:p0": "playwright test tests/e2e/p0 --project=chromium --config=playwright.config.ts"
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:api": "playwright test --project=api",
+    "test:e2e": "playwright test --project=chromium --config=playwright.config.ts",
+    "test:e2e:p0": "playwright test tests/e2e/p0 --project=chromium --config=playwright.config.ts",
+    "test:e2e:p1": "playwright test tests/e2e/p1 --project=chromium --config=playwright.config.ts",
+    "test:all": "npm run test:unit && npm run test:api && npm run test:e2e:p0 && npm run test:e2e:p1",
+    "lint": "prettier --check {pages,components,server,lib,i18n.config.ts,middleware,layouts,error.vue} --ignore-unknown 2>/dev/null || true"
   },
   "dependencies": {
     "@nuxtjs/i18n": "^10.3.0",
@@ -34,6 +41,10 @@
     "@playwright/test": "^1.55.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.4",
-    "@types/node": "^25.6.0"
+    "@types/node": "^25.6.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "@vue/test-utils": "^2.4.8",
+    "happy-dom": "^16.8.1",
+    "vitest": "^3.2.4"
   }
 }

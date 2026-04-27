@@ -1,0 +1,41 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 2,
+      "symbolId": "apps/web-nuxt/server/utils/session-cookie.ts::setAppwriteSessionCookie::function"
+    }
+  ],
+  "contentHash": "fafd856c9da4349b6658b66dbb4bb1ca848cd7145e9fb0d85dd55bc1cbd5ea26",
+  "edges": [
+    {
+      "from": "apps/web-nuxt/server/utils/session-cookie.ts::setAppwriteSessionCookie::function",
+      "kind": "imports",
+      "to": "apps/web-nuxt/server/utils/appwrite.ts::SESSION_COOKIE::variable"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/session-cookie.ts::setAppwriteSessionCookie::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/appwrite.ts::SESSION_COOKIE::variable"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/session-cookie.ts::setAppwriteSessionCookie::function",
+      "kind": "uses",
+      "to": "apps/web-nuxt/server/utils/appwrite.ts::SESSION_COOKIE::variable"
+    }
+  ],
+  "file": "apps/web-nuxt/server/utils/session-cookie.ts",
+  "intent": [],
+  "lastModified": 1777261505,
+  "symbols": [
+    {
+      "endLine": 21,
+      "endOffset": 733,
+      "kind": "function",
+      "name": "setAppwriteSessionCookie",
+      "startLine": 2,
+      "startOffset": 46,
+      "symbolId": "apps/web-nuxt/server/utils/session-cookie.ts::setAppwriteSessionCookie::function"
+    }
+  ]
+}

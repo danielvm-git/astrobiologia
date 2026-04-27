@@ -1,0 +1,105 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "apps/web-nuxt/server/utils/locale.ts::normalizeLocaleTag::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "apps/web-nuxt/server/utils/locale.ts::primaryLanguageSubtag::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "apps/web-nuxt/server/utils/locale.ts::localeTagsMatch::function"
+    },
+    {
+      "cyclomatic": 3,
+      "symbolId": "apps/web-nuxt/server/utils/locale.ts::shouldShowTranslationFallbackBadge::function"
+    }
+  ],
+  "contentHash": "3af211499198db552d4280a871f6e7404e3aac2bee745ea13420e3d9ec02b436",
+  "edges": [
+    {
+      "from": "apps/web-nuxt/server/utils/locale.ts::primaryLanguageSubtag::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/locale.ts::normalizeLocaleTag::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/locale.ts::localeTagsMatch::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/locale.ts::normalizeLocaleTag::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/locale.ts::localeTagsMatch::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/locale.ts::normalizeLocaleTag::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/locale.ts::localeTagsMatch::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/locale.ts::primaryLanguageSubtag::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/locale.ts::localeTagsMatch::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/locale.ts::primaryLanguageSubtag::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/locale.ts::shouldShowTranslationFallbackBadge::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/locale.ts::normalizeLocaleTag::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/locale.ts::shouldShowTranslationFallbackBadge::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/locale.ts::normalizeLocaleTag::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/locale.ts::shouldShowTranslationFallbackBadge::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/locale.ts::localeTagsMatch::function"
+    }
+  ],
+  "file": "apps/web-nuxt/server/utils/locale.ts",
+  "intent": [],
+  "lastModified": 1777261505,
+  "symbols": [
+    {
+      "endLine": 2,
+      "endOffset": 113,
+      "kind": "function",
+      "name": "normalizeLocaleTag",
+      "startLine": 0,
+      "startOffset": 0,
+      "symbolId": "apps/web-nuxt/server/utils/locale.ts::normalizeLocaleTag::function"
+    },
+    {
+      "endLine": 8,
+      "endOffset": 356,
+      "kind": "function",
+      "name": "primaryLanguageSubtag",
+      "startLine": 4,
+      "startOffset": 115,
+      "symbolId": "apps/web-nuxt/server/utils/locale.ts::primaryLanguageSubtag::function"
+    },
+    {
+      "endLine": 15,
+      "endOffset": 711,
+      "kind": "function",
+      "name": "localeTagsMatch",
+      "startLine": 10,
+      "startOffset": 358,
+      "symbolId": "apps/web-nuxt/server/utils/locale.ts::localeTagsMatch::function"
+    },
+    {
+      "endLine": 29,
+      "endOffset": 1125,
+      "kind": "function",
+      "name": "shouldShowTranslationFallbackBadge",
+      "startLine": 17,
+      "startOffset": 713,
+      "symbolId": "apps/web-nuxt/server/utils/locale.ts::shouldShowTranslationFallbackBadge::function"
+    }
+  ]
+}

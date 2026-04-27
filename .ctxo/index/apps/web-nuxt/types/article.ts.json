@@ -1,0 +1,29 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "bfd7f816d385d02c5fd40fa28d36718d48d85c4dce6661aa13a0022fa1e4a1e9",
+  "edges": [],
+  "file": "apps/web-nuxt/types/article.ts",
+  "intent": [],
+  "lastModified": 1777261505,
+  "symbols": [
+    {
+      "endLine": 10,
+      "endOffset": 217,
+      "kind": "interface",
+      "name": "ArticleTranslation",
+      "startLine": 0,
+      "startOffset": 0,
+      "symbolId": "apps/web-nuxt/types/article.ts::ArticleTranslation::interface"
+    },
+    {
+      "endLine": 32,
+      "endOffset": 671,
+      "kind": "interface",
+      "name": "Article",
+      "startLine": 12,
+      "startOffset": 219,
+      "symbolId": "apps/web-nuxt/types/article.ts::Article::interface"
+    }
+  ]
+}

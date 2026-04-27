@@ -1,0 +1,226 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 2,
+      "symbolId": "apps/web-nuxt/server/utils/article-read.ts::getPublishedArticles::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "apps/web-nuxt/server/utils/article-read.ts::getFeaturedArticles::function"
+    },
+    {
+      "cyclomatic": 6,
+      "symbolId": "apps/web-nuxt/server/utils/article-read.ts::getArticleBySlug::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "apps/web-nuxt/server/utils/article-read.ts::getArticlesByCategory::function"
+    },
+    {
+      "cyclomatic": 9,
+      "symbolId": "apps/web-nuxt/server/utils/article-read.ts::searchPublishedArticles::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "apps/web-nuxt/server/utils/article-read.ts::getAllArticles::function"
+    }
+  ],
+  "contentHash": "0eb84a6faa1a5c9c1c7d5604e61f26fbb0869c5d4ccf3fad551142155e67a896",
+  "edges": [
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getPublishedArticles::function",
+      "kind": "imports",
+      "to": "apps/web-nuxt/server/utils/appwrite.ts::createAdminClient::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getPublishedArticles::function",
+      "kind": "imports",
+      "to": "apps/web-nuxt/server/utils/appwrite.ts::getDatabaseId::variable"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getPublishedArticles::function",
+      "kind": "imports",
+      "to": "apps/web-nuxt/server/utils/locale.ts::localeTagsMatch::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getPublishedArticles::function",
+      "kind": "imports",
+      "to": "apps/web-nuxt/server/utils/locale.ts::normalizeLocaleTag::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getPublishedArticles::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/appwrite.ts::createAdminClient::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getPublishedArticles::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/article-read.ts::fetchTranslationsForArticleIds::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getPublishedArticles::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/article-read.ts::joinTranslationsByArticle::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getFeaturedArticles::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/appwrite.ts::createAdminClient::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getFeaturedArticles::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/article-read.ts::fetchTranslationsForArticleIds::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getFeaturedArticles::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/article-read.ts::joinTranslationsByArticle::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getArticleBySlug::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/appwrite.ts::createAdminClient::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getArticleBySlug::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/article-read.ts::pickTranslationForArticle::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getArticleBySlug::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/article-read.ts::articleIdFromTranslation::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getArticleBySlug::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/article-read.ts::pickTranslationForArticle::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getArticlesByCategory::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/appwrite.ts::createAdminClient::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getArticlesByCategory::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/article-read.ts::fetchTranslationsForArticleIds::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getArticlesByCategory::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/article-read.ts::joinTranslationsByArticle::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::searchPublishedArticles::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/appwrite.ts::createAdminClient::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::searchPublishedArticles::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/article-read.ts::getPublishedArticles::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::searchPublishedArticles::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/article-read.ts::articleIdFromTranslation::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getAllArticles::function",
+      "kind": "calls",
+      "to": "apps/web-nuxt/server/utils/appwrite.ts::createAdminClient::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getPublishedArticles::function",
+      "kind": "uses",
+      "to": "apps/web-nuxt/server/utils/appwrite.ts::createAdminClient::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getFeaturedArticles::function",
+      "kind": "uses",
+      "to": "apps/web-nuxt/server/utils/appwrite.ts::createAdminClient::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getArticleBySlug::function",
+      "kind": "uses",
+      "to": "apps/web-nuxt/server/utils/appwrite.ts::createAdminClient::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getArticlesByCategory::function",
+      "kind": "uses",
+      "to": "apps/web-nuxt/server/utils/appwrite.ts::createAdminClient::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::searchPublishedArticles::function",
+      "kind": "uses",
+      "to": "apps/web-nuxt/server/utils/appwrite.ts::createAdminClient::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/utils/article-read.ts::getAllArticles::function",
+      "kind": "uses",
+      "to": "apps/web-nuxt/server/utils/appwrite.ts::createAdminClient::function"
+    }
+  ],
+  "file": "apps/web-nuxt/server/utils/article-read.ts",
+  "intent": [],
+  "lastModified": 1777261504,
+  "symbols": [
+    {
+      "endLine": 92,
+      "endOffset": 3577,
+      "kind": "function",
+      "name": "getPublishedArticles",
+      "startLine": 78,
+      "startOffset": 2866,
+      "symbolId": "apps/web-nuxt/server/utils/article-read.ts::getPublishedArticles::function"
+    },
+    {
+      "endLine": 111,
+      "endOffset": 4297,
+      "kind": "function",
+      "name": "getFeaturedArticles",
+      "startLine": 94,
+      "startOffset": 3579,
+      "symbolId": "apps/web-nuxt/server/utils/article-read.ts::getFeaturedArticles::function"
+    },
+    {
+      "endLine": 160,
+      "endOffset": 5977,
+      "kind": "function",
+      "name": "getArticleBySlug",
+      "startLine": 113,
+      "startOffset": 4299,
+      "symbolId": "apps/web-nuxt/server/utils/article-read.ts::getArticleBySlug::function"
+    },
+    {
+      "endLine": 176,
+      "endOffset": 6711,
+      "kind": "function",
+      "name": "getArticlesByCategory",
+      "startLine": 162,
+      "startOffset": 5979,
+      "symbolId": "apps/web-nuxt/server/utils/article-read.ts::getArticlesByCategory::function"
+    },
+    {
+      "endLine": 231,
+      "endOffset": 8706,
+      "kind": "function",
+      "name": "searchPublishedArticles",
+      "startLine": 178,
+      "startOffset": 6713,
+      "symbolId": "apps/web-nuxt/server/utils/article-read.ts::searchPublishedArticles::function"
+    },
+    {
+      "endLine": 241,
+      "endOffset": 9095,
+      "kind": "function",
+      "name": "getAllArticles",
+      "startLine": 233,
+      "startOffset": 8708,
+      "symbolId": "apps/web-nuxt/server/utils/article-read.ts::getAllArticles::function"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "5db66c7491f007c562fdbab8f1b00d9f1a34e15ec3bc42075cce559926a92511",
+  "edges": [],
+  "file": "apps/web-nuxt/tests/e2e/p0/public-home.spec.ts",
+  "intent": [],
+  "lastModified": 1777261505,
+  "symbols": []
+}

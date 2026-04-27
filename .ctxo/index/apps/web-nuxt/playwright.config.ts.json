@@ -1,0 +1,10 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "6c379d79331279410b5c50041c79a5d7a3bc889de5ff0bb7b9acdd44f586a47d",
+  "edges": [],
+  "file": "apps/web-nuxt/playwright.config.ts",
+  "intent": [],
+  "lastModified": 1777261504,
+  "symbols": []
+}

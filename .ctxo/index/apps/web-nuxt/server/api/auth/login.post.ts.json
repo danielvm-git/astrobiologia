@@ -1,0 +1,26 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "70bf47623eac4cce8755f6ddf81576a94c1728838a9ab3f7fade2eaeede94ce8",
+  "edges": [
+    {
+      "from": "apps/web-nuxt/server/api/auth/login.post.ts::login.post::variable",
+      "kind": "imports",
+      "to": "apps/web-nuxt/server/utils/logger.ts::createLogger::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/api/auth/login.post.ts::login.post::variable",
+      "kind": "imports",
+      "to": "apps/web-nuxt/server/utils/appwrite.ts::createAdminClient::function"
+    },
+    {
+      "from": "apps/web-nuxt/server/api/auth/login.post.ts::login.post::variable",
+      "kind": "imports",
+      "to": "apps/web-nuxt/server/utils/session-cookie.ts::setAppwriteSessionCookie::function"
+    }
+  ],
+  "file": "apps/web-nuxt/server/api/auth/login.post.ts",
+  "intent": [],
+  "lastModified": 1777261504,
+  "symbols": []
+}

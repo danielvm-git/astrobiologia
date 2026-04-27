@@ -6,13 +6,19 @@
   ],
   "scripts": {
     "prepare": "husky",
-    "preflight": "npm run check && npm run test && npx lint-staged --diff HEAD",
+    "type-check": "npm run check -w @astrobiologia/web-nuxt",
+    "lint": "npm run lint -w @astrobiologia/web-nuxt",
+    "preflight": "npm run type-check && npm run lint && npm run test:all && npm run build && npx lint-staged --diff HEAD",
     "dev": "npm run dev -w @astrobiologia/web-nuxt",
     "build": "npm run build -w @astrobiologia/web-nuxt",
     "test": "npm run test -w @astrobiologia/web-nuxt",
+    "test:all": "npm run test:all -w @astrobiologia/web-nuxt",
+    "test:fast": "npm run test:unit -w @astrobiologia/web-nuxt && npm run test:api -w @astrobiologia/web-nuxt",
+    "test:coverage": "npm run test:coverage -w @astrobiologia/web-nuxt",
     "check": "npm run check -w @astrobiologia/web-nuxt"
   },
   "devDependencies": {
+    "@ctxo/cli": "^0.8.1",
     "@ctxo/lang-typescript": "^0.7.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",

@@ -1,0 +1,10 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "fd6f13b2f7409ebc26b6ebe638ef430511a245425cfadfb92e012dcc833c41b0",
+  "edges": [],
+  "file": "apps/web-nuxt/server/api/translate.post.ts",
+  "intent": [],
+  "lastModified": 1777261504,
+  "symbols": []
+}
