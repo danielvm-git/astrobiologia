@@ -64,3 +64,12 @@ target/
 vendor/
 coverage/
 tmp/
+
+# Monorepo
+apps/web-nuxt/.nuxt/
+apps/web-nuxt/.output/
+apps/web-nuxt/node_modules/
+apps/web-nuxt/.data/
+apps/web-nuxt/.nitro/
+apps/web-nuxt/.cache/
+apps/web-nuxt/dist/
