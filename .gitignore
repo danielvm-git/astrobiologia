@@ -7,7 +7,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # Build outputs
-.svelte-kit/
 build/
 dist/
 
@@ -73,3 +72,13 @@ apps/web-nuxt/.data/
 apps/web-nuxt/.nitro/
 apps/web-nuxt/.cache/
 apps/web-nuxt/dist/
+
+# Test artifacts (regenerable)
+playwright-report/
+test-results/
+
+# Session / scratch artifacts
+.brainstorm-resume.md
+scratch/
+_bmad/
+_bmad-output/
