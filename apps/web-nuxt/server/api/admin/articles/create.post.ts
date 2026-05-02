@@ -1,6 +1,16 @@
 import { ID } from "node-appwrite";
 import { createSessionClient, getDatabaseId } from "~/server/utils/appwrite";
 
+type TranslationInput = {
+  language: string;
+  title?: string;
+  slug?: string;
+  excerpt?: string;
+  content?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+};
+
 export default defineEventHandler(async (event) => {
   if (!event.context.user) {
     throw createError({ statusCode: 401, statusMessage: "Unauthorized" });
@@ -30,19 +40,41 @@ export default defineEventHandler(async (event) => {
     articleData
   );
 
-  await databases.createDocument(
-    getDatabaseId(),
-    config.public.articleTranslationsCollectionId,
-    ID.unique(),
-    {
-      article_id: article.$id,
-      language: "pt-br",
-      title: body.title || "",
-      slug: body.slug || "",
-      excerpt: body.excerpt || "",
-      content: body.content || "",
-    }
-  );
+  let translations: TranslationInput[] = Array.isArray(body.translations)
+    ? (body.translations as TranslationInput[])
+    : [];
+
+  if (translations.length === 0) {
+    translations = [
+      {
+        language: "pt-br",
+        title: String(body.title ?? ""),
+        slug: String(body.slug ?? ""),
+        excerpt: String(body.excerpt ?? ""),
+        content: String(body.content ?? ""),
+        metaTitle: String(body.metaTitle ?? ""),
+        metaDescription: String(body.metaDescription ?? ""),
+      },
+    ];
+  }
+
+  for (const trans of translations) {
+    await databases.createDocument(
+      getDatabaseId(),
+      config.public.articleTranslationsCollectionId,
+      ID.unique(),
+      {
+        article_id: article.$id,
+        language: trans.language,
+        title: trans.title ?? "",
+        slug: trans.slug ?? "",
+        excerpt: trans.excerpt ?? "",
+        content: trans.content ?? "",
+        metaTitle: trans.metaTitle ?? "",
+        metaDescription: trans.metaDescription ?? "",
+      }
+    );
+  }
 
   return { success: true, id: article.$id };
 });

@@ -13,19 +13,23 @@ export default defineEventHandler(async (event) => {
 
   const config = useRuntimeConfig();
   const { databases } = createSessionClient(event);
+  const batchSize = 100;
 
-  const translations = await databases.listDocuments(
-    getDatabaseId(),
-    config.public.articleTranslationsCollectionId,
-    [Query.equal("article_id", body.id), Query.limit(200)]
-  );
-
-  for (const translation of translations.documents) {
-    await databases.deleteDocument(
+  for (;;) {
+    const translations = await databases.listDocuments(
       getDatabaseId(),
       config.public.articleTranslationsCollectionId,
-      translation.$id
+      [Query.equal("article_id", body.id), Query.limit(batchSize)]
     );
+    if (translations.documents.length === 0) break;
+    for (const translation of translations.documents) {
+      await databases.deleteDocument(
+        getDatabaseId(),
+        config.public.articleTranslationsCollectionId,
+        translation.$id
+      );
+    }
+    if (translations.documents.length < batchSize) break;
   }
 
   await databases.deleteDocument(

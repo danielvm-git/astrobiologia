@@ -1,76 +1,85 @@
 <script setup lang="ts">
+import ArticleEditor from "~/components/admin/ArticleEditor.vue";
+
 definePageMeta({ layout: "admin", middleware: ["admin"] });
 
-const route = useRoute();
-type AdminArticlePayload = {
-  article?: Record<string, any>;
-  translation?: Record<string, any>;
-};
-
-const { data } = await useAsyncData<AdminArticlePayload>(
-  `admin-article-${route.params.id}`,
-  () =>
-    fetch(`/api/admin/articles/${route.params.id}`).then((response) =>
-      response.json()
-    )
-);
-
-const payload = reactive({
-  category: data.value?.article?.category ?? "noticias",
-  tags: data.value?.article?.tags ?? [],
-  featuredImage: data.value?.article?.featuredImage ?? "",
-  featuredImageAlt: data.value?.article?.featuredImageAlt ?? "",
-  status: data.value?.article?.status ?? "draft",
-  featured: data.value?.article?.featured ?? false,
-  authorId: data.value?.article?.authorId ?? "",
-  authorName: data.value?.article?.authorName ?? "",
-  publishedAt: data.value?.article?.publishedAt ?? "",
-  title: data.value?.translation?.title ?? data.value?.article?.title ?? "",
-  slug: data.value?.translation?.slug ?? data.value?.article?.slug ?? "",
-  excerpt:
-    data.value?.translation?.excerpt ?? data.value?.article?.excerpt ?? "",
-  content:
-    data.value?.translation?.content ?? data.value?.article?.content ?? "",
+useHead({
+  title: "Editar Artigo - Admin Astrobiologia",
+  meta: [{ name: "robots", content: "noindex, nofollow" }],
 });
 
-async function save() {
-  await fetch(`/api/admin/articles/${route.params.id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-  await navigateTo("/admin/artigos");
+const route = useRoute();
+const localePath = useLocalePath();
+const saving = ref(false);
+
+type Payload = {
+  article?: Record<string, unknown>;
+  translations?: Array<Record<string, unknown>>;
+};
+
+const articleIdParam = String(
+  Array.isArray(route.params.id) ? route.params.id[0] : route.params.id
+);
+
+const { data } = await useAsyncData<Payload>(
+  `admin-article-${articleIdParam}`,
+  () =>
+    $fetch<Payload>(`/api/admin/articles/${articleIdParam}`).catch(() => ({
+      article: undefined,
+      translations: [],
+    }))
+);
+
+async function handleSave(
+  articleData: Record<string, unknown>,
+  translations: Array<Record<string, unknown>>
+) {
+  saving.value = true;
+  try {
+    await $fetch(`/api/admin/articles/${articleIdParam}`, {
+      method: "PUT",
+      body: {
+        ...articleData,
+        translations,
+      },
+    });
+    await navigateTo(localePath("/admin/artigos"));
+  } catch (err: unknown) {
+    const msg =
+      err &&
+      typeof err === "object" &&
+      "data" in err &&
+      typeof (err as { data?: { statusMessage?: string } }).data
+        ?.statusMessage === "string"
+        ? (err as { data: { statusMessage: string } }).data.statusMessage
+        : "Erro ao salvar artigo.";
+    alert(msg);
+  } finally {
+    saving.value = false;
+  }
 }
 </script>
 
 <template>
-  <section class="max-w-3xl space-y-4">
-    <h1 class="text-2xl font-black">Editar artigo</h1>
-    <input
-      v-model="payload.title"
-      placeholder="Título"
-      class="w-full rounded border border-slate-200 px-3 py-2"
-    />
-    <input
-      v-model="payload.slug"
-      placeholder="Slug"
-      class="w-full rounded border border-slate-200 px-3 py-2"
-    />
-    <textarea
-      v-model="payload.excerpt"
-      placeholder="Resumo"
-      class="w-full rounded border border-slate-200 px-3 py-2"
-    ></textarea>
-    <textarea
-      v-model="payload.content"
-      placeholder="Conteúdo HTML"
-      class="min-h-52 w-full rounded border border-slate-200 px-3 py-2"
-    ></textarea>
-    <button
-      class="rounded bg-primary px-4 py-2 text-xs font-bold uppercase tracking-widest text-white"
-      @click="save"
+  <div v-if="data?.article" class="mb-8">
+    <h1 class="text-3xl font-black text-slate-900 uppercase tracking-tight">
+      Editar Artigo
+    </h1>
+    <p
+      class="text-slate-500 mt-2 text-sm font-medium uppercase tracking-widest"
     >
-      Salvar
-    </button>
-  </section>
+      Ajustando conteúdo e metadados
+    </p>
+  </div>
+
+  <ArticleEditor
+    v-if="data?.article && data.translations"
+    :article="data.article"
+    :translations="data.translations"
+    :saving="saving"
+    @save="handleSave"
+  />
+  <div v-else class="py-20 text-center text-slate-500">
+    Artigo não encontrado.
+  </div>
 </template>

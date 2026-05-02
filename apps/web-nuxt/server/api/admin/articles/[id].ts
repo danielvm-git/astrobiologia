@@ -1,5 +1,45 @@
-import { Query } from "node-appwrite";
+import { ID, Query } from "node-appwrite";
 import { createSessionClient, getDatabaseId } from "~/server/utils/appwrite";
+
+type TranslationInput = Record<string, unknown> & { language: string };
+
+function sanitizePayload(data: Record<string, unknown>) {
+  const clean: Record<string, unknown> = {};
+  const forbidden = ["updatedAt", "createdAt"];
+  for (const key of Object.keys(data)) {
+    if (key.startsWith("$") || forbidden.includes(key)) continue;
+    clean[key] = data[key];
+  }
+  return clean;
+}
+
+async function listAllTranslations(
+  databases: ReturnType<typeof createSessionClient>["databases"],
+  collectionId: string,
+  articleId: string
+) {
+  const batchSize = 100;
+  const documents: Record<string, unknown>[] = [];
+  let lastId: string | null = null;
+  for (;;) {
+    const queries: string[] = [
+      Query.equal("article_id", articleId),
+      Query.orderAsc("$id"),
+      Query.limit(batchSize),
+    ];
+    if (lastId) queries.push(Query.cursorAfter(lastId));
+    const page = await databases.listDocuments(
+      getDatabaseId(),
+      collectionId,
+      queries
+    );
+    if (page.documents.length === 0) break;
+    documents.push(...page.documents);
+    if (page.documents.length < batchSize) break;
+    lastId = page.documents[page.documents.length - 1].$id as string;
+  }
+  return documents;
+}
 
 export default defineEventHandler(async (event) => {
   if (!event.context.user) {
@@ -20,77 +60,97 @@ export default defineEventHandler(async (event) => {
       config.public.articlesCollectionId,
       id
     );
-    const translations = await databases.listDocuments(
-      getDatabaseId(),
+    const translations = await listAllTranslations(
+      databases,
       config.public.articleTranslationsCollectionId,
-      [Query.equal("article_id", id), Query.limit(50)]
+      id
     );
     const translation =
-      translations.documents.find((doc) => doc.language === "pt-br") ||
-      translations.documents[0] ||
+      translations.find((doc) => doc.language === "pt-br") ||
+      translations[0] ||
       null;
-    return { article, translation, translations: translations.documents };
+    return { article, translation, translations };
   }
 
   if (event.method === "PUT") {
     const body = await readBody<Record<string, unknown>>(event);
 
+    const masterPayload = sanitizePayload({
+      category: body.category,
+      tags: body.tags,
+      featuredImage: body.featuredImage,
+      featuredImageAlt: body.featuredImageAlt,
+      status: body.status,
+      featured: body.featured,
+      authorId: body.authorId,
+      authorName: body.authorName,
+      publishedAt: body.publishedAt,
+    });
+
+    Object.keys(masterPayload).forEach((key) => {
+      if (masterPayload[key] === undefined) delete masterPayload[key];
+    });
+
     await databases.updateDocument(
       getDatabaseId(),
       config.public.articlesCollectionId,
       id,
-      {
-        category: body.category,
-        tags: body.tags,
-        featuredImage: body.featuredImage,
-        featuredImageAlt: body.featuredImageAlt,
-        status: body.status,
-        featured: Boolean(body.featured),
-        authorId: body.authorId,
-        authorName: body.authorName,
-        publishedAt: body.publishedAt,
-      }
+      masterPayload
     );
 
-    const translations = await databases.listDocuments(
-      getDatabaseId(),
+    const translationsInput = body.translations as TranslationInput[] | undefined;
+    if (!Array.isArray(translationsInput)) {
+      return { success: true };
+    }
+
+    const existingTrans = await listAllTranslations(
+      databases,
       config.public.articleTranslationsCollectionId,
-      [
-        Query.equal("article_id", id),
-        Query.equal("language", "pt-br"),
-        Query.limit(1),
-      ]
+      id
     );
 
-    if (translations.documents.length > 0) {
-      await databases.updateDocument(
-        getDatabaseId(),
-        config.public.articleTranslationsCollectionId,
-        translations.documents[0].$id,
-        {
-          title: body.title,
-          slug: body.slug,
-          excerpt: body.excerpt,
-          content: body.content,
-        }
+    for (const trans of translationsInput) {
+      const existing = existingTrans.find(
+        (t) => t.language === trans.language
       );
+      const cleanTrans = sanitizePayload(trans as Record<string, unknown>);
+      delete cleanTrans.article_id;
+
+      if (existing) {
+        await databases.updateDocument(
+          getDatabaseId(),
+          config.public.articleTranslationsCollectionId,
+          existing.$id as string,
+          cleanTrans
+        );
+      } else {
+        await databases.createDocument(
+          getDatabaseId(),
+          config.public.articleTranslationsCollectionId,
+          ID.unique(),
+          {
+            ...cleanTrans,
+            article_id: id,
+          }
+        );
+      }
     }
 
     return { success: true };
   }
 
   if (event.method === "DELETE") {
-    const translations = await databases.listDocuments(
-      getDatabaseId(),
+    const translations = await listAllTranslations(
+      databases,
       config.public.articleTranslationsCollectionId,
-      [Query.equal("article_id", id), Query.limit(200)]
+      id
     );
 
-    for (const translation of translations.documents) {
+    for (const translation of translations) {
       await databases.deleteDocument(
         getDatabaseId(),
         config.public.articleTranslationsCollectionId,
-        translation.$id
+        translation.$id as string
       );
     }
 

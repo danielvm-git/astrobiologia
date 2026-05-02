@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { Telescope, Lock, Mail, Chrome } from "lucide-vue-next";
+import { Client, Account, OAuthProvider } from "appwrite";
 
 definePageMeta({
   layout: false, // Do not use the admin shell layout for the login page
@@ -66,13 +67,17 @@ async function handleLogin() {
 
 function handleGoogleClick() {
   try {
+    const config = useRuntimeConfig();
     const origin = window.location.origin;
-    const success = `${origin}/api/auth/oauth-callback`;
-    const failure = `${origin}${localePath("/admin/login")}?error=google_failed`;
-    const endpoint = useRuntimeConfig().public.appwriteEndpoint;
-    const project = useRuntimeConfig().public.appwriteProjectId;
-    const oauthUrl = `${endpoint}/account/sessions/oauth2/google?project=${project}&success=${encodeURIComponent(success)}&failure=${encodeURIComponent(failure)}`;
-    window.location.href = oauthUrl;
+    const client = new Client()
+      .setEndpoint(config.public.appwriteEndpoint)
+      .setProject(config.public.appwriteProjectId);
+    const account = new Account(client);
+    account.createOAuth2Token(
+      OAuthProvider.Google,
+      `${origin}/api/auth/oauth-callback`,
+      `${origin}${localePath("/admin/login")}?error=google_failed`,
+    );
   } catch (err) {
     errorMessage.value =
       err instanceof Error ? err.message : "Falha ao iniciar login com Google.";

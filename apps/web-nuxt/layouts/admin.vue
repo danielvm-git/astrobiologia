@@ -14,6 +14,8 @@ import {
 } from "lucide-vue-next";
 import { cn } from "@/lib/utils";
 
+type MeUser = { id?: string; email: string; name?: string };
+
 const isSidebarOpen = ref(true);
 const isMobileOpen = ref(false);
 
@@ -23,8 +25,17 @@ const localePath = useLocalePath();
 const currentPath = computed(() => route.path);
 const isLoginPage = computed(() => currentPath.value.includes("/login"));
 
-// Minimal user data type placeholder until the user context is properly typed via Nitro
-const user = useRequestEvent()?.context?.user || null;
+const { data: mePayload } = await useAsyncData("admin-layout-me", () =>
+  $fetch<{ user: MeUser }>("/api/me")
+);
+
+const user = computed(() => mePayload.value?.user ?? null);
+
+function isMenuActive(href: string) {
+  const localized = localePath(href);
+  const path = route.path;
+  return path === localized || path.startsWith(`${localized}/`);
+}
 
 const menuItems = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
@@ -75,7 +86,7 @@ async function handleLogout() {
             :class="
               cn(
                 'flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all group relative',
-                currentPath.startsWith(item.href)
+                isMenuActive(item.href)
                   ? 'bg-accent/10 text-accent font-bold shadow-[0_0_15px_rgba(251,188,5,0.1)]'
                   : 'hover:bg-slate-800 hover:text-white'
               )
@@ -86,7 +97,7 @@ async function handleLogout() {
               :class="
                 cn(
                   'w-5 h-5 shrink-0 transition-transform',
-                  currentPath.startsWith(item.href)
+                  isMenuActive(item.href)
                     ? 'scale-110'
                     : 'group-hover:scale-110'
                 )
@@ -96,7 +107,7 @@ async function handleLogout() {
             <template v-if="isSidebarOpen">
               <span class="text-sm tracking-wide">{{ item.name }}</span>
               <ChevronRight
-                v-if="currentPath.startsWith(item.href)"
+                v-if="isMenuActive(item.href)"
                 class="w-4 h-4 ml-auto"
               />
             </template>
@@ -118,7 +129,10 @@ async function handleLogout() {
             <div
               class="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-black text-xs"
             >
-              {{ user.name?.[0] || user.email[0].toUpperCase() }}
+              {{
+                user.name?.[0] ||
+                (user.email?.[0] ? user.email[0].toUpperCase() : "?")
+              }}
             </div>
             <div class="min-w-0">
               <p
@@ -256,7 +270,7 @@ async function handleLogout() {
               :class="
                 cn(
                   'flex items-center gap-3 px-4 py-3 rounded-xl transition-all',
-                  currentPath.startsWith(item.href)
+                  isMenuActive(item.href)
                     ? 'bg-accent text-accent-foreground font-bold'
                     : 'text-slate-400 hover:bg-slate-800 hover:text-white'
                 )

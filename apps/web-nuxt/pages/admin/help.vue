@@ -3,10 +3,8 @@ import { Telescope } from "lucide-vue-next";
 
 definePageMeta({ layout: "admin", middleware: ["admin"] });
 
-const { t } = useI18n();
-
 useHead({
-  title: () => t("admin_seo_document_title"),
+  title: "Ajuda do Editor - Astrobiologia",
   meta: [{ name: "robots", content: "noindex, nofollow" }],
 });
 </script>
