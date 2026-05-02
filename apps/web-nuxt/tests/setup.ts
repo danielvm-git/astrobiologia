@@ -24,6 +24,7 @@ type NuxtTestGlobals = typeof globalThis & {
   getHeader: Mock;
   setCookie: Mock;
   getCookie: Mock;
+  readBody: Mock<(event: unknown) => Promise<unknown>>;
   createError: (options: {
     statusCode: number;
     statusMessage: string;
@@ -38,6 +39,7 @@ g.getQuery = vi.fn();
 g.getHeader = vi.fn();
 g.setCookie = vi.fn();
 g.getCookie = vi.fn();
+g.readBody = vi.fn();
 g.createError = (options) => {
   const err = new Error(options.statusMessage) as Error & {
     statusCode: number;

@@ -31,6 +31,7 @@ const runtime: RuntimeConfigStub = {
     articleTranslationsCollectionId: "translations",
     categoriesCollectionId: "categories",
     storageBucketId: "storage",
+    siteSettingsCollectionId: "site-settings",
   },
 };
 

@@ -8,5 +8,6 @@ export type RuntimeConfigStub = {
     articleTranslationsCollectionId: string;
     categoriesCollectionId: string;
     storageBucketId: string;
+    siteSettingsCollectionId: string;
   };
 };
