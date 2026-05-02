@@ -60,27 +60,6 @@ export default defineNuxtConfig({
         enforce: "pre",
         resolveId(id) {
           if (id.startsWith("/node_modules/") && id.endsWith(".vue")) {
-            // #region agent log
-            fetch(
-              "http://127.0.0.1:7935/ingest/d09c7f4b-ef13-49c5-ad00-b084fd7a41e4",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  "X-Debug-Session-Id": "bdebdf",
-                },
-                body: JSON.stringify({
-                  sessionId: "bdebdf",
-                  location: "nuxt.config.ts:stub-fs-root-node-modules-vue",
-                  message: "stub fs-root .vue request",
-                  data: { id },
-                  hypothesisId: "H-fs-root-vue",
-                  timestamp: Date.now(),
-                  runId: "dev-verify",
-                }),
-              }
-            ).catch(() => {});
-            // #endregion
             return `\0stub-root-vue:${id}`;
           }
           return undefined;

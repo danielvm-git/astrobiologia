@@ -15,6 +15,8 @@ const defaultRuntime = () => ({
     categoriesCollectionId:
       process.env.NUXT_PUBLIC_CATEGORIES_COLLECTION_ID ?? "categories",
     storageBucketId: process.env.NUXT_PUBLIC_STORAGE_BUCKET_ID ?? "bucket",
+    siteSettingsCollectionId:
+      process.env.NUXT_PUBLIC_SITE_SETTINGS_COLLECTION_ID ?? "site_settings",
   },
 });
 
