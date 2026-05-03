@@ -1,12 +1,5 @@
 {
   "mcpServers": {
-    "lean-spec": {
-      "args": [
-        "-y",
-        "@leanspec/mcp"
-      ],
-      "command": "npx"
-    },
     "appwrite-api": {
       "command": "uvx",
       "args": [
@@ -25,9 +18,6 @@
         "https://mcp-for-docs.appwrite.io"
       ]
     },
-    "svelte-mcp": {
-      "url": "https://mcp.svelte.dev/mcp"
-    },
     "ctxo": {
       "command": "npx",
       "args": [
@@ -37,10 +27,6 @@
     },
     "context-mode": {
       "command": "context-mode"
-    },
-    "neon": {
-      "type": "http",
-      "url": "https://mcp.neon.tech/mcp"
     },
     "nuxt": {
       "type": "http",

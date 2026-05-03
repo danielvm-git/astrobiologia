@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import ArticleEditor from "~/components/admin/ArticleEditor.vue";
 
 definePageMeta({ layout: "admin", middleware: ["admin"] });
@@ -21,7 +22,7 @@ const articleIdParam = String(
   Array.isArray(route.params.id) ? route.params.id[0] : route.params.id
 );
 
-const { data } = await useAsyncData<Payload>(
+const { data, pending, error } = useAsyncData<Payload>(
   `admin-article-${articleIdParam}`,
   () =>
     $fetch<Payload>(`/api/admin/articles/${articleIdParam}`).catch(() => ({
@@ -29,6 +30,8 @@ const { data } = await useAsyncData<Payload>(
       translations: [],
     }))
 );
+
+const isLoading = computed(() => pending.value);
 
 async function handleSave(
   articleData: Record<string, unknown>,
@@ -61,25 +64,33 @@ async function handleSave(
 </script>
 
 <template>
-  <div v-if="data?.article" class="mb-8">
-    <h1 class="text-3xl font-black text-slate-900 uppercase tracking-tight">
-      Editar Artigo
-    </h1>
-    <p
-      class="text-slate-500 mt-2 text-sm font-medium uppercase tracking-widest"
-    >
-      Ajustando conteúdo e metadados
-    </p>
+  <div v-if="isLoading" class="py-20 text-center text-slate-500">
+    Carregando...
   </div>
-
-  <ArticleEditor
-    v-if="data?.article && data.translations"
-    :article="data.article"
-    :translations="data.translations"
-    :saving="saving"
-    @save="handleSave"
-  />
-  <div v-else class="py-20 text-center text-slate-500">
+  <div
+    v-else-if="error || !data?.article"
+    class="py-20 text-center text-slate-500"
+  >
     Artigo não encontrado.
   </div>
+  <template v-else>
+    <div class="mb-8">
+      <h1 class="text-3xl font-black text-slate-900 uppercase tracking-tight">
+        Editar Artigo
+      </h1>
+      <p
+        class="text-slate-500 mt-2 text-sm font-medium uppercase tracking-widest"
+      >
+        Ajustando conteúdo e metadados
+      </p>
+    </div>
+
+    <ArticleEditor
+      v-if="data.translations"
+      :article="data.article"
+      :translations="data.translations"
+      :saving="saving"
+      @save="handleSave"
+    />
+  </template>
 </template>

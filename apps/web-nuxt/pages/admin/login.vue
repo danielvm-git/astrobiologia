@@ -20,6 +20,20 @@ const isSubmitting = ref(false);
 const localePath = useLocalePath();
 
 onMounted(async () => {
+  const route = useRoute();
+  const errorParam = route.query.error as string | undefined;
+  const detail = route.query.detail as string | undefined;
+
+  if (errorParam === "missing_credentials") {
+    errorMessage.value = "Credenciais OAuth ausentes. Tente novamente.";
+  } else if (errorParam === "session_creation_failed") {
+    errorMessage.value = detail
+      ? `Falha ao criar sessão: ${detail}`
+      : "Falha ao criar sessão Google. Tente novamente.";
+  } else if (errorParam === "google_failed") {
+    errorMessage.value = "Login com Google cancelado ou recusado.";
+  }
+
   try {
     await $fetch("/api/me", { method: "GET" });
     await navigateTo(localePath("/admin/dashboard"));
@@ -76,7 +90,7 @@ function handleGoogleClick() {
     account.createOAuth2Token(
       OAuthProvider.Google,
       `${origin}/api/auth/oauth-callback`,
-      `${origin}${localePath("/admin/login")}?error=google_failed`,
+      `${origin}${localePath("/admin/login")}?error=google_failed`
     );
   } catch (err) {
     errorMessage.value =

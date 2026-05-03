@@ -1,5 +1,5 @@
 import { ID, Query } from "node-appwrite";
-import { createSessionClient, getDatabaseId } from "~/server/utils/appwrite";
+import { createAdminClient, getDatabaseId } from "~/server/utils/appwrite";
 
 type TranslationInput = Record<string, unknown> & { language: string };
 
@@ -13,34 +13,6 @@ function sanitizePayload(data: Record<string, unknown>) {
   return clean;
 }
 
-async function listAllTranslations(
-  databases: ReturnType<typeof createSessionClient>["databases"],
-  collectionId: string,
-  articleId: string
-) {
-  const batchSize = 100;
-  const documents: Record<string, unknown>[] = [];
-  let lastId: string | null = null;
-  for (;;) {
-    const queries: string[] = [
-      Query.equal("article_id", articleId),
-      Query.orderAsc("$id"),
-      Query.limit(batchSize),
-    ];
-    if (lastId) queries.push(Query.cursorAfter(lastId));
-    const page = await databases.listDocuments(
-      getDatabaseId(),
-      collectionId,
-      queries
-    );
-    if (page.documents.length === 0) break;
-    documents.push(...page.documents);
-    if (page.documents.length < batchSize) break;
-    lastId = page.documents[page.documents.length - 1].$id as string;
-  }
-  return documents;
-}
-
 export default defineEventHandler(async (event) => {
   if (!event.context.user) {
     throw createError({ statusCode: 401, statusMessage: "Unauthorized" });
@@ -52,7 +24,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const config = useRuntimeConfig();
-  const { databases } = createSessionClient(event);
+  const { databases } = createAdminClient();
 
   if (event.method === "GET") {
     const article = await databases.getDocument(
@@ -60,20 +32,23 @@ export default defineEventHandler(async (event) => {
       config.public.articlesCollectionId,
       id
     );
-    const translations = await listAllTranslations(
-      databases,
+
+    const translations = await databases.listDocuments(
+      getDatabaseId(),
       config.public.articleTranslationsCollectionId,
-      id
+      [Query.equal("article_id", id)]
     );
+
     const translation =
-      translations.find((doc) => doc.language === "pt-br") ||
-      translations[0] ||
+      translations.documents.find((doc: any) => doc.language === "pt-br") ||
+      translations.documents[0] ||
       null;
-    return { article, translation, translations };
+
+    return { article, translation, translations: translations.documents };
   }
 
   if (event.method === "PUT") {
-    const body = await readBody<Record<string, unknown>>(event);
+    const body = await readBody(event);
 
     const masterPayload = sanitizePayload({
       category: body.category,
@@ -98,59 +73,62 @@ export default defineEventHandler(async (event) => {
       masterPayload
     );
 
-    const translationsInput = body.translations as TranslationInput[] | undefined;
-    if (!Array.isArray(translationsInput)) {
+    const translationsInput = body.translations as
+      | TranslationInput[]
+      | undefined;
+    if (!Array.isArray(translationsInput) || translationsInput.length === 0) {
       return { success: true };
     }
 
-    const existingTrans = await listAllTranslations(
-      databases,
+    // Fetch existing translation document IDs keyed by language so we can
+    // update in-place instead of always creating new documents (ID.unique()
+    // would always create, violating the unique (article_id, language) index).
+    const existingDocs = await databases.listDocuments(
+      getDatabaseId(),
       config.public.articleTranslationsCollectionId,
-      id
+      [Query.equal("article_id", id), Query.limit(25)]
+    );
+    const existingIdByLanguage = new Map<string, string>(
+      existingDocs.documents.map((doc) => [
+        (doc as unknown as { language: string }).language,
+        doc.$id,
+      ])
     );
 
     for (const trans of translationsInput) {
-      const existing = existingTrans.find(
-        (t) => t.language === trans.language
-      );
       const cleanTrans = sanitizePayload(trans as Record<string, unknown>);
       delete cleanTrans.article_id;
+      delete cleanTrans.$id;
 
-      if (existing) {
-        await databases.updateDocument(
-          getDatabaseId(),
-          config.public.articleTranslationsCollectionId,
-          existing.$id as string,
-          cleanTrans
-        );
-      } else {
-        await databases.createDocument(
-          getDatabaseId(),
-          config.public.articleTranslationsCollectionId,
-          ID.unique(),
-          {
-            ...cleanTrans,
-            article_id: id,
-          }
-        );
-      }
+      const language = cleanTrans.language as string;
+      const docId = existingIdByLanguage.get(language) ?? ID.unique();
+
+      await databases.upsertDocument(
+        getDatabaseId(),
+        config.public.articleTranslationsCollectionId,
+        docId,
+        {
+          ...cleanTrans,
+          article_id: id,
+        }
+      );
     }
 
     return { success: true };
   }
 
   if (event.method === "DELETE") {
-    const translations = await listAllTranslations(
-      databases,
+    const translations = await databases.listDocuments(
+      getDatabaseId(),
       config.public.articleTranslationsCollectionId,
-      id
+      [Query.equal("article_id", id)]
     );
 
-    for (const translation of translations) {
+    for (const t of translations.documents) {
       await databases.deleteDocument(
         getDatabaseId(),
         config.public.articleTranslationsCollectionId,
-        translation.$id as string
+        t.$id as string
       );
     }
 
@@ -159,6 +137,7 @@ export default defineEventHandler(async (event) => {
       config.public.articlesCollectionId,
       id
     );
+
     return { success: true };
   }
 
