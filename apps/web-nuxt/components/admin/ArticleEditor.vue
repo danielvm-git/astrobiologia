@@ -16,6 +16,7 @@ import { cn } from "@/lib/utils";
 import { ARTICLE_CATEGORIES } from "@/lib/article-categories";
 import {
   ARTICLE_LOCALES,
+  getArticleLocaleLabels,
   ARTICLE_LOCALE_LABELS,
 } from "@/lib/article-locales";
 
@@ -34,6 +35,9 @@ const props = defineProps<{
   translations: Array<Record<string, unknown>>;
   saving?: boolean;
 }>();
+
+const { locale } = useI18n();
+const localeLabels = computed(() => getArticleLocaleLabels(locale.value));
 
 const emit = defineEmits<{
   (
@@ -97,7 +101,9 @@ watch(
   (next) => {
     if (!next) return;
     category.value = String(next.category ?? "noticias");
-    tags.value = Array.isArray(next.tags) ? (next.tags as string[]).join(", ") : "";
+    tags.value = Array.isArray(next.tags)
+      ? (next.tags as string[]).join(", ")
+      : "";
     status.value = String(next.status ?? "draft");
     featured.value = Boolean(next.featured ?? false);
     authorName.value = String(next.authorName ?? "Danilo Albergaria");
@@ -189,7 +195,9 @@ function copyPortugueseTo(lang: string) {
   if (!base.title) return false;
   const t = transState.value[lang];
   t.title = base.title;
-  t.slug = base.slug ? `${base.slug}-${lang}` : `${generateSlug(base.title)}-${lang}`;
+  t.slug = base.slug
+    ? `${base.slug}-${lang}`
+    : `${generateSlug(base.title)}-${lang}`;
   t.excerpt = base.excerpt;
   t.content = base.content;
   t.metaTitle = base.metaTitle ?? "";
@@ -206,7 +214,9 @@ function copyEnglishTo(lang: string) {
   if (!src.title) return false;
   const t = transState.value[lang];
   t.title = src.title;
-  t.slug = src.slug ? `${src.slug}-${lang}` : `${generateSlug(src.title)}-${lang}`;
+  t.slug = src.slug
+    ? `${src.slug}-${lang}`
+    : `${generateSlug(src.title)}-${lang}`;
   t.excerpt = src.excerpt;
   t.content = src.content;
   t.metaTitle = src.metaTitle ?? "";
@@ -295,9 +305,7 @@ async function translateWithDeepL() {
     if (applyTranslationFallback(lang)) {
       alert("Erro na API; conteúdo copiado do inglês ou do português.");
     } else {
-      alert(
-        "Erro ao traduzir. Verifique a chave da API do DeepL em .env"
-      );
+      alert("Erro ao traduzir. Verifique a chave da API do DeepL em .env");
     }
   } finally {
     isBusy.value = false;
@@ -305,6 +313,10 @@ async function translateWithDeepL() {
 }
 
 async function translateAllWithDeepL() {
+  // Flush the active editor so base.content is always current before translating
+  if (tiptapEditor.value) {
+    transState.value[activeLang.value].content = tiptapEditor.value.getHTML();
+  }
   const base = transState.value["pt-br"];
   if (!base.title) {
     alert("Por favor, preencha o título em Português antes de traduzir.");
@@ -351,7 +363,16 @@ async function translateAllWithDeepL() {
       }
 
       if (!transState.value[lang].slug) {
-        transState.value[lang].slug = generateSlug(transState.value[lang].title);
+        const generated = generateSlug(transState.value[lang].title);
+        if (generated) {
+          transState.value[lang].slug = generated;
+        } else {
+          // CJK and other non-Latin scripts produce empty slugs — fall back to
+          // the PT slug with the language code appended so Appwrite gets a
+          // valid non-empty value (e.g. "radar-em-drone-ja").
+          const ptSlug = base.slug || generateSlug(base.title);
+          transState.value[lang].slug = ptSlug ? `${ptSlug}-${lang}` : lang;
+        }
       }
     }
 
@@ -772,7 +793,8 @@ const disableActions = computed(() => isBusy.value || isSavingFlag.value);
             <div
               class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100"
             >
-              <span class="text-xs font-bold text-slate-600 uppercase tracking-widest"
+              <span
+                class="text-xs font-bold text-slate-600 uppercase tracking-widest"
                 >Status</span
               >
               <select
@@ -809,7 +831,11 @@ const disableActions = computed(() => isBusy.value || isSavingFlag.value);
         class="max-w-7xl mx-auto flex justify-between items-center px-4 flex-wrap gap-4"
       >
         <div class="flex items-center gap-4 flex-wrap">
-          <div v-for="tag in ARTICLE_LOCALES" :key="tag" class="flex items-center gap-1">
+          <div
+            v-for="tag in ARTICLE_LOCALES"
+            :key="tag"
+            class="flex items-center gap-1"
+          >
             <div
               :class="
                 cn(
@@ -820,7 +846,7 @@ const disableActions = computed(() => isBusy.value || isSavingFlag.value);
             ></div>
             <span
               class="text-[10px] font-black uppercase tracking-widest text-slate-400"
-              >{{ ARTICLE_LOCALE_LABELS[tag] || tag }}</span
+              >{{ localeLabels[tag] || tag }}</span
             >
           </div>
         </div>
