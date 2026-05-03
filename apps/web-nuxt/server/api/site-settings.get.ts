@@ -9,6 +9,7 @@ const VALID_LAYOUTS: LayoutType[] = [
   "hero-grid",
   "hero-sidebar",
   "magazine",
+  "list",
 ];
 const DEFAULT: SiteSettings = { layout: "hero-grid" };
 

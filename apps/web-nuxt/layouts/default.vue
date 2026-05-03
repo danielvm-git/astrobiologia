@@ -11,7 +11,7 @@ const localePath = useLocalePath();
       class="sticky top-0 z-50 border-b border-slate-100 bg-white/95 backdrop-blur"
     >
       <div
-        class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
+        class="mx-auto flex h-10 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
       >
         <NuxtLink :to="localePath('/')" class="flex items-center gap-2">
           <Telescope class="h-6 w-6 text-primary" />
@@ -34,6 +34,11 @@ const localePath = useLocalePath();
             :to="localePath('/sobre')"
             class="text-xs font-black uppercase tracking-widest text-slate-500 hover:text-primary"
             >{{ $t("nav_about") }}</NuxtLink
+          >
+          <NuxtLink
+            :to="localePath('/admin/dashboard')"
+            class="text-xs font-black uppercase tracking-widest text-slate-500 hover:text-primary"
+            >Admin</NuxtLink
           >
           <LanguageSwitcher variant="header" />
         </nav>
@@ -68,6 +73,12 @@ const localePath = useLocalePath();
             class="text-xs font-black uppercase tracking-widest text-slate-600"
             @click="isMobileOpen = false"
             >{{ $t("nav_about") }}</NuxtLink
+          >
+          <NuxtLink
+            :to="localePath('/admin/dashboard')"
+            class="text-xs font-black uppercase tracking-widest text-slate-600"
+            @click="isMobileOpen = false"
+            >Admin</NuxtLink
           >
           <LanguageSwitcher variant="mobile" />
         </div>

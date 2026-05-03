@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import ArticleCard from "~/components/ArticleCard.vue";
 import { CATEGORIES } from "~/server/utils/appwrite";
 
 const route = useRoute();
@@ -32,25 +31,21 @@ if (error.value) {
 }
 
 const articles = computed(() => data.value?.articles ?? []);
+const currentLayout = useLayoutComponent();
 </script>
 
 <template>
-  <main class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-    <h1 class="text-3xl font-black text-slate-900">{{ category?.name }}</h1>
-    <p class="mt-2 text-slate-600">{{ category?.description }}</p>
-
-    <p v-if="!articles.length" class="mt-10 text-sm text-slate-500">
+  <main>
+    <div class="mx-auto max-w-7xl px-4 pt-10 pb-2 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-black text-slate-900">{{ category?.name }}</h1>
+      <p class="mt-2 text-slate-600">{{ category?.description }}</p>
+    </div>
+    <p
+      v-if="!articles.length"
+      class="mx-auto max-w-7xl px-4 pb-10 text-sm text-slate-500 sm:px-6 lg:px-8"
+    >
       {{ t("empty_category") }}
     </p>
-    <div
-      v-else
-      class="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
-    >
-      <ArticleCard
-        v-for="article in articles"
-        :key="article.$id"
-        :article="article"
-      />
-    </div>
+    <component v-else :is="currentLayout" :articles="articles" />
   </main>
 </template>

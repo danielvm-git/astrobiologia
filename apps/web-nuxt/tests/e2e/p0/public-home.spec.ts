@@ -12,7 +12,7 @@ test.describe("@p0 Home", () => {
     ).toBeVisible();
 
     await expect(
-      page.getByRole("link", { name: /Todos|All/i }).first()
+      page.getByRole("link", { name: /Articles|Artigos/i }).first()
     ).toBeVisible();
     await expect(
       page.getByRole("heading", {

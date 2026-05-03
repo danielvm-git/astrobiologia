@@ -9,7 +9,7 @@ const props = defineProps<{
 <template>
   <header class="bg-slate-900">
     <div
-      class="mx-auto max-w-7xl px-4 pt-8 pb-6 text-center sm:px-6 md:pt-10 md:pb-8 lg:px-8"
+      class="mx-auto max-w-7xl px-4 pt-4 pb-3 text-center sm:px-6 md:pt-6 md:pb-4 lg:px-8"
     >
       <p
         v-if="props.kicker"

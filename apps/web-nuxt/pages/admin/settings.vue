@@ -54,6 +54,12 @@ const layouts: LayoutOption[] = [
     name: "Revista",
     description: "Banner em destaque no topo, grade editorial em 3 colunas.",
   },
+  {
+    id: "list",
+    name: "Lista",
+    description:
+      "Feed vertical de artigos compactos, ideal para leitura rápida.",
+  },
 ];
 </script>
 
@@ -157,6 +163,27 @@ const layouts: LayoutOption[] = [
             <rect x="4" y="72" width="46" height="24" rx="2" fill="#e2e8f0" />
             <rect x="57" y="72" width="46" height="24" rx="2" fill="#e2e8f0" />
             <rect x="110" y="72" width="46" height="24" rx="2" fill="#e2e8f0" />
+          </svg>
+
+          <svg
+            v-else-if="option.id === 'list'"
+            viewBox="0 0 160 100"
+            class="w-full rounded"
+            aria-hidden="true"
+          >
+            <rect width="160" height="100" fill="#f8fafc" rx="4" />
+            <rect x="4" y="4" width="28" height="20" rx="2" fill="#cbd5e1" />
+            <rect x="38" y="4" width="118" height="8" rx="1" fill="#e2e8f0" />
+            <rect x="38" y="16" width="80" height="5" rx="1" fill="#e2e8f0" />
+            <rect x="4" y="30" width="28" height="20" rx="2" fill="#cbd5e1" />
+            <rect x="38" y="30" width="118" height="8" rx="1" fill="#e2e8f0" />
+            <rect x="38" y="42" width="80" height="5" rx="1" fill="#e2e8f0" />
+            <rect x="4" y="56" width="28" height="20" rx="2" fill="#cbd5e1" />
+            <rect x="38" y="56" width="118" height="8" rx="1" fill="#e2e8f0" />
+            <rect x="38" y="68" width="80" height="5" rx="1" fill="#e2e8f0" />
+            <rect x="4" y="82" width="28" height="14" rx="2" fill="#cbd5e1" />
+            <rect x="38" y="82" width="118" height="6" rx="1" fill="#e2e8f0" />
+            <rect x="38" y="91" width="60" height="4" rx="1" fill="#e2e8f0" />
           </svg>
 
           <span

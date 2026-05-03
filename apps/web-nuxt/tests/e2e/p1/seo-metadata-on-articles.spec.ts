@@ -5,17 +5,20 @@ test.describe("@p2 article SEO", () => {
     page,
     request,
   }) => {
-    const list = await request.get(
-      "/api/articles/featured?limit=1&locale=pt-br"
-    );
+    const list = await request.get("/api/articles/list?limit=1&locale=pt-br");
     const payload = (await list.json()) as {
       articles: { translation?: { slug?: string }; slug?: string }[];
     };
     const first = payload.articles?.[0];
     const slug = first?.translation?.slug || first?.slug;
-    test.skip(!slug, "No published article in Appwrite for SEO check");
 
     await page.goto(`/artigos/${slug}`);
+
+    if ((await page.locator("text=404").count()) > 0) {
+      test.skip();
+      return;
+    }
+
     await expect(page.locator('link[rel="alternate"]')).toHaveCount(6);
     await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
       "content",

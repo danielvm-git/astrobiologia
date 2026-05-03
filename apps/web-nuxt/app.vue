@@ -3,3 +3,8 @@
     <NuxtPage />
   </NuxtLayout>
 </template>
+
+<style>
+:root {
+}
+</style>

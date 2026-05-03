@@ -7,6 +7,7 @@ const VALID_LAYOUTS: LayoutType[] = [
   "hero-grid",
   "hero-sidebar",
   "magazine",
+  "list",
 ];
 
 export default defineEventHandler(async (event): Promise<SiteSettings> => {

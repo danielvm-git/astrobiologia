@@ -5,6 +5,7 @@ import {
   LayoutDashboard,
   FileText,
   Settings,
+  Palette,
   LogOut,
   Menu,
   X,
@@ -41,12 +42,12 @@ const menuItems = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { name: "Artigos", href: "/admin/artigos", icon: FileText },
   { name: "Busca (SEO)", href: "/admin/seo", icon: Search },
-  { name: "Configurações", href: "/admin/settings", icon: Settings },
+  { name: "Aparência", href: "/admin/settings", icon: Palette },
 ];
 
 async function handleLogout() {
   await $fetch("/api/auth/logout", { method: "POST" });
-  navigateTo(localePath("/admin/login"));
+  navigateTo("/");
 }
 </script>
 
@@ -63,7 +64,7 @@ async function handleLogout() {
         "
       >
         <div
-          class="h-16 flex items-center px-6 border-b border-slate-800 shrink-0 overflow-hidden"
+          class="h-4 flex items-center px-1 border-b border-slate-800 shrink-0 overflow-hidden"
         >
           <NuxtLink
             :to="localePath('/admin/dashboard')"
@@ -175,7 +176,7 @@ async function handleLogout() {
 
       <!-- Mobile Header -->
       <header
-        class="md:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-slate-200 px-4 flex items-center justify-between z-40"
+        class="md:hidden fixed top-0 left-0 right-0 h-4 bg-white border-b border-slate-200 px-1 flex items-center justify-between z-40"
       >
         <NuxtLink
           :to="localePath('/admin/dashboard')"
@@ -198,7 +199,7 @@ async function handleLogout() {
       <div class="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         <!-- Global Top Bar (Desktop) -->
         <header
-          class="hidden md:flex h-16 items-center justify-between px-8 bg-white/80 backdrop-blur-md border-b border-slate-200 shrink-0 z-30"
+          class="hidden md:flex h-4 items-center justify-between px-1 bg-white/80 backdrop-blur-md border-b border-slate-200 shrink-0 z-30"
         >
           <div class="flex items-center gap-4">
             <span
@@ -232,7 +233,7 @@ async function handleLogout() {
         </header>
 
         <main
-          class="flex-1 overflow-y-auto p-4 md:p-8 pt-20 md:pt-8 bg-slate-50/50"
+          class="flex-1 overflow-y-auto p-4 md:p-8 pt-6 md:pt-6 bg-slate-50/50"
         >
           <slot />
         </main>
