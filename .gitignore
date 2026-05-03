@@ -44,7 +44,6 @@ project.inlang/cache/
 # Ctxo local cache (auto-rebuilt, never committed)
 .ctxo/.cache/
 .openhands
-.github
 .agents
 
 # ── GSD baseline (auto-generated) ──

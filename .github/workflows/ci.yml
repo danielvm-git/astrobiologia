@@ -1,4 +1,4 @@
-# PR quality gate: unit + Svelte check + P0 E2E (Chromium only).
+# PR quality gate: typecheck + unit tests + P0 E2E (Chromium).
 # Widen E2E (all browsers / p1) by changing the e2e job or adding a follow-up workflow.
 name: CI
 
@@ -18,19 +18,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: npm
+          node-version: "22"
+          cache: pnpm
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
-      - name: Svelte check
-        run: npm run check
+      - name: Nuxt check
+        run: pnpm run check
 
       - name: Vitest
-        run: npm run test
+        run: pnpm run test
 
   e2e-p0:
     name: Playwright P0 (Chromium)
@@ -38,19 +42,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: npm
+          node-version: "22"
+          cache: pnpm
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Install Playwright Chromium
-        run: npx playwright install --with-deps chromium
+        run: pnpm exec playwright install --with-deps chromium
 
       - name: Run P0 E2E
-        run: npm run test:e2e:p0
+        run: pnpm run test:e2e:p0
         env:
           CI: true
 
@@ -77,8 +85,7 @@ jobs:
       - uses: actions/setup-node@v4
         if: steps.check-config.outputs.exists == 'true'
         with:
-          node-version: '20'
-          cache: npm
+          node-version: "22"
 
       - name: Install Appwrite CLI
         if: steps.check-config.outputs.exists == 'true'
