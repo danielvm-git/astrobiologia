@@ -46,6 +46,9 @@ async function handleSave(
         translations,
       },
     });
+    // Bust the Nuxt payload cache so the articles list re-fetches fresh data
+    // (includes updated language indicators for newly added translations).
+    clearNuxtData("admin-articles");
     await navigateTo(localePath("/admin/artigos"));
   } catch (err: unknown) {
     const msg =
