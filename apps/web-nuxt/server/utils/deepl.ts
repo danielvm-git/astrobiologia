@@ -8,7 +8,7 @@ const TARGET_LANG_MAP: Record<string, string> = {
 };
 
 export function isDeepLConfigured(): boolean {
-  return Boolean(process.env.DEEPL_API_KEY?.trim());
+  return Boolean(useRuntimeConfig().deeplApiKey?.trim());
 }
 
 export async function translateText(
@@ -16,7 +16,7 @@ export async function translateText(
   targetLang: string,
   isHtml = false
 ): Promise<string> {
-  const authKey = process.env.DEEPL_API_KEY;
+  const authKey = useRuntimeConfig().deeplApiKey;
   if (!authKey) {
     throw new Error("DEEPL_API_KEY is not configured");
   }
