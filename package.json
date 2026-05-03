@@ -1,21 +1,18 @@
 {
   "name": "astrobiologia-monorepo",
   "private": true,
-  "workspaces": [
-    "apps/web-nuxt"
-  ],
   "scripts": {
     "prepare": "husky",
-    "type-check": "npm run check -w @astrobiologia/web-nuxt",
-    "lint": "npm run lint -w @astrobiologia/web-nuxt",
-    "preflight": "npm run type-check && npm run lint && npm run test:all && npm run build && npx lint-staged --diff HEAD",
-    "dev": "npm run dev -w @astrobiologia/web-nuxt",
-    "build": "npm run build -w @astrobiologia/web-nuxt",
-    "test": "npm run test -w @astrobiologia/web-nuxt",
-    "test:all": "npm run test:all -w @astrobiologia/web-nuxt",
-    "test:fast": "npm run test:unit -w @astrobiologia/web-nuxt && npm run test:api -w @astrobiologia/web-nuxt",
-    "test:coverage": "npm run test:coverage -w @astrobiologia/web-nuxt",
-    "check": "npm run check -w @astrobiologia/web-nuxt"
+    "type-check": "pnpm --filter @astrobiologia/web-nuxt check",
+    "lint": "pnpm --filter @astrobiologia/web-nuxt lint",
+    "preflight": "pnpm type-check && pnpm lint && pnpm test:all && pnpm build && pnpm exec lint-staged --diff HEAD",
+    "dev": "pnpm --filter @astrobiologia/web-nuxt dev",
+    "build": "pnpm --filter @astrobiologia/web-nuxt build",
+    "test": "pnpm --filter @astrobiologia/web-nuxt test",
+    "test:all": "pnpm --filter @astrobiologia/web-nuxt test:all",
+    "test:fast": "pnpm --filter @astrobiologia/web-nuxt test:unit && pnpm --filter @astrobiologia/web-nuxt test:api",
+    "test:coverage": "pnpm --filter @astrobiologia/web-nuxt test:coverage",
+    "check": "pnpm --filter @astrobiologia/web-nuxt check"
   },
   "devDependencies": {
     "@ctxo/cli": "^0.8.1",

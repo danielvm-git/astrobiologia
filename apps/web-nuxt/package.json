@@ -9,7 +9,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "test": "npm run test:e2e:p0",
+    "test": "pnpm run test:e2e:p0",
     "test:unit": "vitest run",
     "test:unit:watch": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -17,7 +17,7 @@
     "test:e2e": "playwright test --project=chromium --config=playwright.config.ts",
     "test:e2e:p0": "playwright test tests/e2e/p0 --project=chromium --config=playwright.config.ts",
     "test:e2e:p1": "playwright test tests/e2e/p1 --project=chromium --config=playwright.config.ts",
-    "test:all": "npm run test:unit && npm run test:api && npm run test:e2e:p0 && npm run test:e2e:p1",
+    "test:all": "pnpm run test:unit && pnpm run test:api && pnpm run test:e2e:p0 && pnpm run test:e2e:p1",
     "lint": "prettier --check {pages,components,server,lib,i18n.config.ts,middleware,layouts,error.vue} --ignore-unknown 2>/dev/null || true"
   },
   "dependencies": {
