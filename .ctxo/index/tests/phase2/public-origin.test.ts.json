@@ -1,0 +1,28 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "a388d9a537defb02826fec02dee8a60d5bcda174047439ec3b30c53fa513ec5c",
+  "edges": [
+    {
+      "from": "tests/phase2/public-origin.test.ts::public-origin.test::variable",
+      "kind": "imports",
+      "to": "src/lib/server/public-origin.ts::getPublicOrigin::function"
+    },
+    {
+      "from": "tests/phase2/public-origin.test.ts::public-origin.test::variable",
+      "kind": "imports",
+      "to": "src/lib/server/public-origin.ts::isPublicHttps::function"
+    }
+  ],
+  "file": "tests/phase2/public-origin.test.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T19:38:35-03:00",
+      "hash": "eadee458e4cf08f7f7eee4867c7b8582b528fa9d",
+      "kind": "commit",
+      "message": "feat(auth): enhance OAuth handling by ensuring HTTPS compliance for redirect URLs and improving public origin resolution"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

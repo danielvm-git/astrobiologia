@@ -1,0 +1,38 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 3,
+      "symbolId": "src/lib/auth/google-oauth-browser.ts::startGoogleOAuth::function"
+    }
+  ],
+  "contentHash": "d258eb71c1149087e863b3dfee91e6ffcf1b4956d5aa076b96f3fc1348308df2",
+  "edges": [],
+  "file": "src/lib/auth/google-oauth-browser.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T23:11:46-03:00",
+      "hash": "4b45ba0b34eec59888dc5277cd8a6cc3d665c4cb",
+      "kind": "commit",
+      "message": "fix(i18n-auth): locale-aware admin routing, translations, OAuth logging"
+    },
+    {
+      "date": "2026-04-20T21:21:10-03:00",
+      "hash": "195659b2cd5303dee3c57cbf75e8ad7ff3a3107f",
+      "kind": "commit",
+      "message": "feat(auth): streamline Google OAuth integration and enhance session management"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 23,
+      "endOffset": 922,
+      "kind": "function",
+      "name": "startGoogleOAuth",
+      "startLine": 12,
+      "startOffset": 488,
+      "symbolId": "src/lib/auth/google-oauth-browser.ts::startGoogleOAuth::function"
+    }
+  ]
+}

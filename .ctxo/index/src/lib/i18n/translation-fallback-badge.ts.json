@@ -1,0 +1,61 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 3,
+      "symbolId": "src/lib/i18n/translation-fallback-badge.ts::shouldShowTranslationFallbackBadge::function"
+    }
+  ],
+  "contentHash": "b9f1d877f616f82df0dad6d38d060da8d3117b98671fbe900c95f112ce036119",
+  "edges": [
+    {
+      "from": "src/lib/i18n/translation-fallback-badge.ts::shouldShowTranslationFallbackBadge::function",
+      "kind": "imports",
+      "to": "src/lib/i18n/locale-tag.ts::localeTagsMatch::function"
+    },
+    {
+      "from": "src/lib/i18n/translation-fallback-badge.ts::shouldShowTranslationFallbackBadge::function",
+      "kind": "imports",
+      "to": "src/lib/i18n/locale-tag.ts::normalizeLocaleTag::function"
+    },
+    {
+      "from": "src/lib/i18n/translation-fallback-badge.ts::shouldShowTranslationFallbackBadge::function",
+      "kind": "calls",
+      "to": "src/lib/i18n/locale-tag.ts::normalizeLocaleTag::function"
+    },
+    {
+      "from": "src/lib/i18n/translation-fallback-badge.ts::shouldShowTranslationFallbackBadge::function",
+      "kind": "calls",
+      "to": "src/lib/i18n/locale-tag.ts::normalizeLocaleTag::function"
+    },
+    {
+      "from": "src/lib/i18n/translation-fallback-badge.ts::shouldShowTranslationFallbackBadge::function",
+      "kind": "calls",
+      "to": "src/lib/i18n/locale-tag.ts::localeTagsMatch::function"
+    },
+    {
+      "from": "src/lib/i18n/translation-fallback-badge.ts::shouldShowTranslationFallbackBadge::function",
+      "kind": "uses",
+      "to": "src/lib/i18n/locale-tag.ts::normalizeLocaleTag::function"
+    },
+    {
+      "from": "src/lib/i18n/translation-fallback-badge.ts::shouldShowTranslationFallbackBadge::function",
+      "kind": "uses",
+      "to": "src/lib/i18n/locale-tag.ts::localeTagsMatch::function"
+    }
+  ],
+  "file": "src/lib/i18n/translation-fallback-badge.ts",
+  "intent": [],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 14,
+      "endOffset": 439,
+      "kind": "function",
+      "name": "shouldShowTranslationFallbackBadge",
+      "startLine": 2,
+      "startOffset": 69,
+      "symbolId": "src/lib/i18n/translation-fallback-badge.ts::shouldShowTranslationFallbackBadge::function"
+    }
+  ]
+}

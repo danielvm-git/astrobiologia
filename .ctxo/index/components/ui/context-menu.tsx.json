@@ -1,0 +1,214 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenu::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuTrigger::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuGroup::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuPortal::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuSub::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuRadioGroup::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuSubTrigger::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuSubContent::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuContent::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuItem::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuCheckboxItem::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuRadioItem::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuLabel::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuSeparator::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuShortcut::function"
+    }
+  ],
+  "contentHash": "ef3f8b668e7abee8ea18ea66317d067a5f3590a3bdfb7be937df5838e69602e8",
+  "edges": [],
+  "file": "components/ui/context-menu.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 12,
+      "endOffset": 391,
+      "kind": "function",
+      "name": "ContextMenu",
+      "startLine": 8,
+      "startOffset": 220,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenu::function"
+    },
+    {
+      "endLine": 20,
+      "endOffset": 595,
+      "kind": "function",
+      "name": "ContextMenuTrigger",
+      "startLine": 14,
+      "startOffset": 393,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuTrigger::function"
+    },
+    {
+      "endLine": 28,
+      "endOffset": 791,
+      "kind": "function",
+      "name": "ContextMenuGroup",
+      "startLine": 22,
+      "startOffset": 597,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuGroup::function"
+    },
+    {
+      "endLine": 36,
+      "endOffset": 991,
+      "kind": "function",
+      "name": "ContextMenuPortal",
+      "startLine": 30,
+      "startOffset": 793,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuPortal::function"
+    },
+    {
+      "endLine": 42,
+      "endOffset": 1169,
+      "kind": "function",
+      "name": "ContextMenuSub",
+      "startLine": 38,
+      "startOffset": 993,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuSub::function"
+    },
+    {
+      "endLine": 53,
+      "endOffset": 1402,
+      "kind": "function",
+      "name": "ContextMenuRadioGroup",
+      "startLine": 44,
+      "startOffset": 1171,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuRadioGroup::function"
+    },
+    {
+      "endLine": 77,
+      "endOffset": 2237,
+      "kind": "function",
+      "name": "ContextMenuSubTrigger",
+      "startLine": 55,
+      "startOffset": 1404,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuSubTrigger::function"
+    },
+    {
+      "endLine": 93,
+      "endOffset": 3036,
+      "kind": "function",
+      "name": "ContextMenuSubContent",
+      "startLine": 79,
+      "startOffset": 2239,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuSubContent::function"
+    },
+    {
+      "endLine": 111,
+      "endOffset": 3979,
+      "kind": "function",
+      "name": "ContextMenuContent",
+      "startLine": 95,
+      "startOffset": 3038,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuContent::function"
+    },
+    {
+      "endLine": 134,
+      "endOffset": 5028,
+      "kind": "function",
+      "name": "ContextMenuItem",
+      "startLine": 113,
+      "startOffset": 3981,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuItem::function"
+    },
+    {
+      "endLine": 160,
+      "endOffset": 5998,
+      "kind": "function",
+      "name": "ContextMenuCheckboxItem",
+      "startLine": 136,
+      "startOffset": 5030,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuCheckboxItem::function"
+    },
+    {
+      "endLine": 184,
+      "endOffset": 6932,
+      "kind": "function",
+      "name": "ContextMenuRadioItem",
+      "startLine": 162,
+      "startOffset": 6000,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuRadioItem::function"
+    },
+    {
+      "endLine": 204,
+      "endOffset": 7341,
+      "kind": "function",
+      "name": "ContextMenuLabel",
+      "startLine": 186,
+      "startOffset": 6934,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuLabel::function"
+    },
+    {
+      "endLine": 217,
+      "endOffset": 7643,
+      "kind": "function",
+      "name": "ContextMenuSeparator",
+      "startLine": 206,
+      "startOffset": 7343,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuSeparator::function"
+    },
+    {
+      "endLine": 233,
+      "endOffset": 7939,
+      "kind": "function",
+      "name": "ContextMenuShortcut",
+      "startLine": 219,
+      "startOffset": 7645,
+      "symbolId": "components/ui/context-menu.tsx::ContextMenuShortcut::function"
+    }
+  ]
+}

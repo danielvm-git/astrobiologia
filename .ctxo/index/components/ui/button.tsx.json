@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/button.tsx::Button::function"
+    }
+  ],
+  "contentHash": "7cb96ee534dedef7eb138952dc02fda0cb2caf2e02f2d3c08afab7f978d58dc3",
+  "edges": [],
+  "file": "components/ui/button.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 57,
+      "endOffset": 2107,
+      "kind": "function",
+      "name": "Button",
+      "startLine": 38,
+      "startOffset": 1736,
+      "symbolId": "components/ui/button.tsx::Button::function"
+    }
+  ]
+}

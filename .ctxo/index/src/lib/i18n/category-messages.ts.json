@@ -1,0 +1,38 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 2,
+      "symbolId": "src/lib/i18n/category-messages.ts::getCategoryTitleI18n::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "src/lib/i18n/category-messages.ts::getCategoryDescriptionI18n::function"
+    }
+  ],
+  "contentHash": "29f506235e535b6374845265f6b3130062c4f6a2c377c2663b6b230cfa584e68",
+  "edges": [],
+  "file": "src/lib/i18n/category-messages.ts",
+  "intent": [],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 22,
+      "endOffset": 750,
+      "kind": "function",
+      "name": "getCategoryTitleI18n",
+      "startLine": 20,
+      "startOffset": 649,
+      "symbolId": "src/lib/i18n/category-messages.ts::getCategoryTitleI18n::function"
+    },
+    {
+      "endLine": 26,
+      "endOffset": 878,
+      "kind": "function",
+      "name": "getCategoryDescriptionI18n",
+      "startLine": 24,
+      "startOffset": 752,
+      "symbolId": "src/lib/i18n/category-messages.ts::getCategoryDescriptionI18n::function"
+    }
+  ]
+}

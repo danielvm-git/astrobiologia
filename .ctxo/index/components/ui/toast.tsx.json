@@ -1,0 +1,36 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "37ee2f94a1c5df7a0194cd1740414722e58de5a94fd46e82329b4c217f5fbf36",
+  "edges": [],
+  "file": "components/ui/toast.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 114,
+      "endOffset": 4632,
+      "kind": "type",
+      "name": "ToastProps",
+      "startLine": 114,
+      "startOffset": 4570,
+      "symbolId": "components/ui/toast.tsx::ToastProps::type"
+    },
+    {
+      "endLine": 116,
+      "endOffset": 4698,
+      "kind": "type",
+      "name": "ToastActionElement",
+      "startLine": 116,
+      "startOffset": 4634,
+      "symbolId": "components/ui/toast.tsx::ToastActionElement::type"
+    }
+  ]
+}

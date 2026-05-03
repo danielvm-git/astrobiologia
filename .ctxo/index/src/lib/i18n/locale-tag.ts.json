@@ -1,0 +1,77 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/lib/i18n/locale-tag.ts::normalizeLocaleTag::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "src/lib/i18n/locale-tag.ts::primaryLanguageSubtag::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "src/lib/i18n/locale-tag.ts::localeTagsMatch::function"
+    }
+  ],
+  "contentHash": "f3a71b181d75e50b5e004dc53f95e804298bc352bd5161570e0ac71fcd0daa16",
+  "edges": [
+    {
+      "from": "src/lib/i18n/locale-tag.ts::primaryLanguageSubtag::function",
+      "kind": "calls",
+      "to": "src/lib/i18n/locale-tag.ts::normalizeLocaleTag::function"
+    },
+    {
+      "from": "src/lib/i18n/locale-tag.ts::localeTagsMatch::function",
+      "kind": "calls",
+      "to": "src/lib/i18n/locale-tag.ts::normalizeLocaleTag::function"
+    },
+    {
+      "from": "src/lib/i18n/locale-tag.ts::localeTagsMatch::function",
+      "kind": "calls",
+      "to": "src/lib/i18n/locale-tag.ts::normalizeLocaleTag::function"
+    },
+    {
+      "from": "src/lib/i18n/locale-tag.ts::localeTagsMatch::function",
+      "kind": "calls",
+      "to": "src/lib/i18n/locale-tag.ts::primaryLanguageSubtag::function"
+    },
+    {
+      "from": "src/lib/i18n/locale-tag.ts::localeTagsMatch::function",
+      "kind": "calls",
+      "to": "src/lib/i18n/locale-tag.ts::primaryLanguageSubtag::function"
+    }
+  ],
+  "file": "src/lib/i18n/locale-tag.ts",
+  "intent": [],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 2,
+      "endOffset": 112,
+      "kind": "function",
+      "name": "normalizeLocaleTag",
+      "startLine": 0,
+      "startOffset": 0,
+      "symbolId": "src/lib/i18n/locale-tag.ts::normalizeLocaleTag::function"
+    },
+    {
+      "endLine": 8,
+      "endOffset": 277,
+      "kind": "function",
+      "name": "primaryLanguageSubtag",
+      "startLine": 4,
+      "startOffset": 114,
+      "symbolId": "src/lib/i18n/locale-tag.ts::primaryLanguageSubtag::function"
+    },
+    {
+      "endLine": 15,
+      "endOffset": 529,
+      "kind": "function",
+      "name": "localeTagsMatch",
+      "startLine": 10,
+      "startOffset": 279,
+      "symbolId": "src/lib/i18n/locale-tag.ts::localeTagsMatch::function"
+    }
+  ]
+}

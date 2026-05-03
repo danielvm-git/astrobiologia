@@ -1,0 +1,22 @@
+{
+  "projectId": "YOUR_PROJECT_ID",
+  "endpoint": "https://YOUR_REGION.cloud.appwrite.io/v1",
+  "sites": [
+    {
+      "$id": "YOUR_SITE_ID",
+      "name": "astrobiologia",
+      "enabled": true,
+      "logging": true,
+      "framework": "sveltekit",
+      "timeout": 30,
+      "installCommand": "npm ci",
+      "buildCommand": "npm run build",
+      "outputDirectory": "build",
+      "specification": "s-1vcpu-512mb",
+      "buildRuntime": "node-22",
+      "adapter": "ssr",
+      "fallbackFile": "",
+      "path": "."
+    }
+  ]
+}

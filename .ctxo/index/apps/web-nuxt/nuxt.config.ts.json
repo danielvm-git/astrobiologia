@@ -1,0 +1,17 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "9b5cb3c90056be6679eec46287c7b8b290de7262258f2b28109b050d7553db10",
+  "edges": [],
+  "file": "apps/web-nuxt/nuxt.config.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T22:07:56-03:00",
+      "hash": "fcbecfd59933eb3da9eb6226fcb46eef0947bd0a",
+      "kind": "commit",
+      "message": "refactor: refresh codebase map with current architecture and concerns analysis"
+    }
+  ],
+  "lastModified": 1777261505,
+  "symbols": []
+}

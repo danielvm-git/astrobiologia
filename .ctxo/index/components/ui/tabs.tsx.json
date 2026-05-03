@@ -1,0 +1,71 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/tabs.tsx::Tabs::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/tabs.tsx::TabsList::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/tabs.tsx::TabsTrigger::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/tabs.tsx::TabsContent::function"
+    }
+  ],
+  "contentHash": "23cc67b5360458decab2e93b3827aebbe142fd2d9f76ec418f96cb3269f1820a",
+  "edges": [],
+  "file": "components/ui/tabs.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 18,
+      "endOffset": 370,
+      "kind": "function",
+      "name": "Tabs",
+      "startLine": 7,
+      "startOffset": 134,
+      "symbolId": "components/ui/tabs.tsx::Tabs::function"
+    },
+    {
+      "endLine": 34,
+      "endOffset": 722,
+      "kind": "function",
+      "name": "TabsList",
+      "startLine": 20,
+      "startOffset": 372,
+      "symbolId": "components/ui/tabs.tsx::TabsList::function"
+    },
+    {
+      "endLine": 50,
+      "endOffset": 1658,
+      "kind": "function",
+      "name": "TabsTrigger",
+      "startLine": 36,
+      "startOffset": 724,
+      "symbolId": "components/ui/tabs.tsx::TabsTrigger::function"
+    },
+    {
+      "endLine": 63,
+      "endOffset": 1917,
+      "kind": "function",
+      "name": "TabsContent",
+      "startLine": 52,
+      "startOffset": 1660,
+      "symbolId": "components/ui/tabs.tsx::TabsContent::function"
+    }
+  ]
+}

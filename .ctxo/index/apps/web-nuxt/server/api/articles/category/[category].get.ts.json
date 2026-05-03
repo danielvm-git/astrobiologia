@@ -1,0 +1,10 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "cb4b3a5fdaabb7c518397b589e58f81dc02279a68b12aefd1a7fc3a5b8264a8c",
+  "edges": [],
+  "file": "apps/web-nuxt/server/api/articles/category/[category].get.ts",
+  "intent": [],
+  "lastModified": 1777261504,
+  "symbols": []
+}

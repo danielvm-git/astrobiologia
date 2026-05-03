@@ -1,0 +1,352 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/sidebar.tsx::useSidebar::function"
+    },
+    {
+      "cyclomatic": 9,
+      "symbolId": "components/ui/sidebar.tsx::SidebarProvider::function"
+    },
+    {
+      "cyclomatic": 9,
+      "symbolId": "components/ui/sidebar.tsx::Sidebar::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sidebar.tsx::SidebarTrigger::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sidebar.tsx::SidebarRail::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sidebar.tsx::SidebarInset::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sidebar.tsx::SidebarInput::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sidebar.tsx::SidebarHeader::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sidebar.tsx::SidebarFooter::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sidebar.tsx::SidebarSeparator::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sidebar.tsx::SidebarContent::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sidebar.tsx::SidebarGroup::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/sidebar.tsx::SidebarGroupLabel::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/sidebar.tsx::SidebarGroupAction::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sidebar.tsx::SidebarGroupContent::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sidebar.tsx::SidebarMenu::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sidebar.tsx::SidebarMenuItem::function"
+    },
+    {
+      "cyclomatic": 5,
+      "symbolId": "components/ui/sidebar.tsx::SidebarMenuButton::function"
+    },
+    {
+      "cyclomatic": 3,
+      "symbolId": "components/ui/sidebar.tsx::SidebarMenuAction::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sidebar.tsx::SidebarMenuBadge::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/sidebar.tsx::SidebarMenuSkeleton::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sidebar.tsx::SidebarMenuSub::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/sidebar.tsx::SidebarMenuSubItem::function"
+    },
+    {
+      "cyclomatic": 4,
+      "symbolId": "components/ui/sidebar.tsx::SidebarMenuSubButton::function"
+    }
+  ],
+  "contentHash": "1bdf187549f043a81a5b1a97da1422c4bf2bc5b2cce0415f074e017dcf1e8f71",
+  "edges": [
+    {
+      "from": "components/ui/sidebar.tsx::Sidebar::function",
+      "kind": "calls",
+      "to": "components/ui/sidebar.tsx::useSidebar::function"
+    },
+    {
+      "from": "components/ui/sidebar.tsx::SidebarTrigger::function",
+      "kind": "calls",
+      "to": "components/ui/sidebar.tsx::useSidebar::function"
+    },
+    {
+      "from": "components/ui/sidebar.tsx::SidebarRail::function",
+      "kind": "calls",
+      "to": "components/ui/sidebar.tsx::useSidebar::function"
+    },
+    {
+      "from": "components/ui/sidebar.tsx::SidebarMenuButton::function",
+      "kind": "calls",
+      "to": "components/ui/sidebar.tsx::useSidebar::function"
+    }
+  ],
+  "file": "components/ui/sidebar.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 53,
+      "endOffset": 1428,
+      "kind": "function",
+      "name": "useSidebar",
+      "startLine": 46,
+      "startOffset": 1239,
+      "symbolId": "components/ui/sidebar.tsx::useSidebar::function"
+    },
+    {
+      "endLine": 151,
+      "endOffset": 4273,
+      "kind": "function",
+      "name": "SidebarProvider",
+      "startLine": 55,
+      "startOffset": 1430,
+      "symbolId": "components/ui/sidebar.tsx::SidebarProvider::function"
+    },
+    {
+      "endLine": 253,
+      "endOffset": 7792,
+      "kind": "function",
+      "name": "Sidebar",
+      "startLine": 153,
+      "startOffset": 4275,
+      "symbolId": "components/ui/sidebar.tsx::Sidebar::function"
+    },
+    {
+      "endLine": 279,
+      "endOffset": 8313,
+      "kind": "function",
+      "name": "SidebarTrigger",
+      "startLine": 255,
+      "startOffset": 7794,
+      "symbolId": "components/ui/sidebar.tsx::SidebarTrigger::function"
+    },
+    {
+      "endLine": 304,
+      "endOffset": 9474,
+      "kind": "function",
+      "name": "SidebarRail",
+      "startLine": 281,
+      "startOffset": 8315,
+      "symbolId": "components/ui/sidebar.tsx::SidebarRail::function"
+    },
+    {
+      "endLine": 318,
+      "endOffset": 9967,
+      "kind": "function",
+      "name": "SidebarInset",
+      "startLine": 306,
+      "startOffset": 9476,
+      "symbolId": "components/ui/sidebar.tsx::SidebarInset::function"
+    },
+    {
+      "endLine": 332,
+      "endOffset": 10240,
+      "kind": "function",
+      "name": "SidebarInput",
+      "startLine": 320,
+      "startOffset": 9969,
+      "symbolId": "components/ui/sidebar.tsx::SidebarInput::function"
+    },
+    {
+      "endLine": 343,
+      "endOffset": 10490,
+      "kind": "function",
+      "name": "SidebarHeader",
+      "startLine": 334,
+      "startOffset": 10242,
+      "symbolId": "components/ui/sidebar.tsx::SidebarHeader::function"
+    },
+    {
+      "endLine": 354,
+      "endOffset": 10740,
+      "kind": "function",
+      "name": "SidebarFooter",
+      "startLine": 345,
+      "startOffset": 10492,
+      "symbolId": "components/ui/sidebar.tsx::SidebarFooter::function"
+    },
+    {
+      "endLine": 368,
+      "endOffset": 11026,
+      "kind": "function",
+      "name": "SidebarSeparator",
+      "startLine": 356,
+      "startOffset": 10742,
+      "symbolId": "components/ui/sidebar.tsx::SidebarSeparator::function"
+    },
+    {
+      "endLine": 382,
+      "endOffset": 11375,
+      "kind": "function",
+      "name": "SidebarContent",
+      "startLine": 370,
+      "startOffset": 11028,
+      "symbolId": "components/ui/sidebar.tsx::SidebarContent::function"
+    },
+    {
+      "endLine": 393,
+      "endOffset": 11640,
+      "kind": "function",
+      "name": "SidebarGroup",
+      "startLine": 384,
+      "startOffset": 11377,
+      "symbolId": "components/ui/sidebar.tsx::SidebarGroup::function"
+    },
+    {
+      "endLine": 414,
+      "endOffset": 12312,
+      "kind": "function",
+      "name": "SidebarGroupLabel",
+      "startLine": 395,
+      "startOffset": 11642,
+      "symbolId": "components/ui/sidebar.tsx::SidebarGroupLabel::function"
+    },
+    {
+      "endLine": 437,
+      "endOffset": 13120,
+      "kind": "function",
+      "name": "SidebarGroupAction",
+      "startLine": 416,
+      "startOffset": 12314,
+      "symbolId": "components/ui/sidebar.tsx::SidebarGroupAction::function"
+    },
+    {
+      "endLine": 451,
+      "endOffset": 13385,
+      "kind": "function",
+      "name": "SidebarGroupContent",
+      "startLine": 439,
+      "startOffset": 13122,
+      "symbolId": "components/ui/sidebar.tsx::SidebarGroupContent::function"
+    },
+    {
+      "endLine": 462,
+      "endOffset": 13638,
+      "kind": "function",
+      "name": "SidebarMenu",
+      "startLine": 453,
+      "startOffset": 13387,
+      "symbolId": "components/ui/sidebar.tsx::SidebarMenu::function"
+    },
+    {
+      "endLine": 473,
+      "endOffset": 13895,
+      "kind": "function",
+      "name": "SidebarMenuItem",
+      "startLine": 464,
+      "startOffset": 13640,
+      "symbolId": "components/ui/sidebar.tsx::SidebarMenuItem::function"
+    },
+    {
+      "endLine": 545,
+      "endOffset": 16394,
+      "kind": "function",
+      "name": "SidebarMenuButton",
+      "startLine": 497,
+      "startOffset": 15328,
+      "symbolId": "components/ui/sidebar.tsx::SidebarMenuButton::function"
+    },
+    {
+      "endLine": 577,
+      "endOffset": 17679,
+      "kind": "function",
+      "name": "SidebarMenuAction",
+      "startLine": 547,
+      "startOffset": 16396,
+      "symbolId": "components/ui/sidebar.tsx::SidebarMenuAction::function"
+    },
+    {
+      "endLine": 599,
+      "endOffset": 18448,
+      "kind": "function",
+      "name": "SidebarMenuBadge",
+      "startLine": 579,
+      "startOffset": 17681,
+      "symbolId": "components/ui/sidebar.tsx::SidebarMenuBadge::function"
+    },
+    {
+      "endLine": 637,
+      "endOffset": 19315,
+      "kind": "function",
+      "name": "SidebarMenuSkeleton",
+      "startLine": 601,
+      "startOffset": 18450,
+      "symbolId": "components/ui/sidebar.tsx::SidebarMenuSkeleton::function"
+    },
+    {
+      "endLine": 652,
+      "endOffset": 19712,
+      "kind": "function",
+      "name": "SidebarMenuSub",
+      "startLine": 639,
+      "startOffset": 19317,
+      "symbolId": "components/ui/sidebar.tsx::SidebarMenuSub::function"
+    },
+    {
+      "endLine": 666,
+      "endOffset": 19988,
+      "kind": "function",
+      "name": "SidebarMenuSubItem",
+      "startLine": 654,
+      "startOffset": 19714,
+      "symbolId": "components/ui/sidebar.tsx::SidebarMenuSubItem::function"
+    },
+    {
+      "endLine": 698,
+      "endOffset": 21190,
+      "kind": "function",
+      "name": "SidebarMenuSubButton",
+      "startLine": 668,
+      "startOffset": 19990,
+      "symbolId": "components/ui/sidebar.tsx::SidebarMenuSubButton::function"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+bug_id,date,severity,priority,scope,error_message,location,root_cause,trigger,files_changed,approach,risk_level,breaking_change,prevention_mechanism,prevention_details,new_tests,updated_tests,total_tests,type_check,lint,commit_type,release_type,commit_message,github_issue,follow_ups

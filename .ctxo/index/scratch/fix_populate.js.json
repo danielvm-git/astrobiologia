@@ -1,0 +1,23 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "372ca91889b23964b3791bc7b6e67aee11eada95b1f09a5dfea84241ebda2a8f",
+  "edges": [],
+  "file": "scratch/fix_populate.js",
+  "intent": [
+    {
+      "date": "2026-04-19T19:49:53-03:00",
+      "hash": "88fe82b4ff6a7e12067303dfcce42aadf41525b0",
+      "kind": "commit",
+      "message": "fix(tests): resolve vitest mock error and verify full preflight"
+    },
+    {
+      "date": "2026-04-19T18:18:57-03:00",
+      "hash": "d0a6bcdddb3f9c21a8b8255895e4aa066209f59b",
+      "kind": "commit",
+      "message": "feat: update Appwrite endpoint, add database cleanup utility, and implement automated rate-limited content population script."
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

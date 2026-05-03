@@ -1,0 +1,35 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "e82ccf89f2d899f9d06413b0cae558794fdc184f8c51b9f924a83b50421f51f3",
+  "edges": [
+    {
+      "from": "tests/phase2/auth_guard.test.ts::auth_guard.test::variable",
+      "kind": "imports",
+      "to": "src/hooks.server::handle::function"
+    }
+  ],
+  "file": "tests/phase2/auth_guard.test.ts",
+  "intent": [
+    {
+      "date": "2026-04-19T21:02:26-03:00",
+      "hash": "daac352915829d4989292bab5893128b03122cfc",
+      "kind": "commit",
+      "message": "feat: refactor authentication to use server-side sessions with Appwrite and update admin layout structure"
+    },
+    {
+      "date": "2026-04-19T19:11:52-03:00",
+      "hash": "bc294203e407873cb8ae4004e72c006c0521afc5",
+      "kind": "commit",
+      "message": "fix(deploy): update regional appwrite endpoint and fix auth hooks for remote build"
+    },
+    {
+      "date": "2026-04-19T15:46:42-03:00",
+      "hash": "f02a0844e8b4ade7a57ea6e0e3a0b0dc8b54a67a",
+      "kind": "commit",
+      "message": "feat(phases-1-2): finalize infrastructure and administrative cms"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

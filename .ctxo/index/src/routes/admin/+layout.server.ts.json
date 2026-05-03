@@ -1,0 +1,58 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "718c39e033b6b5ed26fc63c57b6cffd165f9adaa22d909dd9e7ca96adfb099e1",
+  "edges": [
+    {
+      "from": "src/routes/admin/+layout.server.ts::load::variable",
+      "kind": "imports",
+      "to": "src/routes/admin/$types.ts::LayoutServerLoad::class",
+      "typeOnly": true
+    }
+  ],
+  "file": "src/routes/admin/+layout.server.ts",
+  "intent": [
+    {
+      "date": "2026-04-19T21:02:26-03:00",
+      "hash": "daac352915829d4989292bab5893128b03122cfc",
+      "kind": "commit",
+      "message": "feat: refactor authentication to use server-side sessions with Appwrite and update admin layout structure"
+    },
+    {
+      "date": "2026-04-19T19:11:52-03:00",
+      "hash": "bc294203e407873cb8ae4004e72c006c0521afc5",
+      "kind": "commit",
+      "message": "fix(deploy): update regional appwrite endpoint and fix auth hooks for remote build"
+    },
+    {
+      "date": "2026-04-19T19:01:50-03:00",
+      "hash": "8d621b895778da9e4248c61e87002c7d36ee3a56",
+      "kind": "commit",
+      "message": "chore(tests): setup vitest infrastructure and fix auth guard"
+    },
+    {
+      "date": "2026-04-19T16:35:48-03:00",
+      "hash": "bda5a4249df5c215e7a5cf09b8678c1a2285c1a5",
+      "kind": "commit",
+      "message": "feat(03-04): finalize public portal and initial content seeding"
+    },
+    {
+      "date": "2026-04-19T15:12:05-03:00",
+      "hash": "7bc5ce9360f484e96bacaf001d7079642b81cf07",
+      "kind": "commit",
+      "message": "feat: improve admin auth flow with SSR checks, add remote image support, and update article fetch limits"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 12,
+      "endOffset": 265,
+      "kind": "variable",
+      "name": "load",
+      "startLine": 2,
+      "startOffset": 64,
+      "symbolId": "src/routes/admin/+layout.server.ts::load::variable"
+    }
+  ]
+}

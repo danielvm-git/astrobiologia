@@ -61,19 +61,31 @@ jobs:
     name: Deploy Appwrite Sites
     runs-on: ubuntu-latest
     needs: [check-and-unit, e2e-p0]
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') && hashFiles('appwrite.config.json') != ''
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
     steps:
       - uses: actions/checkout@v4
 
+      - name: Check for appwrite.config.json
+        id: check-config
+        run: |
+          if [ -f appwrite.config.json ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
       - uses: actions/setup-node@v4
+        if: steps.check-config.outputs.exists == 'true'
         with:
           node-version: '20'
           cache: npm
 
       - name: Install Appwrite CLI
+        if: steps.check-config.outputs.exists == 'true'
         run: npm install -g appwrite-cli
 
       - name: Push site (non-interactive)
+        if: steps.check-config.outputs.exists == 'true'
         env:
           APPWRITE_ENDPOINT: ${{ secrets.APPWRITE_ENDPOINT }}
           APPWRITE_PROJECT_ID: ${{ secrets.APPWRITE_PROJECT_ID }}
@@ -86,3 +98,7 @@ jobs:
             --project-id "$APPWRITE_PROJECT_ID" \
             --key "$APPWRITE_API_KEY"
           appwrite push sites --site-id "$APPWRITE_SITE_ID" --activate
+
+      - name: Skip deployment
+        if: steps.check-config.outputs.exists == 'false'
+        run: echo "Skipping deployment - appwrite.config.json not found"

@@ -1,58 +1,28 @@
 {
-  "name": "astrobiologia",
-  "version": "0.1.0",
+  "name": "astrobiologia-monorepo",
   "private": true,
-  "type": "module",
-  "engines": {
-    "node": ">=20.0.0"
-  },
   "scripts": {
-    "dev": "vite dev",
-    "build": "vite build",
-    "preview": "vite preview",
-    "test": "vitest run",
-    "test:api": "vitest run",
-    "test:e2e": "playwright test",
-    "test:e2e:p0": "playwright test tests/e2e/p0 --project=chromium",
-    "test:watch": "vitest",
-    "test:ui": "vitest --ui",
-    "preflight": "npm install && npm run paraglide:compile && npm run check && npm run test && npm run build",
-    "paraglide:compile": "paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide",
-    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
-  },
-  "dependencies": {
-    "@tiptap/core": "^3.22.4",
-    "@tiptap/extension-image": "^3.22.4",
-    "@tiptap/extension-link": "^3.22.4",
-    "@tiptap/extension-placeholder": "^3.22.4",
-    "@tiptap/pm": "^3.22.4",
-    "@tiptap/starter-kit": "^3.22.4",
-    "appwrite": "^17.0.0",
-    "clsx": "^2.1.1",
-    "lucide-svelte": "^0.503.0",
-    "svelte-tiptap": "^3.0.1",
-    "tailwind-merge": "^3.3.1"
+    "prepare": "husky",
+    "type-check": "pnpm --filter @astrobiologia/web-nuxt check",
+    "lint": "pnpm --filter @astrobiologia/web-nuxt lint",
+    "preflight": "pnpm type-check && pnpm lint && pnpm test:all && pnpm build && pnpm exec lint-staged --diff HEAD",
+    "dev": "pnpm --filter @astrobiologia/web-nuxt dev",
+    "build": "pnpm --filter @astrobiologia/web-nuxt build",
+    "test": "pnpm --filter @astrobiologia/web-nuxt test",
+    "test:all": "pnpm --filter @astrobiologia/web-nuxt test:all",
+    "test:fast": "pnpm --filter @astrobiologia/web-nuxt test:unit && pnpm --filter @astrobiologia/web-nuxt test:api",
+    "test:coverage": "pnpm --filter @astrobiologia/web-nuxt test:coverage",
+    "check": "pnpm --filter @astrobiologia/web-nuxt check"
   },
   "devDependencies": {
-    "@inlang/paraglide-js": "^2.15.2",
-    "@sveltejs/adapter-node": "^5.5.4",
-    "@sveltejs/kit": "^2.57.1",
-    "@sveltejs/vite-plugin-svelte": "^5.1.0",
-    "@tailwindcss/typography": "^0.5.16",
-    "@tailwindcss/vite": "^4.1.8",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/svelte": "^5.3.1",
-    "@types/node": "^22",
-    "@vitest/ui": "^4.1.4",
-    "@playwright/test": "^1.50.0",
-    "jsdom": "^29.0.2",
-    "node-appwrite": "^24.0.0",
-    "svelte": "^5.33.0",
-    "svelte-check": "^4.2.1",
-    "tailwindcss": "^4.1.8",
-    "typescript": "^5.7.3",
-    "vite": "^6.3.3",
-    "vitest": "^4.1.4"
+    "@ctxo/cli": "^0.8.1",
+    "@ctxo/lang-typescript": "^0.7.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.8.3"
+  },
+  "dependencies": {
+    "appwrite": "^24.2.0",
+    "node-appwrite": "^24.0.0"
   }
 }

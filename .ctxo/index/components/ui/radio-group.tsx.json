@@ -1,0 +1,45 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/radio-group.tsx::RadioGroup::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/radio-group.tsx::RadioGroupItem::function"
+    }
+  ],
+  "contentHash": "9a91313aaed0e8358c69fad89d12a1f5d148bd7fa5ffbed925e6f8b368617ba9",
+  "edges": [],
+  "file": "components/ui/radio-group.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 19,
+      "endOffset": 441,
+      "kind": "function",
+      "name": "RadioGroup",
+      "startLine": 8,
+      "startOffset": 189,
+      "symbolId": "components/ui/radio-group.tsx::RadioGroup::function"
+    },
+    {
+      "endLine": 42,
+      "endOffset": 1427,
+      "kind": "function",
+      "name": "RadioGroupItem",
+      "startLine": 21,
+      "startOffset": 443,
+      "symbolId": "components/ui/radio-group.tsx::RadioGroupItem::function"
+    }
+  ]
+}

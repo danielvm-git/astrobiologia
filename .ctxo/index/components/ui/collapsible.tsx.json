@@ -1,0 +1,58 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/collapsible.tsx::Collapsible::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/collapsible.tsx::CollapsibleTrigger::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/collapsible.tsx::CollapsibleContent::function"
+    }
+  ],
+  "contentHash": "89d052508dd671fdc6c823cc299a53537edd00c7067ae9508a2af0a8eeb4348b",
+  "edges": [],
+  "file": "components/ui/collapsible.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 8,
+      "endOffset": 253,
+      "kind": "function",
+      "name": "Collapsible",
+      "startLine": 4,
+      "startOffset": 83,
+      "symbolId": "components/ui/collapsible.tsx::Collapsible::function"
+    },
+    {
+      "endLine": 19,
+      "endOffset": 494,
+      "kind": "function",
+      "name": "CollapsibleTrigger",
+      "startLine": 10,
+      "startOffset": 255,
+      "symbolId": "components/ui/collapsible.tsx::CollapsibleTrigger::function"
+    },
+    {
+      "endLine": 30,
+      "endOffset": 735,
+      "kind": "function",
+      "name": "CollapsibleContent",
+      "startLine": 21,
+      "startOffset": 496,
+      "symbolId": "components/ui/collapsible.tsx::CollapsibleContent::function"
+    }
+  ]
+}

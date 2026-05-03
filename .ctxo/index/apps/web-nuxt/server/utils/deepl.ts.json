@@ -1,0 +1,38 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "apps/web-nuxt/server/utils/deepl.ts::isDeepLConfigured::function"
+    },
+    {
+      "cyclomatic": 7,
+      "symbolId": "apps/web-nuxt/server/utils/deepl.ts::translateText::function"
+    }
+  ],
+  "contentHash": "8e0b9c898d7411170ec1895784b9b1a93500e67c711edcc1d878054fe066b0ed",
+  "edges": [],
+  "file": "apps/web-nuxt/server/utils/deepl.ts",
+  "intent": [],
+  "lastModified": 1777261504,
+  "symbols": [
+    {
+      "endLine": 11,
+      "endOffset": 238,
+      "kind": "function",
+      "name": "isDeepLConfigured",
+      "startLine": 9,
+      "startOffset": 137,
+      "symbolId": "apps/web-nuxt/server/utils/deepl.ts::isDeepLConfigured::function"
+    },
+    {
+      "endLine": 46,
+      "endOffset": 1357,
+      "kind": "function",
+      "name": "translateText",
+      "startLine": 13,
+      "startOffset": 240,
+      "symbolId": "apps/web-nuxt/server/utils/deepl.ts::translateText::function"
+    }
+  ]
+}

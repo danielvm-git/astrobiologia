@@ -1,0 +1,29 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "1ea467fe8322f2c672284c852c9d2a56e6e6a01471d2e831fb821755114107f0",
+  "edges": [],
+  "file": "apps/web-nuxt/components/ui/button/variants.ts",
+  "intent": [],
+  "lastModified": 1777261504,
+  "symbols": [
+    {
+      "endLine": 40,
+      "endOffset": 2863,
+      "kind": "type",
+      "name": "ButtonVariants",
+      "startLine": 40,
+      "startOffset": 2799,
+      "symbolId": "apps/web-nuxt/components/ui/button/variants.ts::ButtonVariants::type"
+    },
+    {
+      "endLine": 38,
+      "endOffset": 2797,
+      "kind": "variable",
+      "name": "buttonVariants",
+      "startLine": 3,
+      "startOffset": 122,
+      "symbolId": "apps/web-nuxt/components/ui/button/variants.ts::buttonVariants::variable"
+    }
+  ]
+}

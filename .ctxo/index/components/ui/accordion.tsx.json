@@ -1,0 +1,71 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/accordion.tsx::Accordion::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/accordion.tsx::AccordionItem::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/accordion.tsx::AccordionTrigger::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/accordion.tsx::AccordionContent::function"
+    }
+  ],
+  "contentHash": "789b258bfc80b22f9634539e5b7b8d06acb68eb2842347326fdfb5b9eed79d93",
+  "edges": [],
+  "file": "components/ui/accordion.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 12,
+      "endOffset": 353,
+      "kind": "function",
+      "name": "Accordion",
+      "startLine": 8,
+      "startOffset": 191,
+      "symbolId": "components/ui/accordion.tsx::Accordion::function"
+    },
+    {
+      "endLine": 25,
+      "endOffset": 625,
+      "kind": "function",
+      "name": "AccordionItem",
+      "startLine": 14,
+      "startOffset": 355,
+      "symbolId": "components/ui/accordion.tsx::AccordionItem::function"
+    },
+    {
+      "endLine": 47,
+      "endOffset": 1520,
+      "kind": "function",
+      "name": "AccordionTrigger",
+      "startLine": 27,
+      "startOffset": 627,
+      "symbolId": "components/ui/accordion.tsx::AccordionTrigger::function"
+    },
+    {
+      "endLine": 63,
+      "endOffset": 1980,
+      "kind": "function",
+      "name": "AccordionContent",
+      "startLine": 49,
+      "startOffset": 1522,
+      "symbolId": "components/ui/accordion.tsx::AccordionContent::function"
+    }
+  ]
+}

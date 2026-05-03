@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/toggle.tsx::Toggle::function"
+    }
+  ],
+  "contentHash": "80a93a384850d9fd7b4d5c2d1f8409874d198467648e000c310695caedaf807b",
+  "edges": [],
+  "file": "components/ui/toggle.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 44,
+      "endOffset": 1535,
+      "kind": "function",
+      "name": "Toggle",
+      "startLine": 30,
+      "startOffset": 1220,
+      "symbolId": "components/ui/toggle.tsx::Toggle::function"
+    }
+  ]
+}

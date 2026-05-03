@@ -1,0 +1,49 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "8f8871d0df49c88a5ce996aa06089e819c8ee729dc1915e822bbf745bd6667e4",
+  "edges": [
+    {
+      "from": "src/routes/+layout.server.ts::prerender::variable",
+      "kind": "imports",
+      "to": "src/routes/$types.ts::LayoutServerLoad::class",
+      "typeOnly": true
+    }
+  ],
+  "file": "src/routes/+layout.server.ts",
+  "intent": [
+    {
+      "date": "2026-04-19T17:04:32-03:00",
+      "hash": "cc936a86cc6babc97ab01ebb5917d0b53782b215",
+      "kind": "commit",
+      "message": "chore: switch to static adapter, update auth flow to OAuth2 tokens, add favicon, and initialize i18n planning documents"
+    },
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 2,
+      "endOffset": 80,
+      "kind": "variable",
+      "name": "prerender",
+      "startLine": 2,
+      "startOffset": 64,
+      "symbolId": "src/routes/+layout.server.ts::prerender::variable"
+    },
+    {
+      "endLine": 11,
+      "endOffset": 260,
+      "kind": "variable",
+      "name": "load",
+      "startLine": 4,
+      "startOffset": 96,
+      "symbolId": "src/routes/+layout.server.ts::load::variable"
+    }
+  ]
+}

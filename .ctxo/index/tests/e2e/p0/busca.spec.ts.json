@@ -1,0 +1,17 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "6e7419e5eabd8ba1d002ad1d0f1e3755aaa4ab461017bc213db35c847175c172",
+  "edges": [],
+  "file": "tests/e2e/p0/busca.spec.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T18:05:23-03:00",
+      "hash": "68a95723508887b1576ac56f53312f20b4e42874",
+      "kind": "commit",
+      "message": "chore(test): configure playwright E2E suite and P0/P1 test structure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

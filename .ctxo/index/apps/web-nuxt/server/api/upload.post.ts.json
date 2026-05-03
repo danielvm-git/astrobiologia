@@ -1,0 +1,10 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "b18b10627841ed7589f3cdc9febd997bf5dbd500abd07f6e508615ba21237c35",
+  "edges": [],
+  "file": "apps/web-nuxt/server/api/upload.post.ts",
+  "intent": [],
+  "lastModified": 1777261504,
+  "symbols": []
+}

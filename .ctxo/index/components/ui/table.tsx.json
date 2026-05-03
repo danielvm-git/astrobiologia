@@ -1,0 +1,123 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/table.tsx::Table::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/table.tsx::TableHeader::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/table.tsx::TableBody::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/table.tsx::TableFooter::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/table.tsx::TableRow::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/table.tsx::TableHead::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/table.tsx::TableCell::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/table.tsx::TableCaption::function"
+    }
+  ],
+  "contentHash": "7e4ec95a993de8b29a144facf8c5e99271239ee40ca158a93cbc8b6853e7ca54",
+  "edges": [],
+  "file": "components/ui/table.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 19,
+      "endOffset": 413,
+      "kind": "function",
+      "name": "Table",
+      "startLine": 6,
+      "startOffset": 80,
+      "symbolId": "components/ui/table.tsx::Table::function"
+    },
+    {
+      "endLine": 29,
+      "endOffset": 627,
+      "kind": "function",
+      "name": "TableHeader",
+      "startLine": 21,
+      "startOffset": 415,
+      "symbolId": "components/ui/table.tsx::TableHeader::function"
+    },
+    {
+      "endLine": 39,
+      "endOffset": 848,
+      "kind": "function",
+      "name": "TableBody",
+      "startLine": 31,
+      "startOffset": 629,
+      "symbolId": "components/ui/table.tsx::TableBody::function"
+    },
+    {
+      "endLine": 52,
+      "endOffset": 1127,
+      "kind": "function",
+      "name": "TableFooter",
+      "startLine": 41,
+      "startOffset": 850,
+      "symbolId": "components/ui/table.tsx::TableFooter::function"
+    },
+    {
+      "endLine": 65,
+      "endOffset": 1414,
+      "kind": "function",
+      "name": "TableRow",
+      "startLine": 54,
+      "startOffset": 1129,
+      "symbolId": "components/ui/table.tsx::TableRow::function"
+    },
+    {
+      "endLine": 78,
+      "endOffset": 1774,
+      "kind": "function",
+      "name": "TableHead",
+      "startLine": 67,
+      "startOffset": 1416,
+      "symbolId": "components/ui/table.tsx::TableHead::function"
+    },
+    {
+      "endLine": 91,
+      "endOffset": 2090,
+      "kind": "function",
+      "name": "TableCell",
+      "startLine": 80,
+      "startOffset": 1776,
+      "symbolId": "components/ui/table.tsx::TableCell::function"
+    },
+    {
+      "endLine": 104,
+      "endOffset": 2333,
+      "kind": "function",
+      "name": "TableCaption",
+      "startLine": 93,
+      "startOffset": 2092,
+      "symbolId": "components/ui/table.tsx::TableCaption::function"
+    }
+  ]
+}

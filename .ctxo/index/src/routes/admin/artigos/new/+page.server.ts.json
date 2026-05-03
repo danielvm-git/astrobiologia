@@ -1,0 +1,27 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "3d737fec044b4913f1d78dc141ae17a1b9d087f037e03d6df8024069e8e0a422",
+  "edges": [],
+  "file": "src/routes/admin/artigos/new/+page.server.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T00:29:38-03:00",
+      "hash": "0d39272b81db98b68da8163f50785bcf8adc4bf2",
+      "kind": "commit",
+      "message": "refactor: migrate article management to server actions, remove unused deletion endpoint, and implement end-to-end testing infrastructure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 45,
+      "endOffset": 1586,
+      "kind": "variable",
+      "name": "actions",
+      "startLine": 5,
+      "startOffset": 219,
+      "symbolId": "src/routes/admin/artigos/new/+page.server.ts::actions::variable"
+    }
+  ]
+}

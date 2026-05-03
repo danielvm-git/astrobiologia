@@ -1,0 +1,40 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "76c89d8157aac613468f13d36b5ea98b077e7be964eb678070a1d10b0a234efc",
+  "edges": [
+    {
+      "from": "src/routes/artigos/+page.server.ts::load::variable",
+      "kind": "imports",
+      "to": "src/routes/artigos/$types.ts::PageServerLoad::class",
+      "typeOnly": true
+    }
+  ],
+  "file": "src/routes/artigos/+page.server.ts",
+  "intent": [
+    {
+      "date": "2026-04-19T19:43:21-03:00",
+      "hash": "93ebc37148af4c433d5b507282957b7234007f16",
+      "kind": "commit",
+      "message": "fix(build): add missing static routes and localize article list"
+    },
+    {
+      "date": "2026-04-19T13:09:22-03:00",
+      "hash": "1f8ff39ad85303b1150b19df68319ed061780ed1",
+      "kind": "commit",
+      "message": "fix(build): resolve env variables error using dynamic public env and fallbacks"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 18,
+      "endOffset": 509,
+      "kind": "variable",
+      "name": "load",
+      "startLine": 4,
+      "startOffset": 183,
+      "symbolId": "src/routes/artigos/+page.server.ts::load::variable"
+    }
+  ]
+}

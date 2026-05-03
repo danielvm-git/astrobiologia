@@ -1,0 +1,97 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/empty.tsx::Empty::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/empty.tsx::EmptyHeader::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/empty.tsx::EmptyMedia::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/empty.tsx::EmptyTitle::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/empty.tsx::EmptyDescription::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/empty.tsx::EmptyContent::function"
+    }
+  ],
+  "contentHash": "c9828acce9044690059524bee2e67dec68710baed7bfa1f6c787ca86413112d6",
+  "edges": [],
+  "file": "components/ui/empty.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 15,
+      "endOffset": 430,
+      "kind": "function",
+      "name": "Empty",
+      "startLine": 4,
+      "startOffset": 101,
+      "symbolId": "components/ui/empty.tsx::Empty::function"
+    },
+    {
+      "endLine": 28,
+      "endOffset": 703,
+      "kind": "function",
+      "name": "EmptyHeader",
+      "startLine": 17,
+      "startOffset": 432,
+      "symbolId": "components/ui/empty.tsx::EmptyHeader::function"
+    },
+    {
+      "endLine": 58,
+      "endOffset": 1443,
+      "kind": "function",
+      "name": "EmptyMedia",
+      "startLine": 45,
+      "startOffset": 1126,
+      "symbolId": "components/ui/empty.tsx::EmptyMedia::function"
+    },
+    {
+      "endLine": 68,
+      "endOffset": 1670,
+      "kind": "function",
+      "name": "EmptyTitle",
+      "startLine": 60,
+      "startOffset": 1445,
+      "symbolId": "components/ui/empty.tsx::EmptyTitle::function"
+    },
+    {
+      "endLine": 81,
+      "endOffset": 2001,
+      "kind": "function",
+      "name": "EmptyDescription",
+      "startLine": 70,
+      "startOffset": 1672,
+      "symbolId": "components/ui/empty.tsx::EmptyDescription::function"
+    },
+    {
+      "endLine": 94,
+      "endOffset": 2300,
+      "kind": "function",
+      "name": "EmptyContent",
+      "startLine": 83,
+      "startOffset": 2003,
+      "symbolId": "components/ui/empty.tsx::EmptyContent::function"
+    }
+  ]
+}

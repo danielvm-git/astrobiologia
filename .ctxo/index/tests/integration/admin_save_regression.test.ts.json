@@ -1,0 +1,38 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "051948897f4933eaa77509bd568bf16e4569354109ab79d5224c621706cab49e",
+  "edges": [
+    {
+      "from": "tests/integration/admin_save_regression.test.ts::admin_save_regression.test::variable",
+      "kind": "imports",
+      "to": "src/routes/admin/artigos/[id]/edit/+page.server::actions::function"
+    },
+    {
+      "from": "tests/integration/admin_save_regression.test.ts::admin_save_regression.test::variable",
+      "kind": "imports",
+      "to": "src/lib/server/appwrite.ts::createAdminClient::function"
+    },
+    {
+      "from": "tests/integration/admin_save_regression.test.ts::admin_save_regression.test::variable",
+      "kind": "imports",
+      "to": "src/lib/server/appwrite.ts::DATABASE_ID::variable"
+    },
+    {
+      "from": "tests/integration/admin_save_regression.test.ts::admin_save_regression.test::variable",
+      "kind": "imports",
+      "to": "src/lib/appwrite.ts::COLLECTIONS::variable"
+    }
+  ],
+  "file": "tests/integration/admin_save_regression.test.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T00:29:38-03:00",
+      "hash": "0d39272b81db98b68da8163f50785bcf8adc4bf2",
+      "kind": "commit",
+      "message": "refactor: migrate article management to server actions, remove unused deletion endpoint, and implement end-to-end testing infrastructure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

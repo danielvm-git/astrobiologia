@@ -1,0 +1,39 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "3ddfe9fdbef90bc8094b5e941fbe711bd946fb19986c18b986b3c992a885c0e6",
+  "edges": [],
+  "file": "src/routes/api/translate/+server.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T22:36:43-03:00",
+      "hash": "783694e3a7235c62e08375c5f4470c6913f13582",
+      "kind": "commit",
+      "message": "feat(i18n): enhance localization and DeepL integration across components"
+    },
+    {
+      "date": "2026-04-20T20:40:38-03:00",
+      "hash": "0c21bccbf7b167e9edc1d9c43dff16c7d285e115",
+      "kind": "commit",
+      "message": "feat: extend DeepL integration to support multiple target languages and batch translation in the article editor"
+    },
+    {
+      "date": "2026-04-19T22:05:16-03:00",
+      "hash": "8c75ae4ec8a45e12c2c9663aaebde62be6685ac1",
+      "kind": "commit",
+      "message": "refactor: migrate client-side loaders to server-side, implement DeepL integration, and update auth hooks and paraglide strategy."
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 36,
+      "endOffset": 1194,
+      "kind": "variable",
+      "name": "POST",
+      "startLine": 3,
+      "startOffset": 129,
+      "symbolId": "src/routes/api/translate/+server.ts::POST::variable"
+    }
+  ]
+}

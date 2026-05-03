@@ -1,0 +1,41 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/lib/server/logger.ts::createLogger::function"
+    }
+  ],
+  "contentHash": "3a320b28388fafadf68cb0eead0bef54277af728caf526458917daf2261fc85c",
+  "edges": [],
+  "file": "src/lib/server/logger.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T00:29:38-03:00",
+      "hash": "0d39272b81db98b68da8163f50785bcf8adc4bf2",
+      "kind": "commit",
+      "message": "refactor: migrate article management to server actions, remove unused deletion endpoint, and implement end-to-end testing infrastructure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 69,
+      "endOffset": 2081,
+      "kind": "function",
+      "name": "createLogger",
+      "startLine": 67,
+      "startOffset": 2002,
+      "symbolId": "src/lib/server/logger.ts::createLogger::function"
+    },
+    {
+      "endLine": 72,
+      "endOffset": 2152,
+      "kind": "variable",
+      "name": "logger",
+      "startLine": 72,
+      "startOffset": 2121,
+      "symbolId": "src/lib/server/logger.ts::logger::variable"
+    }
+  ]
+}

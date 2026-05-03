@@ -1,0 +1,74 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 7,
+      "symbolId": "src/lib/server/public-origin.ts::getPublicOrigin::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "src/lib/server/public-origin.ts::isPublicHttps::function"
+    }
+  ],
+  "contentHash": "6b069a7f9d295a3382338b72c00e9b8f7ffbeb2b75b0cc62bed590403d984baa",
+  "edges": [
+    {
+      "from": "src/lib/server/public-origin.ts::getPublicOrigin::function",
+      "kind": "calls",
+      "to": "src/lib/server/public-origin.ts::fallbackOrigin::function"
+    },
+    {
+      "from": "src/lib/server/public-origin.ts::isPublicHttps::function",
+      "kind": "calls",
+      "to": "src/lib/server/public-origin.ts::getPublicOrigin::function"
+    }
+  ],
+  "file": "src/lib/server/public-origin.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T21:21:10-03:00",
+      "hash": "195659b2cd5303dee3c57cbf75e8ad7ff3a3107f",
+      "kind": "commit",
+      "message": "feat(auth): streamline Google OAuth integration and enhance session management"
+    },
+    {
+      "date": "2026-04-20T19:55:48-03:00",
+      "hash": "623de70593b5d37e0e7a0c7b432c8a969195636c",
+      "kind": "commit",
+      "message": "fix(auth): harden OAuth origin resolution and deployment notes"
+    },
+    {
+      "date": "2026-04-20T19:38:35-03:00",
+      "hash": "eadee458e4cf08f7f7eee4867c7b8582b528fa9d",
+      "kind": "commit",
+      "message": "feat(auth): enhance OAuth handling by ensuring HTTPS compliance for redirect URLs and improving public origin resolution"
+    },
+    {
+      "date": "2026-04-20T19:07:23-03:00",
+      "hash": "4328a3daec330b10c8669441f0feec289241b3de",
+      "kind": "commit",
+      "message": "feat(auth): improve Google OAuth handling with dynamic public origin and enhanced security checks"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 42,
+      "endOffset": 1459,
+      "kind": "function",
+      "name": "getPublicOrigin",
+      "startLine": 18,
+      "startOffset": 759,
+      "symbolId": "src/lib/server/public-origin.ts::getPublicOrigin::function"
+    },
+    {
+      "endLine": 53,
+      "endOffset": 1858,
+      "kind": "function",
+      "name": "isPublicHttps",
+      "startLine": 45,
+      "startOffset": 1539,
+      "symbolId": "src/lib/server/public-origin.ts::isPublicHttps::function"
+    }
+  ]
+}

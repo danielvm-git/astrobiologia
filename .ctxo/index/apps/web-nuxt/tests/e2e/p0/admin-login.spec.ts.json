@@ -1,0 +1,10 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "9448b802205bd438b41408ed31a37dcf8d4eca1bb1d13bd6ad6cee201050a847",
+  "edges": [],
+  "file": "apps/web-nuxt/tests/e2e/p0/admin-login.spec.ts",
+  "intent": [],
+  "lastModified": 1777261505,
+  "symbols": []
+}

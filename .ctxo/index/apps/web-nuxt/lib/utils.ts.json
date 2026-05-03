@@ -1,0 +1,90 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "apps/web-nuxt/lib/utils.ts::cn::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "apps/web-nuxt/lib/utils.ts::formatDate::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "apps/web-nuxt/lib/utils.ts::formatShortDate::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "apps/web-nuxt/lib/utils.ts::slugify::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "apps/web-nuxt/lib/utils.ts::truncate::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "apps/web-nuxt/lib/utils.ts::readingTime::function"
+    }
+  ],
+  "contentHash": "cf68ba95595103122b3a6ee77e5502ea5ecfb0a277f0c3f4a752abb8ead25033",
+  "edges": [],
+  "file": "apps/web-nuxt/lib/utils.ts",
+  "intent": [],
+  "lastModified": 1777261504,
+  "symbols": [
+    {
+      "endLine": 5,
+      "endOffset": 167,
+      "kind": "function",
+      "name": "cn",
+      "startLine": 3,
+      "startOffset": 89,
+      "symbolId": "apps/web-nuxt/lib/utils.ts::cn::function"
+    },
+    {
+      "endLine": 14,
+      "endOffset": 417,
+      "kind": "function",
+      "name": "formatDate",
+      "startLine": 7,
+      "startOffset": 169,
+      "symbolId": "apps/web-nuxt/lib/utils.ts::formatDate::function"
+    },
+    {
+      "endLine": 23,
+      "endOffset": 673,
+      "kind": "function",
+      "name": "formatShortDate",
+      "startLine": 16,
+      "startOffset": 419,
+      "symbolId": "apps/web-nuxt/lib/utils.ts::formatShortDate::function"
+    },
+    {
+      "endLine": 34,
+      "endOffset": 895,
+      "kind": "function",
+      "name": "slugify",
+      "startLine": 25,
+      "startOffset": 675,
+      "symbolId": "apps/web-nuxt/lib/utils.ts::slugify::function"
+    },
+    {
+      "endLine": 39,
+      "endOffset": 1050,
+      "kind": "function",
+      "name": "truncate",
+      "startLine": 36,
+      "startOffset": 897,
+      "symbolId": "apps/web-nuxt/lib/utils.ts::truncate::function"
+    },
+    {
+      "endLine": 45,
+      "endOffset": 1224,
+      "kind": "function",
+      "name": "readingTime",
+      "startLine": 41,
+      "startOffset": 1052,
+      "symbolId": "apps/web-nuxt/lib/utils.ts::readingTime::function"
+    }
+  ]
+}

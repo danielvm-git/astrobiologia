@@ -1,0 +1,36 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "3f61aa594df979acea6625b0129abe6a2d5bcbd32752b55fb4f6cbe5308d8d36",
+  "edges": [],
+  "file": "src/lib/stores/auth.ts",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 7,
+      "endOffset": 157,
+      "kind": "interface",
+      "name": "AuthState",
+      "startLine": 2,
+      "startOffset": 42,
+      "symbolId": "src/lib/stores/auth.ts::AuthState::interface"
+    },
+    {
+      "endLine": 44,
+      "endOffset": 790,
+      "kind": "variable",
+      "name": "authStore",
+      "startLine": 44,
+      "startOffset": 761,
+      "symbolId": "src/lib/stores/auth.ts::authStore::variable"
+    }
+  ]
+}

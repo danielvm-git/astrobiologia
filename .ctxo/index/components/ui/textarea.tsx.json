@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/textarea.tsx::Textarea::function"
+    }
+  ],
+  "contentHash": "cf31ce99f03ac69f9821b4463a366c66698ae8e7eba5c06d2ede63d5cf7309bd",
+  "edges": [],
+  "file": "components/ui/textarea.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 15,
+      "endOffset": 738,
+      "kind": "function",
+      "name": "Textarea",
+      "startLine": 4,
+      "startOffset": 66,
+      "symbolId": "components/ui/textarea.tsx::Textarea::function"
+    }
+  ]
+}

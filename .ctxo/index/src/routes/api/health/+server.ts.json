@@ -1,0 +1,40 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "1c2081a9242a569c7cbbadd4ede0a405836086816ebd666dde8feecb1d9bb0a3",
+  "edges": [
+    {
+      "from": "src/routes/api/health/+server.ts::GET::variable",
+      "kind": "imports",
+      "to": "src/routes/api/health/$types.ts::RequestHandler::class",
+      "typeOnly": true
+    }
+  ],
+  "file": "src/routes/api/health/+server.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T18:05:18-03:00",
+      "hash": "de0dfec42d7a9ec7e253ab25bbf9e1843efc26c2",
+      "kind": "commit",
+      "message": "refactor(core): centralized appwrite config and implement health check endpoint"
+    },
+    {
+      "date": "2026-04-19T15:46:42-03:00",
+      "hash": "f02a0844e8b4ade7a57ea6e0e3a0b0dc8b54a67a",
+      "kind": "commit",
+      "message": "feat(phases-1-2): finalize infrastructure and administrative cms"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 30,
+      "endOffset": 897,
+      "kind": "variable",
+      "name": "GET",
+      "startLine": 4,
+      "startOffset": 169,
+      "symbolId": "src/routes/api/health/+server.ts::GET::variable"
+    }
+  ]
+}

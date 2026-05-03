@@ -1,0 +1,17 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "d201471f7c2021041dee2648f24fa478fde17a0f93d45c51fef65b4743c02e93",
+  "edges": [],
+  "file": "tests/e2e/p0/public-home.spec.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T18:05:23-03:00",
+      "hash": "68a95723508887b1576ac56f53312f20b4e42874",
+      "kind": "commit",
+      "message": "chore(test): configure playwright E2E suite and P0/P1 test structure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

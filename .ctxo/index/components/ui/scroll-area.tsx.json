@@ -1,0 +1,45 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/scroll-area.tsx::ScrollArea::function"
+    },
+    {
+      "cyclomatic": 3,
+      "symbolId": "components/ui/scroll-area.tsx::ScrollBar::function"
+    }
+  ],
+  "contentHash": "4d19b093a16635687d128e2157c8f5bac50b2391cbe031e07ec1e2d53f4d73a3",
+  "edges": [],
+  "file": "components/ui/scroll-area.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 28,
+      "endOffset": 806,
+      "kind": "function",
+      "name": "ScrollArea",
+      "startLine": 7,
+      "startOffset": 147,
+      "symbolId": "components/ui/scroll-area.tsx::ScrollArea::function"
+    },
+    {
+      "endLine": 55,
+      "endOffset": 1611,
+      "kind": "function",
+      "name": "ScrollBar",
+      "startLine": 30,
+      "startOffset": 808,
+      "symbolId": "components/ui/scroll-area.tsx::ScrollBar::function"
+    }
+  ]
+}

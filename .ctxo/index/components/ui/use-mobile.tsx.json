@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/use-mobile.tsx::useIsMobile::function"
+    }
+  ],
+  "contentHash": "1b43441b273aa21c1e74fefa774d5a7cb50068e5d4c192a8f63b9c95c5580431",
+  "edges": [],
+  "file": "components/ui/use-mobile.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 18,
+      "endOffset": 564,
+      "kind": "function",
+      "name": "useIsMobile",
+      "startLine": 4,
+      "startOffset": 63,
+      "symbolId": "components/ui/use-mobile.tsx::useIsMobile::function"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "763f54badc7d72dfdf61fcbef81f82d689a16253520968a49089c1490391cfd5",
+  "edges": [],
+  "file": "apps/web-nuxt/server/api/admin/articles/delete.post.ts",
+  "intent": [],
+  "lastModified": 1777261504,
+  "symbols": []
+}

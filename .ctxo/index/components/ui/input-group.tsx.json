@@ -1,0 +1,97 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/input-group.tsx::InputGroup::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/input-group.tsx::InputGroupAddon::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/input-group.tsx::InputGroupButton::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/input-group.tsx::InputGroupText::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/input-group.tsx::InputGroupInput::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/input-group.tsx::InputGroupTextarea::function"
+    }
+  ],
+  "contentHash": "9214c077d8d253331da82bffdb36edb778abc73d27b34dff0eb544e6d7b9d386",
+  "edges": [],
+  "file": "components/ui/input-group.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 35,
+      "endOffset": 1553,
+      "kind": "function",
+      "name": "InputGroup",
+      "startLine": 9,
+      "startOffset": 261,
+      "symbolId": "components/ui/input-group.tsx::InputGroup::function"
+    },
+    {
+      "endLine": 78,
+      "endOffset": 2983,
+      "kind": "function",
+      "name": "InputGroupAddon",
+      "startLine": 58,
+      "startOffset": 2438,
+      "symbolId": "components/ui/input-group.tsx::InputGroupAddon::function"
+    },
+    {
+      "endLine": 115,
+      "endOffset": 3898,
+      "kind": "function",
+      "name": "InputGroupButton",
+      "startLine": 98,
+      "startOffset": 3500,
+      "symbolId": "components/ui/input-group.tsx::InputGroupButton::function"
+    },
+    {
+      "endLine": 127,
+      "endOffset": 4210,
+      "kind": "function",
+      "name": "InputGroupText",
+      "startLine": 117,
+      "startOffset": 3900,
+      "symbolId": "components/ui/input-group.tsx::InputGroupText::function"
+    },
+    {
+      "endLine": 143,
+      "endOffset": 4545,
+      "kind": "function",
+      "name": "InputGroupInput",
+      "startLine": 129,
+      "startOffset": 4212,
+      "symbolId": "components/ui/input-group.tsx::InputGroupInput::function"
+    },
+    {
+      "endLine": 159,
+      "endOffset": 4906,
+      "kind": "function",
+      "name": "InputGroupTextarea",
+      "startLine": 145,
+      "startOffset": 4547,
+      "symbolId": "components/ui/input-group.tsx::InputGroupTextarea::function"
+    }
+  ]
+}

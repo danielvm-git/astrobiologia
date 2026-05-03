@@ -1,0 +1,58 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/button-group.tsx::ButtonGroup::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/button-group.tsx::ButtonGroupText::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/button-group.tsx::ButtonGroupSeparator::function"
+    }
+  ],
+  "contentHash": "07203100cedafa78bd03b8ffe71559d29c35bfe7ea034449ed21d1008907cc0e",
+  "edges": [],
+  "file": "components/ui/button-group.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 37,
+      "endOffset": 1296,
+      "kind": "function",
+      "name": "ButtonGroup",
+      "startLine": 23,
+      "startOffset": 951,
+      "symbolId": "components/ui/button-group.tsx::ButtonGroup::function"
+    },
+    {
+      "endLine": 57,
+      "endOffset": 1728,
+      "kind": "function",
+      "name": "ButtonGroupText",
+      "startLine": 39,
+      "startOffset": 1298,
+      "symbolId": "components/ui/button-group.tsx::ButtonGroupText::function"
+    },
+    {
+      "endLine": 75,
+      "endOffset": 2118,
+      "kind": "function",
+      "name": "ButtonGroupSeparator",
+      "startLine": 59,
+      "startOffset": 1730,
+      "symbolId": "components/ui/button-group.tsx::ButtonGroupSeparator::function"
+    }
+  ]
+}

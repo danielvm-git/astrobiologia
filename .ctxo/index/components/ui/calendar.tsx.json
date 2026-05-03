@@ -1,0 +1,45 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 4,
+      "symbolId": "components/ui/calendar.tsx::Calendar::function"
+    },
+    {
+      "cyclomatic": 5,
+      "symbolId": "components/ui/calendar.tsx::CalendarDayButton::function"
+    }
+  ],
+  "contentHash": "11b817aaa791d8ebd39a882f80827a7d4a99c6d451c8b836a81b186fcb2de87a",
+  "edges": [],
+  "file": "components/ui/calendar.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 172,
+      "endOffset": 5882,
+      "kind": "function",
+      "name": "Calendar",
+      "startLine": 13,
+      "startOffset": 311,
+      "symbolId": "components/ui/calendar.tsx::Calendar::function"
+    },
+    {
+      "endLine": 210,
+      "endOffset": 7638,
+      "kind": "function",
+      "name": "CalendarDayButton",
+      "startLine": 174,
+      "startOffset": 5884,
+      "symbolId": "components/ui/calendar.tsx::CalendarDayButton::function"
+    }
+  ]
+}

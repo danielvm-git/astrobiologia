@@ -1,12 +1,5 @@
 {
   "mcpServers": {
-    "lean-spec": {
-      "args": [
-        "-y",
-        "@leanspec/mcp"
-      ],
-      "command": "npx"
-    },
     "appwrite-api": {
       "command": "uvx",
       "args": [
@@ -25,8 +18,19 @@
         "https://mcp-for-docs.appwrite.io"
       ]
     },
-    "svelte-mcp": {
-      "url": "https://mcp.svelte.dev/mcp"
+    "ctxo": {
+      "command": "npx",
+      "args": [
+        "@ctxo/cli",
+        "mcp"
+      ]
+    },
+    "context-mode": {
+      "command": "context-mode"
+    },
+    "nuxt": {
+      "type": "http",
+      "url": "https://nuxt.com/mcp"
     }
   }
 }

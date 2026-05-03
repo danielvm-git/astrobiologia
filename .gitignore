@@ -1,13 +1,12 @@
 # Dependencies
 node_modules/
-pnpm-lock.yaml
+package-lock.json
 .pnpm-debug.log*
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
 # Build outputs
-.svelte-kit/
 build/
 dist/
 
@@ -36,7 +35,52 @@ Thumbs.db
 .claude
 .cursor
 .gemini
+opencode.json
 
 # Paraglide
 src/lib/paraglide
 project.inlang/cache/
+
+# Ctxo local cache (auto-rebuilt, never committed)
+.ctxo/.cache/
+.openhands
+.github
+.agents
+
+# ── GSD baseline (auto-generated) ──
+.gsd
+.gsd-id
+.mcp.json
+.bg-shell/
+*.code-workspace
+.env.*
+!.env.example
+.next/
+__pycache__/
+*.pyc
+.venv/
+venv/
+target/
+vendor/
+coverage/
+tmp/
+
+# Monorepo
+apps/web-nuxt/.nuxt/
+apps/web-nuxt/.output/
+apps/web-nuxt/node_modules/
+apps/web-nuxt/.data/
+apps/web-nuxt/.nitro/
+apps/web-nuxt/.cache/
+apps/web-nuxt/dist/
+
+# Test artifacts (regenerable)
+playwright-report/
+test-results/
+
+# Session / scratch artifacts
+.brainstorm-resume.md
+scratch/
+_bmad/
+_bmad-output/
+.planning

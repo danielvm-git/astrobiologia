@@ -1,0 +1,444 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 2,
+      "symbolId": "src/lib/appwrite.ts::getCurrentUser::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/lib/appwrite.ts::login::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/lib/appwrite.ts::logout::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/lib/appwrite.ts::createArticle::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/lib/appwrite.ts::createTranslation::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/lib/appwrite.ts::updateArticle::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/lib/appwrite.ts::updateTranslation::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "src/lib/appwrite.ts::deleteArticle::function"
+    },
+    {
+      "cyclomatic": 3,
+      "symbolId": "src/lib/appwrite.ts::getImageUrl::function"
+    },
+    {
+      "cyclomatic": 3,
+      "symbolId": "src/lib/appwrite.ts::uploadImage::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/lib/appwrite.ts::deleteImage::function"
+    }
+  ],
+  "contentHash": "f0c384b87fbcde25c7da744e11c563e84ccb11f65cebd968938ada2063630c25",
+  "edges": [
+    {
+      "from": "src/lib/appwrite.ts::getCurrentUser::function",
+      "kind": "imports",
+      "to": "src/lib/appwrite-datasets.ts::account::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::getCurrentUser::function",
+      "kind": "imports",
+      "to": "src/lib/appwrite-datasets.ts::databases::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::getCurrentUser::function",
+      "kind": "imports",
+      "to": "src/lib/appwrite-datasets.ts::storage::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::getCurrentUser::function",
+      "kind": "imports",
+      "to": "src/lib/appwrite-datasets.ts::DATABASE_ID::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::getCurrentUser::function",
+      "kind": "imports",
+      "to": "src/lib/appwrite-datasets.ts::COLLECTIONS::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::getCurrentUser::function",
+      "kind": "imports",
+      "to": "src/lib/appwrite-datasets.ts::STORAGE_BUCKET_ID::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::getCurrentUser::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::account::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::login::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::account::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::logout::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::account::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::createArticle::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::databases::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::createArticle::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::DATABASE_ID::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::createArticle::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::COLLECTIONS::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::createTranslation::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::databases::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::createTranslation::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::DATABASE_ID::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::createTranslation::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::COLLECTIONS::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::updateArticle::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::databases::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::updateArticle::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::DATABASE_ID::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::updateArticle::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::COLLECTIONS::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::updateTranslation::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::databases::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::updateTranslation::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::DATABASE_ID::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::updateTranslation::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::COLLECTIONS::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::deleteArticle::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::databases::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::deleteArticle::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::DATABASE_ID::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::deleteArticle::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::COLLECTIONS::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::getImageUrl::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::storage::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::getImageUrl::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::STORAGE_BUCKET_ID::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::deleteImage::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::storage::variable"
+    },
+    {
+      "from": "src/lib/appwrite.ts::deleteImage::function",
+      "kind": "uses",
+      "to": "src/lib/appwrite-datasets.ts::STORAGE_BUCKET_ID::variable"
+    }
+  ],
+  "file": "src/lib/appwrite.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T22:36:43-03:00",
+      "hash": "783694e3a7235c62e08375c5f4470c6913f13582",
+      "kind": "commit",
+      "message": "feat(i18n): enhance localization and DeepL integration across components"
+    },
+    {
+      "date": "2026-04-20T18:05:18-03:00",
+      "hash": "de0dfec42d7a9ec7e253ab25bbf9e1843efc26c2",
+      "kind": "commit",
+      "message": "refactor(core): centralized appwrite config and implement health check endpoint"
+    },
+    {
+      "date": "2026-04-20T00:29:38-03:00",
+      "hash": "0d39272b81db98b68da8163f50785bcf8adc4bf2",
+      "kind": "commit",
+      "message": "refactor: migrate article management to server actions, remove unused deletion endpoint, and implement end-to-end testing infrastructure"
+    },
+    {
+      "date": "2026-04-19T21:14:10-03:00",
+      "hash": "3ca81c1ee8cdc7f69a9796b224bb857b2166d6f6",
+      "kind": "commit",
+      "message": "refactor: migrate to dynamic environment variables for Appwrite configuration and improve ArticleEditor accessibility and state management."
+    },
+    {
+      "date": "2026-04-19T21:02:26-03:00",
+      "hash": "daac352915829d4989292bab5893128b03122cfc",
+      "kind": "commit",
+      "message": "feat: refactor authentication to use server-side sessions with Appwrite and update admin layout structure"
+    },
+    {
+      "date": "2026-04-19T19:49:53-03:00",
+      "hash": "88fe82b4ff6a7e12067303dfcce42aadf41525b0",
+      "kind": "commit",
+      "message": "fix(tests): resolve vitest mock error and verify full preflight"
+    },
+    {
+      "date": "2026-04-19T19:46:47-03:00",
+      "hash": "3abb5ac5fe5a1d1a3a7993705a834963f2ae6f19",
+      "kind": "commit",
+      "message": "fix(build): resolve prerender 404s by switching to static env vars"
+    },
+    {
+      "date": "2026-04-19T19:41:22-03:00",
+      "hash": "27b560c1e80bc81dec18cab4bb87c44506358003",
+      "kind": "commit",
+      "message": "feat(cms): implement multilingual article editor and final i18n verification"
+    },
+    {
+      "date": "2026-04-19T19:35:43-03:00",
+      "hash": "1d7d552e6516708f6350b1e6191d9b21d7cf3d04",
+      "kind": "commit",
+      "message": "feat(i18n): implement relational database schema and migrate content"
+    },
+    {
+      "date": "2026-04-19T19:11:52-03:00",
+      "hash": "bc294203e407873cb8ae4004e72c006c0521afc5",
+      "kind": "commit",
+      "message": "fix(deploy): update regional appwrite endpoint and fix auth hooks for remote build"
+    },
+    {
+      "date": "2026-04-19T18:18:57-03:00",
+      "hash": "d0a6bcdddb3f9c21a8b8255895e4aa066209f59b",
+      "kind": "commit",
+      "message": "feat: update Appwrite endpoint, add database cleanup utility, and implement automated rate-limited content population script."
+    },
+    {
+      "date": "2026-04-19T17:08:37-03:00",
+      "hash": "2a068d582a36bd4915612f51bf4466b84a86fe13",
+      "kind": "commit",
+      "message": "feat: transition to dynamic env configuration, add accessibility label to article editor, and update project planning state"
+    },
+    {
+      "date": "2026-04-19T16:35:48-03:00",
+      "hash": "bda5a4249df5c215e7a5cf09b8678c1a2285c1a5",
+      "kind": "commit",
+      "message": "feat(03-04): finalize public portal and initial content seeding"
+    },
+    {
+      "date": "2026-04-19T15:19:04-03:00",
+      "hash": "545bf9c062bb31a7947bb86bcbc33cb833bb4d54",
+      "kind": "commit",
+      "message": "feat(phase-1): finalize infrastructure and design foundation"
+    },
+    {
+      "date": "2026-04-19T15:12:05-03:00",
+      "hash": "7bc5ce9360f484e96bacaf001d7079642b81cf07",
+      "kind": "commit",
+      "message": "feat: improve admin auth flow with SSR checks, add remote image support, and update article fetch limits"
+    },
+    {
+      "date": "2026-04-19T13:09:22-03:00",
+      "hash": "1f8ff39ad85303b1150b19df68319ed061780ed1",
+      "kind": "commit",
+      "message": "fix(build): resolve env variables error using dynamic public env and fallbacks"
+    },
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 79,
+      "endOffset": 1443,
+      "kind": "function",
+      "name": "getCurrentUser",
+      "startLine": 72,
+      "startOffset": 1284,
+      "symbolId": "src/lib/appwrite.ts::getCurrentUser::function"
+    },
+    {
+      "endLine": 84,
+      "endOffset": 1621,
+      "kind": "function",
+      "name": "login",
+      "startLine": 81,
+      "startOffset": 1445,
+      "symbolId": "src/lib/appwrite.ts::login::function"
+    },
+    {
+      "endLine": 88,
+      "endOffset": 1713,
+      "kind": "function",
+      "name": "logout",
+      "startLine": 86,
+      "startOffset": 1623,
+      "symbolId": "src/lib/appwrite.ts::logout::function"
+    },
+    {
+      "endLine": 98,
+      "endOffset": 2001,
+      "kind": "function",
+      "name": "createArticle",
+      "startLine": 90,
+      "startOffset": 1715,
+      "symbolId": "src/lib/appwrite.ts::createArticle::function"
+    },
+    {
+      "endLine": 108,
+      "endOffset": 2293,
+      "kind": "function",
+      "name": "createTranslation",
+      "startLine": 100,
+      "startOffset": 2003,
+      "symbolId": "src/lib/appwrite.ts::createTranslation::function"
+    },
+    {
+      "endLine": 119,
+      "endOffset": 2586,
+      "kind": "function",
+      "name": "updateArticle",
+      "startLine": 110,
+      "startOffset": 2295,
+      "symbolId": "src/lib/appwrite.ts::updateArticle::function"
+    },
+    {
+      "endLine": 129,
+      "endOffset": 2877,
+      "kind": "function",
+      "name": "updateTranslation",
+      "startLine": 121,
+      "startOffset": 2588,
+      "symbolId": "src/lib/appwrite.ts::updateTranslation::function"
+    },
+    {
+      "endLine": 141,
+      "endOffset": 3329,
+      "kind": "function",
+      "name": "deleteArticle",
+      "startLine": 131,
+      "startOffset": 2879,
+      "symbolId": "src/lib/appwrite.ts::deleteArticle::function"
+    },
+    {
+      "endLine": 148,
+      "endOffset": 3587,
+      "kind": "function",
+      "name": "getImageUrl",
+      "startLine": 144,
+      "startOffset": 3348,
+      "symbolId": "src/lib/appwrite.ts::getImageUrl::function"
+    },
+    {
+      "endLine": 166,
+      "endOffset": 3979,
+      "kind": "function",
+      "name": "uploadImage",
+      "startLine": 150,
+      "startOffset": 3589,
+      "symbolId": "src/lib/appwrite.ts::uploadImage::function"
+    },
+    {
+      "endLine": 170,
+      "endOffset": 4103,
+      "kind": "function",
+      "name": "deleteImage",
+      "startLine": 168,
+      "startOffset": 3981,
+      "symbolId": "src/lib/appwrite.ts::deleteImage::function"
+    },
+    {
+      "endLine": 25,
+      "endOffset": 390,
+      "kind": "interface",
+      "name": "User",
+      "startLine": 20,
+      "startOffset": 300,
+      "symbolId": "src/lib/appwrite.ts::User::interface"
+    },
+    {
+      "endLine": 37,
+      "endOffset": 600,
+      "kind": "interface",
+      "name": "ArticleTranslation",
+      "startLine": 27,
+      "startOffset": 392,
+      "symbolId": "src/lib/appwrite.ts::ArticleTranslation::interface"
+    },
+    {
+      "endLine": 61,
+      "endOffset": 1153,
+      "kind": "interface",
+      "name": "Article",
+      "startLine": 39,
+      "startOffset": 602,
+      "symbolId": "src/lib/appwrite.ts::Article::interface"
+    },
+    {
+      "endLine": 69,
+      "endOffset": 1266,
+      "kind": "interface",
+      "name": "Category",
+      "startLine": 63,
+      "startOffset": 1155,
+      "symbolId": "src/lib/appwrite.ts::Category::interface"
+    },
+    {
+      "endLine": 180,
+      "endOffset": 5042,
+      "kind": "variable",
+      "name": "CATEGORIES",
+      "startLine": 173,
+      "startOffset": 4175,
+      "symbolId": "src/lib/appwrite.ts::CATEGORIES::variable"
+    }
+  ]
+}

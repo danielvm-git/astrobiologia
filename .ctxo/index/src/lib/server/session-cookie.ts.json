@@ -1,0 +1,60 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "src/lib/server/session-cookie.ts::setAppwriteSessionCookie::function"
+    }
+  ],
+  "contentHash": "177566ed6297eef11323946143071c97e9ec38deecfdb0f1f3069d4d94fbc0be",
+  "edges": [
+    {
+      "from": "src/lib/server/session-cookie.ts::setAppwriteSessionCookie::function",
+      "kind": "imports",
+      "to": "src/lib/server/appwrite.ts::SESSION_COOKIE::variable"
+    },
+    {
+      "from": "src/lib/server/session-cookie.ts::setAppwriteSessionCookie::function",
+      "kind": "imports",
+      "to": "src/lib/server/public-origin.ts::isPublicHttps::function"
+    },
+    {
+      "from": "src/lib/server/session-cookie.ts::setAppwriteSessionCookie::function",
+      "kind": "calls",
+      "to": "src/lib/server/public-origin.ts::isPublicHttps::function"
+    },
+    {
+      "from": "src/lib/server/session-cookie.ts::setAppwriteSessionCookie::function",
+      "kind": "uses",
+      "to": "src/lib/server/appwrite.ts::SESSION_COOKIE::variable"
+    },
+    {
+      "from": "src/lib/server/session-cookie.ts::setAppwriteSessionCookie::function",
+      "kind": "uses",
+      "to": "src/lib/server/public-origin.ts::isPublicHttps::function"
+    }
+  ],
+  "file": "src/lib/server/session-cookie.ts",
+  "intent": [],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 22,
+      "endOffset": 540,
+      "kind": "function",
+      "name": "setAppwriteSessionCookie",
+      "startLine": 9,
+      "startOffset": 223,
+      "symbolId": "src/lib/server/session-cookie.ts::setAppwriteSessionCookie::function"
+    },
+    {
+      "endLine": 7,
+      "endOffset": 221,
+      "kind": "type",
+      "name": "AppwriteSessionSecretFields",
+      "startLine": 4,
+      "startOffset": 141,
+      "symbolId": "src/lib/server/session-cookie.ts::AppwriteSessionSecretFields::type"
+    }
+  ]
+}

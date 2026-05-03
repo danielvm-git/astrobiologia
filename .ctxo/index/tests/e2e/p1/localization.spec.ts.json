@@ -1,0 +1,17 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "e7855734c9f4a31a24d0e8fa333c9b4f2537b82e0c2524fb3a4beb824bd1105e",
+  "edges": [],
+  "file": "tests/e2e/p1/localization.spec.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T18:19:16-03:00",
+      "hash": "9ec4c5840c71eda7b7b300d57b6119afedf45da7",
+      "kind": "commit",
+      "message": "feat: add localization support for Japanese, Spanish, Dutch, and Chinese languages with corresponding E2E tests"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

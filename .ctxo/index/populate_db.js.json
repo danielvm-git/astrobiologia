@@ -1,0 +1,41 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "57a6b7d231a9d06476668306aa788d665d68886b59e182cfe577bacf6e932a7f",
+  "edges": [],
+  "file": "populate_db.js",
+  "intent": [
+    {
+      "date": "2026-04-20T18:23:41-03:00",
+      "hash": "be48057df2e03527bc727cfb8838a4cfbdffbc37",
+      "kind": "commit",
+      "message": "chore: update Appwrite project ID and enhance Google login error reporting"
+    },
+    {
+      "date": "2026-04-19T18:18:57-03:00",
+      "hash": "d0a6bcdddb3f9c21a8b8255895e4aa066209f59b",
+      "kind": "commit",
+      "message": "feat: update Appwrite endpoint, add database cleanup utility, and implement automated rate-limited content population script."
+    },
+    {
+      "date": "2026-04-19T16:35:48-03:00",
+      "hash": "bda5a4249df5c215e7a5cf09b8678c1a2285c1a5",
+      "kind": "commit",
+      "message": "feat(03-04): finalize public portal and initial content seeding"
+    },
+    {
+      "date": "2026-04-19T14:27:54-03:00",
+      "hash": "e90751119e6ef41775ce9dffc7a489a205fec8fe",
+      "kind": "commit",
+      "message": "feat: create script to seed initial articles into Appwrite database"
+    },
+    {
+      "date": "2026-04-19T14:24:06-03:00",
+      "hash": "fafb622ea8dfcac3812da9736f9f0265b26bd291",
+      "kind": "commit",
+      "message": "feat: add script to populate database with initial records"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

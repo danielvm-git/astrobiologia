@@ -1,0 +1,50 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 8,
+      "symbolId": "src/routes/oauth/+server.ts::GET::function"
+    }
+  ],
+  "contentHash": "4dc30ca6b384b1c979092dda129b8d8c816f1f834924c6161ecdf838a26dd276",
+  "edges": [],
+  "file": "src/routes/oauth/+server.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T23:11:46-03:00",
+      "hash": "4b45ba0b34eec59888dc5277cd8a6cc3d665c4cb",
+      "kind": "commit",
+      "message": "fix(i18n-auth): locale-aware admin routing, translations, OAuth logging"
+    },
+    {
+      "date": "2026-04-20T19:07:23-03:00",
+      "hash": "4328a3daec330b10c8669441f0feec289241b3de",
+      "kind": "commit",
+      "message": "feat(auth): improve Google OAuth handling with dynamic public origin and enhanced security checks"
+    },
+    {
+      "date": "2026-04-19T22:04:12-03:00",
+      "hash": "4f71ce4eb5dd3f817d22f09c98bdbfe5f3ed453b",
+      "kind": "commit",
+      "message": "fix(auth): update node-appwrite v24 calls to named-parameter syntax"
+    },
+    {
+      "date": "2026-04-19T21:02:26-03:00",
+      "hash": "daac352915829d4989292bab5893128b03122cfc",
+      "kind": "commit",
+      "message": "feat: refactor authentication to use server-side sessions with Appwrite and update admin layout structure"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 32,
+      "endOffset": 1416,
+      "kind": "function",
+      "name": "GET",
+      "startLine": 8,
+      "startOffset": 314,
+      "symbolId": "src/routes/oauth/+server.ts::GET::function"
+    }
+  ]
+}

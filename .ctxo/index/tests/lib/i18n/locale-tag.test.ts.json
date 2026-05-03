@@ -1,0 +1,31 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "96ae8fa91c5b2f4050adb058d1b5df28f781398b79aa4e281d464b8a463edfc0",
+  "edges": [
+    {
+      "from": "tests/lib/i18n/locale-tag.test.ts::locale-tag.test::variable",
+      "kind": "imports",
+      "to": "src/lib/i18n/locale-tag.ts::localeTagsMatch::function"
+    },
+    {
+      "from": "tests/lib/i18n/locale-tag.test.ts::locale-tag.test::variable",
+      "kind": "imports",
+      "to": "src/lib/i18n/locale-tag.ts::normalizeLocaleTag::function"
+    },
+    {
+      "from": "tests/lib/i18n/locale-tag.test.ts::locale-tag.test::variable",
+      "kind": "imports",
+      "to": "src/lib/i18n/locale-tag.ts::primaryLanguageSubtag::function"
+    },
+    {
+      "from": "tests/lib/i18n/locale-tag.test.ts::locale-tag.test::variable",
+      "kind": "imports",
+      "to": "src/lib/i18n/translation-fallback-badge.ts::shouldShowTranslationFallbackBadge::function"
+    }
+  ],
+  "file": "tests/lib/i18n/locale-tag.test.ts",
+  "intent": [],
+  "lastModified": 1777240609,
+  "symbols": []
+}

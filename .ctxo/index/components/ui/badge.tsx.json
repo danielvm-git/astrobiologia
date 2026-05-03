@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/badge.tsx::Badge::function"
+    }
+  ],
+  "contentHash": "92dfe1cb7278ffac5c23656e33d0827da93b067724f377923f618c248204fa67",
+  "edges": [],
+  "file": "components/ui/badge.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 43,
+      "endOffset": 1598,
+      "kind": "function",
+      "name": "Badge",
+      "startLine": 27,
+      "startOffset": 1255,
+      "symbolId": "components/ui/badge.tsx::Badge::function"
+    }
+  ]
+}

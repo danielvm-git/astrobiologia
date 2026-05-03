@@ -1,0 +1,10 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "55625917c923770ff936fc77316528ab386c657222c285face0dfe6dcc767cae",
+  "edges": [],
+  "file": "apps/web-nuxt/server/api/auth/oauth-callback.get.ts",
+  "intent": [],
+  "lastModified": 1777261504,
+  "symbols": []
+}

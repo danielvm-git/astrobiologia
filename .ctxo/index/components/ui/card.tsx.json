@@ -1,0 +1,110 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/card.tsx::Card::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/card.tsx::CardHeader::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/card.tsx::CardTitle::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/card.tsx::CardDescription::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/card.tsx::CardAction::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/card.tsx::CardContent::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/card.tsx::CardFooter::function"
+    }
+  ],
+  "contentHash": "541ffffc9e6533063116770ae651e359b41de8546c52a29a3b560074878a37db",
+  "edges": [],
+  "file": "components/ui/card.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 15,
+      "endOffset": 350,
+      "kind": "function",
+      "name": "Card",
+      "startLine": 4,
+      "startOffset": 66,
+      "symbolId": "components/ui/card.tsx::Card::function"
+    },
+    {
+      "endLine": 28,
+      "endOffset": 720,
+      "kind": "function",
+      "name": "CardHeader",
+      "startLine": 17,
+      "startOffset": 352,
+      "symbolId": "components/ui/card.tsx::CardHeader::function"
+    },
+    {
+      "endLine": 38,
+      "endOffset": 937,
+      "kind": "function",
+      "name": "CardTitle",
+      "startLine": 30,
+      "startOffset": 722,
+      "symbolId": "components/ui/card.tsx::CardTitle::function"
+    },
+    {
+      "endLine": 48,
+      "endOffset": 1169,
+      "kind": "function",
+      "name": "CardDescription",
+      "startLine": 40,
+      "startOffset": 939,
+      "symbolId": "components/ui/card.tsx::CardDescription::function"
+    },
+    {
+      "endLine": 61,
+      "endOffset": 1449,
+      "kind": "function",
+      "name": "CardAction",
+      "startLine": 50,
+      "startOffset": 1171,
+      "symbolId": "components/ui/card.tsx::CardAction::function"
+    },
+    {
+      "endLine": 71,
+      "endOffset": 1648,
+      "kind": "function",
+      "name": "CardContent",
+      "startLine": 63,
+      "startOffset": 1451,
+      "symbolId": "components/ui/card.tsx::CardContent::function"
+    },
+    {
+      "endLine": 81,
+      "endOffset": 1880,
+      "kind": "function",
+      "name": "CardFooter",
+      "startLine": 73,
+      "startOffset": 1650,
+      "symbolId": "components/ui/card.tsx::CardFooter::function"
+    }
+  ]
+}

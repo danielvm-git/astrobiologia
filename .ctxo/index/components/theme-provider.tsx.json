@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/theme-provider.tsx::ThemeProvider::function"
+    }
+  ],
+  "contentHash": "7c1edcfa7a0614bfc279aeb8ce3e60e0642b1c24a6ff3d4d03d3e256efc95b20",
+  "edges": [],
+  "file": "components/theme-provider.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 10,
+      "endOffset": 291,
+      "kind": "function",
+      "name": "ThemeProvider",
+      "startLine": 8,
+      "startOffset": 142,
+      "symbolId": "components/theme-provider.tsx::ThemeProvider::function"
+    }
+  ]
+}

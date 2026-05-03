@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/checkbox.tsx::Checkbox::function"
+    }
+  ],
+  "contentHash": "f4629326151cdb4fefbb8d49ff20bcc3ffab3f791fb31b795937650877eae212",
+  "edges": [],
+  "file": "components/ui/checkbox.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 29,
+      "endOffset": 1205,
+      "kind": "function",
+      "name": "Checkbox",
+      "startLine": 8,
+      "startOffset": 183,
+      "symbolId": "components/ui/checkbox.tsx::Checkbox::function"
+    }
+  ]
+}

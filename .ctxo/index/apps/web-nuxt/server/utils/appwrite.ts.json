@@ -1,0 +1,84 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 3,
+      "symbolId": "apps/web-nuxt/server/utils/appwrite.ts::getImageUrl::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "apps/web-nuxt/server/utils/appwrite.ts::createAdminClient::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "apps/web-nuxt/server/utils/appwrite.ts::createSessionClient::function"
+    }
+  ],
+  "contentHash": "d67bbf38e758e0cf51d90e5bd75d16e8d150ab86ba1c65f79a4bb7ed99159985",
+  "edges": [
+    {
+      "from": "apps/web-nuxt/server/utils/appwrite.ts::getImageUrl::function",
+      "kind": "imports",
+      "to": "apps/web-nuxt/server/utils/logger.ts::createLogger::function"
+    }
+  ],
+  "file": "apps/web-nuxt/server/utils/appwrite.ts",
+  "intent": [],
+  "lastModified": 1777261504,
+  "symbols": [
+    {
+      "endLine": 63,
+      "endOffset": 1749,
+      "kind": "function",
+      "name": "getImageUrl",
+      "startLine": 52,
+      "startOffset": 1256,
+      "symbolId": "apps/web-nuxt/server/utils/appwrite.ts::getImageUrl::function"
+    },
+    {
+      "endLine": 88,
+      "endOffset": 2383,
+      "kind": "function",
+      "name": "createAdminClient",
+      "startLine": 68,
+      "startOffset": 1830,
+      "symbolId": "apps/web-nuxt/server/utils/appwrite.ts::createAdminClient::function"
+    },
+    {
+      "endLine": 119,
+      "endOffset": 3227,
+      "kind": "function",
+      "name": "createSessionClient",
+      "startLine": 93,
+      "startOffset": 2452,
+      "symbolId": "apps/web-nuxt/server/utils/appwrite.ts::createSessionClient::function"
+    },
+    {
+      "endLine": 5,
+      "endOffset": 237,
+      "kind": "variable",
+      "name": "SESSION_COOKIE",
+      "startLine": 5,
+      "startOffset": 173,
+      "symbolId": "apps/web-nuxt/server/utils/appwrite.ts::SESSION_COOKIE::variable"
+    },
+    {
+      "endLine": 50,
+      "endOffset": 1253,
+      "kind": "variable",
+      "name": "CATEGORIES",
+      "startLine": 7,
+      "startOffset": 253,
+      "symbolId": "apps/web-nuxt/server/utils/appwrite.ts::CATEGORIES::variable"
+    },
+    {
+      "endLine": 121,
+      "endOffset": 3300,
+      "kind": "variable",
+      "name": "getDatabaseId",
+      "startLine": 121,
+      "startOffset": 3242,
+      "symbolId": "apps/web-nuxt/server/utils/appwrite.ts::getDatabaseId::variable"
+    }
+  ]
+}

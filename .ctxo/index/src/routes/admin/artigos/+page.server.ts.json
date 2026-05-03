@@ -1,0 +1,67 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "e552ca089d205ddf4150910b48bff054bf78c750855cc27b15773a4cf220c40a",
+  "edges": [
+    {
+      "from": "src/routes/admin/artigos/+page.server.ts::load::variable",
+      "kind": "imports",
+      "to": "src/routes/admin/artigos/$types.ts::PageServerLoad::class",
+      "typeOnly": true
+    }
+  ],
+  "file": "src/routes/admin/artigos/+page.server.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T23:24:57-03:00",
+      "hash": "d2b201200dc24655c115ef2b88bef6feac42f0be",
+      "kind": "commit",
+      "message": "fix(admin): category reactivity, translation badges pagination, WIP pages"
+    },
+    {
+      "date": "2026-04-20T20:03:19-03:00",
+      "hash": "94533991646b3e1d3a19331685a2c539cb8cbd32",
+      "kind": "commit",
+      "message": "feat: implement full localization support across routes and update deployment documentation for OAuth configuration."
+    },
+    {
+      "date": "2026-04-20T00:29:38-03:00",
+      "hash": "0d39272b81db98b68da8163f50785bcf8adc4bf2",
+      "kind": "commit",
+      "message": "refactor: migrate article management to server actions, remove unused deletion endpoint, and implement end-to-end testing infrastructure"
+    },
+    {
+      "date": "2026-04-19T22:05:16-03:00",
+      "hash": "8c75ae4ec8a45e12c2c9663aaebde62be6685ac1",
+      "kind": "commit",
+      "message": "refactor: migrate client-side loaders to server-side, implement DeepL integration, and update auth hooks and paraglide strategy."
+    },
+    {
+      "date": "2026-04-19T13:09:22-03:00",
+      "hash": "1f8ff39ad85303b1150b19df68319ed061780ed1",
+      "kind": "commit",
+      "message": "fix(build): resolve env variables error using dynamic public env and fallbacks"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 73,
+      "endOffset": 2637,
+      "kind": "variable",
+      "name": "load",
+      "startLine": 10,
+      "startOffset": 427,
+      "symbolId": "src/routes/admin/artigos/+page.server.ts::load::variable"
+    },
+    {
+      "endLine": 117,
+      "endOffset": 3958,
+      "kind": "variable",
+      "name": "actions",
+      "startLine": 75,
+      "startOffset": 2653,
+      "symbolId": "src/routes/admin/artigos/+page.server.ts::actions::variable"
+    }
+  ]
+}

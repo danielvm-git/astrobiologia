@@ -1,0 +1,41 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "295d6c3f7a21ea0441d5eec05a9dbb582d3de755f80dbb7b254b19e8fb8b0587",
+  "edges": [
+    {
+      "from": "tests/phase5/i18n.test.ts::i18n.test::variable",
+      "kind": "imports",
+      "to": "src/lib/appwrite.ts::appwrite::variable"
+    }
+  ],
+  "file": "tests/phase5/i18n.test.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T18:05:13-03:00",
+      "hash": "d2ee1da3ece15cf1d8700e45489f3991046442df",
+      "kind": "commit",
+      "message": "feat(i18n): update PT/EN translations and add validation tests"
+    },
+    {
+      "date": "2026-04-19T21:02:26-03:00",
+      "hash": "daac352915829d4989292bab5893128b03122cfc",
+      "kind": "commit",
+      "message": "feat: refactor authentication to use server-side sessions with Appwrite and update admin layout structure"
+    },
+    {
+      "date": "2026-04-19T19:46:47-03:00",
+      "hash": "3abb5ac5fe5a1d1a3a7993705a834963f2ae6f19",
+      "kind": "commit",
+      "message": "fix(build): resolve prerender 404s by switching to static env vars"
+    },
+    {
+      "date": "2026-04-19T19:41:22-03:00",
+      "hash": "27b560c1e80bc81dec18cab4bb87c44506358003",
+      "kind": "commit",
+      "message": "feat(cms): implement multilingual article editor and final i18n verification"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

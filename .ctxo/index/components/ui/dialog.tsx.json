@@ -1,0 +1,149 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dialog.tsx::Dialog::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dialog.tsx::DialogTrigger::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dialog.tsx::DialogPortal::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dialog.tsx::DialogClose::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dialog.tsx::DialogOverlay::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/dialog.tsx::DialogContent::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dialog.tsx::DialogHeader::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dialog.tsx::DialogFooter::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dialog.tsx::DialogTitle::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/dialog.tsx::DialogDescription::function"
+    }
+  ],
+  "contentHash": "2341f5d3379758c9659806e518299f9a3dc394128571e379ed83941deae83403",
+  "edges": [],
+  "file": "components/ui/dialog.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 12,
+      "endOffset": 325,
+      "kind": "function",
+      "name": "Dialog",
+      "startLine": 8,
+      "startOffset": 175,
+      "symbolId": "components/ui/dialog.tsx::Dialog::function"
+    },
+    {
+      "endLine": 18,
+      "endOffset": 498,
+      "kind": "function",
+      "name": "DialogTrigger",
+      "startLine": 14,
+      "startOffset": 327,
+      "symbolId": "components/ui/dialog.tsx::DialogTrigger::function"
+    },
+    {
+      "endLine": 24,
+      "endOffset": 667,
+      "kind": "function",
+      "name": "DialogPortal",
+      "startLine": 20,
+      "startOffset": 500,
+      "symbolId": "components/ui/dialog.tsx::DialogPortal::function"
+    },
+    {
+      "endLine": 30,
+      "endOffset": 832,
+      "kind": "function",
+      "name": "DialogClose",
+      "startLine": 26,
+      "startOffset": 669,
+      "symbolId": "components/ui/dialog.tsx::DialogClose::function"
+    },
+    {
+      "endLine": 46,
+      "endOffset": 1255,
+      "kind": "function",
+      "name": "DialogOverlay",
+      "startLine": 32,
+      "startOffset": 834,
+      "symbolId": "components/ui/dialog.tsx::DialogOverlay::function"
+    },
+    {
+      "endLine": 80,
+      "endOffset": 2728,
+      "kind": "function",
+      "name": "DialogContent",
+      "startLine": 48,
+      "startOffset": 1257,
+      "symbolId": "components/ui/dialog.tsx::DialogContent::function"
+    },
+    {
+      "endLine": 90,
+      "endOffset": 2969,
+      "kind": "function",
+      "name": "DialogHeader",
+      "startLine": 82,
+      "startOffset": 2730,
+      "symbolId": "components/ui/dialog.tsx::DialogHeader::function"
+    },
+    {
+      "endLine": 103,
+      "endOffset": 3245,
+      "kind": "function",
+      "name": "DialogFooter",
+      "startLine": 92,
+      "startOffset": 2971,
+      "symbolId": "components/ui/dialog.tsx::DialogFooter::function"
+    },
+    {
+      "endLine": 116,
+      "endOffset": 3519,
+      "kind": "function",
+      "name": "DialogTitle",
+      "startLine": 105,
+      "startOffset": 3247,
+      "symbolId": "components/ui/dialog.tsx::DialogTitle::function"
+    },
+    {
+      "endLine": 129,
+      "endOffset": 3812,
+      "kind": "function",
+      "name": "DialogDescription",
+      "startLine": 118,
+      "startOffset": 3521,
+      "symbolId": "components/ui/dialog.tsx::DialogDescription::function"
+    }
+  ]
+}

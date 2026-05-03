@@ -1,0 +1,80 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/use-toast.ts::toast::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/use-toast.ts::useToast::function"
+    }
+  ],
+  "contentHash": "3b5f8c9c5257f1cf36a94eeffed2588037e9cc7931d90b752604c2baed30cf81",
+  "edges": [
+    {
+      "from": "components/ui/use-toast.ts::toast::function",
+      "kind": "calls",
+      "to": "components/ui/use-toast.ts::genId::function"
+    },
+    {
+      "from": "components/ui/use-toast.ts::toast::function",
+      "kind": "calls",
+      "to": "components/ui/use-toast.ts::dispatch::function"
+    },
+    {
+      "from": "components/ui/use-toast.ts::toast::function",
+      "kind": "calls",
+      "to": "components/ui/use-toast.ts::dispatch::function"
+    },
+    {
+      "from": "components/ui/use-toast.ts::toast::function",
+      "kind": "calls",
+      "to": "components/ui/use-toast.ts::dispatch::function"
+    },
+    {
+      "from": "components/ui/use-toast.ts::useToast::function",
+      "kind": "calls",
+      "to": "components/ui/use-toast.ts::dispatch::function"
+    }
+  ],
+  "file": "components/ui/use-toast.ts",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 168,
+      "endOffset": 3496,
+      "kind": "function",
+      "name": "toast",
+      "startLine": 141,
+      "startOffset": 3010,
+      "symbolId": "components/ui/use-toast.ts::toast::function"
+    },
+    {
+      "endLine": 188,
+      "endOffset": 3916,
+      "kind": "function",
+      "name": "useToast",
+      "startLine": 170,
+      "startOffset": 3498,
+      "symbolId": "components/ui/use-toast.ts::useToast::function"
+    },
+    {
+      "endLine": 126,
+      "endOffset": 2724,
+      "kind": "variable",
+      "name": "reducer",
+      "startLine": 73,
+      "startOffset": 1457,
+      "symbolId": "components/ui/use-toast.ts::reducer::variable"
+    }
+  ]
+}

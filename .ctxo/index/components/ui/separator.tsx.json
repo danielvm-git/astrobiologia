@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/separator.tsx::Separator::function"
+    }
+  ],
+  "contentHash": "96ef29b5aa9a169fd23a813ebbd4a721ba693c9ba73b9bdd9b4ece6788e9279c",
+  "edges": [],
+  "file": "components/ui/separator.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 25,
+      "endOffset": 677,
+      "kind": "function",
+      "name": "Separator",
+      "startLine": 7,
+      "startOffset": 144,
+      "symbolId": "components/ui/separator.tsx::Separator::function"
+    }
+  ]
+}

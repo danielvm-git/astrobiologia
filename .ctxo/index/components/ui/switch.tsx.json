@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/switch.tsx::Switch::function"
+    }
+  ],
+  "contentHash": "85baaea33c3eecfad8968f44562331f395bb4f3c02d60933d5b50d556fbd6df0",
+  "edges": [],
+  "file": "components/ui/switch.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 26,
+      "endOffset": 1132,
+      "kind": "function",
+      "name": "Switch",
+      "startLine": 7,
+      "startOffset": 138,
+      "symbolId": "components/ui/switch.tsx::Switch::function"
+    }
+  ]
+}

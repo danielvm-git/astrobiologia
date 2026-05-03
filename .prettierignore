@@ -1,0 +1,12 @@
+node_modules
+.svelte-kit
+build
+dist
+src/lib/paraglide
+src/paraglide
+project.inlang/cache
+.nuxt
+.output
+coverage
+test-results
+playwright-report

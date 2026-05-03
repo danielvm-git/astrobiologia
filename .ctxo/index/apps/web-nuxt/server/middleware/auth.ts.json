@@ -1,0 +1,10 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "dce49069a419b173a797097074636ef1447b0e6cfa61c2dd4432b19a73e67bb7",
+  "edges": [],
+  "file": "apps/web-nuxt/server/middleware/auth.ts",
+  "intent": [],
+  "lastModified": 1777261504,
+  "symbols": []
+}

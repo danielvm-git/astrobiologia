@@ -1,0 +1,10 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "29852415cb55f63f13a3246d3045ca46b2f1714b2e5250450830cac3b633a08d",
+  "edges": [],
+  "file": "apps/web-nuxt/server/api/health.get.ts",
+  "intent": [],
+  "lastModified": 1777261504,
+  "symbols": []
+}

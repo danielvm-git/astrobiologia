@@ -1,0 +1,149 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/field.tsx::FieldSet::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/field.tsx::FieldLegend::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/field.tsx::FieldGroup::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/field.tsx::Field::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/field.tsx::FieldContent::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/field.tsx::FieldLabel::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/field.tsx::FieldTitle::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/field.tsx::FieldDescription::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/field.tsx::FieldSeparator::function"
+    },
+    {
+      "cyclomatic": 7,
+      "symbolId": "components/ui/field.tsx::FieldError::function"
+    }
+  ],
+  "contentHash": "c80fb0dc554855fd84ac91ad30f724127a066ad2156b1846dc46ee5811ee9135",
+  "edges": [],
+  "file": "components/ui/field.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 21,
+      "endOffset": 576,
+      "kind": "function",
+      "name": "FieldSet",
+      "startLine": 9,
+      "startOffset": 247,
+      "symbolId": "components/ui/field.tsx::FieldSet::function"
+    },
+    {
+      "endLine": 41,
+      "endOffset": 991,
+      "kind": "function",
+      "name": "FieldLegend",
+      "startLine": 23,
+      "startOffset": 578,
+      "symbolId": "components/ui/field.tsx::FieldLegend::function"
+    },
+    {
+      "endLine": 54,
+      "endOffset": 1343,
+      "kind": "function",
+      "name": "FieldGroup",
+      "startLine": 43,
+      "startOffset": 993,
+      "symbolId": "components/ui/field.tsx::FieldGroup::function"
+    },
+    {
+      "endLine": 94,
+      "endOffset": 2617,
+      "kind": "function",
+      "name": "Field",
+      "startLine": 80,
+      "startOffset": 2284,
+      "symbolId": "components/ui/field.tsx::Field::function"
+    },
+    {
+      "endLine": 107,
+      "endOffset": 2900,
+      "kind": "function",
+      "name": "FieldContent",
+      "startLine": 96,
+      "startOffset": 2619,
+      "symbolId": "components/ui/field.tsx::FieldContent::function"
+    },
+    {
+      "endLine": 125,
+      "endOffset": 3545,
+      "kind": "function",
+      "name": "FieldLabel",
+      "startLine": 109,
+      "startOffset": 2902,
+      "symbolId": "components/ui/field.tsx::FieldLabel::function"
+    },
+    {
+      "endLine": 138,
+      "endOffset": 3869,
+      "kind": "function",
+      "name": "FieldTitle",
+      "startLine": 127,
+      "startOffset": 3547,
+      "symbolId": "components/ui/field.tsx::FieldTitle::function"
+    },
+    {
+      "endLine": 153,
+      "endOffset": 4361,
+      "kind": "function",
+      "name": "FieldDescription",
+      "startLine": 140,
+      "startOffset": 3871,
+      "symbolId": "components/ui/field.tsx::FieldDescription::function"
+    },
+    {
+      "endLine": 183,
+      "endOffset": 5039,
+      "kind": "function",
+      "name": "FieldSeparator",
+      "startLine": 155,
+      "startOffset": 4363,
+      "symbolId": "components/ui/field.tsx::FieldSeparator::function"
+    },
+    {
+      "endLine": 230,
+      "endOffset": 5896,
+      "kind": "function",
+      "name": "FieldError",
+      "startLine": 185,
+      "startOffset": 5041,
+      "symbolId": "components/ui/field.tsx::FieldError::function"
+    }
+  ]
+}

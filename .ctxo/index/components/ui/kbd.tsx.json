@@ -1,0 +1,45 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/kbd.tsx::Kbd::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "components/ui/kbd.tsx::KbdGroup::function"
+    }
+  ],
+  "contentHash": "3e346d9b84a0e2cbafb6311589d4dfcf0df6c1c8f94fca26ff4c34dfa4170823",
+  "edges": [],
+  "file": "components/ui/kbd.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 15,
+      "endOffset": 617,
+      "kind": "function",
+      "name": "Kbd",
+      "startLine": 2,
+      "startOffset": 34,
+      "symbolId": "components/ui/kbd.tsx::Kbd::function"
+    },
+    {
+      "endLine": 25,
+      "endOffset": 836,
+      "kind": "function",
+      "name": "KbdGroup",
+      "startLine": 17,
+      "startOffset": 619,
+      "symbolId": "components/ui/kbd.tsx::KbdGroup::function"
+    }
+  ]
+}

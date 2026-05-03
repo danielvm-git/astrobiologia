@@ -1,0 +1,67 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "accaa7b21362d4cb13ee7587ea70e05679d39c9fecc57d03e18d73a421cf3aa1",
+  "edges": [
+    {
+      "from": "tests/phase2/appwrite_crud.test.ts::appwrite_crud.test::variable",
+      "kind": "imports",
+      "to": "tests/mocks/appwrite.ts::mockDatabases::variable"
+    },
+    {
+      "from": "tests/phase2/appwrite_crud.test.ts::appwrite_crud.test::variable",
+      "kind": "imports",
+      "to": "tests/mocks/appwrite.ts::mockStorage::variable"
+    },
+    {
+      "from": "tests/phase2/appwrite_crud.test.ts::appwrite_crud.test::variable",
+      "kind": "imports",
+      "to": "tests/factories/article.factory::createArticle::function"
+    },
+    {
+      "from": "tests/phase2/appwrite_crud.test.ts::appwrite_crud.test::variable",
+      "kind": "imports",
+      "to": "tests/factories/article.factory::createArticleTranslation::function"
+    },
+    {
+      "from": "tests/phase2/appwrite_crud.test.ts::appwrite_crud.test::variable",
+      "kind": "imports",
+      "to": "src/lib/appwrite.ts::appwrite::variable"
+    }
+  ],
+  "file": "tests/phase2/appwrite_crud.test.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T00:29:38-03:00",
+      "hash": "0d39272b81db98b68da8163f50785bcf8adc4bf2",
+      "kind": "commit",
+      "message": "refactor: migrate article management to server actions, remove unused deletion endpoint, and implement end-to-end testing infrastructure"
+    },
+    {
+      "date": "2026-04-19T21:02:26-03:00",
+      "hash": "daac352915829d4989292bab5893128b03122cfc",
+      "kind": "commit",
+      "message": "feat: refactor authentication to use server-side sessions with Appwrite and update admin layout structure"
+    },
+    {
+      "date": "2026-04-19T19:46:47-03:00",
+      "hash": "3abb5ac5fe5a1d1a3a7993705a834963f2ae6f19",
+      "kind": "commit",
+      "message": "fix(build): resolve prerender 404s by switching to static env vars"
+    },
+    {
+      "date": "2026-04-19T19:35:43-03:00",
+      "hash": "1d7d552e6516708f6350b1e6191d9b21d7cf3d04",
+      "kind": "commit",
+      "message": "feat(i18n): implement relational database schema and migrate content"
+    },
+    {
+      "date": "2026-04-19T15:46:42-03:00",
+      "hash": "f02a0844e8b4ade7a57ea6e0e3a0b0dc8b54a67a",
+      "kind": "commit",
+      "message": "feat(phases-1-2): finalize infrastructure and administrative cms"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": []
+}

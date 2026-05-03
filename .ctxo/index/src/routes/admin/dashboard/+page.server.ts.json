@@ -1,0 +1,52 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "fb5031879fb1ef1db230787482e28197866becb7fcea17b8f460f9d6e359687e",
+  "edges": [
+    {
+      "from": "src/routes/admin/dashboard/+page.server.ts::load::variable",
+      "kind": "imports",
+      "to": "src/routes/admin/dashboard/$types.ts::PageServerLoad::class",
+      "typeOnly": true
+    }
+  ],
+  "file": "src/routes/admin/dashboard/+page.server.ts",
+  "intent": [
+    {
+      "date": "2026-04-20T00:29:38-03:00",
+      "hash": "0d39272b81db98b68da8163f50785bcf8adc4bf2",
+      "kind": "commit",
+      "message": "refactor: migrate article management to server actions, remove unused deletion endpoint, and implement end-to-end testing infrastructure"
+    },
+    {
+      "date": "2026-04-19T22:05:16-03:00",
+      "hash": "8c75ae4ec8a45e12c2c9663aaebde62be6685ac1",
+      "kind": "commit",
+      "message": "refactor: migrate client-side loaders to server-side, implement DeepL integration, and update auth hooks and paraglide strategy."
+    },
+    {
+      "date": "2026-04-19T13:09:22-03:00",
+      "hash": "1f8ff39ad85303b1150b19df68319ed061780ed1",
+      "kind": "commit",
+      "message": "fix(build): resolve env variables error using dynamic public env and fallbacks"
+    },
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240610,
+  "symbols": [
+    {
+      "endLine": 61,
+      "endOffset": 1601,
+      "kind": "variable",
+      "name": "load",
+      "startLine": 5,
+      "startOffset": 219,
+      "symbolId": "src/routes/admin/dashboard/+page.server.ts::load::variable"
+    }
+  ]
+}

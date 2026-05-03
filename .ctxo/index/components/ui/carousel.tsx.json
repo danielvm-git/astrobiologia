@@ -1,0 +1,114 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 10,
+      "symbolId": "components/ui/carousel.tsx::Carousel::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/carousel.tsx::CarouselContent::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/carousel.tsx::CarouselItem::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/carousel.tsx::CarouselPrevious::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "components/ui/carousel.tsx::CarouselNext::function"
+    }
+  ],
+  "contentHash": "67237a35be1473c2436d9438a17330e183bf720e84391dd8d0a00a73f289a371",
+  "edges": [
+    {
+      "from": "components/ui/carousel.tsx::CarouselContent::function",
+      "kind": "calls",
+      "to": "components/ui/carousel.tsx::useCarousel::function"
+    },
+    {
+      "from": "components/ui/carousel.tsx::CarouselItem::function",
+      "kind": "calls",
+      "to": "components/ui/carousel.tsx::useCarousel::function"
+    },
+    {
+      "from": "components/ui/carousel.tsx::CarouselPrevious::function",
+      "kind": "calls",
+      "to": "components/ui/carousel.tsx::useCarousel::function"
+    },
+    {
+      "from": "components/ui/carousel.tsx::CarouselNext::function",
+      "kind": "calls",
+      "to": "components/ui/carousel.tsx::useCarousel::function"
+    }
+  ],
+  "file": "components/ui/carousel.tsx",
+  "intent": [
+    {
+      "date": "2026-04-19T10:43:21-03:00",
+      "hash": "cc503df6a428cc29e5238894d4ff4491e2b6850d",
+      "kind": "commit",
+      "message": "Initial commit"
+    }
+  ],
+  "lastModified": 1777240609,
+  "symbols": [
+    {
+      "endLine": 132,
+      "endOffset": 3167,
+      "kind": "function",
+      "name": "Carousel",
+      "startLine": 44,
+      "startOffset": 1149,
+      "symbolId": "components/ui/carousel.tsx::Carousel::function"
+    },
+    {
+      "endLine": 153,
+      "endOffset": 3620,
+      "kind": "function",
+      "name": "CarouselContent",
+      "startLine": 134,
+      "startOffset": 3169,
+      "symbolId": "components/ui/carousel.tsx::CarouselContent::function"
+    },
+    {
+      "endLine": 171,
+      "endOffset": 4027,
+      "kind": "function",
+      "name": "CarouselItem",
+      "startLine": 155,
+      "startOffset": 3622,
+      "symbolId": "components/ui/carousel.tsx::CarouselItem::function"
+    },
+    {
+      "endLine": 201,
+      "endOffset": 4740,
+      "kind": "function",
+      "name": "CarouselPrevious",
+      "startLine": 173,
+      "startOffset": 4029,
+      "symbolId": "components/ui/carousel.tsx::CarouselPrevious::function"
+    },
+    {
+      "endLine": 231,
+      "endOffset": 5446,
+      "kind": "function",
+      "name": "CarouselNext",
+      "startLine": 203,
+      "startOffset": 4742,
+      "symbolId": "components/ui/carousel.tsx::CarouselNext::function"
+    },
+    {
+      "endLine": 11,
+      "endOffset": 309,
+      "kind": "type",
+      "name": "CarouselApi",
+      "startLine": 11,
+      "startOffset": 267,
+      "symbolId": "components/ui/carousel.tsx::CarouselApi::type"
+    }
+  ]
+}
