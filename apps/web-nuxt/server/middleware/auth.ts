@@ -6,6 +6,17 @@ export default defineEventHandler(async (event) => {
     return;
   }
 
+  const config = useRuntimeConfig();
+  const sessionCookie = getCookie(
+    event,
+    SESSION_COOKIE(config.public.appwriteProjectId)
+  );
+
+  if (!sessionCookie) {
+    event.context.user = null;
+    return;
+  }
+
   const { account } = createSessionClient(event);
 
   try {
@@ -13,19 +24,10 @@ export default defineEventHandler(async (event) => {
     event.context.user = user;
     logger.debug("Session verified", { email: user.email, path: event.path });
   } catch (e: any) {
-    // Only log if there was an attempt (cookie present)
-    const config = useRuntimeConfig();
-    const sessionCookie = getCookie(
-      event,
-      SESSION_COOKIE(config.public.appwriteProjectId)
-    );
-
-    if (sessionCookie) {
-      logger.warn("Session verification failed", {
-        message: e.message,
-        path: event.path,
-      });
-    }
+    logger.warn("Session verification failed", {
+      message: e.message,
+      path: event.path,
+    });
     event.context.user = null;
   }
 });
