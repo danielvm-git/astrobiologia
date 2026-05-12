@@ -8,6 +8,7 @@
     "preflight": "pnpm type-check && pnpm lint && pnpm test:all && pnpm build && pnpm exec lint-staged --diff HEAD",
     "dev": "pnpm --filter @astrobiologia/web-nuxt dev",
     "build": "pnpm --filter @astrobiologia/web-nuxt build",
+    "generate": "pnpm --filter @astrobiologia/web-nuxt generate",
     "test": "pnpm --filter @astrobiologia/web-nuxt test",
     "test:all": "pnpm --filter @astrobiologia/web-nuxt test:all",
     "test:fast": "pnpm --filter @astrobiologia/web-nuxt test:unit && pnpm --filter @astrobiologia/web-nuxt test:api",

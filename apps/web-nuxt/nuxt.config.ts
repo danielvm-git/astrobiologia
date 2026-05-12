@@ -9,6 +9,22 @@ export default defineNuxtConfig({
   css: ["~/assets/css/main.css"],
   devtools: { enabled: true },
   modules: ["@nuxtjs/i18n", "@pinia/nuxt"],
+  routeRules: {
+    // Admin is auth-protected, no SSR needed
+    "/admin/**": { ssr: false },
+    // Public pages prerendered at build time
+    "/": { prerender: true },
+    "/artigos": { prerender: true },
+    "/sobre": { prerender: true },
+    "/contato": { prerender: true },
+    "/privacidade": { prerender: true },
+  },
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      failOnError: false,
+    },
+  },
   postcss: {
     plugins: {
       "@tailwindcss/postcss": {},
