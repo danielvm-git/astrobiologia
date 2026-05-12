@@ -21,22 +21,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
+          cache: pnpm
+
       - name: install
-        run: npm ci
+        run: pnpm install --frozen-lockfile
+
       - name: typecheck
-        run: npm run check
+        run: pnpm run check
+
       - name: unit
-        run: npm run test:unit -w @astrobiologia/web-nuxt
+        run: pnpm run test:unit -w @astrobiologia/web-nuxt
+
       - name: coverage
-        run: npm run test:coverage -w @astrobiologia/web-nuxt
+        run: pnpm run test:coverage -w @astrobiologia/web-nuxt
+
       - name: install playwright browser
         run: npx playwright install chromium --with-deps
         working-directory: apps/web-nuxt
+
       - name: api
-        run: npm run test:api -w @astrobiologia/web-nuxt
+        run: pnpm run test:api -w @astrobiologia/web-nuxt
+
       - name: e2e
-        run: npm run test:e2e -w @astrobiologia/web-nuxt
+        run: pnpm run test:e2e -w @astrobiologia/web-nuxt
