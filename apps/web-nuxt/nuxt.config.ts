@@ -55,6 +55,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     appwriteApiKey: "",
+    appwriteSiteId: "",
     deeplApiKey: "",
     public: {
       appwriteEndpoint: "https://cloud.appwrite.io/v1",

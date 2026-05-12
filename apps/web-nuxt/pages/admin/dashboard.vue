@@ -11,6 +11,7 @@ import {
   ChevronRight,
   Telescope,
   Settings,
+  RefreshCw,
 } from "lucide-vue-next";
 import { cn } from "@/lib/utils";
 
@@ -47,13 +48,35 @@ type DashboardPayload = {
   error?: string;
 };
 
-const { data, error: fetchError, refresh } = await useAsyncData<DashboardPayload>(
-  "admin-dashboard",
-  () => $fetch<DashboardPayload>("/api/admin/dashboard")
+const {
+  data,
+  error: fetchError,
+  refresh,
+} = await useAsyncData<DashboardPayload>("admin-dashboard", () =>
+  $fetch<DashboardPayload>("/api/admin/dashboard")
 );
 
 const stats = computed(() => data.value?.stats);
-const loadError = computed(() => data.value?.error || fetchError.value?.message);
+const loadError = computed(
+  () => data.value?.error || fetchError.value?.message
+);
+
+const redeploying = ref(false);
+const redeployStatus = ref<"idle" | "success" | "error">("idle");
+
+async function triggerRedeploy() {
+  redeploying.value = true;
+  redeployStatus.value = "idle";
+  try {
+    await $fetch("/api/admin/redeploy", { method: "POST" });
+    redeployStatus.value = "success";
+  } catch {
+    redeployStatus.value = "error";
+  } finally {
+    redeploying.value = false;
+    setTimeout(() => (redeployStatus.value = "idle"), 4000);
+  }
+}
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("pt-BR", {
@@ -91,7 +114,9 @@ function formatDate(dateStr: string) {
 
     <div v-else-if="stats" class="space-y-10">
       <div>
-        <h1 class="text-4xl font-black text-slate-900 uppercase tracking-tighter">
+        <h1
+          class="text-4xl font-black text-slate-900 uppercase tracking-tighter"
+        >
           Painel de Controle
         </h1>
         <p
@@ -242,10 +267,7 @@ function formatDate(dateStr: string) {
                       <h3
                         class="text-lg font-bold text-slate-900 truncate group-hover:text-primary transition-colors"
                       >
-                        {{
-                          article.title ||
-                          "(Sem título)"
-                        }}
+                        {{ article.title || "(Sem título)" }}
                       </h3>
                       <div class="flex items-center gap-3 mt-2">
                         <span
@@ -284,9 +306,7 @@ function formatDate(dateStr: string) {
                       </div>
                     </div>
                     <NuxtLink
-                      :to="
-                        localePath(`/admin/artigos/${article.$id}/edit`)
-                      "
+                      :to="localePath(`/admin/artigos/${article.$id}/edit`)"
                       class="px-4 py-2 bg-slate-100 text-slate-600 hover:bg-primary hover:text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shrink-0"
                     >
                       Editar
@@ -341,6 +361,33 @@ function formatDate(dateStr: string) {
                   class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"
                 />
               </NuxtLink>
+
+              <button
+                type="button"
+                :disabled="redeploying"
+                class="w-full flex items-center justify-between p-4 bg-white border border-slate-200 text-slate-900 rounded-2xl hover:border-primary transition-all group disabled:opacity-50 disabled:cursor-not-allowed"
+                @click="triggerRedeploy"
+              >
+                <div class="flex items-center gap-3">
+                  <RefreshCw
+                    class="w-5 h-5 text-primary"
+                    :class="{ 'animate-spin': redeploying }"
+                  />
+                  <span class="font-black uppercase tracking-widest text-xs">
+                    <template v-if="redeploying">Publicando...</template>
+                    <template v-else-if="redeployStatus === 'success'"
+                      >Publicado!</template
+                    >
+                    <template v-else-if="redeployStatus === 'error'"
+                      >Erro ao Publicar</template
+                    >
+                    <template v-else>Publicar Site</template>
+                  </span>
+                </div>
+                <ChevronRight
+                  class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"
+                />
+              </button>
 
               <div
                 class="p-6 bg-slate-900 rounded-2xl text-white relative overflow-hidden"
