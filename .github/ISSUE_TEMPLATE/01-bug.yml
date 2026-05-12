@@ -1,0 +1,75 @@
+name: Bug
+description: Registar um defeito com rastreio a requisitos (.planning)
+title: "bug: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Antes de abrir:** confirma em `localhost` com Appwrite quando possível.  
+        **Título (editar acima):** `bug(escopo): descrição` — ex. `bug(busca): 500 em pesquisa vazia`.
+  - type: textarea
+    id: requirement
+    attributes:
+      label: Requisito
+      description: Cita o ficheiro em `.planning` (UAT, `milestones/*-REQUIREMENTS`, ou `*VALIDATION*`) e o critério.
+      placeholder: "ex. phases/05-multilingual-i18n/05-UAT.md — critério X"
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Comportamento actual
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamento esperado
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Passos para reproduzir
+      description: "Preferência: ambiente `localhost` + URL da rota. Se for só em produção, indica e porquê."
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severidade
+      options:
+        - critical
+        - high
+        - medium
+        - low
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Prioridade
+      options:
+        - p0
+        - p1
+        - p2
+        - p3
+    validations:
+      required: true
+  - type: checkboxes
+    id: area
+    attributes:
+      label: Área
+      options:
+        - label: Público (home, listagens, artigo)
+        - label: i18n
+        - label: Admin / CMS
+        - label: Autenticação
+        - label: Busca
+        - label: Infra / CI
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidência (opcional)
+      description: Screenshot, stack trace, ou trecho de log. Não colar credenciais.

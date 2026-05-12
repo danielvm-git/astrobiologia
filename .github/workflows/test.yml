@@ -1,0 +1,42 @@
+name: test
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+env:
+  APPWRITE_API_KEY: ${{ secrets.APPWRITE_API_KEY }}
+  NUXT_PUBLIC_APPWRITE_PROJECT_ID: ${{ secrets.NUXT_PUBLIC_APPWRITE_PROJECT_ID }}
+  NUXT_PUBLIC_APPWRITE_ENDPOINT: https://cloud.appwrite.io/v1
+  NUXT_PUBLIC_DATABASE_ID: ${{ secrets.NUXT_PUBLIC_DATABASE_ID }}
+  NUXT_PUBLIC_ARTICLES_COLLECTION_ID: ${{ secrets.NUXT_PUBLIC_ARTICLES_COLLECTION_ID }}
+  NUXT_PUBLIC_ARTICLE_TRANSLATIONS_COLLECTION_ID: ${{ secrets.NUXT_PUBLIC_ARTICLE_TRANSLATIONS_COLLECTION_ID }}
+  NUXT_PUBLIC_CATEGORIES_COLLECTION_ID: ${{ secrets.NUXT_PUBLIC_CATEGORIES_COLLECTION_ID }}
+  NUXT_PUBLIC_STORAGE_BUCKET_ID: ${{ secrets.NUXT_PUBLIC_STORAGE_BUCKET_ID }}
+  CI: "true"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: install
+        run: npm ci
+      - name: typecheck
+        run: npm run check
+      - name: unit
+        run: npm run test:unit -w @astrobiologia/web-nuxt
+      - name: coverage
+        run: npm run test:coverage -w @astrobiologia/web-nuxt
+      - name: install playwright browser
+        run: npx playwright install chromium --with-deps
+        working-directory: apps/web-nuxt
+      - name: api
+        run: npm run test:api -w @astrobiologia/web-nuxt
+      - name: e2e
+        run: npm run test:e2e -w @astrobiologia/web-nuxt
