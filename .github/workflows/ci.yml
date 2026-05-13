@@ -54,6 +54,24 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build
+        working-directory: apps/web-astro
+        run: pnpm run build
+        env:
+          APPWRITE_ENDPOINT: ${{ secrets.APPWRITE_ENDPOINT }}
+          APPWRITE_PROJECT_ID: ${{ secrets.APPWRITE_PROJECT_ID }}
+          APPWRITE_API_KEY: ${{ secrets.APPWRITE_API_KEY }}
+          DATABASE_ID: ${{ secrets.DATABASE_ID }}
+          ARTICLES_COLLECTION_ID: ${{ secrets.ARTICLES_COLLECTION_ID }}
+          ARTICLE_TRANSLATIONS_COLLECTION_ID: ${{ secrets.ARTICLE_TRANSLATIONS_COLLECTION_ID }}
+          CATEGORIES_COLLECTION_ID: ${{ secrets.CATEGORIES_COLLECTION_ID }}
+          STORAGE_BUCKET_ID: ${{ secrets.STORAGE_BUCKET_ID }}
+          SITE_SETTINGS_COLLECTION_ID: ${{ secrets.SITE_SETTINGS_COLLECTION_ID }}
+          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
+          PUBLIC_APPWRITE_ENDPOINT: ${{ secrets.APPWRITE_ENDPOINT }}
+          PUBLIC_APPWRITE_PROJECT_ID: ${{ secrets.APPWRITE_PROJECT_ID }}
+          PUBLIC_STORAGE_BUCKET_ID: ${{ secrets.STORAGE_BUCKET_ID }}
+
       - name: Install Playwright Chromium
         working-directory: apps/web-astro
         run: npx playwright install --with-deps chromium
@@ -63,6 +81,21 @@ jobs:
         run: pnpm run test:e2e:p0
         env:
           CI: true
+          APPWRITE_ENDPOINT: ${{ secrets.APPWRITE_ENDPOINT }}
+          APPWRITE_PROJECT_ID: ${{ secrets.APPWRITE_PROJECT_ID }}
+          APPWRITE_API_KEY: ${{ secrets.APPWRITE_API_KEY }}
+          DATABASE_ID: ${{ secrets.DATABASE_ID }}
+          ARTICLES_COLLECTION_ID: ${{ secrets.ARTICLES_COLLECTION_ID }}
+          ARTICLE_TRANSLATIONS_COLLECTION_ID: ${{ secrets.ARTICLE_TRANSLATIONS_COLLECTION_ID }}
+          CATEGORIES_COLLECTION_ID: ${{ secrets.CATEGORIES_COLLECTION_ID }}
+          STORAGE_BUCKET_ID: ${{ secrets.STORAGE_BUCKET_ID }}
+          SITE_SETTINGS_COLLECTION_ID: ${{ secrets.SITE_SETTINGS_COLLECTION_ID }}
+          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
+          PUBLIC_APPWRITE_ENDPOINT: ${{ secrets.APPWRITE_ENDPOINT }}
+          PUBLIC_APPWRITE_PROJECT_ID: ${{ secrets.APPWRITE_PROJECT_ID }}
+          PUBLIC_STORAGE_BUCKET_ID: ${{ secrets.STORAGE_BUCKET_ID }}
+          E2E_ADMIN_EMAIL: ${{ secrets.E2E_ADMIN_EMAIL }}
+          E2E_ADMIN_PASSWORD: ${{ secrets.E2E_ADMIN_PASSWORD }}
 
   # Requires committed appwrite.config.json (copy from appwrite.config.json.example,
   # then sync with `appwrite pull sites` — see DEPLOYMENT.md).
