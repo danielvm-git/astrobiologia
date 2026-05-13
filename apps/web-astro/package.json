@@ -13,6 +13,7 @@
     "test:coverage": "vitest run --coverage",
     "lint": "prettier --check \"src/**/*.{ts,tsx,astro}\" --ignore-unknown 2>/dev/null || true",
     "test:e2e": "npx bddgen && playwright test",
+    "test:e2e:p0": "npx bddgen && playwright test --grep @p0",
     "test:ui": "npx bddgen && playwright test --ui",
     "report:generate": "allure awesome allure-results --output allure-report",
     "report:open": "allure open allure-report",

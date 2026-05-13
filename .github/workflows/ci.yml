@@ -30,11 +30,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Nuxt check
-        run: pnpm --filter @astrobiologia/web-nuxt run check
+      - name: Check
+        run: pnpm --filter @astrobiologia/web-astro run check
 
       - name: Vitest (unit)
-        run: pnpm --filter @astrobiologia/web-nuxt run test:unit
+        run: pnpm --filter @astrobiologia/web-astro run test:unit
 
   e2e-p0:
     name: Playwright P0 (Chromium)
@@ -55,11 +55,11 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright Chromium
-        working-directory: apps/web-nuxt
+        working-directory: apps/web-astro
         run: npx playwright install --with-deps chromium
 
       - name: Run P0 E2E
-        working-directory: apps/web-nuxt
+        working-directory: apps/web-astro
         run: pnpm run test:e2e:p0
         env:
           CI: true
