@@ -1,0 +1,14 @@
+{
+  "projectId": "PROJECT_ID",
+  "projectName": "Astrobiologia",
+  "sites": [
+    {
+      "$id": "SITE_ID",
+      "name": "web-astro",
+      "entrypoint": "server/entry.mjs",
+      "root": "apps/web-astro/dist",
+      "ignore": ["node_modules", ".git"],
+      "activate": true
+    }
+  ]
+}
