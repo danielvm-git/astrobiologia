@@ -38,7 +38,10 @@ export default function LoginForm() {
         </h1>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm font-medium mb-6">
+          <div
+            data-testid="login-error"
+            className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm font-medium mb-6"
+          >
             {error}
           </div>
         )}
