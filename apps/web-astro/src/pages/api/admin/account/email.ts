@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { AppwriteException } from "node-appwrite";
 import { createSessionClient } from "../../../../lib/appwrite";
 
 function json(data: unknown, status = 200) {
@@ -27,8 +28,8 @@ export const PATCH: APIRoute = async ({ locals, request }) => {
     await account.updateEmail(email, password);
     return json({ success: true });
   } catch (err: unknown) {
-    const msg =
-      err instanceof Error ? err.message : "Erro ao atualizar e-mail.";
-    return json({ error: msg }, 400);
+    if (err instanceof AppwriteException && err.code === 409)
+      return json({ error: "Este e-mail já está em uso." }, 409);
+    return json({ error: "Erro ao atualizar e-mail." }, 400);
   }
 };

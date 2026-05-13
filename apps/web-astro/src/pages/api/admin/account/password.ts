@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { AppwriteException } from "node-appwrite";
 import { createSessionClient } from "../../../../lib/appwrite";
 
 function json(data: unknown, status = 200) {
@@ -27,7 +28,8 @@ export const PATCH: APIRoute = async ({ locals, request }) => {
     await account.updatePassword(password, oldPassword);
     return json({ success: true });
   } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : "Erro ao atualizar senha.";
-    return json({ error: msg }, 400);
+    if (err instanceof AppwriteException && err.code === 401)
+      return json({ error: "Senha atual incorreta." }, 401);
+    return json({ error: "Erro ao atualizar senha." }, 400);
   }
 };
