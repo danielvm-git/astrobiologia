@@ -118,6 +118,7 @@ Bias toward the minimum code that solves the problem. Nothing speculative.
 - **Check (Lint/Type):** `pnpm --filter @astrobiologia/web-astro check`
 - **Unit Tests:** `pnpm --filter @astrobiologia/web-astro test:unit`
 - **Coverage:** `pnpm --filter @astrobiologia/web-astro test:coverage`
+- **Report Watch:** `pnpm report:astro:watch`
 
 ### Web Nuxt
 
