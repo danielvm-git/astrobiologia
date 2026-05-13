@@ -15,7 +15,7 @@
     "test:ui": "npx bddgen && playwright test --ui",
     "report:generate": "allure awesome allure-results --output allure-report",
     "report:open": "allure open allure-report",
-    "report:watch": "allure watch allure-results"
+    "report:watch": "mkdir -p allure-results && allure watch allure-results"
   },
   "dependencies": {
     "@astrojs/node": "^9.1.3",
