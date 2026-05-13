@@ -1,0 +1,13 @@
+---
+import Base from "../../layouts/Base.astro";
+import LoginForm from "../../components/admin/LoginForm";
+
+// Redirect already-logged-in users
+if (Astro.locals.user) {
+  return Astro.redirect("/admin");
+}
+---
+
+<Base title="Login — Astrobiologia Admin" robots="noindex, nofollow">
+  <LoginForm client:only="react" />
+</Base>
