@@ -18,7 +18,7 @@ function translationJoinLimit(articleCount: number): number {
 }
 
 function articleIdFromTranslation(t: ArticleTranslation): string {
-  const raw = (t as Record<string, unknown>)["article_id"];
+  const raw = (t as unknown as Record<string, unknown>)["article_id"];
   if (typeof raw === "string") return raw;
   if (raw && typeof raw === "object" && "$id" in raw)
     return (raw as { $id: string }).$id;

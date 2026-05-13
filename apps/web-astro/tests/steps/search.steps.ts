@@ -6,5 +6,6 @@ When("they search for {string}", async ({ page }, query: string) => {
 });
 
 Then("they should see relevant results", async ({ page }) => {
-  await expect(page.locator("article")).toHaveCount({ min: 1 });
+  const count = await page.locator("article").count();
+  expect(count).toBeGreaterThanOrEqual(1);
 });
