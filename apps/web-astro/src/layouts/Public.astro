@@ -1,0 +1,21 @@
+---
+import Base from "./Base.astro";
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage } = Astro.props;
+---
+
+<Base title={title} description={description} ogImage={ogImage}>
+  <Navigation />
+  <main class="max-w-7xl mx-auto px-4 py-12">
+    <slot />
+  </main>
+  <Footer />
+</Base>

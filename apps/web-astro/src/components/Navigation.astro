@@ -1,0 +1,23 @@
+---
+const locale = Astro.currentLocale ?? "pt-br";
+const prefix = locale === "pt-br" ? "" : `/${locale}`;
+---
+
+<nav class="border-b border-slate-200 bg-white sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
+    <a href={`${prefix}/`} class="font-black text-xl uppercase tracking-tighter text-slate-900">
+      Astrobiologia
+    </a>
+    <div class="flex items-center gap-6 text-sm font-bold uppercase tracking-widest">
+      <a href={`${prefix}/artigos`} class="text-slate-600 hover:text-slate-900 transition-colors">
+        Artigos
+      </a>
+      <a href={`${prefix}/sobre`} class="text-slate-600 hover:text-slate-900 transition-colors">
+        Sobre
+      </a>
+      <a href={`${prefix}/contato`} class="text-slate-600 hover:text-slate-900 transition-colors">
+        Contato
+      </a>
+    </div>
+  </div>
+</nav>
