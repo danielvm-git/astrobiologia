@@ -30,6 +30,14 @@ When(
   }
 );
 
+When(
+  "they set the article status to {string}",
+  async ({ page }, status: string) => {
+    const value = status.toLowerCase() === "publicado" ? "published" : "draft";
+    await page.getByTestId("status-select").selectOption(value);
+  }
+);
+
 When("they save the article", async ({ page, createdArticleIds }) => {
   const savedPromise = page.waitForResponse(
     (r) =>

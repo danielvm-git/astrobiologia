@@ -28,7 +28,7 @@ const href = `${prefix}/artigos/${slug}`;
 ---
 
 {variant === "featured" ? (
-  <article class="group relative overflow-hidden rounded-xl bg-slate-900 shadow-sm transition-shadow hover:shadow-md h-full">
+  <article data-testid="article-card" class="group relative overflow-hidden rounded-xl bg-slate-900 shadow-sm transition-shadow hover:shadow-md h-full">
     <a href={href} class="block h-full">
       <div class="relative min-h-[380px] h-full flex items-end">
         {imageUrl ? (
@@ -58,7 +58,7 @@ const href = `${prefix}/artigos/${slug}`;
     </a>
   </article>
 ) : variant === "compact" ? (
-  <article class="group flex gap-4 py-3">
+  <article data-testid="article-card" class="group flex gap-4 py-3">
     <a href={href} class="shrink-0">
       <div class="relative h-20 w-28 overflow-hidden rounded-lg bg-slate-100">
         {imageUrl ? (

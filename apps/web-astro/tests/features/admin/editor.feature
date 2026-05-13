@@ -10,5 +10,6 @@ Feature: Admin Article Editor
     And they fill in the article title with "Novo Artigo de Teste"
     And they write the article content with "Este é o conteúdo do artigo."
     And they select the category "noticias"
+    And they set the article status to "publicado"
     And they save the article
     Then the article should be created successfully

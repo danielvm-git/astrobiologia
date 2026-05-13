@@ -522,6 +522,7 @@ export default function ArticleEditor({ articleId }: { articleId?: string }) {
                 Status
               </label>
               <select
+                data-testid="status-select"
                 value={meta.status}
                 onChange={(e) =>
                   setMeta((prev) => ({
