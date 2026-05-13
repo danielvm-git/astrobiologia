@@ -51,6 +51,26 @@ Before reviewing a PR, call `get_pr_impact` to get a full risk assessment with c
 
 Superpowers: https://github.com/obra/superpowers
 
+## Clean Code for Agents (STRUCTURAL)
+
+To minimize hallucination and maximize token efficiency, follow these structural rules:
+
+### 1. The 300-Line Limit
+
+Keep files focused. **No file should exceed 300 lines** (max 500 in exceptional cases). Large files cause truncation and loss of context. If a file grows large, decompose it into smaller, focused modules.
+
+### 2. Function Granularity
+
+Keep functions small: **4–20 lines is the ideal range.** A small function fits entirely within a single attention window, leading to better reasoning and fewer bugs.
+
+### 3. Lexical Searchability (Grep-Friendliness)
+
+Use unique, descriptive, and grep-friendly names for symbols. Avoid generic names like `data`, `item`, or `handler`. A search for a symbol should ideally return exactly one target, not dozens of unrelated hits.
+
+### 4. Intent-Focused Comments (Provenance)
+
+Comments should explain **Why** (intent, business rules, workarounds), not **What**. The agent can read the code to understand what it does; it needs comments to understand the "Provenance" or the reasoning behind non-obvious logic.
+
 ## Behavioral guidelines
 
 Reduce common LLM coding mistakes. Merge with project-specific Cursor rules and skills as needed.
