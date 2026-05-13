@@ -5,8 +5,12 @@
     {
       "$id": "SITE_ID",
       "name": "web-astro",
+      "framework": "astro",
+      "path": "apps/web-astro",
+      "installCommand": "npm install",
+      "buildCommand": "npm run build",
+      "outputDirectory": "dist",
       "entrypoint": "server/entry.mjs",
-      "root": "apps/web-astro/dist",
       "ignore": ["node_modules", ".git"],
       "activate": true
     }
