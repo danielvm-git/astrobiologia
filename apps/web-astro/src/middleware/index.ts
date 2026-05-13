@@ -11,5 +11,12 @@ export const onRequest = defineMiddleware(async (context, next) => {
   } catch {
     // Session invalid — user stays null
   }
+  const { pathname } = context.url;
+  const isAdminPage =
+    pathname.startsWith("/admin") && !pathname.startsWith("/admin/login");
+  if (isAdminPage && !context.locals.user) {
+    return context.redirect("/admin/login");
+  }
+
   return next();
 });

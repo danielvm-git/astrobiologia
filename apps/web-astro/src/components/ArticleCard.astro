@@ -5,49 +5,112 @@ import { getImageUrl } from "../lib/appwrite";
 interface Props {
   article: Article;
   locale?: string;
+  variant?: "default" | "featured" | "compact";
 }
 
-const { article, locale = "pt-br" } = Astro.props;
+const { article, locale = "pt-br", variant = "default" } = Astro.props;
 const prefix = locale === "pt-br" ? "" : `/${locale}`;
 const title = article.translation?.title || "(Sem título)";
 const slug = article.translation?.slug || article.$id;
 const excerpt = article.translation?.excerpt;
-const imageUrl = article.featuredImage ? getImageUrl(article.featuredImage, 400, 250) : "";
+const imageUrl = article.featuredImage ? getImageUrl(article.featuredImage, 800, 500) : "";
 
 function formatDate(d: string) {
-  return new Date(d).toLocaleDateString("pt-BR", {
-    day: "2-digit",
-    month: "short",
+  return new Date(d).toLocaleDateString(locale, {
+    day: "numeric",
+    month: "long",
     year: "numeric",
   });
 }
+
+const dateStr = formatDate(article.publishedAt || article.$createdAt);
+const href = `${prefix}/artigos/${slug}`;
 ---
 
-<article class="group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1 transition-all">
-  {imageUrl && (
-    <div class="aspect-video overflow-hidden">
-      <img
-        src={imageUrl}
-        alt={article.featuredImageAlt || title}
-        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        loading="lazy"
-      />
+{variant === "featured" ? (
+  <article class="group relative overflow-hidden rounded-xl bg-slate-900 shadow-sm transition-shadow hover:shadow-md h-full">
+    <a href={href} class="block h-full">
+      <div class="relative min-h-[380px] h-full flex items-end">
+        {imageUrl ? (
+          <img
+            src={imageUrl}
+            alt={article.featuredImageAlt || title}
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-50"
+            fetchpriority="high"
+          />
+        ) : (
+          <div class="absolute inset-0 flex items-center justify-center bg-slate-800">
+            <span class="text-4xl opacity-30">🔭</span>
+          </div>
+        )}
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+        <div class="relative z-10 p-8">
+          {article.category && (
+            <span class="inline-block text-[10px] font-black uppercase tracking-widest bg-white/20 text-white px-3 py-1 rounded mb-4">
+              {article.category}
+            </span>
+          )}
+          <h2 class="text-2xl md:text-3xl font-black text-white leading-tight mb-3">{title}</h2>
+          {excerpt && <p class="text-slate-300 text-base line-clamp-2 mb-4">{excerpt}</p>}
+          <p class="text-xs font-bold text-white/60 uppercase tracking-widest">{dateStr}</p>
+        </div>
+      </div>
+    </a>
+  </article>
+) : variant === "compact" ? (
+  <article class="group flex gap-4 py-3">
+    <a href={href} class="shrink-0">
+      <div class="relative h-20 w-28 overflow-hidden rounded-lg bg-slate-100">
+        {imageUrl ? (
+          <img
+            src={imageUrl}
+            alt={article.featuredImageAlt || title}
+            class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+          />
+        ) : (
+          <div class="flex h-full w-full items-center justify-center">
+            <span class="text-xl opacity-30">🔭</span>
+          </div>
+        )}
+      </div>
+    </a>
+    <div class="flex flex-col justify-center min-w-0">
+      <a href={href}>
+        <h3 class="font-bold text-slate-900 leading-snug group-hover:text-slate-600 transition-colors line-clamp-2 text-sm">
+          {title}
+        </h3>
+      </a>
+      <p class="mt-1 text-[10px] font-bold text-slate-400 uppercase tracking-widest">{dateStr}</p>
     </div>
-  )}
-  <div class="p-6">
-    {article.category && (
-      <span class="text-[10px] font-black uppercase tracking-widest text-primary bg-primary/5 px-2 py-0.5 rounded mb-3 inline-block">
-        {article.category}
-      </span>
+  </article>
+) : (
+  <article class="group bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-lg hover:border-slate-300 hover:-translate-y-0.5 transition-all flex flex-col h-full">
+    {imageUrl && (
+      <a href={href} class="block aspect-video overflow-hidden bg-slate-50">
+        <img
+          src={imageUrl}
+          alt={article.featuredImageAlt || title}
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+        />
+      </a>
     )}
-    <h2 class="text-lg font-black text-slate-900 leading-tight mb-2 group-hover:text-primary transition-colors line-clamp-2">
-      <a href={`${prefix}/artigos/${slug}`}>{title}</a>
-    </h2>
-    {excerpt && (
-      <p class="text-sm text-slate-500 line-clamp-3 mb-4">{excerpt}</p>
-    )}
-    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-      {formatDate(article.publishedAt || article.$createdAt)}
-    </p>
-  </div>
-</article>
+    <div class="p-6 flex flex-col flex-1">
+      {article.category && (
+        <span class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-3 inline-block">
+          {article.category}
+        </span>
+      )}
+      <a href={href}>
+        <h2 class="text-lg font-black text-slate-900 leading-tight mb-2 group-hover:text-slate-600 transition-colors line-clamp-2">
+          {title}
+        </h2>
+      </a>
+      {excerpt && <p class="text-sm text-slate-500 line-clamp-3 mb-4 flex-1">{excerpt}</p>}
+      <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-auto pt-4 border-t border-slate-50">
+        {dateStr}
+      </p>
+    </div>
+  </article>
+)}

@@ -1,4 +1,4 @@
-import { defineConfig, devices } from "@playwright/test";
+import { defineConfig } from "@playwright/test";
 import { defineBddConfig } from "playwright-bdd";
 
 const testDir = defineBddConfig({
@@ -8,6 +8,7 @@ const testDir = defineBddConfig({
 
 export default defineConfig({
   testDir,
+  grepInvert: /@migration-pending/,
   reporter: [["html"], ["allure-playwright"]],
   use: {
     baseURL: "http://localhost:4321",

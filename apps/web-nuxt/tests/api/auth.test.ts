@@ -22,10 +22,10 @@ test.describe("admin API auth", () => {
   }, testInfo) => {
     const session = process.env.E2E_ADMIN_SESSION;
     const projectId = process.env.NUXT_PUBLIC_APPWRITE_PROJECT_ID;
-    testInfo.skip(
+    /* testInfo.skip(
       !session || !projectId,
       "Set E2E_ADMIN_SESSION and NUXT_PUBLIC_APPWRITE_PROJECT_ID to assert authorized admin API"
-    );
+    ); */
     const res = await request.get("/api/admin/articles/list", {
       headers: { Cookie: `a_session_${projectId}=${session}` },
     });

@@ -10,10 +10,10 @@ test.describe("@p0 Admin login", () => {
   test("[P0] lands on dashboard after successful email/password login", async ({
     page,
   }) => {
-    test.skip(
+    /* test.skip(
       !hasRealAdminCredentials,
       "Set ADMIN_EMAIL/ADMIN_PASSWORD to run authenticated scenario"
-    );
+    ); */
 
     await page.goto("/admin/login");
     await expect(page).toHaveURL(/admin\/login/);

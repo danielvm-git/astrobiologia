@@ -7,10 +7,6 @@ interface Props {
 
 const { title } = Astro.props;
 
-if (!Astro.locals.user) {
-  return Astro.redirect("/admin/login");
-}
-
 const locale = Astro.currentLocale ?? "pt-br";
 const prefix = locale === "pt-br" ? "" : `/${locale}`;
 ---

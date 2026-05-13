@@ -28,10 +28,10 @@ test.describe("@p1 Article list – language indicators after save", () => {
   test("[P1] articles list re-fetches after saving an edit (cache invalidation)", async ({
     page,
   }) => {
-    test.skip(
+    /* test.skip(
       !hasRealAdminCredentials,
       "Set ADMIN_EMAIL/ADMIN_PASSWORD to run authenticated scenario"
-    );
+    ); */
 
     await loginAsAdmin(page);
 

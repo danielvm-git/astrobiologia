@@ -14,10 +14,10 @@ test.describe("@p2 article SEO", () => {
 
     await page.goto(`/artigos/${slug}`);
 
-    if ((await page.locator("text=404").count()) > 0) {
+    /* if ((await page.locator("text=404").count()) > 0) {
       test.skip();
       return;
-    }
+    } */
 
     await expect(page.locator('link[rel="alternate"]')).toHaveCount(6);
     await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
