@@ -28,7 +28,7 @@ test.describe("Admin Settings", () => {
 
   test(
     "Site metadata can be saved",
-    { tag: ["@p1", "@admin", "@wip"] },
+    { tag: ["@p1", "@admin", "@migration-pending"] },
     async ({ Given, When, Then, And, page }) => {
       await Given("the user is logged in as admin", null, { page });
       await When('they navigate to "/admin/configuracoes"', null, { page });
@@ -195,7 +195,7 @@ const bddFileData = [
   {
     pwTestLine: 22,
     pickleLine: 23,
-    tags: ["@p1", "@admin", "@wip"],
+    tags: ["@p1", "@admin", "@migration-pending"],
     steps: [
       {
         pwStepLine: 23,

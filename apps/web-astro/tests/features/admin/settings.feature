@@ -19,7 +19,7 @@ Feature: Admin Settings
     And they save the account settings
     Then they should see a success toast
 
-  @p1 @admin @wip
+  @p1 @admin @migration-pending
   Scenario: Site metadata can be saved
     Given the user is logged in as admin
     When they navigate to "/admin/configuracoes"
