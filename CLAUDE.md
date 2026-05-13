@@ -71,69 +71,40 @@ Use unique, descriptive, and grep-friendly names for symbols. Avoid generic name
 
 Comments should explain **Why** (intent, business rules, workarounds), not **What**. The agent can read the code to understand what it does; it needs comments to understand the "Provenance" or the reasoning behind non-obvious logic.
 
-## Behavioral guidelines
+## Senior Engineer Loop (BEHAVIORAL)
 
-Reduce common LLM coding mistakes. Merge with project-specific Cursor rules and skills as needed.
+To minimize logic errors and prevent over-engineering, follow the Senior Engineer Loop:
 
-### 1. Think Before Coding
+### 1. Thinking Aloud (Validation Phase)
 
-**Don't assume. Don't hide confusion. Surface tradeoffs.**
+Before implementing, explicitly state your assumptions and findings in the chat.
 
-Before implementing:
+- **Surface Tradeoffs:** Present multiple interpretations/approaches—don't pick silently.
+- **Blast Radius:** Name what might break based on your evidence gathering.
+- **Stop on Confusion:** If a request is ambiguous, stop and name the confusion. Ask before guessing.
 
-- State your assumptions explicitly. If uncertain, ask.
-- If multiple interpretations exist, present them — don't pick silently.
-- If a simpler approach exists, say so. Push back when warranted.
-- If something is unclear, stop. Name what's confusing. Ask.
+### 2. Surgical Diffs (Implementation Phase)
 
-### 2. Simplicity First
+Touch only what you must. Follow the "Leave it better than you found it" rule **only** for the lines you are directly changing.
 
-**Minimum code that solves the problem. Nothing speculative.**
+- **Minimal Footprint:** Don't "improve" adjacent code, comments, or formatting unless requested.
+- **Match Existing Style:** Adhere to local patterns even if you prefer a different architecture.
+- **Cleanup Your Mess:** Remove imports, variables, or functions that YOUR changes made unused. Don't remove pre-existing dead code unless asked.
 
-- No features beyond what was asked.
-- No abstractions for single-use code.
-- No "flexibility" or "configurability" that wasn't requested.
-- No error handling for impossible scenarios.
-- If you write 200 lines and it could be 50, rewrite it.
+### 3. Goal-Driven Execution (Verification Phase)
 
-Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
+Every task must have a verifiable success criterion. Loop until verified.
 
-### 3. Surgical Changes
+- **Reproduction First:** For bug fixes, write a test that reproduces the failure before fixing.
+- **Continuous Validation:** Run tests/lint/build after every logical chunk, not just at the end.
+- **Evidence of Success:** Claims of "Tests pass" must be backed by the actual command output in the chat.
 
-**Touch only what you must. Clean up only your own mess.**
+### 4. Ruthless Simplicity
 
-When editing existing code:
+Bias toward the minimum code that solves the problem. Nothing speculative.
 
-- Don't "improve" adjacent code, comments, or formatting.
-- Don't refactor things that aren't broken.
-- Match existing style, even if you'd do it differently.
-- If you notice unrelated dead code, mention it — don't delete it.
+- **No YAGNI:** No features, abstractions, or "configurability" beyond the current request.
+- **Rewrite to Simplify:** If you write 200 lines and it could be 50, rewrite it.
+- **Push Back:** If a request is over-engineered or a simpler path exists, suggest it.
 
-When your changes create orphans:
-
-- Remove imports/variables/functions that YOUR changes made unused.
-- Don't remove pre-existing dead code unless asked.
-
-The test: Every changed line should trace directly to the user's request.
-
-### 4. Goal-Driven Execution
-
-**Define success criteria. Loop until verified.**
-
-Transform tasks into verifiable goals:
-
-- "Add validation" → "Write tests for invalid inputs, then make them pass"
-- "Fix the bug" → "Write a test that reproduces it, then make it pass"
-- "Refactor X" → "Ensure tests pass before and after"
-
-For multi-step tasks, state a brief plan:
-
-```
-1. [Step] → verify: [check]
-2. [Step] → verify: [check]
-3. [Step] → verify: [check]
-```
-
-Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
-
-**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+**The loop is working if:** Diffs are small, logic is verified by tests, and questions happen before implementation rather than after mistakes.
