@@ -1,0 +1,10 @@
+---
+import Admin from "../../../../layouts/Admin.astro";
+import ArticleEditor from "../../../../components/admin/ArticleEditor";
+
+const { id } = Astro.params;
+---
+
+<Admin title="Editar Artigo">
+  <ArticleEditor articleId={id} client:only="react" />
+</Admin>

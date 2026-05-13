@@ -1,0 +1,8 @@
+---
+import Admin from "../../../layouts/Admin.astro";
+import ArticleEditor from "../../../components/admin/ArticleEditor";
+---
+
+<Admin title="Novo Artigo">
+  <ArticleEditor client:only="react" />
+</Admin>

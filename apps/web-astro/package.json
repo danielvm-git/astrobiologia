@@ -13,8 +13,8 @@
     "lint": "prettier --check \"src/**/*.{ts,tsx,astro}\" --ignore-unknown 2>/dev/null || true",
     "test:e2e": "npx bddgen && playwright test",
     "test:ui": "npx bddgen && playwright test --ui",
-    "report:generate": "allure generate allure-results --clean",
-    "report:open": "allure open",
+    "report:generate": "allure awesome allure-results --output allure-report",
+    "report:open": "allure open allure-report",
     "report:watch": "allure watch allure-results"
   },
   "dependencies": {
@@ -25,6 +25,7 @@
     "@tiptap/extension-link": "^3.22.5",
     "@tiptap/extension-placeholder": "^3.22.5",
     "@tiptap/pm": "^3.22.5",
+    "@tiptap/react": "^3.22.5",
     "@tiptap/starter-kit": "^3.22.5",
     "astro": "^5.9.0",
     "cookie": "^1.0.2",
@@ -44,7 +45,7 @@
     "@types/react": "^19.1.5",
     "@types/react-dom": "^19.1.5",
     "@vitest/coverage-v8": "^3.2.4",
-    "allure-commandline": "^2.40.0",
+    "allure": "^3.8.0",
     "allure-js-commons": "^3.8.0",
     "allure-playwright": "^3.8.0",
     "playwright-bdd": "^8.5.0",
