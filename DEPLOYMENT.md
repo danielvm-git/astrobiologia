@@ -15,12 +15,14 @@ pnpm build         # builds apps/web-astro → apps/web-astro/dist/
 
 In the Appwrite Console → Sites → your site → Settings:
 
-| Setting              | Value            |
-| -------------------- | ---------------- |
-| **Root Directory**   | `apps/web-astro` |
-| **Build Command**    | `pnpm build`     |
-| **Output Directory** | `dist`           |
-| **Runtime**          | `node-22`        |
+| Setting              | Value                         |
+| -------------------- | ----------------------------- |
+| **Build Command**    | `echo "Already built in GHA"` |
+| **Output Directory** | `.`                           |
+| **Service Command**  | `node server/entry.mjs`       |
+| **Runtime**          | `node-22`                     |
+
+_Note: Since we use GitHub Actions to build the site, Appwrite doesn't need to run the build again._
 
 ## Environment variables
 
@@ -47,8 +49,11 @@ Set these in Appwrite Console → Sites → Settings → Environment Variables.
 
 ## Git integration
 
-In Appwrite Console → Sites → your site → Settings → Git repository, connect the GitHub repo.
-Set **Root Directory** to `/` and use the build settings above. Appwrite will redeploy on every push to `main`.
+**Recommendation**: Disconnect Git integration in the Appwrite Console.
+
+We use the Appwrite CLI in GitHub Actions to push the pre-built `dist` folder. This avoids redundant builds and ensures that the site is only deployed after all tests pass in GHA.
+
+If you keep Git integration connected, Appwrite will attempt to build the site on every push, which is redundant if GHA is already doing it.
 
 ## Local development
 
