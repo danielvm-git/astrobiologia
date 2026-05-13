@@ -108,3 +108,26 @@ Bias toward the minimum code that solves the problem. Nothing speculative.
 - **Push Back:** If a request is over-engineered or a simpler path exists, suggest it.
 
 **The loop is working if:** Diffs are small, logic is verified by tests, and questions happen before implementation rather than after mistakes.
+
+## Project Commands (REFERENCE)
+
+### Web Astro (Primary)
+
+- **Dev:** `pnpm --filter @astrobiologia/web-astro dev`
+- **Build:** `pnpm --filter @astrobiologia/web-astro build`
+- **Check (Lint/Type):** `pnpm --filter @astrobiologia/web-astro check`
+- **Unit Tests:** `pnpm --filter @astrobiologia/web-astro test:unit`
+- **Coverage:** `pnpm --filter @astrobiologia/web-astro test:coverage`
+
+### Web Nuxt
+
+- **Dev:** `pnpm --filter @astrobiologia/web-nuxt dev`
+- **Build:** `pnpm --filter @astrobiologia/web-nuxt build`
+- **Check:** `pnpm --filter @astrobiologia/web-nuxt check`
+- **Tests:** `pnpm --filter @astrobiologia/web-nuxt test`
+
+### Global / Monorepo
+
+- **Preflight (Full Check):** `pnpm preflight`
+- **Global Check:** `pnpm check`
+- **Global Test:** `pnpm test:all`
