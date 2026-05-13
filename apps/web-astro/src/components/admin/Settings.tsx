@@ -84,12 +84,67 @@ type AccountSectionProps = {
   accountLoading: boolean;
   accountError: string;
   saveAccount: () => void;
+  newEmail: string;
+  setNewEmail: (v: string) => void;
+  emailPassword: string;
+  setEmailPassword: (v: string) => void;
+  emailLoading: boolean;
+  emailError: string;
+  saveEmail: () => void;
 };
 
 function AccountSection(p: AccountSectionProps) {
   return (
     <section>
       <SectionHeading>Conta</SectionHeading>
+      {/* Email sub-form */}
+      <div className="mb-8">
+        <p className={`${labelClass} mb-4`}>Alterar E-mail</p>
+        {p.emailError && (
+          <p className="text-red-600 text-sm font-medium mb-4">
+            {p.emailError}
+          </p>
+        )}
+        <div className="space-y-4">
+          <div>
+            <label htmlFor="account-email" className={labelClass}>
+              Novo E-mail
+            </label>
+            <input
+              type="email"
+              id="account-email"
+              data-testid="account-email"
+              value={p.newEmail}
+              onChange={(e) => p.setNewEmail(e.target.value)}
+              className={inputClass}
+              placeholder="novo@exemplo.com"
+            />
+          </div>
+          <div>
+            <label htmlFor="account-email-password" className={labelClass}>
+              Senha Atual
+            </label>
+            <input
+              type="password"
+              id="account-email-password"
+              data-testid="account-email-password"
+              value={p.emailPassword}
+              onChange={(e) => p.setEmailPassword(e.target.value)}
+              className={inputClass}
+              placeholder="••••••••"
+            />
+          </div>
+          <button
+            type="button"
+            data-testid="account-email-save"
+            onClick={p.saveEmail}
+            disabled={p.emailLoading}
+            className={btnPrimary}
+          >
+            {p.emailLoading ? "Salvando..." : "Salvar E-mail"}
+          </button>
+        </div>
+      </div>
       {p.accountError && (
         <p className="text-red-600 text-sm font-medium mb-4">
           {p.accountError}
@@ -240,11 +295,37 @@ export default function Settings() {
   const [siteDescription, setSiteDescription] = useState("");
   const [metaLoading, setMetaLoading] = useState(false);
   const [metaError, setMetaError] = useState("");
+  const [newEmail, setNewEmail] = useState("");
+  const [emailPassword, setEmailPassword] = useState("");
+  const [emailLoading, setEmailLoading] = useState(false);
+  const [emailError, setEmailError] = useState("");
   const [toast, setToast] = useState(false);
 
   function showToast() {
     setToast(true);
     setTimeout(() => setToast(false), 3000);
+  }
+
+  async function saveEmail() {
+    setEmailLoading(true);
+    setEmailError("");
+    try {
+      const res = await fetch("/api/admin/account/email", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: newEmail, password: emailPassword }),
+      });
+      if (!res.ok) {
+        const data = (await res.json()) as { error?: string };
+        setEmailError(data.error ?? "Erro ao atualizar e-mail.");
+        return;
+      }
+      setNewEmail("");
+      setEmailPassword("");
+      showToast();
+    } finally {
+      setEmailLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -348,6 +429,13 @@ export default function Settings() {
         accountLoading={accountLoading}
         accountError={accountError}
         saveAccount={saveAccount}
+        newEmail={newEmail}
+        setNewEmail={setNewEmail}
+        emailPassword={emailPassword}
+        setEmailPassword={setEmailPassword}
+        emailLoading={emailLoading}
+        emailError={emailError}
+        saveEmail={saveEmail}
       />
       <MetadataSection
         siteName={siteName}
