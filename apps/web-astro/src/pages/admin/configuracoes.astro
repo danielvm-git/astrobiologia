@@ -1,0 +1,8 @@
+---
+import Admin from "../../../layouts/Admin.astro";
+import Settings from "../../../components/admin/Settings";
+---
+
+<Admin title="Configurações">
+  <Settings client:only="react" />
+</Admin>
