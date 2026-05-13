@@ -4,7 +4,7 @@ import { test } from "../../../tests/fixtures/base.fixture.ts";
 test.describe("Search", () => {
   test(
     "User searches for an article",
-    { tag: ["@p1", "@migration-pending"] },
+    { tag: ["@p1"] },
     async ({ Given, When, Then, page }) => {
       await Given('the user navigates to "/busca"', null, { page });
       await When('they search for "exoplaneta"', null, { page });
@@ -29,7 +29,7 @@ const bddFileData = [
   {
     pwTestLine: 6,
     pickleLine: 7,
-    tags: ["@p1", "@migration-pending"],
+    tags: ["@p1"],
     steps: [
       {
         pwStepLine: 7,

@@ -4,10 +4,13 @@ import { test } from "../../../../tests/fixtures/base.fixture.ts";
 test.describe("Admin Translation Flow", () => {
   test(
     "Admin translates an article to English",
-    { tag: ["@p0", "@admin", "@translation", "@migration-pending"] },
-    async ({ Given, When, Then, And, page }) => {
+    { tag: ["@p0", "@admin", "@translation"] },
+    async ({ Given, When, Then, And, createdArticleIds, page }) => {
       await Given("the user is logged in as admin", null, { page });
-      await And("they are editing an existing article", null, { page });
+      await And("they are editing an existing article", null, {
+        createdArticleIds,
+        page,
+      });
       await When('they click the "EN" translation tab', null, { page });
       await And('they click "Traduzir com DeepL"', null, { page });
       await Then('the "English" title and content should be populated', null, {
@@ -39,7 +42,7 @@ const bddFileData = [
   {
     pwTestLine: 6,
     pickleLine: 7,
-    tags: ["@p0", "@admin", "@translation", "@migration-pending"],
+    tags: ["@p0", "@admin", "@translation"],
     steps: [
       {
         pwStepLine: 7,

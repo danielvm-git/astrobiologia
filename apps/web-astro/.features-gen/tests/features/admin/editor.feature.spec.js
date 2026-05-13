@@ -4,8 +4,8 @@ import { test } from "../../../../tests/fixtures/base.fixture.ts";
 test.describe("Admin Article Editor", () => {
   test(
     "Admin creates a new article",
-    { tag: ["@p0", "@admin", "@migration-pending"] },
-    async ({ Given, When, Then, And, page }) => {
+    { tag: ["@p0", "@admin"] },
+    async ({ Given, When, Then, And, createdArticleIds, page }) => {
       await Given("the user is logged in as admin", null, { page });
       await When('they navigate to "/admin/artigos/new"', null, { page });
       await And(
@@ -19,7 +19,7 @@ test.describe("Admin Article Editor", () => {
         { page }
       );
       await And('they select the category "noticias"', null, { page });
-      await And("they save the article", null, { page });
+      await And("they save the article", null, { createdArticleIds, page });
       await Then("the article should be created successfully", null, { page });
     }
   );
@@ -41,7 +41,7 @@ const bddFileData = [
   {
     pwTestLine: 6,
     pickleLine: 7,
-    tags: ["@p0", "@admin", "@migration-pending"],
+    tags: ["@p0", "@admin"],
     steps: [
       {
         pwStepLine: 7,
