@@ -18,8 +18,10 @@ When("they submit the login form with valid credentials", async ({ page }) => {
 });
 
 Then("they should be redirected to the admin dashboard", async ({ page }) => {
-  await page.waitForURL("**/admin", { timeout: 10000 });
-  await expect(page.getByRole("heading", { name: /painel/i })).toBeVisible();
+  await page.waitForURL(/\/admin$/, { timeout: 10000 });
+  await expect(
+    page.getByRole("heading", { name: /painel de controle/i })
+  ).toBeVisible();
 });
 
 When(
