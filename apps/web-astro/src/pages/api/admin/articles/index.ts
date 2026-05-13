@@ -1,0 +1,155 @@
+import type { APIRoute } from "astro";
+import { ID, Query } from "node-appwrite";
+import { createSessionClient } from "../../../../lib/appwrite";
+import { ARTICLE_LOCALES } from "../../../../lib/article-locales";
+
+function json(data: unknown, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { "Content-Type": "application/json" },
+  });
+}
+
+export const GET: APIRoute = async ({ locals, request }) => {
+  if (!locals.user) return json({ error: "Unauthorized" }, 401);
+
+  const { databases } = createSessionClient(request);
+  const DB = import.meta.env.DATABASE_ID;
+  const ARTICLES = import.meta.env.ARTICLES_COLLECTION_ID;
+  const TRANS = import.meta.env.ARTICLE_TRANSLATIONS_COLLECTION_ID;
+
+  const response = await databases.listDocuments(DB, ARTICLES, [
+    Query.orderDesc("$createdAt"),
+    Query.limit(100),
+  ]);
+
+  const articleIds = response.documents.map((d) => d.$id);
+  const allTrans: Array<{
+    article_id: string;
+    language: string;
+    title?: string;
+    slug?: string;
+  }> = [];
+
+  if (articleIds.length > 0) {
+    const BATCH = 200;
+    let lastId: string | null = null;
+    for (;;) {
+      const queries = [
+        Query.equal("article_id", articleIds),
+        Query.orderAsc("$id"),
+        Query.limit(BATCH),
+      ];
+      if (lastId) queries.push(Query.cursorAfter(lastId));
+      const page = await databases.listDocuments(DB, TRANS, queries);
+      if (page.documents.length === 0) break;
+      allTrans.push(...(page.documents as unknown as typeof allTrans));
+      if (page.documents.length < BATCH) break;
+      lastId = page.documents.at(-1)!.$id;
+    }
+  }
+
+  const titles: Record<string, string> = {};
+  const slugs: Record<string, string> = {};
+  const availability: Record<string, Record<string, boolean>> = {};
+
+  for (const id of articleIds) {
+    availability[id] = Object.fromEntries(
+      ARTICLE_LOCALES.map((l) => [l, false])
+    );
+  }
+  for (const t of allTrans) {
+    if (availability[t.article_id]) {
+      availability[t.article_id][t.language] = true;
+    }
+    if (t.language === "pt-br") {
+      if (t.title) titles[t.article_id] = t.title;
+      if (t.slug) slugs[t.article_id] = t.slug;
+    }
+  }
+
+  const articles = JSON.parse(JSON.stringify(response.documents)).map(
+    (a: Record<string, unknown> & { $id: string }) => ({
+      ...a,
+      title: titles[a.$id] || "(Sem título)",
+      slug: slugs[a.$id] || "",
+      languages:
+        availability[a.$id] ||
+        Object.fromEntries(ARTICLE_LOCALES.map((l) => [l, false])),
+    })
+  );
+
+  return json({ articles });
+};
+
+type TranslationInput = {
+  language: string;
+  title?: string;
+  slug?: string;
+  excerpt?: string;
+  content?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+};
+
+export const POST: APIRoute = async ({ locals, request }) => {
+  if (!locals.user) return json({ error: "Unauthorized" }, 401);
+
+  let body: Record<string, unknown>;
+  try {
+    body = await request.json();
+  } catch {
+    return json({ error: "Invalid JSON" }, 400);
+  }
+
+  const { databases } = createSessionClient(request);
+  const DB = import.meta.env.DATABASE_ID;
+  const ARTICLES = import.meta.env.ARTICLES_COLLECTION_ID;
+  const TRANS = import.meta.env.ARTICLE_TRANSLATIONS_COLLECTION_ID;
+
+  const now = new Date().toISOString();
+  const article = await databases.createDocument(DB, ARTICLES, ID.unique(), {
+    category: body.category || "noticias",
+    tags: Array.isArray(body.tags) ? body.tags : [],
+    featuredImage: body.featuredImage || "",
+    featuredImageAlt: body.featuredImageAlt || "",
+    status: body.status || "draft",
+    featured: Boolean(body.featured),
+    authorId: body.authorId || locals.user.$id,
+    authorName: body.authorName || locals.user.name || "Admin",
+    publishedAt: body.publishedAt || now,
+  });
+
+  let translations: TranslationInput[] = Array.isArray(body.translations)
+    ? (body.translations as TranslationInput[])
+    : [];
+
+  if (translations.length === 0) {
+    translations = [
+      {
+        language: "pt-br",
+        title: String(body.title ?? ""),
+        slug: String(body.slug ?? ""),
+        excerpt: String(body.excerpt ?? ""),
+        content: String(body.content ?? ""),
+        metaTitle: String(body.metaTitle ?? ""),
+        metaDescription: String(body.metaDescription ?? ""),
+      },
+    ];
+  }
+
+  for (const t of translations) {
+    await databases.createDocument(DB, TRANS, ID.unique(), {
+      article_id: article.$id,
+      language: t.language,
+      title: t.title ?? "",
+      slug: t.slug ?? "",
+      excerpt: t.excerpt ?? "",
+      content: t.content ?? "",
+      metaTitle: t.metaTitle ?? "",
+      metaDescription: t.metaDescription ?? "",
+    });
+  }
+
+  return json({ success: true, id: article.$id });
+};
