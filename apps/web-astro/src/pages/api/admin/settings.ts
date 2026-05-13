@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { AppwriteException } from "node-appwrite";
-import { createAdminClient, createSessionClient } from "../../../lib/appwrite";
+import { createAdminClient } from "../../../lib/appwrite";
 
 function json(data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -11,16 +11,17 @@ function json(data: unknown, status = 200) {
 
 const SETTINGS_DOC_ID = "site-settings";
 
-export const GET: APIRoute = async ({ locals, request }) => {
+export const GET: APIRoute = async ({ locals }) => {
   if (!locals.user) return json({ error: "Unauthorized" }, 401);
 
   try {
-    const { databases } = createSessionClient(request);
+    const { databases } = createAdminClient();
     const DB = import.meta.env.DATABASE_ID;
     const SETTINGS = import.meta.env.SITE_SETTINGS_COLLECTION_ID;
     const doc = await databases.getDocument(DB, SETTINGS, SETTINGS_DOC_ID);
     return json({ settings: doc });
-  } catch {
+  } catch (err: unknown) {
+    console.error("[settings GET]", err);
     return json({ settings: null });
   }
 };
