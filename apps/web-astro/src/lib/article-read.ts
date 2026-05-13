@@ -1,7 +1,11 @@
 import { Query } from "node-appwrite";
 import type { Article, ArticleTranslation } from "./types";
 import { createAdminClient } from "./appwrite";
-import { localeTagsMatch, normalizeLocaleTag } from "./locale";
+import {
+  localeTagsMatch,
+  normalizeLocaleTag,
+  primaryLanguageSubtag,
+} from "./locale";
 
 const CHUNK_SIZE = 15;
 const TRANS_PER_ARTICLE_HEADROOM = 10;
@@ -26,8 +30,12 @@ export function pickTranslationForArticle(
   preferred: string
 ): ArticleTranslation | undefined {
   if (translations.length === 0) return undefined;
+  const preferredPrimary = primaryLanguageSubtag(preferred);
   return (
     translations.find((t) => localeTagsMatch(t.language, preferred)) ||
+    translations.find(
+      (t) => primaryLanguageSubtag(t.language) === preferredPrimary
+    ) ||
     translations.find((t) => normalizeLocaleTag(t.language) === "pt-br") ||
     translations.find((t) => normalizeLocaleTag(t.language) === "en") ||
     translations[0]
