@@ -13,7 +13,11 @@
     "test:all": "pnpm --filter @astrobiologia/web-nuxt test:all",
     "test:fast": "pnpm --filter @astrobiologia/web-nuxt test:unit && pnpm --filter @astrobiologia/web-nuxt test:api",
     "test:coverage": "pnpm --filter @astrobiologia/web-nuxt test:coverage",
-    "check": "pnpm --filter @astrobiologia/web-nuxt check"
+    "check": "pnpm --filter @astrobiologia/web-nuxt check",
+    "dev:astro": "pnpm --filter @astrobiologia/web-astro dev",
+    "build:astro": "pnpm --filter @astrobiologia/web-astro build",
+    "check:astro": "pnpm --filter @astrobiologia/web-astro check",
+    "test:astro": "pnpm --filter @astrobiologia/web-astro test:unit"
   },
   "devDependencies": {
     "@ctxo/cli": "^0.8.1",
