@@ -10,7 +10,12 @@
     "test:unit": "vitest run",
     "test:unit:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "lint": "prettier --check \"src/**/*.{ts,tsx,astro}\" --ignore-unknown 2>/dev/null || true"
+    "lint": "prettier --check \"src/**/*.{ts,tsx,astro}\" --ignore-unknown 2>/dev/null || true",
+    "test:e2e": "npx bddgen && playwright test",
+    "test:ui": "npx bddgen && playwright test --ui",
+    "report:generate": "allure generate allure-results --clean",
+    "report:open": "allure open",
+    "report:watch": "allure watch allure-results"
   },
   "dependencies": {
     "@astrojs/node": "^9.1.3",

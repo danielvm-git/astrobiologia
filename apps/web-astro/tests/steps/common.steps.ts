@@ -8,6 +8,10 @@ Given("the user navigates to {string}", async ({ page }, url: string) => {
   await page.goto(url);
 });
 
+When("they navigate to {string}", async ({ page }, url: string) => {
+  await page.goto(url);
+});
+
 Given("the user is logged in as admin", async ({ page }) => {
   // TODO: Implement actual login logic once auth is migrated
   await page.goto("/admin/login");
