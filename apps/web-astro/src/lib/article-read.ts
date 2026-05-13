@@ -260,8 +260,12 @@ export async function searchPublishedArticles(
         Query.limit(limit),
       ]
     );
-    return fallback.documents as unknown as Article[];
+    if (fallback.total > 0) {
+      return fallback.documents as unknown as Article[];
+    }
   } catch {
-    return [];
+    // Full-text index may not be configured; fall through to broad fallback
   }
+
+  return getPublishedArticles(language, limit);
 }

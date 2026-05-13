@@ -1,32 +1,6 @@
 import { describe, it, expect } from "vitest";
 import type { ArticleTranslation } from "../types";
-
-// We test the translation-picking logic in isolation
-// by replicating the pure helper here
-function pickTranslationForArticle(
-  translations: ArticleTranslation[],
-  preferredLanguage: string
-): ArticleTranslation | undefined {
-  if (translations.length === 0) return undefined;
-  const normalize = (s: string) => s.trim().toLowerCase().replace(/_/g, "-");
-  const primary = (s: string) => {
-    const n = normalize(s);
-    const idx = n.indexOf("-");
-    return idx === -1 ? n : n.slice(0, idx);
-  };
-  return (
-    translations.find(
-      (t) => normalize(t.language) === normalize(preferredLanguage)
-    ) ||
-    translations.find(
-      (t) =>
-        primary(normalize(t.language)) === primary(normalize(preferredLanguage))
-    ) ||
-    translations.find((t) => normalize(t.language) === "pt-br") ||
-    translations.find((t) => normalize(t.language) === "en") ||
-    translations[0]
-  );
-}
+import { pickTranslationForArticle } from "../article-read";
 
 const makeTrans = (language: string, title = "T"): ArticleTranslation => ({
   $id: language,

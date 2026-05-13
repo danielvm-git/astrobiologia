@@ -257,7 +257,10 @@ export default function ArticleEditor({ articleId }: { articleId?: string }) {
       if (!res.ok) throw new Error(data.error);
       setSaveStatus("saved");
       if (isNew && data.id) {
-        window.location.href = `/admin/artigos/${data.id}/edit`;
+        const redirectId = data.id;
+        setTimeout(() => {
+          window.location.href = `/admin/artigos/${redirectId}/edit`;
+        }, 2000);
       }
     } catch {
       setSaveStatus("error");
@@ -314,7 +317,10 @@ export default function ArticleEditor({ articleId }: { articleId?: string }) {
       </div>
 
       {saveStatus === "saved" && (
-        <div className="toast-success fixed bottom-4 right-4 bg-green-600 text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg z-50">
+        <div
+          data-testid="toast-success"
+          className="toast-success fixed bottom-4 right-4 bg-green-600 text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg z-50"
+        >
           Artigo salvo com sucesso!
         </div>
       )}
@@ -357,6 +363,7 @@ export default function ArticleEditor({ articleId }: { articleId?: string }) {
               </label>
               <input
                 id="article-title"
+                data-testid="article-title"
                 type="text"
                 value={currentTrans.title}
                 onChange={(e) => updateTransField("title", e.target.value)}
@@ -376,6 +383,7 @@ export default function ArticleEditor({ articleId }: { articleId?: string }) {
                 <div className="flex gap-2">
                   <input
                     id="article-slug"
+                    data-testid="article-slug"
                     type="text"
                     value={currentTrans.slug}
                     onChange={(e) => updateTransField("slug", e.target.value)}
@@ -410,7 +418,10 @@ export default function ArticleEditor({ articleId }: { articleId?: string }) {
               <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1.5">
                 Conteúdo
               </label>
-              <div className="editor-content border border-slate-200 rounded-xl overflow-hidden focus-within:ring-2 focus-within:ring-slate-900">
+              <div
+                data-testid="article-editor"
+                className="editor-content border border-slate-200 rounded-xl overflow-hidden focus-within:ring-2 focus-within:ring-slate-900"
+              >
                 <div className="border-b border-slate-100 px-3 py-2 flex gap-2 flex-wrap bg-slate-50">
                   {[
                     {
@@ -516,6 +527,7 @@ export default function ArticleEditor({ articleId }: { articleId?: string }) {
               </label>
               <select
                 id="category"
+                data-testid="category-select"
                 value={meta.category}
                 onChange={(e) =>
                   setMeta((prev) => ({ ...prev, category: e.target.value }))

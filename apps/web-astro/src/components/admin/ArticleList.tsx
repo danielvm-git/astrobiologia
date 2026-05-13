@@ -181,6 +181,7 @@ export default function ArticleList() {
                     <div className="flex items-center gap-2 justify-end">
                       <a
                         href={`/admin/artigos/${article.$id}/edit`}
+                        data-testid="article-edit-link"
                         className="p-2 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-900 transition-colors"
                         title="Editar"
                       >

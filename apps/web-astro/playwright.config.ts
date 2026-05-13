@@ -1,5 +1,18 @@
 import { defineConfig } from "@playwright/test";
 import { defineBddConfig } from "playwright-bdd";
+import { existsSync, readFileSync } from "fs";
+
+// Load .env.test for local E2E credentials without requiring dotenv as a dep
+if (existsSync(".env.test")) {
+  for (const line of readFileSync(".env.test", "utf-8").split("\n")) {
+    const eq = line.indexOf("=");
+    if (eq > 0 && !line.startsWith("#")) {
+      const key = line.slice(0, eq).trim();
+      const val = line.slice(eq + 1).trim();
+      if (key && !(key in process.env)) process.env[key] = val;
+    }
+  }
+}
 
 const testDir = defineBddConfig({
   paths: ["tests/features/**/*.feature"],
@@ -9,6 +22,11 @@ const testDir = defineBddConfig({
 export default defineConfig({
   testDir,
   grepInvert: /@migration-pending/,
+  globalSetup: "./tests/global-setup",
+  fullyParallel: true,
+  retries: process.env.CI ? 1 : 0,
+  workers: process.env.CI ? 2 : undefined,
+  timeout: 60_000,
   reporter: [["html"], ["allure-playwright"]],
   use: {
     baseURL: "http://localhost:4321",

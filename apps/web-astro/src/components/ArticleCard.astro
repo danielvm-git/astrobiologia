@@ -85,7 +85,7 @@ const href = `${prefix}/artigos/${slug}`;
     </div>
   </article>
 ) : (
-  <article class="group bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-lg hover:border-slate-300 hover:-translate-y-0.5 transition-all flex flex-col h-full">
+  <article data-testid="article-card" class="group bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-lg hover:border-slate-300 hover:-translate-y-0.5 transition-all flex flex-col h-full">
     {imageUrl && (
       <a href={href} class="block aspect-video overflow-hidden bg-slate-50">
         <img

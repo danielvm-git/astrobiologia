@@ -1,6 +1,9 @@
 import type { APIRoute } from "astro";
 import { ID, Query } from "node-appwrite";
-import { createSessionClient } from "../../../../lib/appwrite";
+import {
+  createAdminClient,
+  createSessionClient,
+} from "../../../../lib/appwrite";
 import { ARTICLE_LOCALES } from "../../../../lib/article-locales";
 
 function json(data: unknown, status = 200) {
@@ -102,13 +105,23 @@ export const POST: APIRoute = async ({ locals, request }) => {
     return json({ error: "Invalid JSON" }, 400);
   }
 
-  const { databases } = createSessionClient(request);
+  const { databases } = createAdminClient();
   const DB = import.meta.env.DATABASE_ID;
   const ARTICLES = import.meta.env.ARTICLES_COLLECTION_ID;
   const TRANS = import.meta.env.ARTICLE_TRANSLATIONS_COLLECTION_ID;
 
   const now = new Date().toISOString();
+  const translations_input: TranslationInput[] = Array.isArray(
+    body.translations
+  )
+    ? (body.translations as TranslationInput[])
+    : [];
+  const ptBrTrans = translations_input.find((t) => t.language === "pt-br");
   const article = await databases.createDocument(DB, ARTICLES, ID.unique(), {
+    title: ptBrTrans?.title ?? String(body.title ?? ""),
+    slug: ptBrTrans?.slug ?? String(body.slug ?? ""),
+    excerpt: ptBrTrans?.excerpt ?? String(body.excerpt ?? ""),
+    content: ptBrTrans?.content ?? String(body.content ?? ""),
     category: body.category || "noticias",
     tags: Array.isArray(body.tags) ? body.tags : [],
     featuredImage: body.featuredImage || "",
@@ -120,9 +133,7 @@ export const POST: APIRoute = async ({ locals, request }) => {
     publishedAt: body.publishedAt || now,
   });
 
-  let translations: TranslationInput[] = Array.isArray(body.translations)
-    ? (body.translations as TranslationInput[])
-    : [];
+  let translations: TranslationInput[] = translations_input;
 
   if (translations.length === 0) {
     translations = [
