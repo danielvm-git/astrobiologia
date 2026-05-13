@@ -91,11 +91,10 @@ export function createSessionClient(request: Request) {
 export function getImageUrl(fileId: string, width = 800, height = 600): string {
   if (!fileId) return "";
   if (fileId.startsWith("http")) return fileId;
-  const client = baseClient();
-  const storage = new Storage(client);
-  return storage
-    .getFilePreview(import.meta.env.STORAGE_BUCKET_ID, fileId, width, height)
-    .toString();
+  const endpoint = import.meta.env.APPWRITE_ENDPOINT;
+  const project = import.meta.env.APPWRITE_PROJECT_ID;
+  const bucket = import.meta.env.STORAGE_BUCKET_ID;
+  return `${endpoint}/storage/buckets/${bucket}/files/${fileId}/preview?width=${width}&height=${height}&project=${project}`;
 }
 
 export function setSessionCookie(
@@ -106,7 +105,7 @@ export function setSessionCookie(
 ): void {
   const maxAge = Math.floor((new Date(expire).getTime() - Date.now()) / 1000);
   const parts = [
-    `${SESSION_COOKIE}=${encodeURIComponent(secret)}`,
+    `${SESSION_COOKIE}=${secret}`,
     `Max-Age=${maxAge}`,
     "Path=/",
     "HttpOnly",
