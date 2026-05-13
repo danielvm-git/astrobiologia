@@ -3,7 +3,7 @@ Feature: Admin Translation Flow
   I want to translate articles into multiple languages
   So I can reach a global audience
 
-  @p0 @admin @translation @migration-pending
+  @p0 @admin @translation
   Scenario: Admin translates an article to English
     Given the user is logged in as admin
     And they are editing an existing article

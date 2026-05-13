@@ -1,0 +1,82 @@
+{
+  "roots": [
+    "cat:9ecce49fab629e4b59ec1865d23e0041",
+    "cat:8636f45fc99f75aa9eabcabb52312d40"
+  ],
+  "nodes": {
+    "cat:9ecce49fab629e4b59ec1865d23e0041": {
+      "id": "cat:9ecce49fab629e4b59ec1865d23e0041",
+      "type": "category",
+      "name": "Product errors",
+      "statistic": { "total": 1, "failed": 1 },
+      "childrenIds": ["message:05a9145dd156d34e5ef68ca261f6f674"],
+      "expand": false
+    },
+    "message:05a9145dd156d34e5ef68ca261f6f674": {
+      "id": "message:05a9145dd156d34e5ef68ca261f6f674",
+      "type": "message",
+      "name": "Error: expect(locator).toContainText(expected) failed\n\nLocator: locator('h1')\nExpected pattern: /noticias/i\nReceived string:  \"404:  Not found\"\nTimeout: 5000ms\n\nCall log:\n  - Expect \"toContainText\" with timeout 5000ms\n  - waiting for locator('h1')\n    9 × locator resolved to <h1>…</h1>\n      - unexpected value \"404:  Not found\"\n",
+      "key": "message",
+      "value": "Error: expect(locator).toContainText(expected) failed\n\nLocator: locator('h1')\nExpected pattern: /noticias/i\nReceived string:  \"404:  Not found\"\nTimeout: 5000ms\n\nCall log:\n  - Expect \"toContainText\" with timeout 5000ms\n  - waiting for locator('h1')\n    9 × locator resolved to <h1>…</h1>\n      - unexpected value \"404:  Not found\"\n",
+      "statistic": { "total": 1, "failed": 1 },
+      "childrenIds": ["d0387d748faeeecca1ddb9e983d59d19"]
+    },
+    "d0387d748faeeecca1ddb9e983d59d19": {
+      "id": "d0387d748faeeecca1ddb9e983d59d19",
+      "type": "tr",
+      "name": "User browses a category",
+      "status": "failed",
+      "duration": 5451,
+      "flaky": false,
+      "retriesCount": 0
+    },
+    "cat:8636f45fc99f75aa9eabcabb52312d40": {
+      "id": "cat:8636f45fc99f75aa9eabcabb52312d40",
+      "type": "category",
+      "name": "Test errors",
+      "statistic": { "total": 3, "broken": 3 },
+      "childrenIds": ["message:c94f9573d6b8bb93db07740946ead95a"],
+      "expand": false
+    },
+    "message:c94f9573d6b8bb93db07740946ead95a": {
+      "id": "message:c94f9573d6b8bb93db07740946ead95a",
+      "type": "message",
+      "name": "Test timeout of 30000ms exceeded.",
+      "key": "message",
+      "value": "Test timeout of 30000ms exceeded.",
+      "statistic": { "total": 3, "broken": 3 },
+      "childrenIds": [
+        "f5059e84994b41c8570e5b0698613213",
+        "f02386f0c0cf365ed2994e49564a7428",
+        "62fcdc93848e9a2804f18f0059d57dfa"
+      ]
+    },
+    "f5059e84994b41c8570e5b0698613213": {
+      "id": "f5059e84994b41c8570e5b0698613213",
+      "type": "tr",
+      "name": "Admin creates a new article",
+      "status": "broken",
+      "duration": 35681,
+      "flaky": false,
+      "retriesCount": 0
+    },
+    "f02386f0c0cf365ed2994e49564a7428": {
+      "id": "f02386f0c0cf365ed2994e49564a7428",
+      "type": "tr",
+      "name": "Admin translates an article to English",
+      "status": "broken",
+      "duration": 35705,
+      "flaky": false,
+      "retriesCount": 0
+    },
+    "62fcdc93848e9a2804f18f0059d57dfa": {
+      "id": "62fcdc93848e9a2804f18f0059d57dfa",
+      "type": "tr",
+      "name": "User searches for an article",
+      "status": "broken",
+      "duration": 30069,
+      "flaky": false,
+      "retriesCount": 0
+    }
+  }
+}

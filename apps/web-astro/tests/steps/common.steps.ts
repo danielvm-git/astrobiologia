@@ -13,8 +13,21 @@ When("they navigate to {string}", async ({ page }, url: string) => {
 });
 
 Given("the user is logged in as admin", async ({ page }) => {
-  // TODO: Implement actual login logic once auth is migrated
+  const email = process.env.E2E_ADMIN_EMAIL;
+  const password = process.env.E2E_ADMIN_PASSWORD;
+  if (!email || !password) {
+    throw new Error(
+      "E2E_ADMIN_EMAIL and E2E_ADMIN_PASSWORD env vars are required for admin tests"
+    );
+  }
   await page.goto("/admin/login");
+  const res = await page.request.post("/api/auth/login", {
+    data: { email, password },
+    headers: { "Content-Type": "application/json" },
+  });
+  if (!res.ok()) {
+    throw new Error(`Admin login failed with status ${res.status()}`);
+  }
 });
 
 Then(

@@ -120,13 +120,6 @@ Bias toward the minimum code that solves the problem. Nothing speculative.
 - **Coverage:** `pnpm --filter @astrobiologia/web-astro test:coverage`
 - **Report Watch:** `pnpm report:astro:watch`
 
-### Web Nuxt
-
-- **Dev:** `pnpm --filter @astrobiologia/web-nuxt dev`
-- **Build:** `pnpm --filter @astrobiologia/web-nuxt build`
-- **Check:** `pnpm --filter @astrobiologia/web-nuxt check`
-- **Tests:** `pnpm --filter @astrobiologia/web-nuxt test`
-
 ### Global / Monorepo
 
 - **Preflight (Full Check):** `pnpm preflight`

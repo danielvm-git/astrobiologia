@@ -1,0 +1,7 @@
+{
+  "id": "4280f9bee94d746d44b0ee213091afa3",
+  "fullName": "tests/features/admin/translation.feature.spec.js:6:3",
+  "name": "Admin translates an article to English",
+  "status": "broken",
+  "testResultsByEnv": { "default": "f02386f0c0cf365ed2994e49564a7428" }
+}

@@ -1,8 +1,7 @@
 packages:
-  - "apps/web-nuxt"
   - "apps/web-astro"
 allowBuilds:
   "@parcel/watcher": true
   esbuild: true
   sharp: true
-  vue-demi: true
+  vue-demi: set this to true or false

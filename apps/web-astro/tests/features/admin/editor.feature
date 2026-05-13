@@ -3,7 +3,7 @@ Feature: Admin Article Editor
   I want to manage site content
   So I can keep the information up to date
 
-  @p0 @admin @migration-pending
+  @p0 @admin
   Scenario: Admin creates a new article
     Given the user is logged in as admin
     When they navigate to "/admin/artigos/new"

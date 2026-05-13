@@ -1,0 +1,7 @@
+{
+  "id": "ebd7a0540142eccaa2dfd260fde768fd",
+  "fullName": "tests/features/articles.feature.spec.js:6:3",
+  "name": "User opens an article",
+  "status": "failed",
+  "testResultsByEnv": { "default": "71d0238ab3cff9aaea6c7e2089506101" }
+}
