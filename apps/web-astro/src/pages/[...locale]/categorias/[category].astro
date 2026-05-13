@@ -1,0 +1,56 @@
+---
+import Public from "../../../layouts/Public.astro";
+import ArticleCard from "../../../components/ArticleCard.astro";
+import { getArticlesByCategory } from "../../../lib/article-read";
+
+const { category } = Astro.params;
+const locale = Astro.currentLocale ?? "pt-br";
+
+if (!category) return Astro.redirect("/artigos");
+
+const categoryLabels: Record<string, string> = {
+  noticias: "Notícias",
+  entrevistas: "Entrevistas",
+  analises: "Análises",
+  "pesquisas-brasileiras": "Pesquisas Brasileiras",
+  exoplanetas: "Exoplanetas",
+  extremofilos: "Extremófilos",
+};
+
+const label = categoryLabels[category] ?? category;
+
+let articles: Awaited<ReturnType<typeof getArticlesByCategory>> = [];
+try {
+  articles = await getArticlesByCategory(category, locale, 24);
+} catch {
+  // empty state
+}
+---
+
+<Public
+  title={`${label} — Astrobiologia`}
+  description={`Artigos sobre ${label.toLowerCase()} em astrobiologia.`}
+>
+  <div class="mb-10">
+    <h1 class="text-4xl font-black uppercase tracking-tighter text-slate-900">
+      {category}
+    </h1>
+    <p class="text-slate-500 mt-2 text-sm font-medium uppercase tracking-widest">
+      {label}
+    </p>
+  </div>
+
+  {
+    articles.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {articles.map((article) => (
+          <ArticleCard article={article} locale={locale} />
+        ))}
+      </div>
+    ) : (
+      <p class="text-slate-400 italic text-center py-32">
+        Nenhum artigo publicado nesta categoria.
+      </p>
+    )
+  }
+</Public>

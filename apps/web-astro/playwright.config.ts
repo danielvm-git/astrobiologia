@@ -24,10 +24,10 @@ export default defineConfig({
   grepInvert: /@migration-pending/,
   globalSetup: "./tests/global-setup",
   fullyParallel: true,
-  retries: process.env.CI ? 1 : 0,
-  workers: process.env.CI ? 2 : undefined,
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 4 : undefined,
   timeout: 60_000,
-  reporter: [["html"], ["allure-playwright"]],
+  reporter: [["html", { open: "never" }], ["allure-playwright"]],
   use: {
     baseURL: "http://localhost:4321",
     trace: "on-first-retry",

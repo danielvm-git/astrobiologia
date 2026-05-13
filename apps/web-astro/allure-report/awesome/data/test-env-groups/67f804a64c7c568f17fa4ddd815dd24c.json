@@ -1,7 +1,0 @@
-{
-  "id": "67f804a64c7c568f17fa4ddd815dd24c",
-  "fullName": "tests/features/search.feature.spec.js:6:3",
-  "name": "User searches for an article",
-  "status": "broken",
-  "testResultsByEnv": { "default": "62fcdc93848e9a2804f18f0059d57dfa" }
-}

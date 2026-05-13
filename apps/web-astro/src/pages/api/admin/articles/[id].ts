@@ -53,11 +53,18 @@ export const ALL: APIRoute = async ({ locals, request, params }) => {
       return json({ error: "Invalid JSON" }, 400);
     }
 
+    const translationsInput = body["translations"] as
+      | TranslationInput[]
+      | undefined;
+
+    const ptBrTrans = translationsInput?.find((t) => t.language === "pt-br");
+
     await databases.updateDocument(
       DB,
       ARTICLES,
       id,
       sanitize({
+        slug: ptBrTrans?.["slug"] ?? body["slug"],
         category: body["category"],
         tags: body["tags"],
         featuredImage: body["featuredImage"],
@@ -70,9 +77,6 @@ export const ALL: APIRoute = async ({ locals, request, params }) => {
       })
     );
 
-    const translationsInput = body["translations"] as
-      | TranslationInput[]
-      | undefined;
     if (!Array.isArray(translationsInput) || translationsInput.length === 0) {
       return json({ success: true });
     }
@@ -93,17 +97,39 @@ export const ALL: APIRoute = async ({ locals, request, params }) => {
       delete clean["article_id"];
       delete clean["$id"];
       const lang = clean["language"] as string;
+      if (!lang) continue;
+
+      // Skip if it's empty and not the primary language
+      if (!clean["title"] && !clean["content"] && lang !== "pt-br") continue;
+
       const docId = idByLanguage.get(lang);
+      const generateId = () => ID.unique();
+
+      const suffix = `-${lang}`;
+      let uniqueSlug = clean["slug"]
+        ? lang === "pt-br" || (clean["slug"] as string).endsWith(suffix)
+          ? clean["slug"]
+          : `${clean["slug"]}${suffix}`
+        : "";
+
+      if (!uniqueSlug && (clean["title"] || clean["content"])) {
+        uniqueSlug = `${id}-${lang}`;
+      }
+
       if (docId) {
         await databases.updateDocument(DB, TRANS, docId, {
           ...clean,
+          slug: uniqueSlug,
           article_id: id,
         });
       } else {
-        await databases.createDocument(DB, TRANS, ID.unique(), {
+        const transId = generateId();
+        const newDoc = await databases.createDocument(DB, TRANS, transId, {
           ...clean,
+          slug: uniqueSlug,
           article_id: id,
         });
+        idByLanguage.set(lang, newDoc.$id); // Prevent duplicate creation in same request
       }
     }
 

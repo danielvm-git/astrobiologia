@@ -1,0 +1,55 @@
+---
+import Public from "../../../layouts/Public.astro";
+import ArticleCard from "../../../components/ArticleCard.astro";
+import { getPublishedArticles } from "../../../lib/article-read";
+
+const locale = Astro.currentLocale ?? "pt-br";
+const pageParam = Astro.url.searchParams.get("page");
+const page = Math.max(1, Number(pageParam) || 1);
+const PAGE_SIZE = 12;
+const offset = (page - 1) * PAGE_SIZE;
+
+let articles: Awaited<ReturnType<typeof getPublishedArticles>> = [];
+
+try {
+  articles = await getPublishedArticles(locale, PAGE_SIZE, offset);
+} catch {
+  // empty state
+}
+
+const prefix = locale === "pt-br" ? "" : `/${locale}`;
+---
+
+<Public title="Artigos — Astrobiologia" description="Todos os artigos publicados sobre astrobiologia.">
+  <div class="mb-10">
+    <h1 class="text-4xl font-black uppercase tracking-tighter text-slate-900">
+      Artigos
+    </h1>
+    <p class="text-slate-500 mt-2 text-sm font-medium uppercase tracking-widest">
+      Ciência e Pesquisa em Astrobiologia
+    </p>
+  </div>
+
+  {articles.length > 0 ? (
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {articles.map((article) => (
+        <ArticleCard article={article} locale={locale} />
+      ))}
+    </div>
+  ) : (
+    <p class="text-slate-400 italic text-center py-32">
+      Nenhum artigo publicado ainda.
+    </p>
+  )}
+
+  {articles.length === PAGE_SIZE && (
+    <div class="text-center mt-12">
+      <a
+        href={`${prefix}/artigos?page=${page + 1}`}
+        class="inline-block px-8 py-3 border-2 border-slate-900 text-slate-900 font-black uppercase tracking-widest text-xs rounded-xl hover:bg-slate-900 hover:text-white transition-all"
+      >
+        Próxima Página
+      </a>
+    </div>
+  )}
+</Public>

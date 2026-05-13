@@ -160,18 +160,32 @@ export default function ArticleEditor({ articleId }: { articleId?: string }) {
 
   async function autoSlug() {
     const title = translations[activeLocale]?.title ?? "";
-    const slug = title
+    let slug = title
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
       .replace(/[^a-z0-9\s-]/g, "")
       .trim()
       .replace(/\s+/g, "-");
+
+    if (!slug && title.trim()) {
+      // Fallback for CJK or other non-latin titles
+      const ptSlug = translations["pt-br"]?.slug;
+      slug =
+        ptSlug && activeLocale !== "pt-br"
+          ? `${ptSlug}-${activeLocale}`
+          : `artigo-${activeLocale}-${Date.now().toString(36)}`;
+    }
     updateTransField("slug", slug);
   }
 
   async function translateToLocale(targetLocale: string) {
-    const source = translations["pt-br"];
+    // Ensure we have the latest content from the editor if translating from pt-br
+    let source = translations["pt-br"];
+    if (activeLocale === "pt-br" && editor) {
+      source = { ...source, content: editor.getHTML() };
+    }
+
     if (!source.title && !source.content) {
       alert("Preencha o conteúdo em Português antes de traduzir.");
       return;
@@ -203,8 +217,9 @@ export default function ArticleEditor({ articleId }: { articleId?: string }) {
           title,
           slug:
             translations[targetLocale]?.slug ||
-            translations["pt-br"]?.slug ||
-            "",
+            (translations["pt-br"]?.slug
+              ? `${translations["pt-br"].slug}-${targetLocale}`
+              : ""),
           excerpt,
           content,
           metaTitle,

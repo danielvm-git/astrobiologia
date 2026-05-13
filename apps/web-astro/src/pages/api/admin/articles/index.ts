@@ -117,7 +117,9 @@ export const POST: APIRoute = async ({ locals, request }) => {
     ? (body.translations as TranslationInput[])
     : [];
   const ptBrTrans = translations_input.find((t) => t.language === "pt-br");
-  const article = await databases.createDocument(DB, ARTICLES, ID.unique(), {
+  const generateId = () => ID.unique();
+  const articleId = generateId();
+  const article = await databases.createDocument(DB, ARTICLES, articleId, {
     title: ptBrTrans?.title ?? String(body.title ?? ""),
     slug: ptBrTrans?.slug ?? String(body.slug ?? ""),
     excerpt: ptBrTrans?.excerpt ?? String(body.excerpt ?? ""),
@@ -149,12 +151,32 @@ export const POST: APIRoute = async ({ locals, request }) => {
     ];
   }
 
+  // Filter out duplicates, empty languages, and empty content
+  const seenLangs = new Set<string>();
   for (const t of translations) {
-    await databases.createDocument(DB, TRANS, ID.unique(), {
+    if (!t.language || seenLangs.has(t.language)) continue;
+    // Only create if there's actual content or it's the primary language
+    if (!t.title && !t.content && t.language !== "pt-br") continue;
+    seenLangs.add(t.language);
+
+    const transId = generateId();
+    // Ensure slug is unique per translation if the collection has a unique index on slug
+    const suffix = `-${t.language}`;
+    let uniqueSlug = t.slug
+      ? t.language === "pt-br" || t.slug.endsWith(suffix)
+        ? t.slug
+        : `${t.slug}${suffix}`
+      : "";
+
+    if (!uniqueSlug && (t.title || t.content)) {
+      uniqueSlug = `${articleId}-${t.language}`;
+    }
+
+    await databases.createDocument(DB, TRANS, transId, {
       article_id: article.$id,
       language: t.language,
       title: t.title ?? "",
-      slug: t.slug ?? "",
+      slug: uniqueSlug,
       excerpt: t.excerpt ?? "",
       content: t.content ?? "",
       metaTitle: t.metaTitle ?? "",

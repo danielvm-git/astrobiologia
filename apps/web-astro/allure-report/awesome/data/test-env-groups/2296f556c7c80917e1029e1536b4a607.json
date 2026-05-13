@@ -1,7 +1,0 @@
-{
-  "id": "2296f556c7c80917e1029e1536b4a607",
-  "fullName": "tests/features/categories.feature.spec.js:6:3",
-  "name": "User browses a category",
-  "status": "failed",
-  "testResultsByEnv": { "default": "d0387d748faeeecca1ddb9e983d59d19" }
-}

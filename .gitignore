@@ -78,6 +78,12 @@ apps/web-nuxt/dist/
 playwright-report/
 test-results/
 allure-results/
+apps/web-astro/allure-report/
+apps/web-astro/.features-gen/
+apps/web-astro/tests/.auth/
+
+# Astro
+apps/web-astro/.astro/
 
 # Session / scratch artifacts
 .brainstorm-resume.md

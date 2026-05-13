@@ -1,0 +1,70 @@
+---
+import Public from "../../layouts/Public.astro";
+import ArticleCard from "../../components/ArticleCard.astro";
+import { searchPublishedArticles } from "../../lib/article-read";
+
+const locale = Astro.currentLocale ?? "pt-br";
+const q = Astro.url.searchParams.get("q")?.trim() ?? "";
+
+let articles: Awaited<ReturnType<typeof searchPublishedArticles>> = [];
+if (q) {
+  try {
+    articles = await searchPublishedArticles(q, locale, 20);
+  } catch {
+    // empty state
+  }
+}
+---
+
+<Public
+  title="Busca — Astrobiologia"
+  description="Pesquise artigos sobre astrobiologia."
+>
+  <div class="mb-10">
+    <h1 class="text-4xl font-black uppercase tracking-tighter text-slate-900">
+      Busca
+    </h1>
+  </div>
+
+  <form method="get" action="/busca" class="mb-10">
+    <div class="flex gap-3 max-w-2xl">
+      <input
+        type="search"
+        name="q"
+        value={q}
+        placeholder="Pesquisar artigos..."
+        class="flex-1 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900"
+        autofocus
+      />
+      <button
+        type="submit"
+        class="px-6 py-3 bg-slate-900 text-white font-black uppercase tracking-widest text-xs rounded-xl hover:bg-slate-700 transition"
+      >
+        Buscar
+      </button>
+    </div>
+  </form>
+
+  {
+    q && (
+      <p class="text-sm text-slate-500 mb-6">
+        {articles.length} resultado{articles.length !== 1 ? "s" : ""} para{" "}
+        <strong>"{q}"</strong>
+      </p>
+    )
+  }
+
+  {
+    articles.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {articles.map((article) => (
+          <ArticleCard article={article} locale={locale} />
+        ))}
+      </div>
+    ) : q ? (
+      <p class="text-slate-400 italic text-center py-32">
+        Nenhum resultado encontrado para "{q}".
+      </p>
+    ) : null
+  }
+</Public>
