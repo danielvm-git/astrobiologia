@@ -21,7 +21,7 @@ const testDir = defineBddConfig({
 
 export default defineConfig({
   testDir,
-  grepInvert: /@migration-pending/,
+  grepInvert: /@wip/,
   globalSetup: "./tests/global-setup",
   fullyParallel: true,
   retries: process.env.CI ? 2 : 0,
