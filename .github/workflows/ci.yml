@@ -1,5 +1,6 @@
 # PR quality gate: typecheck + unit tests + P0 E2E (Chromium).
-# Widen E2E (all browsers / p1) by changing the e2e job or adding a follow-up workflow.
+# Deploy to Appwrite Sites only on main after all checks pass.
+# Widen E2E (all browsers / P1) by adding a follow-up job or workflow.
 name: CI
 
 on:
@@ -39,6 +40,22 @@ jobs:
   e2e-p0:
     name: Playwright P0 (Chromium)
     runs-on: ubuntu-latest
+    env:
+      APPWRITE_ENDPOINT: ${{ secrets.APPWRITE_ENDPOINT }}
+      APPWRITE_PROJECT_ID: ${{ secrets.APPWRITE_PROJECT_ID }}
+      APPWRITE_API_KEY: ${{ secrets.APPWRITE_API_KEY }}
+      DATABASE_ID: ${{ secrets.DATABASE_ID }}
+      ARTICLES_COLLECTION_ID: ${{ secrets.ARTICLES_COLLECTION_ID }}
+      ARTICLE_TRANSLATIONS_COLLECTION_ID: ${{ secrets.ARTICLE_TRANSLATIONS_COLLECTION_ID }}
+      CATEGORIES_COLLECTION_ID: ${{ secrets.CATEGORIES_COLLECTION_ID }}
+      STORAGE_BUCKET_ID: ${{ secrets.STORAGE_BUCKET_ID }}
+      SITE_SETTINGS_COLLECTION_ID: ${{ secrets.SITE_SETTINGS_COLLECTION_ID }}
+      DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
+      PUBLIC_APPWRITE_ENDPOINT: ${{ secrets.APPWRITE_ENDPOINT }}
+      PUBLIC_APPWRITE_PROJECT_ID: ${{ secrets.APPWRITE_PROJECT_ID }}
+      PUBLIC_STORAGE_BUCKET_ID: ${{ secrets.STORAGE_BUCKET_ID }}
+      E2E_ADMIN_EMAIL: ${{ secrets.E2E_ADMIN_EMAIL }}
+      E2E_ADMIN_PASSWORD: ${{ secrets.E2E_ADMIN_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
 
@@ -57,48 +74,39 @@ jobs:
       - name: Build
         working-directory: apps/web-astro
         run: pnpm run build
-        env:
-          APPWRITE_ENDPOINT: ${{ secrets.APPWRITE_ENDPOINT }}
-          APPWRITE_PROJECT_ID: ${{ secrets.APPWRITE_PROJECT_ID }}
-          APPWRITE_API_KEY: ${{ secrets.APPWRITE_API_KEY }}
-          DATABASE_ID: ${{ secrets.DATABASE_ID }}
-          ARTICLES_COLLECTION_ID: ${{ secrets.ARTICLES_COLLECTION_ID }}
-          ARTICLE_TRANSLATIONS_COLLECTION_ID: ${{ secrets.ARTICLE_TRANSLATIONS_COLLECTION_ID }}
-          CATEGORIES_COLLECTION_ID: ${{ secrets.CATEGORIES_COLLECTION_ID }}
-          STORAGE_BUCKET_ID: ${{ secrets.STORAGE_BUCKET_ID }}
-          SITE_SETTINGS_COLLECTION_ID: ${{ secrets.SITE_SETTINGS_COLLECTION_ID }}
-          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
-          PUBLIC_APPWRITE_ENDPOINT: ${{ secrets.APPWRITE_ENDPOINT }}
-          PUBLIC_APPWRITE_PROJECT_ID: ${{ secrets.APPWRITE_PROJECT_ID }}
-          PUBLIC_STORAGE_BUCKET_ID: ${{ secrets.STORAGE_BUCKET_ID }}
 
-      - name: Install Playwright Chromium
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Install Playwright Chromium + system deps
         working-directory: apps/web-astro
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium
+
+      - name: Install Playwright system deps (browser cached)
+        working-directory: apps/web-astro
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
 
       - name: Run P0 E2E
         working-directory: apps/web-astro
         run: pnpm run test:e2e:p0
         env:
           CI: true
-          APPWRITE_ENDPOINT: ${{ secrets.APPWRITE_ENDPOINT }}
-          APPWRITE_PROJECT_ID: ${{ secrets.APPWRITE_PROJECT_ID }}
-          APPWRITE_API_KEY: ${{ secrets.APPWRITE_API_KEY }}
-          DATABASE_ID: ${{ secrets.DATABASE_ID }}
-          ARTICLES_COLLECTION_ID: ${{ secrets.ARTICLES_COLLECTION_ID }}
-          ARTICLE_TRANSLATIONS_COLLECTION_ID: ${{ secrets.ARTICLE_TRANSLATIONS_COLLECTION_ID }}
-          CATEGORIES_COLLECTION_ID: ${{ secrets.CATEGORIES_COLLECTION_ID }}
-          STORAGE_BUCKET_ID: ${{ secrets.STORAGE_BUCKET_ID }}
-          SITE_SETTINGS_COLLECTION_ID: ${{ secrets.SITE_SETTINGS_COLLECTION_ID }}
-          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
-          PUBLIC_APPWRITE_ENDPOINT: ${{ secrets.APPWRITE_ENDPOINT }}
-          PUBLIC_APPWRITE_PROJECT_ID: ${{ secrets.APPWRITE_PROJECT_ID }}
-          PUBLIC_STORAGE_BUCKET_ID: ${{ secrets.STORAGE_BUCKET_ID }}
-          E2E_ADMIN_EMAIL: ${{ secrets.E2E_ADMIN_EMAIL }}
-          E2E_ADMIN_PASSWORD: ${{ secrets.E2E_ADMIN_PASSWORD }}
 
-  # Requires committed appwrite.config.json (copy from appwrite.config.json.example,
-  # then sync with `appwrite pull sites` — see DEPLOYMENT.md).
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: apps/web-astro/playwright-report/
+          retention-days: 7
+
+  # Deploys using the appwrite.json template.
   # GitHub repo secrets: APPWRITE_ENDPOINT, APPWRITE_PROJECT_ID, APPWRITE_API_KEY, APPWRITE_SITE_ID
   deploy-appwrite-sites:
     name: Deploy Appwrite Sites
@@ -108,26 +116,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check for appwrite.config.json
-        id: check-config
-        run: |
-          if [ -f appwrite.config.json ]; then
-            echo "exists=true" >> $GITHUB_OUTPUT
-          else
-            echo "exists=false" >> $GITHUB_OUTPUT
-          fi
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
 
       - uses: actions/setup-node@v4
-        if: steps.check-config.outputs.exists == 'true'
         with:
           node-version: "22"
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        working-directory: apps/web-astro
+        run: pnpm run build
+
+      - name: Configure appwrite.json
+        run: |
+          sed -i "s/PROJECT_ID/${{ secrets.APPWRITE_PROJECT_ID }}/g" appwrite.json
+          sed -i "s/SITE_ID/${{ secrets.APPWRITE_SITE_ID }}/g" appwrite.json
 
       - name: Install Appwrite CLI
-        if: steps.check-config.outputs.exists == 'true'
         run: npm install -g appwrite-cli
 
       - name: Push site (non-interactive)
-        if: steps.check-config.outputs.exists == 'true'
         env:
           APPWRITE_ENDPOINT: ${{ secrets.APPWRITE_ENDPOINT }}
           APPWRITE_PROJECT_ID: ${{ secrets.APPWRITE_PROJECT_ID }}
@@ -139,8 +152,4 @@ jobs:
             --endpoint "$APPWRITE_ENDPOINT" \
             --project-id "$APPWRITE_PROJECT_ID" \
             --key "$APPWRITE_API_KEY"
-          appwrite push sites --site-id "$APPWRITE_SITE_ID" --activate
-
-      - name: Skip deployment
-        if: steps.check-config.outputs.exists == 'false'
-        run: echo "Skipping deployment - appwrite.config.json not found"
+          appwrite push sites --site-id "$APPWRITE_SITE_ID" --activate --force
