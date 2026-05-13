@@ -92,11 +92,40 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
 
+      - name: Debug Environment
+        run: |
+          echo "Checking Environment Variables (SET/EMPTY):"
+          echo "APPWRITE_ENDPOINT: ${APPWRITE_ENDPOINT:+SET}${APPWRITE_ENDPOINT:-EMPTY}"
+          echo "APPWRITE_PROJECT_ID: ${APPWRITE_PROJECT_ID:+SET}${APPWRITE_PROJECT_ID:-EMPTY}"
+          echo "APPWRITE_API_KEY: ${APPWRITE_API_KEY:+SET}${APPWRITE_API_KEY:-EMPTY}"
+          echo "DATABASE_ID: ${DATABASE_ID:+SET}${DATABASE_ID:-EMPTY}"
+          echo "ARTICLES_COLLECTION_ID: ${ARTICLES_COLLECTION_ID:+SET}${ARTICLES_COLLECTION_ID:-EMPTY}"
+          echo "E2E_ADMIN_EMAIL: ${E2E_ADMIN_EMAIL:+SET}${E2E_ADMIN_EMAIL:-EMPTY}"
+          echo "E2E_ADMIN_PASSWORD: ${E2E_ADMIN_PASSWORD:+SET}${E2E_ADMIN_PASSWORD:-EMPTY}"
+          echo "DEEPL_API_KEY: ${DEEPL_API_KEY:+SET}${DEEPL_API_KEY:-EMPTY}"
+
+          echo "Testing Appwrite connectivity..."
+          if [ -n "$APPWRITE_ENDPOINT" ]; then
+            curl -I "$APPWRITE_ENDPOINT/health/version" || echo "Appwrite endpoint UNREACHABLE"
+          else
+            echo "Appwrite endpoint NOT SET"
+          fi
+
       - name: Run P0 E2E
         working-directory: apps/web-astro
         run: pnpm run test:e2e:p0
         env:
           CI: true
+          APPWRITE_ENDPOINT: ${{ secrets.APPWRITE_ENDPOINT }}
+          APPWRITE_PROJECT_ID: ${{ secrets.APPWRITE_PROJECT_ID }}
+          APPWRITE_API_KEY: ${{ secrets.APPWRITE_API_KEY }}
+          DATABASE_ID: ${{ secrets.DATABASE_ID }}
+          ARTICLES_COLLECTION_ID: ${{ secrets.ARTICLES_COLLECTION_ID }}
+          ARTICLE_TRANSLATIONS_COLLECTION_ID: ${{ secrets.ARTICLE_TRANSLATIONS_COLLECTION_ID }}
+          CATEGORIES_COLLECTION_ID: ${{ secrets.CATEGORIES_COLLECTION_ID }}
+          STORAGE_BUCKET_ID: ${{ secrets.STORAGE_BUCKET_ID }}
+          SITE_SETTINGS_COLLECTION_ID: ${{ secrets.SITE_SETTINGS_COLLECTION_ID }}
+          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
           E2E_ADMIN_EMAIL: ${{ secrets.E2E_ADMIN_EMAIL }}
           E2E_ADMIN_PASSWORD: ${{ secrets.E2E_ADMIN_PASSWORD }}
 

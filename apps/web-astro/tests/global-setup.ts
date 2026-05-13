@@ -48,6 +48,9 @@ export default async function globalSetup(_config: FullConfig) {
   const transColId = process.env.ARTICLE_TRANSLATIONS_COLLECTION_ID;
 
   if (endpoint && project && key && dbId && artColId && transColId) {
+    console.log(
+      `Global Setup: Attempting to seed data at ${endpoint} (Project: ${project})`
+    );
     const client = new Client()
       .setEndpoint(endpoint)
       .setProject(project)
@@ -59,9 +62,13 @@ export default async function globalSetup(_config: FullConfig) {
         Query.equal("status", "published"),
         Query.limit(1),
       ]);
+      console.log(`Global Setup: Found ${res.total} published articles.`);
 
       if (res.total === 0) {
-        console.log("No published articles found. Seeding a test article...");
+        console.log(
+          "Global Setup: No published articles found. Seeding a test article..."
+        );
+
         const articleId = ID.unique();
         await databases.createDocument(dbId, artColId, articleId, {
           category: "noticias",
