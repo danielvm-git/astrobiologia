@@ -83,3 +83,4 @@ scratch/
 _bmad/
 _bmad-output/
 .planning
+.worktrees/
