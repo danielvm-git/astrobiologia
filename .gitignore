@@ -43,6 +43,7 @@ project.inlang/cache/
 
 # Ctxo local cache (auto-rebuilt, never committed)
 .ctxo/.cache/
+.ctxo/*
 .openhands
 .agents
 

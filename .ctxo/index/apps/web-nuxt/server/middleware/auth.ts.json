@@ -1,10 +1,23 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "dce49069a419b173a797097074636ef1447b0e6cfa61c2dd4432b19a73e67bb7",
+  "contentHash": "e48cf75742d7c83195213cccd15ef4438f02fbe2e0ae11c28188ba46cd8bce38",
   "edges": [],
   "file": "apps/web-nuxt/server/middleware/auth.ts",
-  "intent": [],
-  "lastModified": 1777261504,
+  "intent": [
+    {
+      "date": "2026-05-12T18:32:57-03:00",
+      "hash": "a6cc00dfedac3bc3104bf8080787a81847a94f2a",
+      "kind": "commit",
+      "message": "fix(deploy): finalize Appwrite deployment optimizations"
+    },
+    {
+      "date": "2026-04-27T01:37:52-03:00",
+      "hash": "e946ce0e21006dfb9001c81f8773fe8f07559051",
+      "kind": "commit",
+      "message": "Fix CSS parsing warnings and refactor PostCSS configuration"
+    }
+  ],
+  "lastModified": 1778643189,
   "symbols": []
 }

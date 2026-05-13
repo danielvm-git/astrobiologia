@@ -6,28 +6,35 @@
       "symbolId": "apps/web-nuxt/server/utils/logger.ts::createLogger::function"
     }
   ],
-  "contentHash": "ac794126533f7f1983856dfc8a71fbe870bf89c131efe5c3794bde9ebad7d13d",
+  "contentHash": "59cdc300ad19fa70a8f6fc1780cef5720d6a733e239015a2afcab1351761e68d",
   "edges": [],
   "file": "apps/web-nuxt/server/utils/logger.ts",
-  "intent": [],
-  "lastModified": 1777261505,
+  "intent": [
+    {
+      "date": "2026-04-27T01:37:52-03:00",
+      "hash": "e946ce0e21006dfb9001c81f8773fe8f07559051",
+      "kind": "commit",
+      "message": "Fix CSS parsing warnings and refactor PostCSS configuration"
+    }
+  ],
+  "lastModified": 1778643189,
   "symbols": [
     {
-      "endLine": 67,
-      "endOffset": 2052,
+      "endLine": 69,
+      "endOffset": 1868,
       "kind": "function",
       "name": "createLogger",
-      "startLine": 65,
-      "startOffset": 1973,
+      "startLine": 67,
+      "startOffset": 1791,
       "symbolId": "apps/web-nuxt/server/utils/logger.ts::createLogger::function"
     },
     {
-      "endLine": 70,
-      "endOffset": 2123,
+      "endLine": 72,
+      "endOffset": 1939,
       "kind": "variable",
       "name": "logger",
-      "startLine": 70,
-      "startOffset": 2092,
+      "startLine": 72,
+      "startOffset": 1908,
       "symbolId": "apps/web-nuxt/server/utils/logger.ts::logger::variable"
     }
   ]

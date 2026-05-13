@@ -4,7 +4,14 @@
   "contentHash": "f89f20d16b26bf0f6293af14c6c2c41fb14a318f4c37714d26de1e49af6276de",
   "edges": [],
   "file": "apps/web-nuxt/server/api/search.get.ts",
-  "intent": [],
-  "lastModified": 1777261504,
+  "intent": [
+    {
+      "date": "2026-04-27T01:37:52-03:00",
+      "hash": "e946ce0e21006dfb9001c81f8773fe8f07559051",
+      "kind": "commit",
+      "message": "Fix CSS parsing warnings and refactor PostCSS configuration"
+    }
+  ],
+  "lastModified": 1778643189,
   "symbols": []
 }

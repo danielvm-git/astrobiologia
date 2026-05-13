@@ -18,7 +18,7 @@
       "symbolId": "apps/web-nuxt/server/utils/locale.ts::shouldShowTranslationFallbackBadge::function"
     }
   ],
-  "contentHash": "3af211499198db552d4280a871f6e7404e3aac2bee745ea13420e3d9ec02b436",
+  "contentHash": "b8f1173abf5a0c231257f1b4a542955d8d7216a03bd71a3576aedd1092fe42b2",
   "edges": [
     {
       "from": "apps/web-nuxt/server/utils/locale.ts::primaryLanguageSubtag::function",
@@ -62,8 +62,15 @@
     }
   ],
   "file": "apps/web-nuxt/server/utils/locale.ts",
-  "intent": [],
-  "lastModified": 1777261505,
+  "intent": [
+    {
+      "date": "2026-04-27T01:37:52-03:00",
+      "hash": "e946ce0e21006dfb9001c81f8773fe8f07559051",
+      "kind": "commit",
+      "message": "Fix CSS parsing warnings and refactor PostCSS configuration"
+    }
+  ],
+  "lastModified": 1778643189,
   "symbols": [
     {
       "endLine": 2,
@@ -75,8 +82,8 @@
       "symbolId": "apps/web-nuxt/server/utils/locale.ts::normalizeLocaleTag::function"
     },
     {
-      "endLine": 8,
-      "endOffset": 356,
+      "endLine": 10,
+      "endOffset": 364,
       "kind": "function",
       "name": "primaryLanguageSubtag",
       "startLine": 4,
@@ -84,21 +91,21 @@
       "symbolId": "apps/web-nuxt/server/utils/locale.ts::primaryLanguageSubtag::function"
     },
     {
-      "endLine": 15,
-      "endOffset": 711,
+      "endLine": 20,
+      "endOffset": 733,
       "kind": "function",
       "name": "localeTagsMatch",
-      "startLine": 10,
-      "startOffset": 358,
+      "startLine": 12,
+      "startOffset": 366,
       "symbolId": "apps/web-nuxt/server/utils/locale.ts::localeTagsMatch::function"
     },
     {
-      "endLine": 29,
-      "endOffset": 1125,
+      "endLine": 34,
+      "endOffset": 1147,
       "kind": "function",
       "name": "shouldShowTranslationFallbackBadge",
-      "startLine": 17,
-      "startOffset": 713,
+      "startLine": 22,
+      "startOffset": 735,
       "symbolId": "apps/web-nuxt/server/utils/locale.ts::shouldShowTranslationFallbackBadge::function"
     }
   ]

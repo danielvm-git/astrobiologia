@@ -26,7 +26,7 @@
       "symbolId": "apps/web-nuxt/server/utils/article-read.ts::getAllArticles::function"
     }
   ],
-  "contentHash": "0eb84a6faa1a5c9c1c7d5604e61f26fbb0869c5d4ccf3fad551142155e67a896",
+  "contentHash": "e689eea7620e78b8eb68e2638ec33a2dcfa6183aa33210982d262f822e815555",
   "edges": [
     {
       "from": "apps/web-nuxt/server/utils/article-read.ts::getPublishedArticles::function",
@@ -165,61 +165,68 @@
     }
   ],
   "file": "apps/web-nuxt/server/utils/article-read.ts",
-  "intent": [],
-  "lastModified": 1777261504,
+  "intent": [
+    {
+      "date": "2026-04-27T01:37:52-03:00",
+      "hash": "e946ce0e21006dfb9001c81f8773fe8f07559051",
+      "kind": "commit",
+      "message": "Fix CSS parsing warnings and refactor PostCSS configuration"
+    }
+  ],
+  "lastModified": 1778643189,
   "symbols": [
     {
-      "endLine": 92,
-      "endOffset": 3577,
+      "endLine": 130,
+      "endOffset": 3764,
       "kind": "function",
       "name": "getPublishedArticles",
-      "startLine": 78,
-      "startOffset": 2866,
+      "startLine": 106,
+      "startOffset": 3011,
       "symbolId": "apps/web-nuxt/server/utils/article-read.ts::getPublishedArticles::function"
     },
     {
-      "endLine": 111,
-      "endOffset": 4297,
+      "endLine": 158,
+      "endOffset": 4524,
       "kind": "function",
       "name": "getFeaturedArticles",
-      "startLine": 94,
-      "startOffset": 3579,
+      "startLine": 132,
+      "startOffset": 3766,
       "symbolId": "apps/web-nuxt/server/utils/article-read.ts::getFeaturedArticles::function"
     },
     {
-      "endLine": 160,
-      "endOffset": 5977,
+      "endLine": 216,
+      "endOffset": 6245,
       "kind": "function",
       "name": "getArticleBySlug",
-      "startLine": 113,
-      "startOffset": 4299,
+      "startLine": 160,
+      "startOffset": 4526,
       "symbolId": "apps/web-nuxt/server/utils/article-read.ts::getArticleBySlug::function"
     },
     {
-      "endLine": 176,
-      "endOffset": 6711,
+      "endLine": 242,
+      "endOffset": 7021,
       "kind": "function",
       "name": "getArticlesByCategory",
-      "startLine": 162,
-      "startOffset": 5979,
+      "startLine": 218,
+      "startOffset": 6247,
       "symbolId": "apps/web-nuxt/server/utils/article-read.ts::getArticlesByCategory::function"
     },
     {
-      "endLine": 231,
-      "endOffset": 8706,
+      "endLine": 315,
+      "endOffset": 9140,
       "kind": "function",
       "name": "searchPublishedArticles",
-      "startLine": 178,
-      "startOffset": 6713,
+      "startLine": 244,
+      "startOffset": 7023,
       "symbolId": "apps/web-nuxt/server/utils/article-read.ts::searchPublishedArticles::function"
     },
     {
-      "endLine": 241,
-      "endOffset": 9095,
+      "endLine": 326,
+      "endOffset": 9532,
       "kind": "function",
       "name": "getAllArticles",
-      "startLine": 233,
-      "startOffset": 8708,
+      "startLine": 317,
+      "startOffset": 9142,
       "symbolId": "apps/web-nuxt/server/utils/article-read.ts::getAllArticles::function"
     }
   ]

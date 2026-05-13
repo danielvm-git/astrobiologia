@@ -1,28 +1,35 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "1ea467fe8322f2c672284c852c9d2a56e6e6a01471d2e831fb821755114107f0",
+  "contentHash": "18edd0a1fc2e194c9a27f8cd3075365a7360dbde16364f219ef8a6d7b3f13b8a",
   "edges": [],
   "file": "apps/web-nuxt/components/ui/button/variants.ts",
-  "intent": [],
-  "lastModified": 1777261504,
+  "intent": [
+    {
+      "date": "2026-04-27T01:37:52-03:00",
+      "hash": "e946ce0e21006dfb9001c81f8773fe8f07559051",
+      "kind": "commit",
+      "message": "Fix CSS parsing warnings and refactor PostCSS configuration"
+    }
+  ],
+  "lastModified": 1778643189,
   "symbols": [
     {
       "endLine": 40,
-      "endOffset": 2863,
+      "endOffset": 2866,
       "kind": "type",
       "name": "ButtonVariants",
       "startLine": 40,
-      "startOffset": 2799,
+      "startOffset": 2801,
       "symbolId": "apps/web-nuxt/components/ui/button/variants.ts::ButtonVariants::type"
     },
     {
       "endLine": 38,
-      "endOffset": 2797,
+      "endOffset": 2798,
       "kind": "variable",
       "name": "buttonVariants",
       "startLine": 3,
-      "startOffset": 122,
+      "startOffset": 124,
       "symbolId": "apps/web-nuxt/components/ui/button/variants.ts::buttonVariants::variable"
     }
   ]

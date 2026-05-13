@@ -26,15 +26,22 @@
       "symbolId": "apps/web-nuxt/lib/utils.ts::readingTime::function"
     }
   ],
-  "contentHash": "cf68ba95595103122b3a6ee77e5502ea5ecfb0a277f0c3f4a752abb8ead25033",
+  "contentHash": "1c57886861550d4ec6eb2d01f9ef13373f7d741613005b998b9eaea0895493f5",
   "edges": [],
   "file": "apps/web-nuxt/lib/utils.ts",
-  "intent": [],
-  "lastModified": 1777261504,
+  "intent": [
+    {
+      "date": "2026-04-27T01:37:52-03:00",
+      "hash": "e946ce0e21006dfb9001c81f8773fe8f07559051",
+      "kind": "commit",
+      "message": "Fix CSS parsing warnings and refactor PostCSS configuration"
+    }
+  ],
+  "lastModified": 1778643189,
   "symbols": [
     {
       "endLine": 5,
-      "endOffset": 167,
+      "endOffset": 168,
       "kind": "function",
       "name": "cn",
       "startLine": 3,
@@ -43,47 +50,47 @@
     },
     {
       "endLine": 14,
-      "endOffset": 417,
+      "endOffset": 428,
       "kind": "function",
       "name": "formatDate",
       "startLine": 7,
-      "startOffset": 169,
+      "startOffset": 170,
       "symbolId": "apps/web-nuxt/lib/utils.ts::formatDate::function"
     },
     {
       "endLine": 23,
-      "endOffset": 673,
+      "endOffset": 694,
       "kind": "function",
       "name": "formatShortDate",
       "startLine": 16,
-      "startOffset": 419,
+      "startOffset": 430,
       "symbolId": "apps/web-nuxt/lib/utils.ts::formatShortDate::function"
     },
     {
       "endLine": 34,
-      "endOffset": 895,
+      "endOffset": 931,
       "kind": "function",
       "name": "slugify",
       "startLine": 25,
-      "startOffset": 675,
+      "startOffset": 696,
       "symbolId": "apps/web-nuxt/lib/utils.ts::slugify::function"
     },
     {
       "endLine": 39,
-      "endOffset": 1050,
+      "endOffset": 1088,
       "kind": "function",
       "name": "truncate",
       "startLine": 36,
-      "startOffset": 897,
+      "startOffset": 933,
       "symbolId": "apps/web-nuxt/lib/utils.ts::truncate::function"
     },
     {
       "endLine": 45,
-      "endOffset": 1224,
+      "endOffset": 1265,
       "kind": "function",
       "name": "readingTime",
       "startLine": 41,
-      "startOffset": 1052,
+      "startOffset": 1090,
       "symbolId": "apps/web-nuxt/lib/utils.ts::readingTime::function"
     }
   ]

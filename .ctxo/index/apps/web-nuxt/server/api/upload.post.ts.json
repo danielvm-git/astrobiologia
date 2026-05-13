@@ -1,10 +1,23 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "b18b10627841ed7589f3cdc9febd997bf5dbd500abd07f6e508615ba21237c35",
+  "contentHash": "2ecc32738db1f97ada1bb5bf005591a9dbce3a3e35b0a3536a6cd4fee37bbe75",
   "edges": [],
   "file": "apps/web-nuxt/server/api/upload.post.ts",
-  "intent": [],
-  "lastModified": 1777261504,
+  "intent": [
+    {
+      "date": "2026-05-02T16:23:32-03:00",
+      "hash": "14f117f46a45098f5639fa8fcfebda5c4209cd38",
+      "kind": "commit",
+      "message": "feat(layout-switcher): implement site layout switcher end-to-end"
+    },
+    {
+      "date": "2026-04-27T01:37:52-03:00",
+      "hash": "e946ce0e21006dfb9001c81f8773fe8f07559051",
+      "kind": "commit",
+      "message": "Fix CSS parsing warnings and refactor PostCSS configuration"
+    }
+  ],
+  "lastModified": 1778643189,
   "symbols": []
 }

@@ -1,10 +1,17 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "29852415cb55f63f13a3246d3045ca46b2f1714b2e5250450830cac3b633a08d",
+  "contentHash": "6b01ec7299fec016abe1e18a1f3683df12c87f20c0aaf2b812635cf1d0c5c335",
   "edges": [],
   "file": "apps/web-nuxt/server/api/health.get.ts",
-  "intent": [],
-  "lastModified": 1777261504,
+  "intent": [
+    {
+      "date": "2026-04-27T01:37:52-03:00",
+      "hash": "e946ce0e21006dfb9001c81f8773fe8f07559051",
+      "kind": "commit",
+      "message": "Fix CSS parsing warnings and refactor PostCSS configuration"
+    }
+  ],
+  "lastModified": 1778643189,
   "symbols": []
 }

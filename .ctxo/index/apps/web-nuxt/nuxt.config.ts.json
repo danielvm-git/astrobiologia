@@ -1,10 +1,52 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "9b5cb3c90056be6679eec46287c7b8b290de7262258f2b28109b050d7553db10",
+  "contentHash": "42c24d6309e9901c3a6c147abdeb54819e97112c273be81fb8c197725089fb87",
   "edges": [],
   "file": "apps/web-nuxt/nuxt.config.ts",
   "intent": [
+    {
+      "date": "2026-05-12T20:28:34-03:00",
+      "hash": "6cf167df74c66e56fefcbf61978b07699328b931",
+      "kind": "commit",
+      "message": "feat(admin): add Publicar Site button to trigger site redeploy from dashboard"
+    },
+    {
+      "date": "2026-05-12T20:11:03-03:00",
+      "hash": "21f1ff21a0528733ca422643a5633d1593339cf1",
+      "kind": "commit",
+      "message": "fix(deploy): switch to static generation to eliminate Appwrite SSR cold start timeout"
+    },
+    {
+      "date": "2026-05-03T16:46:22-03:00",
+      "hash": "f9d4ab39863889385f2dfac3961a1a7643721f9b",
+      "kind": "commit",
+      "message": "chore(config): migrate DeepL key to Nuxt runtimeConfig"
+    },
+    {
+      "date": "2026-05-03T16:35:09-03:00",
+      "hash": "65c2921500994d85c7653eb937b4791f55eba776",
+      "kind": "commit",
+      "message": "feat(layout-switcher): add list layout, wire article pages to dynamic layout"
+    },
+    {
+      "date": "2026-05-02T15:16:10-03:00",
+      "hash": "eafd5dd6a6a2f73f60e482b5a431ed7da634ad7e",
+      "kind": "commit",
+      "message": "chore(layout-switcher): remove debug telemetry, fix defaultRuntime shape"
+    },
+    {
+      "date": "2026-05-02T11:02:44-03:00",
+      "hash": "59d101b8332a7d530343f8c26f32edcdaceae26e",
+      "kind": "commit",
+      "message": "chore(layout-switcher): install pinia, add siteSettingsCollectionId config"
+    },
+    {
+      "date": "2026-04-27T01:37:52-03:00",
+      "hash": "e946ce0e21006dfb9001c81f8773fe8f07559051",
+      "kind": "commit",
+      "message": "Fix CSS parsing warnings and refactor PostCSS configuration"
+    },
     {
       "date": "2026-04-26T22:07:56-03:00",
       "hash": "fcbecfd59933eb3da9eb6226fcb46eef0947bd0a",
@@ -12,6 +54,6 @@
       "message": "refactor: refresh codebase map with current architecture and concerns analysis"
     }
   ],
-  "lastModified": 1777261505,
+  "lastModified": 1778643189,
   "symbols": []
 }

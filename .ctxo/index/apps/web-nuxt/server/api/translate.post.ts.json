@@ -1,10 +1,17 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "fd6f13b2f7409ebc26b6ebe638ef430511a245425cfadfb92e012dcc833c41b0",
+  "contentHash": "0bd23c58292b3ac9c4aef050f50f50d65b764c8a6a3c09713d0116ec1046167d",
   "edges": [],
   "file": "apps/web-nuxt/server/api/translate.post.ts",
-  "intent": [],
-  "lastModified": 1777261504,
+  "intent": [
+    {
+      "date": "2026-04-27T01:37:52-03:00",
+      "hash": "e946ce0e21006dfb9001c81f8773fe8f07559051",
+      "kind": "commit",
+      "message": "Fix CSS parsing warnings and refactor PostCSS configuration"
+    }
+  ],
+  "lastModified": 1778643189,
   "symbols": []
 }

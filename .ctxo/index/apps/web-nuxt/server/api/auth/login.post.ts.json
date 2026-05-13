@@ -1,7 +1,7 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "70bf47623eac4cce8755f6ddf81576a94c1728838a9ab3f7fade2eaeede94ce8",
+  "contentHash": "6754e3dbf70930d7e7cee9144e72e69dfe9f7d1847c44c569b1f9fd4a195b6a8",
   "edges": [
     {
       "from": "apps/web-nuxt/server/api/auth/login.post.ts::login.post::variable",
@@ -20,7 +20,14 @@
     }
   ],
   "file": "apps/web-nuxt/server/api/auth/login.post.ts",
-  "intent": [],
-  "lastModified": 1777261504,
+  "intent": [
+    {
+      "date": "2026-04-27T01:37:52-03:00",
+      "hash": "e946ce0e21006dfb9001c81f8773fe8f07559051",
+      "kind": "commit",
+      "message": "Fix CSS parsing warnings and refactor PostCSS configuration"
+    }
+  ],
+  "lastModified": 1778643189,
   "symbols": []
 }

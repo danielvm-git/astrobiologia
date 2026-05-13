@@ -1,10 +1,23 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "5db66c7491f007c562fdbab8f1b00d9f1a34e15ec3bc42075cce559926a92511",
+  "contentHash": "b6a286ffb64a7459a8f4c9adae12ad0b013bb2396c2d95996dd9cd578d603202",
   "edges": [],
   "file": "apps/web-nuxt/tests/e2e/p0/public-home.spec.ts",
-  "intent": [],
-  "lastModified": 1777261505,
+  "intent": [
+    {
+      "date": "2026-05-03T16:35:09-03:00",
+      "hash": "65c2921500994d85c7653eb937b4791f55eba776",
+      "kind": "commit",
+      "message": "feat(layout-switcher): add list layout, wire article pages to dynamic layout"
+    },
+    {
+      "date": "2026-04-27T01:37:52-03:00",
+      "hash": "e946ce0e21006dfb9001c81f8773fe8f07559051",
+      "kind": "commit",
+      "message": "Fix CSS parsing warnings and refactor PostCSS configuration"
+    }
+  ],
+  "lastModified": 1778643189,
   "symbols": []
 }
