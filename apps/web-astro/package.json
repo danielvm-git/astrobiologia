@@ -44,6 +44,7 @@
     "@types/react": "^19.1.5",
     "@types/react-dom": "^19.1.5",
     "@vitest/coverage-v8": "^3.2.4",
+    "allure-commandline": "^2.40.0",
     "allure-js-commons": "^3.8.0",
     "allure-playwright": "^3.8.0",
     "playwright-bdd": "^8.5.0",
