@@ -10,7 +10,7 @@
       "buildRuntime": "node-24",
       "adapter": "ssr",
       "path": "apps/web-astro/dist",
-      "installCommand": "",
+      "installCommand": "npm install --production --no-package-lock",
       "buildCommand": "echo \"Already built in GHA\"",
       "outputDirectory": ".",
       "entrypoint": "server/entry.mjs",
