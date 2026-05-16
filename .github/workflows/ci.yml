@@ -166,4 +166,4 @@ jobs:
             --endpoint "$APPWRITE_ENDPOINT" \
             --project-id "$APPWRITE_PROJECT_ID" \
             --key "$APPWRITE_API_KEY"
-          appwrite push sites --site-id "$APPWRITE_SITE_ID" --activate --force --yes
+          appwrite push sites --site-id "$APPWRITE_SITE_ID" --activate --force
