@@ -46,19 +46,30 @@ async function fetchTranslationsForIds(
   ids: string[]
 ): Promise<ArticleTranslation[]> {
   if (ids.length === 0) return [];
+  console.log(
+    `[DEBUG] fetchTranslationsForIds: Fetching translations for ${ids.length} articles`
+  );
   const { databases } = createAdminClient();
   const out: ArticleTranslation[] = [];
   for (let i = 0; i < ids.length; i += CHUNK_SIZE) {
     const chunk = ids.slice(i, i + CHUNK_SIZE);
-    const res = await databases.listDocuments(
-      import.meta.env.DATABASE_ID,
-      import.meta.env.ARTICLE_TRANSLATIONS_COLLECTION_ID,
-      [
-        Query.equal("article_id", chunk),
-        Query.limit(translationJoinLimit(chunk.length)),
-      ]
-    );
-    out.push(...(res.documents as unknown as ArticleTranslation[]));
+    try {
+      const res = await databases.listDocuments(
+        import.meta.env.DATABASE_ID,
+        import.meta.env.ARTICLE_TRANSLATIONS_COLLECTION_ID,
+        [
+          Query.equal("article_id", chunk),
+          Query.limit(translationJoinLimit(chunk.length)),
+        ]
+      );
+      console.log(
+        `[DEBUG] fetchTranslationsForIds: Found ${res.documents.length} translations`
+      );
+      out.push(...(res.documents as unknown as ArticleTranslation[]));
+    } catch (error) {
+      console.error(`[DEBUG] fetchTranslationsForIds Error:`, error);
+      throw error;
+    }
   }
   return out;
 }
@@ -90,23 +101,34 @@ export async function getPublishedArticles(
   limit = 20,
   offset = 0
 ): Promise<Article[]> {
+  console.log(
+    `[DEBUG] getPublishedArticles: lang=${language}, db=${import.meta.env.DATABASE_ID}, coll=${import.meta.env.ARTICLES_COLLECTION_ID}`
+  );
   const { databases } = createAdminClient();
-  const res = await databases.listDocuments(
-    import.meta.env.DATABASE_ID,
-    import.meta.env.ARTICLES_COLLECTION_ID,
-    [
-      Query.equal("status", "published"),
-      Query.orderDesc("publishedAt"),
-      Query.limit(limit),
-      Query.offset(offset),
-    ]
-  );
-  if (res.total === 0) return [];
-  const articles = res.documents as unknown as Article[];
-  const translations = await fetchTranslationsForIds(
-    articles.map((a) => a.$id)
-  );
-  return joinTranslations(articles, translations, language);
+  try {
+    const res = await databases.listDocuments(
+      import.meta.env.DATABASE_ID,
+      import.meta.env.ARTICLES_COLLECTION_ID,
+      [
+        Query.equal("status", "published"),
+        Query.orderDesc("publishedAt"),
+        Query.limit(limit),
+        Query.offset(offset),
+      ]
+    );
+    console.log(
+      `[DEBUG] getPublishedArticles: Found ${res.total} total documents`
+    );
+    if (res.total === 0) return [];
+    const articles = res.documents as unknown as Article[];
+    const translations = await fetchTranslationsForIds(
+      articles.map((a) => a.$id)
+    );
+    return joinTranslations(articles, translations, language);
+  } catch (error) {
+    console.error(`[DEBUG] getPublishedArticles Error:`, error);
+    throw error;
+  }
 }
 
 export async function getFeaturedArticles(
