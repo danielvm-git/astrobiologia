@@ -26,7 +26,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "24"
           cache: pnpm
 
       - name: Install dependencies
@@ -66,7 +66,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "24"
           cache: pnpm
 
       - name: Install dependencies
@@ -136,7 +136,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "24"
           cache: pnpm
 
       - name: Install dependencies
@@ -145,6 +145,11 @@ jobs:
       - name: Build
         working-directory: apps/web-astro
         run: pnpm run build
+
+      - name: Prepare dist for Appwrite
+        run: |
+          cp apps/web-astro/package.json apps/web-astro/dist/
+          cp pnpm-lock.yaml apps/web-astro/dist/
 
       - name: Configure appwrite.json
         run: |

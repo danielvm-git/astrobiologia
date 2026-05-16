@@ -1,6 +1,9 @@
 {
   "name": "astrobiologia-monorepo",
   "private": true,
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "prepare": "husky",
     "type-check": "pnpm --filter @astrobiologia/web-astro check",
