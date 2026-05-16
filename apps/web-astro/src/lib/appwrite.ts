@@ -49,9 +49,26 @@ export const CATEGORIES = [
 ] as const;
 
 function baseClient(): Client {
-  return new Client()
-    .setEndpoint(import.meta.env.APPWRITE_ENDPOINT)
-    .setProject(import.meta.env.APPWRITE_PROJECT_ID);
+  const endpoint = import.meta.env.APPWRITE_ENDPOINT;
+  const project = import.meta.env.APPWRITE_PROJECT_ID;
+
+  console.log(`[DEBUG] baseClient initialization:`);
+  console.log(`- APPWRITE_ENDPOINT: ${endpoint ? "SET" : "MISSING"}`);
+  console.log(`- APPWRITE_PROJECT_ID: ${project ? "SET" : "MISSING"}`);
+
+  // Log available keys to check for naming mismatches (e.g., PUBLIC_ prefix)
+  const allKeys = Object.keys(import.meta.env);
+  console.log(
+    `- Available Env Keys: ${allKeys.filter((k) => k.includes("APPWRITE") || k.includes("ID") || k.includes("COLLECTION")).join(", ")}`
+  );
+  console.log(
+    `- DATABASE_ID: ${import.meta.env.DATABASE_ID ? "SET" : "MISSING"}`
+  );
+  console.log(
+    `- ARTICLES_COLLECTION_ID: ${import.meta.env.ARTICLES_COLLECTION_ID ? "SET" : "MISSING"}`
+  );
+
+  return new Client().setEndpoint(endpoint).setProject(project);
 }
 
 export function createAdminClient() {
