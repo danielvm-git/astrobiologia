@@ -8,7 +8,7 @@
       "framework": "astro",
       "path": "apps/web-astro/dist",
       "installCommand": "",
-      "buildCommand": "",
+      "buildCommand": "echo \"Already built in GHA\"",
       "outputDirectory": ".",
       "entrypoint": "server/entry.mjs",
       "ignore": ["node_modules", ".git"],
