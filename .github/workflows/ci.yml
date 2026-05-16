@@ -149,11 +149,6 @@ jobs:
         working-directory: apps/web-astro
         run: pnpm run build
 
-      - name: Prepare dist for Appwrite
-        run: |
-          cp apps/web-astro/package.json apps/web-astro/dist/
-          cp pnpm-lock.yaml apps/web-astro/dist/
-
       - name: Configure appwrite.json
         run: |
           sed -i "s/PROJECT_ID/${{ secrets.APPWRITE_PROJECT_ID }}/g" appwrite.json

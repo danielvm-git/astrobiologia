@@ -1,19 +1,18 @@
 {
   "projectId": "PROJECT_ID",
   "projectName": "Astrobiologia",
-  "//": "Framework updated to other to bypass bundling errors",
   "sites": [
     {
       "$id": "SITE_ID",
       "name": "web-astro",
-      "framework": "other",
+      "framework": "astro",
       "specification": "s-1vcpu-512mb",
       "buildRuntime": "node-24",
       "adapter": "ssr",
-      "path": "apps/web-astro/dist",
-      "installCommand": "",
+      "path": "apps/web-astro",
+      "installCommand": "npm install --omit=dev --no-package-lock",
       "buildCommand": "echo \"Already built in GHA\"",
-      "outputDirectory": ".",
+      "outputDirectory": "dist",
       "entrypoint": "server/entry.mjs",
       "ignore": ["node_modules", ".git"],
       "activate": true
