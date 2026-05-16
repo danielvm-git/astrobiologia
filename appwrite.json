@@ -1,6 +1,7 @@
 {
   "projectId": "PROJECT_ID",
   "projectName": "Astrobiologia",
+  "//": "Framework updated to other to bypass bundling errors",
   "sites": [
     {
       "$id": "SITE_ID",
