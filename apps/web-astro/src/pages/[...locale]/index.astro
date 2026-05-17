@@ -14,7 +14,8 @@ try {
     getFeaturedArticles(locale, 6),
     getPublishedArticles(locale, 24),
   ]);
-} catch {
+} catch (err) {
+  console.error("INDEX ARTICLE FETCH ERROR:", err);
   // Show empty state instead of 500
 }
 
