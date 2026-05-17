@@ -27,3 +27,31 @@ const dbId = getEnv("DATABASE_ID");
 const articlesId = getEnv("ARTICLES_COLLECTION_ID");
 const translationsId = getEnv("ARTICLE_TRANSLATIONS_COLLECTION_ID");
 const bucketId = getEnv("STORAGE_BUCKET_ID");
+
+async function purge() {
+  console.log("Starting purge...");
+
+  // 1. Purge Translations
+  const trans = await databases.listDocuments(dbId, translationsId, [
+    Query.limit(100),
+  ]);
+  for (const doc of trans.documents) {
+    await databases.deleteDocument(dbId, translationsId, doc.$id);
+  }
+
+  // 2. Purge Articles
+  const articles = await databases.listDocuments(dbId, articlesId, [
+    Query.limit(100),
+  ]);
+  for (const doc of articles.documents) {
+    await databases.deleteDocument(dbId, articlesId, doc.$id);
+  }
+
+  // 3. Purge Storage
+  const files = await storage.listFiles(bucketId, [Query.limit(100)]);
+  for (const file of files.files) {
+    await storage.deleteFile(bucketId, file.$id);
+  }
+
+  console.log("Purge complete.");
+}
