@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { ID, Query } from "node-appwrite";
-import { createAdminClient } from "../../../../lib/appwrite";
+import { createAdminClient, getEnv } from "../../../../lib/appwrite";
 
 function json(data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -27,9 +27,9 @@ export const ALL: APIRoute = async ({ locals, request, params }) => {
   if (!id) return json({ error: "Missing article id" }, 400);
 
   const { databases } = createAdminClient();
-  const DB = import.meta.env.DATABASE_ID;
-  const ARTICLES = import.meta.env.ARTICLES_COLLECTION_ID;
-  const TRANS = import.meta.env.ARTICLE_TRANSLATIONS_COLLECTION_ID;
+  const DB = getEnv("DATABASE_ID");
+  const ARTICLES = getEnv("ARTICLES_COLLECTION_ID");
+  const TRANS = getEnv("ARTICLE_TRANSLATIONS_COLLECTION_ID");
 
   if (request.method === "GET") {
     const article = await databases.getDocument(DB, ARTICLES, id);

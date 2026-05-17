@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { AppwriteException } from "node-appwrite";
-import { createAdminClient } from "../../../lib/appwrite";
+import { createAdminClient, getEnv } from "../../../lib/appwrite";
 
 function json(data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -16,8 +16,8 @@ export const GET: APIRoute = async ({ locals }) => {
 
   try {
     const { databases } = createAdminClient();
-    const DB = import.meta.env.DATABASE_ID;
-    const SETTINGS = import.meta.env.SITE_SETTINGS_COLLECTION_ID;
+    const DB = getEnv("DATABASE_ID");
+    const SETTINGS = getEnv("SITE_SETTINGS_COLLECTION_ID");
     const doc = await databases.getDocument(DB, SETTINGS, SETTINGS_DOC_ID);
     return json({ settings: doc });
   } catch (err: unknown) {
@@ -38,8 +38,8 @@ export const PUT: APIRoute = async ({ locals, request }) => {
 
   try {
     const { databases } = createAdminClient();
-    const DB = import.meta.env.DATABASE_ID;
-    const SETTINGS = import.meta.env.SITE_SETTINGS_COLLECTION_ID;
+    const DB = getEnv("DATABASE_ID");
+    const SETTINGS = getEnv("SITE_SETTINGS_COLLECTION_ID");
 
     try {
       await databases.updateDocument(DB, SETTINGS, SETTINGS_DOC_ID, body);

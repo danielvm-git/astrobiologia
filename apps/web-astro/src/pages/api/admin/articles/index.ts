@@ -3,6 +3,7 @@ import { ID, Query } from "node-appwrite";
 import {
   createAdminClient,
   createSessionClient,
+  getEnv,
 } from "../../../../lib/appwrite";
 import { ARTICLE_LOCALES } from "../../../../lib/article-locales";
 
@@ -17,9 +18,9 @@ export const GET: APIRoute = async ({ locals, request }) => {
   if (!locals.user) return json({ error: "Unauthorized" }, 401);
 
   const { databases } = createSessionClient(request);
-  const DB = import.meta.env.DATABASE_ID;
-  const ARTICLES = import.meta.env.ARTICLES_COLLECTION_ID;
-  const TRANS = import.meta.env.ARTICLE_TRANSLATIONS_COLLECTION_ID;
+  const DB = getEnv("DATABASE_ID");
+  const ARTICLES = getEnv("ARTICLES_COLLECTION_ID");
+  const TRANS = getEnv("ARTICLE_TRANSLATIONS_COLLECTION_ID");
 
   const response = await databases.listDocuments(DB, ARTICLES, [
     Query.orderDesc("$createdAt"),
@@ -106,9 +107,9 @@ export const POST: APIRoute = async ({ locals, request }) => {
   }
 
   const { databases } = createAdminClient();
-  const DB = import.meta.env.DATABASE_ID;
-  const ARTICLES = import.meta.env.ARTICLES_COLLECTION_ID;
-  const TRANS = import.meta.env.ARTICLE_TRANSLATIONS_COLLECTION_ID;
+  const DB = getEnv("DATABASE_ID");
+  const ARTICLES = getEnv("ARTICLES_COLLECTION_ID");
+  const TRANS = getEnv("ARTICLE_TRANSLATIONS_COLLECTION_ID");
 
   const now = new Date().toISOString();
   const translations_input: TranslationInput[] = Array.isArray(

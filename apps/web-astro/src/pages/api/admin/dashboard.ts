@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { Query } from "node-appwrite";
-import { createSessionClient } from "../../../lib/appwrite";
+import { createSessionClient, getEnv } from "../../../lib/appwrite";
 
 function json(data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -13,8 +13,8 @@ export const GET: APIRoute = async ({ locals, request }) => {
   if (!locals.user) return json({ error: "Unauthorized" }, 401);
 
   const { databases } = createSessionClient(request);
-  const DB = import.meta.env.DATABASE_ID;
-  const ARTICLES = import.meta.env.ARTICLES_COLLECTION_ID;
+  const DB = getEnv("DATABASE_ID");
+  const ARTICLES = getEnv("ARTICLES_COLLECTION_ID");
 
   try {
     const [allRes, publishedRes, draftRes, recentRes] = await Promise.all([

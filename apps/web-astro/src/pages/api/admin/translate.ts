@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { getEnv } from "../../../lib/appwrite";
 
 const TARGET_LANG_MAP: Record<string, string> = {
   "pt-br": "PT-BR",
@@ -30,7 +31,7 @@ export const POST: APIRoute = async ({ locals, request }) => {
   if (!body.targetLang)
     return json({ error: "Idioma de destino não fornecido" }, 400);
 
-  const authKey = import.meta.env.DEEPL_API_KEY;
+  const authKey = getEnv("DEEPL_API_KEY");
   if (!authKey?.trim())
     return json({ error: "DEEPL_API_KEY não configurada" }, 503);
 
