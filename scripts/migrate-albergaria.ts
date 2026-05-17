@@ -69,3 +69,63 @@ interface MigrationArticle {
 const REAL_ARTICLES: MigrationArticle[] = [
   // Sub-agent will populate this using web_fetch
 ];
+
+async function uploadImage(url: string): Promise<string> {
+  const res = await fetch(url);
+  const blob = await res.blob();
+  // Using a generic filename since we don't have the original name
+  const file = new File([blob], "image.jpg", { type: "image/jpeg" });
+  const uploaded = await storage.createFile(bucketId, ID.unique(), file);
+  return uploaded.$id;
+}
+
+async function runImport() {
+  console.log("Starting import...");
+  for (const data of REAL_ARTICLES) {
+    let fileId = "";
+    try {
+      fileId = await uploadImage(data.imageUrl);
+    } catch (e) {
+      console.error(`Failed to upload image for ${data.title}:`, e);
+    }
+
+    // Create Master Article
+    const article = await databases.createDocument(
+      dbId,
+      articlesId,
+      ID.unique(),
+      {
+        slug: data.slug,
+        category: data.category,
+        featured: data.featured,
+        featuredImage: fileId,
+        status: "published",
+        publishedAt: new Date().toISOString(),
+      }
+    );
+
+    // Create Translation
+    await databases.createDocument(dbId, translationsId, ID.unique(), {
+      article_id: article.$id,
+      language: "pt-br",
+      title: data.title,
+      slug: data.slug,
+      excerpt: data.excerpt,
+      content: data.content,
+    });
+
+    console.log(`Imported: ${data.title}`);
+  }
+  console.log("Import complete.");
+}
+
+async function main() {
+  try {
+    await purge();
+    await runImport();
+  } catch (e) {
+    console.error("Migration failed:", e);
+  }
+}
+
+main();
