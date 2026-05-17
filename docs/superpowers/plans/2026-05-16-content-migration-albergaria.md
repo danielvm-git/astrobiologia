@@ -1,3 +1,31 @@
+# Danilo Albergaria Content Migration Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Purge all dummy data and import 12 professional science journalism articles by Danilo Albergaria into Appwrite.
+
+**Architecture:** A standalone TypeScript migration script using `node-appwrite` and existing project libraries. The script will be executed in three stages: Purge, Extract, and Import.
+
+**Tech Stack:** TypeScript, `node-appwrite`, `node-fetch`.
+
+---
+
+### Task 1: Script Skeleton & Environment
+
+**Files:**
+
+- Create: `scripts/migrate-albergaria.ts`
+
+- [ ] **Step 1: Create the migration script directory and file**
+
+```bash
+mkdir -p scripts
+touch scripts/migrate-albergaria.ts
+```
+
+- [ ] **Step 2: Add imports and configuration**
+
+```typescript
 import { Client, Databases, Storage, Query, ID } from "node-appwrite";
 import { getEnv } from "../apps/web-astro/src/lib/appwrite";
 
@@ -27,7 +55,26 @@ const dbId = getEnv("DATABASE_ID");
 const articlesId = getEnv("ARTICLES_COLLECTION_ID");
 const translationsId = getEnv("ARTICLE_TRANSLATIONS_COLLECTION_ID");
 const bucketId = getEnv("STORAGE_BUCKET_ID");
+```
 
+- [ ] **Step 3: Commit skeleton**
+
+```bash
+git add scripts/migrate-albergaria.ts
+git commit -m "feat: add migration script skeleton"
+```
+
+---
+
+### Task 2: Purge Logic
+
+**Files:**
+
+- Modify: `scripts/migrate-albergaria.ts`
+
+- [ ] **Step 1: Implement purge function**
+
+```typescript
 async function purge() {
   console.log("Starting purge...");
 
@@ -55,7 +102,26 @@ async function purge() {
 
   console.log("Purge complete.");
 }
+```
 
+- [ ] **Step 2: Commit purge logic**
+
+```bash
+git add scripts/migrate-albergaria.ts
+git commit -m "feat: add purge logic to migration script"
+```
+
+---
+
+### Task 3: Extraction & Clean-up
+
+**Files:**
+
+- Modify: `scripts/migrate-albergaria.ts`
+
+- [ ] **Step 1: Define article structure and cleaning logic**
+
+```typescript
 interface MigrationArticle {
   title: string;
   slug: string;
@@ -66,28 +132,52 @@ interface MigrationArticle {
   featured: boolean;
 }
 
+// Cleaning logic will be handled by sub-agents during extraction
+// or manually implemented if needed.
+```
+
+- [ ] **Step 2: Add extraction placeholder (to be filled by sub-agent)**
+
+```typescript
 const REAL_ARTICLES: MigrationArticle[] = [
   // Sub-agent will populate this using web_fetch
 ];
+```
 
+- [ ] **Step 3: Commit extraction placeholder**
+
+```bash
+git add scripts/migrate-albergaria.ts
+git commit -m "chore: add article data placeholder"
+```
+
+---
+
+### Task 4: Import & Image Handling
+
+**Files:**
+
+- Modify: `scripts/migrate-albergaria.ts`
+
+- [ ] **Step 1: Implement image upload helper**
+
+```typescript
 async function uploadImage(url: string): Promise<string> {
   const res = await fetch(url);
   const blob = await res.blob();
-  // Using a generic filename since we don't have the original name
   const file = new File([blob], "image.jpg", { type: "image/jpeg" });
   const uploaded = await storage.createFile(bucketId, ID.unique(), file);
   return uploaded.$id;
 }
+```
 
+- [ ] **Step 2: Implement import function**
+
+```typescript
 async function runImport() {
   console.log("Starting import...");
   for (const data of REAL_ARTICLES) {
-    let fileId = "";
-    try {
-      fileId = await uploadImage(data.imageUrl);
-    } catch (e) {
-      console.error(`Failed to upload image for ${data.title}:`, e);
-    }
+    const fileId = await uploadImage(data.imageUrl);
 
     // Create Master Article
     const article = await databases.createDocument(
@@ -116,16 +206,49 @@ async function runImport() {
 
     console.log(`Imported: ${data.title}`);
   }
-  console.log("Import complete.");
 }
+```
 
-async function main() {
-  try {
-    await purge();
-    await runImport();
-  } catch (e) {
-    console.error("Migration failed:", e);
-  }
-}
+- [ ] **Step 3: Commit import logic**
 
-main();
+```bash
+git add scripts/migrate-albergaria.ts
+git commit -m "feat: add import logic to migration script"
+```
+
+---
+
+### Task 5: Content Extraction (Sub-agent)
+
+- [ ] **Step 1: Dispatch sub-agent to fetch and clean content**
+      Task: "@generalist Visit the 12 URLs in migrate-albergaria.ts and extract the full content, title, slug, excerpt, and image URL for each. Clean the content (remove ads/menus) and return it as an array of JSON objects matching the MigrationArticle interface. Map categories to: noticias, analises, exoplanetas, extremofilos, entrevistas, pesquisas-brasileiras."
+
+- [ ] **Step 2: Update REAL_ARTICLES array with results**
+
+- [ ] **Step 3: Commit finalized data**
+
+```bash
+git add scripts/migrate-albergaria.ts
+git commit -m "data: finalize article content for migration"
+```
+
+---
+
+### Task 6: Execution & Verification
+
+- [ ] **Step 1: Run the migration script**
+
+```bash
+npx tsx scripts/migrate-albergaria.ts
+```
+
+- [ ] **Step 2: Verify on site**
+      Visit https://astrobiologia.appwrite.network/artigos and confirm 12 articles are present with images.
+
+- [ ] **Step 3: Cleanup script**
+
+```bash
+rm scripts/migrate-albergaria.ts
+git add scripts
+git commit -m "chore: cleanup migration script"
+```

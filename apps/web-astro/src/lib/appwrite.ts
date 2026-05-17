@@ -1,7 +1,27 @@
 import { Client, Account, Databases, Storage } from "node-appwrite";
 import { parse } from "cookie";
 
-export const SESSION_COOKIE = `a_session_${import.meta.env.APPWRITE_PROJECT_ID}`;
+/**
+ * Helper to get environment variables with multiple fallbacks:
+ * 1. import.meta.env[key]
+ * 2. import.meta.env[PUBLIC_key]
+ * 3. process.env[key]
+ * 4. process.env[PUBLIC_key]
+ */
+export function getEnv(key: string): string {
+  const metaEnv = (globalThis as any).import?.meta?.env || {};
+  return (
+    metaEnv[key] ||
+    metaEnv[`PUBLIC_${key}`] ||
+    (typeof process !== "undefined" ? process.env[key] : undefined) ||
+    (typeof process !== "undefined"
+      ? process.env[`PUBLIC_${key}`]
+      : undefined) ||
+    ""
+  );
+}
+
+export const SESSION_COOKIE = `a_session_${getEnv("APPWRITE_PROJECT_ID")}`;
 
 export const CATEGORIES = [
   {
@@ -47,25 +67,6 @@ export const CATEGORIES = [
     color: "accent",
   },
 ] as const;
-
-/**
- * Helper to get environment variables with multiple fallbacks:
- * 1. import.meta.env[key]
- * 2. import.meta.env[PUBLIC_key]
- * 3. process.env[key]
- * 4. process.env[PUBLIC_key]
- */
-export function getEnv(key: string): string {
-  return (
-    import.meta.env[key] ||
-    import.meta.env[`PUBLIC_${key}`] ||
-    (typeof process !== "undefined" ? process.env[key] : undefined) ||
-    (typeof process !== "undefined"
-      ? process.env[`PUBLIC_${key}`]
-      : undefined) ||
-    ""
-  );
-}
 
 function safeId(id: string): string {
   if (!id) return "MISSING";
