@@ -48,31 +48,33 @@ export const CATEGORIES = [
   },
 ] as const;
 
+/**
+ * Helper to get environment variables with fallback to PUBLIC_ prefix
+ */
+export function getEnv(key: string): string {
+  return import.meta.env[key] || import.meta.env[`PUBLIC_${key}`] || "";
+}
+
 function baseClient(): Client {
-  const endpoint = import.meta.env.APPWRITE_ENDPOINT;
-  const project = import.meta.env.APPWRITE_PROJECT_ID;
+  const endpoint = getEnv("APPWRITE_ENDPOINT");
+  const project = getEnv("APPWRITE_PROJECT_ID");
 
   console.log(`[DEBUG] baseClient initialization:`);
-  console.log(`- APPWRITE_ENDPOINT: ${endpoint ? "SET" : "MISSING"}`);
-  console.log(`- APPWRITE_PROJECT_ID: ${project ? "SET" : "MISSING"}`);
-
-  // Log available keys to check for naming mismatches (e.g., PUBLIC_ prefix)
-  const allKeys = Object.keys(import.meta.env);
+  console.log(`- ENDPOINT: ${endpoint ? "SET" : "MISSING"}`);
+  console.log(`- PROJECT_ID: ${project ? "SET" : "MISSING"}`);
+  console.log(`- DATABASE_ID: ${getEnv("DATABASE_ID") ? "SET" : "MISSING"}`);
   console.log(
-    `- Available Env Keys: ${allKeys.filter((k) => k.includes("APPWRITE") || k.includes("ID") || k.includes("COLLECTION")).join(", ")}`
-  );
-  console.log(
-    `- DATABASE_ID: ${import.meta.env.DATABASE_ID ? "SET" : "MISSING"}`
-  );
-  console.log(
-    `- ARTICLES_COLLECTION_ID: ${import.meta.env.ARTICLES_COLLECTION_ID ? "SET" : "MISSING"}`
+    `- ARTICLES_COLLECTION_ID: ${getEnv("ARTICLES_COLLECTION_ID") ? "SET" : "MISSING"}`
   );
 
   return new Client().setEndpoint(endpoint).setProject(project);
 }
 
 export function createAdminClient() {
-  const client = baseClient().setKey(import.meta.env.APPWRITE_API_KEY);
+  const apiKey = getEnv("APPWRITE_API_KEY");
+  console.log(`- API_KEY: ${apiKey ? "SET" : "MISSING"}`);
+
+  const client = baseClient().setKey(apiKey);
   return {
     get account() {
       return new Account(client);
@@ -108,9 +110,9 @@ export function createSessionClient(request: Request) {
 export function getImageUrl(fileId: string, width = 800, height = 600): string {
   if (!fileId) return "";
   if (fileId.startsWith("http")) return fileId;
-  const endpoint = import.meta.env.APPWRITE_ENDPOINT;
-  const project = import.meta.env.APPWRITE_PROJECT_ID;
-  const bucket = import.meta.env.STORAGE_BUCKET_ID;
+  const endpoint = getEnv("APPWRITE_ENDPOINT");
+  const project = getEnv("APPWRITE_PROJECT_ID");
+  const bucket = getEnv("STORAGE_BUCKET_ID");
   return `${endpoint}/storage/buckets/${bucket}/files/${fileId}/preview?width=${width}&height=${height}&project=${project}`;
 }
 

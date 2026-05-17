@@ -1,6 +1,6 @@
 import { Query } from "node-appwrite";
 import type { Article, ArticleTranslation } from "./types";
-import { createAdminClient } from "./appwrite";
+import { createAdminClient, getEnv } from "./appwrite";
 import {
   localeTagsMatch,
   normalizeLocaleTag,
@@ -55,8 +55,8 @@ async function fetchTranslationsForIds(
     const chunk = ids.slice(i, i + CHUNK_SIZE);
     try {
       const res = await databases.listDocuments(
-        import.meta.env.DATABASE_ID,
-        import.meta.env.ARTICLE_TRANSLATIONS_COLLECTION_ID,
+        getEnv("DATABASE_ID"),
+        getEnv("ARTICLE_TRANSLATIONS_COLLECTION_ID"),
         [
           Query.equal("article_id", chunk),
           Query.limit(translationJoinLimit(chunk.length)),
@@ -102,13 +102,13 @@ export async function getPublishedArticles(
   offset = 0
 ): Promise<Article[]> {
   console.log(
-    `[DEBUG] getPublishedArticles: lang=${language}, db=${import.meta.env.DATABASE_ID}, coll=${import.meta.env.ARTICLES_COLLECTION_ID}`
+    `[DEBUG] getPublishedArticles: lang=${language}, db=${getEnv("DATABASE_ID")}, coll=${getEnv("ARTICLES_COLLECTION_ID")}`
   );
   const { databases } = createAdminClient();
   try {
     const res = await databases.listDocuments(
-      import.meta.env.DATABASE_ID,
-      import.meta.env.ARTICLES_COLLECTION_ID,
+      getEnv("DATABASE_ID"),
+      getEnv("ARTICLES_COLLECTION_ID"),
       [
         Query.equal("status", "published"),
         Query.orderDesc("publishedAt"),
@@ -137,8 +137,8 @@ export async function getFeaturedArticles(
 ): Promise<Article[]> {
   const { databases } = createAdminClient();
   const res = await databases.listDocuments(
-    import.meta.env.DATABASE_ID,
-    import.meta.env.ARTICLES_COLLECTION_ID,
+    getEnv("DATABASE_ID"),
+    getEnv("ARTICLES_COLLECTION_ID"),
     [
       Query.equal("status", "published"),
       Query.equal("featured", true),
@@ -161,8 +161,8 @@ export async function getArticleBySlug(
   const { databases } = createAdminClient();
 
   const transRes = await databases.listDocuments(
-    import.meta.env.DATABASE_ID,
-    import.meta.env.ARTICLE_TRANSLATIONS_COLLECTION_ID,
+    getEnv("DATABASE_ID"),
+    getEnv("ARTICLE_TRANSLATIONS_COLLECTION_ID"),
     [Query.equal("slug", slug), Query.limit(50)]
   );
 
@@ -174,8 +174,8 @@ export async function getArticleBySlug(
       if (masterId) {
         try {
           const article = (await databases.getDocument(
-            import.meta.env.DATABASE_ID,
-            import.meta.env.ARTICLES_COLLECTION_ID,
+            getEnv("DATABASE_ID"),
+            getEnv("ARTICLES_COLLECTION_ID"),
             masterId
           )) as unknown as Article;
           return { ...article, translation };
@@ -187,8 +187,8 @@ export async function getArticleBySlug(
   }
 
   const masterRes = await databases.listDocuments(
-    import.meta.env.DATABASE_ID,
-    import.meta.env.ARTICLES_COLLECTION_ID,
+    getEnv("DATABASE_ID"),
+    getEnv("ARTICLES_COLLECTION_ID"),
     [Query.equal("slug", slug), Query.limit(1)]
   );
 
@@ -208,8 +208,8 @@ export async function getArticlesByCategory(
 ): Promise<Article[]> {
   const { databases } = createAdminClient();
   const res = await databases.listDocuments(
-    import.meta.env.DATABASE_ID,
-    import.meta.env.ARTICLES_COLLECTION_ID,
+    getEnv("DATABASE_ID"),
+    getEnv("ARTICLES_COLLECTION_ID"),
     [
       Query.equal("status", "published"),
       Query.equal("category", category),
@@ -238,8 +238,8 @@ export async function searchPublishedArticles(
   for (const field of ["title", "excerpt", "content"] as const) {
     try {
       const res = await databases.listDocuments(
-        import.meta.env.DATABASE_ID,
-        import.meta.env.ARTICLE_TRANSLATIONS_COLLECTION_ID,
+        getEnv("DATABASE_ID"),
+        getEnv("ARTICLE_TRANSLATIONS_COLLECTION_ID"),
         [
           Query.equal("language", language),
           Query.search(field, normalized),
@@ -257,8 +257,8 @@ export async function searchPublishedArticles(
 
   if (translationsById.size > 0) {
     const masters = await databases.listDocuments(
-      import.meta.env.DATABASE_ID,
-      import.meta.env.ARTICLES_COLLECTION_ID,
+      getEnv("DATABASE_ID"),
+      getEnv("ARTICLES_COLLECTION_ID"),
       [
         Query.equal("$id", Array.from(translationsById.keys())),
         Query.equal("status", "published"),
@@ -274,8 +274,8 @@ export async function searchPublishedArticles(
 
   try {
     const fallback = await databases.listDocuments(
-      import.meta.env.DATABASE_ID,
-      import.meta.env.ARTICLES_COLLECTION_ID,
+      getEnv("DATABASE_ID"),
+      getEnv("ARTICLES_COLLECTION_ID"),
       [
         Query.equal("status", "published"),
         Query.search("title", normalized),
