@@ -68,31 +68,15 @@ export const CATEGORIES = [
   },
 ] as const;
 
-function safeId(id: string): string {
-  if (!id) return "MISSING";
-  if (id.length <= 6) return `LEN(${id.length})`;
-  return `${id.slice(0, 3)}...${id.slice(-3)} (LEN:${id.length})`;
-}
-
 function baseClient(): Client {
   const endpoint = getEnv("APPWRITE_ENDPOINT");
   const project = getEnv("APPWRITE_PROJECT_ID");
-
-  console.log(`[DEBUG] baseClient initialization:`);
-  console.log(`- ENDPOINT: ${endpoint ? "SET" : "MISSING"} (${endpoint})`);
-  console.log(`- PROJECT_ID: ${safeId(project)}`);
-  console.log(`- DATABASE_ID: ${safeId(getEnv("DATABASE_ID"))}`);
-  console.log(
-    `- ARTICLES_COLLECTION_ID: ${safeId(getEnv("ARTICLES_COLLECTION_ID"))}`
-  );
 
   return new Client().setEndpoint(endpoint).setProject(project);
 }
 
 export function createAdminClient() {
   const apiKey = getEnv("APPWRITE_API_KEY");
-  console.log(`- API_KEY: ${apiKey ? "SET" : "MISSING"}`);
-
   const client = baseClient().setKey(apiKey);
   return {
     get account() {
