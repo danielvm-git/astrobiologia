@@ -55,3 +55,17 @@ async function purge() {
 
   console.log("Purge complete.");
 }
+
+interface MigrationArticle {
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  imageUrl: string;
+  category: string;
+  featured: boolean;
+}
+
+const REAL_ARTICLES: MigrationArticle[] = [
+  // Sub-agent will populate this using web_fetch
+];
