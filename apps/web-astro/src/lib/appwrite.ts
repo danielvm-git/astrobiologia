@@ -49,10 +49,28 @@ export const CATEGORIES = [
 ] as const;
 
 /**
- * Helper to get environment variables with fallback to PUBLIC_ prefix
+ * Helper to get environment variables with multiple fallbacks:
+ * 1. import.meta.env[key]
+ * 2. import.meta.env[PUBLIC_key]
+ * 3. process.env[key]
+ * 4. process.env[PUBLIC_key]
  */
 export function getEnv(key: string): string {
-  return import.meta.env[key] || import.meta.env[`PUBLIC_${key}`] || "";
+  return (
+    import.meta.env[key] ||
+    import.meta.env[`PUBLIC_${key}`] ||
+    (typeof process !== "undefined" ? process.env[key] : undefined) ||
+    (typeof process !== "undefined"
+      ? process.env[`PUBLIC_${key}`]
+      : undefined) ||
+    ""
+  );
+}
+
+function safeId(id: string): string {
+  if (!id) return "MISSING";
+  if (id.length <= 6) return `LEN(${id.length})`;
+  return `${id.slice(0, 3)}...${id.slice(-3)} (LEN:${id.length})`;
 }
 
 function baseClient(): Client {
@@ -60,11 +78,11 @@ function baseClient(): Client {
   const project = getEnv("APPWRITE_PROJECT_ID");
 
   console.log(`[DEBUG] baseClient initialization:`);
-  console.log(`- ENDPOINT: ${endpoint ? "SET" : "MISSING"}`);
-  console.log(`- PROJECT_ID: ${project ? "SET" : "MISSING"}`);
-  console.log(`- DATABASE_ID: ${getEnv("DATABASE_ID") ? "SET" : "MISSING"}`);
+  console.log(`- ENDPOINT: ${endpoint ? "SET" : "MISSING"} (${endpoint})`);
+  console.log(`- PROJECT_ID: ${safeId(project)}`);
+  console.log(`- DATABASE_ID: ${safeId(getEnv("DATABASE_ID"))}`);
   console.log(
-    `- ARTICLES_COLLECTION_ID: ${getEnv("ARTICLES_COLLECTION_ID") ? "SET" : "MISSING"}`
+    `- ARTICLES_COLLECTION_ID: ${safeId(getEnv("ARTICLES_COLLECTION_ID"))}`
   );
 
   return new Client().setEndpoint(endpoint).setProject(project);
