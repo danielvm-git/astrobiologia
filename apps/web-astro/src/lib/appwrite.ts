@@ -1,6 +1,22 @@
 import { Client, Account, Databases, Storage } from "node-appwrite";
 import { parse } from "cookie";
 
+// Patch Client to prevent Undici agent validation crash under modern Node (v24/v26)
+const originalPrepare = (Client.prototype as any).prepareRequest;
+(Client.prototype as any).prepareRequest = function (
+  method: string,
+  url: URL,
+  headers: Record<string, string> = {},
+  params: Record<string, any> = {}
+) {
+  const result = originalPrepare.call(this, method, url, headers, params);
+  if (result && result.options) {
+    delete result.options.agent;
+    delete result.options.dispatcher;
+  }
+  return result;
+};
+
 /**
  * Helper to get environment variables with multiple fallbacks:
  * 1. import.meta.env[key]
@@ -9,7 +25,11 @@ import { parse } from "cookie";
  * 4. process.env[PUBLIC_key]
  */
 export function getEnv(key: string): string {
-  const metaEnv = (globalThis as any).import?.meta?.env || {};
+  let metaEnv: Record<string, any> = {};
+  try {
+    metaEnv = import.meta.env || {};
+  } catch {}
+
   return (
     metaEnv[key] ||
     metaEnv[`PUBLIC_${key}`] ||
