@@ -175,7 +175,10 @@ function AccountSection(p: AccountSectionProps) {
         saveEmail={p.saveEmail}
       />
       {p.accountError && (
-        <p className="text-red-600 text-sm font-medium mb-4">
+        <p
+          data-testid="account-error"
+          className="text-red-600 text-sm font-medium mb-4"
+        >
           {p.accountError}
         </p>
       )}

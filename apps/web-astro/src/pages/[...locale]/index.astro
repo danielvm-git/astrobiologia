@@ -67,7 +67,7 @@ const sidebarArticles = recent.slice(0, 5);
         ))}
       </div>
     ) : (
-      <p class="text-slate-400 italic text-center py-16">
+      <p data-testid="empty-state" class="text-slate-400 italic text-center py-16">
         Nenhum artigo publicado ainda.
       </p>
     )}

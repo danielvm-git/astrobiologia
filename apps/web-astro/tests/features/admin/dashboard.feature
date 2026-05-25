@@ -15,3 +15,9 @@ Feature: Admin Dashboard
     When they navigate to "/admin"
     And they click the "Novo Artigo" quick action
     Then they should be on the new article page
+
+  @p1 @admin
+  Scenario: Unauthenticated user is redirected to login
+    Given the user is not logged in
+    When they navigate to "/admin"
+    Then they should be redirected to "/admin/login"

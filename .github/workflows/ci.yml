@@ -1,6 +1,13 @@
-# PR quality gate: typecheck + unit tests + P0 E2E (Chromium).
+# PR quality gate: typecheck + unit tests + coverage gate + P0 E2E (Chromium).
 # Deploy to Appwrite Sites only on main after all checks pass.
-# Widen E2E (all browsers / P1) by adding a follow-up job or workflow.
+# GSD Quality Gates enforced:
+#   G.1: Unit tests pass
+#   G.2: E2E tests pass (P0)
+#   G.3: Type check passes
+#   G.4: Suite completes within 5 minutes
+#   G.7: CI runs on every PR
+#   G.8: CI fails on any failing test
+#   S.1-S.4: Coverage thresholds enforced (statements, branches, functions)
 name: CI
 
 on:
@@ -38,8 +45,29 @@ jobs:
       - name: Check
         run: pnpm --filter @astrobiologia/web-astro run check
 
-      - name: Vitest (unit)
-        run: pnpm --filter @astrobiologia/web-astro run test:unit
+      - name: Vitest with coverage gate & G.4 timing
+        run: |
+          START=$(date +%s)
+          pnpm --filter @astrobiologia/web-astro run test:coverage || EXIT_CODE=$?
+          END=$(date +%s)
+          DURATION=$((END - START))
+          echo "Suite execution time: ${DURATION}s"
+          if [ "$DURATION" -gt 300 ]; then
+            echo "G.4 FAIL: Suite took ${DURATION}s, exceeding 300s limit"
+            exit 1
+          fi
+          echo "G.4 PASS: Suite completed in ${DURATION}s"
+          exit ${EXIT_CODE:-0}
+        env:
+          CI: true
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: apps/web-astro/coverage/
+          retention-days: 7
 
   e2e-p0:
     name: Playwright P0 (Chromium)
@@ -97,7 +125,6 @@ jobs:
         run: npx playwright install-deps chromium
 
       - name: Run P0 E2E
-
         working-directory: apps/web-astro
         run: pnpm run test:e2e:p0
         env:

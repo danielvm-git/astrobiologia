@@ -13,3 +13,19 @@ Feature: Admin Article Editor
     And they set the article status to "publicado"
     And they save the article
     Then the article should be created successfully
+
+  @p1 @admin
+  Scenario: Admin saves article with missing required fields
+    Given the user is logged in as admin
+    When they navigate to "/admin/artigos/new"
+    And they save the article without filling in the title
+    Then they should see a validation error for the title field
+
+  @p1 @admin
+  Scenario: Admin edits an existing article
+    Given the user is logged in as admin
+    And an existing article exists
+    When they navigate to edit the article
+    And they update the article title with "Updated Title"
+    And they save the article
+    Then the article should be updated successfully

@@ -250,7 +250,15 @@ export default function ArticleEditor({ articleId }: { articleId?: string }) {
     }
   }
 
+  const [validationError, setValidationError] = useState("");
+
   async function save() {
+    if (!translations["pt-br"]?.title?.trim()) {
+      setValidationError("O título é obrigatório.");
+      setTimeout(() => setValidationError(""), 4000);
+      return;
+    }
+    setValidationError("");
     setSaving(true);
     setSaveStatus("idle");
     try {
@@ -331,6 +339,14 @@ export default function ArticleEditor({ articleId }: { articleId?: string }) {
         </button>
       </div>
 
+      {validationError && (
+        <div
+          data-testid="title-error"
+          className="fixed bottom-4 left-4 bg-red-600 text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg z-50"
+        >
+          {validationError}
+        </div>
+      )}
       {saveStatus === "saved" && (
         <div
           data-testid="toast-success"

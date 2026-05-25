@@ -13,3 +13,9 @@ Then("they should see relevant results", async ({ page }) => {
   const count = await page.locator("article").count();
   expect(count).toBeGreaterThanOrEqual(1);
 });
+
+Then("they should see a no-results message", async ({ page }) => {
+  await expect(page.getByTestId("no-results")).toBeVisible({
+    timeout: 10000,
+  });
+});

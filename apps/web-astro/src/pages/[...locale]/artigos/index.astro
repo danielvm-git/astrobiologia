@@ -37,7 +37,7 @@ const prefix = locale === "pt-br" ? "" : `/${locale}`;
       ))}
     </div>
   ) : (
-    <p class="text-slate-400 italic text-center py-32">
+    <p data-testid="empty-state" class="text-slate-400 italic text-center py-32">
       Nenhum artigo publicado ainda.
     </p>
   )}

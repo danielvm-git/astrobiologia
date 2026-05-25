@@ -55,3 +55,38 @@ Then(
     await expect(page).toHaveTitle(new RegExp(title));
   }
 );
+
+Given("the user is not logged in", async ({ page }) => {
+  await page.context().clearCookies();
+});
+
+Then("they should be redirected to {string}", async ({ page }, url: string) => {
+  await page.waitForURL(new RegExp(url.replace(/\//g, "\\/")), {
+    timeout: 10000,
+  });
+});
+
+Given("no articles are published", async () => {
+  // no-op: this is a test environment precondition
+  // In CI, the test DB starts empty. In dev, rely on manual state.
+});
+
+Then("they should see a not-found message", async ({ page }) => {
+  // Check for 404 response or not-found indicator
+  await expect(page.locator("body")).toContainText(/não encontrado/i);
+});
+
+Then("they should see an empty state message", async ({ page }) => {
+  await expect(page.getByTestId("empty-state")).toBeVisible({ timeout: 10000 });
+});
+
+Then("they should see a validation error", async ({ page }) => {
+  await expect(page.getByTestId("title-error")).toBeVisible({ timeout: 5000 });
+});
+
+Then(
+  "they should see a validation prompt or all articles",
+  async ({ page }) => {
+    await expect(page.locator("body")).toContainText(/pesquisar/i);
+  }
+);

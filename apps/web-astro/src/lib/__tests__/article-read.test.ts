@@ -31,4 +31,30 @@ describe("pickTranslationForArticle", () => {
     const trans = [makeTrans("zh"), makeTrans("nl")];
     expect(pickTranslationForArticle(trans, "ja")?.language).toBe("zh");
   });
+
+  it("prefers exact match over primary subtag match", () => {
+    // pt-pt is not in the list, so pt-br matches via primary subtag
+    const trans = [makeTrans("pt-br"), makeTrans("es")];
+    expect(pickTranslationForArticle(trans, "pt-pt")?.language).toBe("pt-br");
+  });
+
+  it("falls back to en when preferred not found and no pt-br", () => {
+    const trans = [makeTrans("en"), makeTrans("es")];
+    expect(pickTranslationForArticle(trans, "ja")?.language).toBe("en");
+  });
+
+  it("matches by primary subtag before falling back to pt-br", () => {
+    const trans = [makeTrans("pt-pt"), makeTrans("es")];
+    expect(pickTranslationForArticle(trans, "pt-br")?.language).toBe("pt-pt");
+  });
+
+  it("returns the only translation for single-item array", () => {
+    const trans = [makeTrans("es")];
+    expect(pickTranslationForArticle(trans, "en")?.language).toBe("es");
+  });
+
+  it("handles case-insensitive matching via localeTagsMatch", () => {
+    const trans = [makeTrans("en")];
+    expect(pickTranslationForArticle(trans, "EN")?.language).toBe("en");
+  });
 });

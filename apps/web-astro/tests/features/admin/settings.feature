@@ -26,3 +26,11 @@ Feature: Admin Settings
     And they fill in the site metadata
     And they save the site metadata
     Then they should see a success toast
+
+  @p1 @admin
+  Scenario: Password update with mismatched confirmation fails
+    Given the user is logged in as admin
+    When they navigate to "/admin/configuracoes"
+    And they fill in the password form with mismatched confirmation
+    And they save the account settings
+    Then they should see a password mismatch error

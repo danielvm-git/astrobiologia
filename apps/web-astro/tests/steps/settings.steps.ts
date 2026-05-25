@@ -62,3 +62,23 @@ Then("they should see a success toast", async ({ page }) => {
     timeout: 10000,
   });
 });
+
+When(
+  "they fill in the password form with mismatched confirmation",
+  async ({ page }) => {
+    await page.getByTestId("account-current-password").fill("RealPass123!");
+    await page.getByTestId("account-password").fill("NewPass456!");
+    await page
+      .getByTestId("account-password-confirm")
+      .fill("DifferentPass789!");
+  }
+);
+
+Then("they should see a password mismatch error", async ({ page }) => {
+  await expect(page.getByTestId("account-error")).toBeVisible({
+    timeout: 5000,
+  });
+  await expect(page.getByTestId("account-error")).toContainText(
+    /não coincidem/i
+  );
+});
