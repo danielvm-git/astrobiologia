@@ -9,3 +9,9 @@ Then("I should see at least one article card", async ({ page }) => {
   const count = await page.locator("article").count();
   expect(count).toBeGreaterThanOrEqual(1);
 });
+
+Then("I should see an empty state message", async ({ page }) => {
+  await expect(page.getByTestId("empty-state")).toBeVisible({
+    timeout: 10000,
+  });
+});

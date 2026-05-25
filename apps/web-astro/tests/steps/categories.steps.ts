@@ -1,4 +1,4 @@
-import { Then, expect } from "../fixtures/base.fixture";
+import { Given, Then, expect } from "../fixtures/base.fixture";
 
 Then(
   "they should see articles for the {string} category",
