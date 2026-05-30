@@ -1,6 +1,6 @@
 import type { ArticleTranslation } from "@/lib/article-editor-types";
 
-type TranslateApiResult = { translated?: string };
+type TranslateApiResult = { translated?: string; error?: string };
 
 async function translateText(
   text: string,
@@ -14,7 +14,13 @@ async function translateText(
     body: JSON.stringify({ text, targetLang: targetLocale, isHtml }),
   });
   const data = (await res.json()) as TranslateApiResult;
-  return data.translated ?? text;
+  if (!res.ok) {
+    throw new Error(data.error ?? `Translate failed (${res.status})`);
+  }
+  if (data.translated === undefined) {
+    throw new Error("Translate response missing translated text");
+  }
+  return data.translated;
 }
 
 export async function buildTranslatedLocaleFields(
