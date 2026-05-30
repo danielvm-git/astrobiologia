@@ -166,6 +166,50 @@ describe("PUT /api/admin/articles/[id]", () => {
     expect(typeof updatePayload.metaDescription).toBe("string");
   });
 
+  it("persists slug when updating an existing translation", async () => {
+    const { ALL } = await import("../admin/articles/[id]");
+    resetAppwriteMocks();
+    mockGetDocument.mockResolvedValue({ $id: "art_1" });
+    mockUpdateDocument.mockResolvedValue({});
+    mockListDocuments.mockResolvedValue({
+      documents: [
+        { $id: "trans_pt", language: "pt-br" },
+        { $id: "trans_en", language: "en" },
+      ],
+    });
+    const res = await ALL({
+      locals: { user: mockUser },
+      params: { id: "art_1" },
+      request: new Request("http://localhost/api/admin/articles/art_1", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          translations: [
+            {
+              language: "pt-br",
+              title: "Título",
+              slug: "titulo",
+              content: "Conteúdo",
+            },
+            {
+              language: "en",
+              title: "English Title",
+              slug: "titulo-en",
+              content: "English content",
+            },
+          ],
+        }),
+      }),
+    } as unknown as Parameters<typeof ALL>[0]);
+    expect(res.status).toBe(200);
+    const translationUpdateCall = mockUpdateDocument.mock.calls.find(
+      (call) => call[2] === "trans_en"
+    );
+    expect(translationUpdateCall).toBeDefined();
+    const updatePayload = translationUpdateCall![3] as { slug?: string };
+    expect(updatePayload.slug).toBe("titulo-en");
+  });
+
   it("truncates metaDescription over 500 chars to 500 chars", async () => {
     const { ALL } = await import("../admin/articles/[id]");
     resetAppwriteMocks();

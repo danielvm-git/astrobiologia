@@ -182,6 +182,7 @@ export const ALL: APIRoute = async ({ locals, request, params }) => {
           excerpt: normalized["excerpt"],
           metaTitle: normalized["metaTitle"],
           metaDescription: normalized["metaDescription"],
+          slug: uniqueSlug,
           article_id: id,
         });
       } else {
