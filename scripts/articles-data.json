@@ -1,0 +1,175 @@
+{
+  "author": {
+    "id": "danilo-albergaria",
+    "name": "Danilo Albergaria"
+  },
+  "articles": [
+    {
+      "sourceUrl": "https://theconversation.com/a-comunidade-cientifica-se-prepara-para-comunicar-resultados-das-buscas-por-vida-fora-da-terra-entenda-como-e-por-que-280129",
+      "slug": "comunicar-resultados-buscas-vida-fora-da-terra",
+      "category": "analises",
+      "featured": true,
+      "publishedAt": "2026-04-07",
+      "journalName": "The Conversation Brasil",
+      "pdfUrl": null,
+      "imageUrl": null,
+      "title": "A comunidade científica se prepara para comunicar resultados das buscas por vida fora da Terra: entenda como e por quê",
+      "excerpt": "Cientistas da NASA propuseram a Escala de Confiança da Detecção de Vida (CoLD) para comunicar possíveis evidências de vida extraterrestre com sobriedade e transparência.",
+      "tags": ["astrobiologia", "comunicação científica", "NASA", "CoLD"]
+    },
+    {
+      "sourceUrl": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0328766",
+      "slug": "comunicando-astrobiologia-busca-por-vida",
+      "category": "pesquisas-brasileiras",
+      "featured": true,
+      "publishedAt": "2025-07-29",
+      "journalName": "PLOS One",
+      "pdfUrl": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0328766&type=printable",
+      "imageUrl": null,
+      "title": "Comunicando astrobiologia e a busca por vida em outros lugares: especulações e promessas em jornais, releases e artigos científicos",
+      "excerpt": "Estudo quantitativo de três décadas de comunicação sobre astrobiologia em artigos acadêmicos, releases de imprensa e reportagens.",
+      "tags": [
+        "astrobiologia",
+        "comunicação científica",
+        "exoplanetas",
+        "pesquisa"
+      ]
+    },
+    {
+      "sourceUrl": "https://www.nature.com/articles/s41550-025-02657-w",
+      "slug": "astronomia-ucraniana-em-tempo-de-guerra",
+      "category": "noticias",
+      "featured": true,
+      "publishedAt": "2025-09-15",
+      "journalName": "Nature Astronomy",
+      "pdfUrl": "https://doi.org/10.1038/s41550-025-02657-w",
+      "imageUrl": null,
+      "title": "Astronomia ucraniana em tempo de guerra e suas perspectivas",
+      "excerpt": "A invasão russa danificou observatórios e deslocou pesquisadores. Um plano de recuperação da astronomia ucraniana está em elaboração.",
+      "tags": ["astronomia", "Ucrânia", "ciência em guerra"]
+    },
+    {
+      "sourceUrl": "https://www.fcw.org.br/culturacientifica6/danilo-albergaria",
+      "slug": "hype-na-astrobiologia",
+      "category": "analises",
+      "featured": true,
+      "publishedAt": "2026-01-01",
+      "journalName": "FCW Cultura Científica",
+      "pdfUrl": null,
+      "imageUrl": null,
+      "title": "Hype na astrobiologia: entre o sensacionalismo e o otimismo científico",
+      "excerpt": "Reflexão sobre como o hype e a especulação circulam na comunicação da astrobiologia e o que isso significa para o jornalismo científico.",
+      "tags": ["astrobiologia", "hype", "comunicação científica"]
+    },
+    {
+      "sourceUrl": "https://revistapesquisa.fapesp.br/o-ceu-visto-das-missoes/",
+      "slug": "o-ceu-visto-das-missoes",
+      "category": "analises",
+      "featured": false,
+      "publishedAt": null,
+      "journalName": "Pesquisa FAPESP",
+      "pdfUrl": null,
+      "tags": ["astronomia", "história da ciência", "Missões Jesuíticas"]
+    },
+    {
+      "sourceUrl": "https://revistapesquisa.fapesp.br/fritz-muller-ganha-site-com-exposicao-virtual-e-books-e-artigos/",
+      "slug": "fritz-muller-ganha-site-com-exposicao-virtual",
+      "category": "noticias",
+      "featured": false,
+      "publishedAt": null,
+      "journalName": "Pesquisa FAPESP",
+      "pdfUrl": null,
+      "tags": ["história da ciência", "Fritz Müller", "Brasil"]
+    },
+    {
+      "sourceUrl": "https://revistapesquisa.fapesp.br/ameaca-imprevista-a-etnobotanica/",
+      "slug": "ameaca-imprevista-a-etnobotanica",
+      "category": "analises",
+      "featured": false,
+      "publishedAt": null,
+      "journalName": "Pesquisa FAPESP",
+      "pdfUrl": null,
+      "tags": ["etnobotânica", "biodiversidade", "Amazônia"]
+    },
+    {
+      "sourceUrl": "https://revistapesquisa.fapesp.br/experimentos-avancam-na-manipulacao-das-interacoes-entre-ondas-acusticas-e-de-luz/",
+      "slug": "experimentos-ondas-acusticas-e-luz",
+      "category": "pesquisas-brasileiras",
+      "featured": false,
+      "publishedAt": null,
+      "journalName": "Pesquisa FAPESP",
+      "pdfUrl": null,
+      "tags": ["física", "óptica", "acústica"]
+    },
+    {
+      "sourceUrl": "https://revistapesquisa.fapesp.br/costa-ribeiro-descobriu-fontes-inesperadas-de-eletricidade/",
+      "slug": "costa-ribeiro-fontes-eletricidade",
+      "category": "pesquisas-brasileiras",
+      "featured": false,
+      "publishedAt": null,
+      "journalName": "Pesquisa FAPESP",
+      "pdfUrl": null,
+      "tags": ["história da ciência", "eletricidade", "Brasil"]
+    },
+    {
+      "sourceUrl": "https://revistapesquisa.fapesp.br/atomos-gigantes-podem-ser-a-base-de-sensores-quanticos-mais-refinados/",
+      "slug": "atomos-gigantes-sensores-quanticos",
+      "category": "pesquisas-brasileiras",
+      "featured": false,
+      "publishedAt": null,
+      "journalName": "Pesquisa FAPESP",
+      "pdfUrl": null,
+      "tags": ["física quântica", "sensores", "pesquisa"]
+    },
+    {
+      "sourceUrl": "https://revistapesquisa.fapesp.br/cerveja-gelada-por-mais-tempo/",
+      "slug": "cerveja-gelada-por-mais-tempo",
+      "category": "noticias",
+      "featured": false,
+      "publishedAt": null,
+      "journalName": "Pesquisa FAPESP",
+      "pdfUrl": null,
+      "tags": ["química", "materiais", "inovação"]
+    },
+    {
+      "sourceUrl": "https://revistapesquisa.fapesp.br/fenomeno-misterioso-da-agua-tambem-pode-ser-produzido-em-sistemas-quanticos/",
+      "slug": "fenomeno-agua-sistemas-quanticos",
+      "category": "pesquisas-brasileiras",
+      "featured": false,
+      "publishedAt": null,
+      "journalName": "Pesquisa FAPESP",
+      "pdfUrl": null,
+      "tags": ["física quântica", "água", "pesquisa"]
+    },
+    {
+      "sourceUrl": "https://revistapesquisa.fapesp.br/as-raizes-da-fome/",
+      "slug": "as-raizes-da-fome",
+      "category": "analises",
+      "featured": false,
+      "publishedAt": null,
+      "journalName": "Pesquisa FAPESP",
+      "pdfUrl": null,
+      "tags": ["segurança alimentar", "política pública", "sociedade"]
+    },
+    {
+      "sourceUrl": "https://revistapesquisa.fapesp.br/morre-luiz-pinguelli-rosa-fisico-especialista-em-energia/",
+      "slug": "morre-luiz-pinguelli-rosa",
+      "category": "noticias",
+      "featured": false,
+      "publishedAt": null,
+      "journalName": "Pesquisa FAPESP",
+      "pdfUrl": null,
+      "tags": ["obituário", "energia", "ciência brasileira"]
+    },
+    {
+      "sourceUrl": "https://www.comciencia.br/o-eclipse-de-1919-e-as-disputas-pela-ciencia/",
+      "slug": "eclipse-1919-disputas-pela-ciencia",
+      "category": "analises",
+      "featured": false,
+      "publishedAt": null,
+      "journalName": "ComCiência",
+      "pdfUrl": null,
+      "tags": ["história da ciência", "relatividade", "Einstein"]
+    }
+  ]
+}
