@@ -3,7 +3,7 @@ Feature: Articles
   I want to read detailed science journalism
   So I can learn about astrobiology
 
-  @p0 @smoke
+  @p1
   Scenario: User opens an article
     Given the user navigates to "/artigos"
     When they click on the first article card

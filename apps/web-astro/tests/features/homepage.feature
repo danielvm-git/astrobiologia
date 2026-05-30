@@ -3,7 +3,7 @@ Feature: Homepage
   I want to see the latest astrobiology news
   So I can stay informed
 
-  @p0 @smoke
+  @p1
   Scenario: Homepage loads correctly
     Given the user is on the homepage
     Then the page title should contain "Astrobiologia"
