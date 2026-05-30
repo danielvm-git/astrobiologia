@@ -67,6 +67,7 @@ Given(
     await createArticleViaUi(page, createdArticleIds, {
       title: uniqueTitle("Artigo para Tradução"),
       content: "Conteúdo de teste para tradução.",
+      status: "published",
     });
     await expectArticleEditorTitleLoaded(page);
   }
@@ -159,6 +160,7 @@ Given("an existing article exists", async ({ page, createdArticleIds }) => {
   await createArticleViaUi(page, createdArticleIds, {
     title: uniqueTitle("Existing Article"),
     content: "Conteúdo de teste.",
+    status: "published",
   });
 });
 

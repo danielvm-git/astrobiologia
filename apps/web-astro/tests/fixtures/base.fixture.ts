@@ -1,5 +1,6 @@
 import { test as base, createBdd } from "playwright-bdd";
 import { loadE2eEnv } from "../helpers/e2eEnv";
+import { deleteE2eArticleById } from "../helpers/appwriteTestClient";
 import { testRunId } from "../helpers/testRunId";
 
 loadE2eEnv();
@@ -19,12 +20,20 @@ export const test = base.extend<TestFixtures>({
     const failures: string[] = [];
     for (const id of ids) {
       try {
+        await deleteE2eArticleById(id);
+      } catch (err) {
+        failures.push(`${id} (Appwrite: ${String(err)})`);
+      }
+      // Fallback: HTTP delete when Appwrite key unavailable in fixture context.
+      try {
         const res = await page.request.delete(`/api/admin/articles/${id}`);
-        if (!res.ok()) {
+        if (!res.ok() && res.status() !== 404) {
           failures.push(`${id} (HTTP ${res.status()})`);
         }
       } catch (err) {
-        failures.push(`${id} (${String(err)})`);
+        if (!failures.some((f) => f.startsWith(id))) {
+          failures.push(`${id} (${String(err)})`);
+        }
       }
     }
     if (failures.length > 0) {
