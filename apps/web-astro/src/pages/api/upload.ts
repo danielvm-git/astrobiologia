@@ -27,7 +27,8 @@ export const POST: APIRoute = async ({ locals, request }) => {
     const buffer = Buffer.from(await file.arrayBuffer());
     const input = InputFile.fromBuffer(buffer, file.name || "upload.bin");
     const created = await storage.createFile(BUCKET, ID.unique(), input);
-    const url = `${getEnv("APPWRITE_ENDPOINT")}/storage/buckets/${BUCKET}/files/${created.$id}/preview?project=${getEnv("APPWRITE_PROJECT_ID")}`;
+    // Use /view instead of /preview to avoid 403 errors on plan limits
+    const url = `${getEnv("APPWRITE_ENDPOINT")}/storage/buckets/${BUCKET}/files/${created.$id}/view?project=${getEnv("APPWRITE_PROJECT_ID")}`;
     return json({ success: true, fileId: created.$id, url });
   } catch {
     return json({ error: "Falha ao enviar arquivo" }, 500);

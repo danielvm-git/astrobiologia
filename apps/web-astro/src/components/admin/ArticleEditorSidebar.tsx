@@ -18,7 +18,8 @@ function featuredImagePreviewUrl(fileId: string): string {
   const bucket = import.meta.env.PUBLIC_STORAGE_BUCKET_ID ?? "images";
   const project =
     import.meta.env.PUBLIC_APPWRITE_PROJECT_ID ?? "69e462f20036d39192ba";
-  return `${endpoint}/storage/buckets/${bucket}/files/${fileId}/preview?width=400&height=250&project=${project}`;
+  // Use /view instead of /preview to avoid 403 errors on plan limits
+  return `${endpoint}/storage/buckets/${bucket}/files/${fileId}/view?project=${project}`;
 }
 
 export default function ArticleEditorSidebar({
