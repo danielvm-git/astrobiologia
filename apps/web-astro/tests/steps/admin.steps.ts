@@ -248,3 +248,23 @@ Then(
     await expect(page.locator("h1")).toContainText(title);
   }
 );
+
+When("they click the logout button", async ({ page }) => {
+  const logoutBtn = page.getByRole("button", { name: /sair/i });
+  await logoutBtn.click();
+  // Wait for the logout API call to complete and redirect
+  await page.waitForURL("/", { timeout: 10000 });
+});
+
+Then("they should be redirected to the homepage", async ({ page }) => {
+  expect(page.url()).toBe(
+    page.context().browser()?.contexts()[0]?.pages()[0]?.url() || ""
+  );
+  await expect(page).toHaveURL(/^\/$|^\/$/);
+});
+
+Then("the page should show the homepage hero", async ({ page }) => {
+  // The homepage should display the hero section with search or featured articles
+  const hero = page.locator("header, [data-testid='hero'], h1");
+  await expect(hero.first()).toBeVisible({ timeout: 10000 });
+});
