@@ -73,8 +73,12 @@ export async function ensureSeedPublishedArticle(): Promise<void> {
       });
     }
     return;
-  } catch {
+  } catch (err: unknown) {
     // 404 — not yet created; fall through to create below.
+    const isNotFound =
+      (err as { code?: number }).code === 404 ||
+      (err instanceof Error && err.message.includes("could not be found"));
+    if (!isNotFound) throw err;
   }
 
   try {
