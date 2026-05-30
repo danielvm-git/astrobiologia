@@ -121,7 +121,9 @@ export function getImageUrl(fileId: string, width = 800, height = 600): string {
   const endpoint = getEnv("APPWRITE_ENDPOINT");
   const project = getEnv("APPWRITE_PROJECT_ID");
   const bucket = getEnv("STORAGE_BUCKET_ID");
-  return `${endpoint}/storage/buckets/${bucket}/files/${fileId}/preview?width=${width}&height=${height}&project=${project}`;
+  // Use /view instead of /preview to avoid 403 errors on plan limits.
+  // Sizing is handled via CSS/Tailwind, not URL params.
+  return `${endpoint}/storage/buckets/${bucket}/files/${fileId}/view?project=${project}`;
 }
 
 export function setSessionCookie(

@@ -85,16 +85,23 @@ describe("getImageUrl", () => {
     expect(mod.getImageUrl(url)).toBe(url);
   });
 
-  it("constructs preview URL for fileId", () => {
+  it("constructs view URL for fileId", () => {
     const result = mod.getImageUrl("file_789");
     expect(result).toBe(
-      "https://endpoint.example.com/storage/buckets/bucket_456/files/file_789/preview?width=800&height=600&project=proj_123"
+      "https://endpoint.example.com/storage/buckets/bucket_456/files/file_789/view?project=proj_123"
     );
   });
 
-  it("uses custom width and height when provided", () => {
+  it("includes project query param in view URL", () => {
+    const result = mod.getImageUrl("file_789");
+    expect(result).toContain("/view?");
+    expect(result).toContain("project=proj_123");
+  });
+
+  it("does not include width/height in view URL", () => {
     const result = mod.getImageUrl("file_789", 400, 300);
-    expect(result).toContain("width=400&height=300");
+    expect(result).not.toContain("width");
+    expect(result).not.toContain("height");
   });
 });
 
