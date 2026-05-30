@@ -14,6 +14,7 @@ export default defineConfig({
   testDir,
   grepInvert: /@wip/,
   globalSetup: "./tests/global-setup",
+  globalTeardown: "./tests/global-teardown",
   fullyParallel: true,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 4 : undefined,

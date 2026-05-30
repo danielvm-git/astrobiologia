@@ -1,4 +1,5 @@
 import type { Page } from "@playwright/test";
+import { E2E_RUNNER_AUTHOR_ID } from "./appwriteTestClient";
 import { testRunId } from "./testRunId";
 
 export type CreateArticlePayload = {
@@ -48,6 +49,9 @@ export async function createArticleViaApi(
   const data = {
     ...payload,
     slug,
+    authorId: E2E_RUNNER_AUTHOR_ID,
+    authorName: "E2E Runner",
+    featured: false,
     translations: (payload.translations ?? []).map((t) => ({
       ...t,
       slug: t.slug ?? (t.language === "pt-br" ? slug : `${slug}-${t.language}`),

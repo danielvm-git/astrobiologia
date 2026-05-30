@@ -19,7 +19,8 @@
     "test:fast": "pnpm --filter @astrobiologia/web-astro test:unit",
     "test:coverage": "pnpm --filter @astrobiologia/web-astro test:coverage",
     "report:astro:watch": "pnpm --filter @astrobiologia/web-astro report:watch",
-    "check": "pnpm --filter @astrobiologia/web-astro check"
+    "check": "pnpm --filter @astrobiologia/web-astro check",
+    "cleanup:e2e-articles": "node scripts/cleanup-e2e-articles.mjs"
   },
   "devDependencies": {
     "@ctxo/cli": "^0.8.1",

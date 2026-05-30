@@ -86,7 +86,7 @@ export async function createArticleViaUi(
     const id = await createArticleViaApi(page, {
       title: options.title,
       content: options.content ?? "Conteúdo de teste.",
-      status: options.status ?? "published",
+      status: options.status ?? "draft",
       translations: [
         {
           language: "pt-br",
