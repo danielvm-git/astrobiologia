@@ -1,18 +1,9 @@
 import { defineConfig } from "@playwright/test";
 import { defineBddConfig } from "playwright-bdd";
-import { existsSync, readFileSync } from "fs";
+import { getE2eServerEnv, loadE2eEnv } from "./tests/helpers/e2eEnv";
+import { ADMIN_AUTH_FILE } from "./tests/helpers/adminStorageState";
 
-// Load .env.test for local E2E credentials without requiring dotenv as a dep
-if (existsSync(".env.test")) {
-  for (const line of readFileSync(".env.test", "utf-8").split("\n")) {
-    const eq = line.indexOf("=");
-    if (eq > 0 && !line.startsWith("#")) {
-      const key = line.slice(0, eq).trim();
-      const val = line.slice(eq + 1).trim();
-      if (key && !(key in process.env)) process.env[key] = val;
-    }
-  }
-}
+loadE2eEnv();
 
 const testDir = defineBddConfig({
   paths: ["tests/features/**/*.feature"],
@@ -37,6 +28,57 @@ export default defineConfig({
   webServer: {
     command: "npm run preview",
     url: "http://localhost:4321",
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
+    env: getE2eServerEnv(),
   },
+  projects: [
+    {
+      name: "setup",
+      testDir: ".",
+      testMatch: /tests\/auth\.setup\.ts/,
+    },
+    {
+      name: "public-smoke",
+      grep: /@p0/,
+      grepInvert: /@admin|@deepl/,
+    },
+    {
+      name: "admin-crud",
+      grep: /(?=.*@p0)(?=.*@admin)/,
+      grepInvert: /@deepl/,
+      fullyParallel: false,
+      workers: 1,
+      dependencies: ["setup"],
+      use: { storageState: ADMIN_AUTH_FILE },
+    },
+    {
+      name: "admin-extended",
+      grep: /(?=.*@p1)(?=.*@admin)/,
+      grepInvert: /@deepl|@isolated|@wip/,
+      dependencies: ["setup"],
+      use: { storageState: ADMIN_AUTH_FILE },
+    },
+    {
+      name: "external",
+      grep: /@deepl/,
+      fullyParallel: false,
+      workers: 1,
+      dependencies: ["setup"],
+      use: { storageState: ADMIN_AUTH_FILE },
+    },
+    {
+      name: "isolated",
+      grep: /@isolated/,
+      fullyParallel: false,
+      workers: 1,
+      dependencies: [
+        "setup",
+        "public-smoke",
+        "admin-crud",
+        "admin-extended",
+        "external",
+      ],
+      use: { storageState: ADMIN_AUTH_FILE },
+    },
+  ],
 });

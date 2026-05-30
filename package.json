@@ -8,7 +8,7 @@
     "prepare": "husky",
     "type-check": "pnpm --filter @astrobiologia/web-astro check",
     "lint": "pnpm --filter @astrobiologia/web-astro lint",
-    "preflight": "pnpm type-check && pnpm lint && pnpm test:unit && pnpm build && pnpm test:e2e && pnpm exec lint-staged --diff HEAD",
+    "preflight": "node scripts/check-node-version.mjs && pnpm type-check && pnpm lint && pnpm test:unit && pnpm build && pnpm test:e2e && pnpm exec lint-staged --diff HEAD",
     "dev": "pnpm --filter @astrobiologia/web-astro dev",
     "build": "pnpm --filter @astrobiologia/web-astro build",
     "generate": "pnpm --filter @astrobiologia/web-astro build",

@@ -49,6 +49,7 @@ jobs:
         run: |
           START=$(date +%s)
           pnpm --filter @astrobiologia/web-astro run test:coverage || EXIT_CODE=$?
+          pnpm --filter @astrobiologia/web-astro run test:api || EXIT_CODE=${EXIT_CODE:-$?}
           END=$(date +%s)
           DURATION=$((END - START))
           echo "Suite execution time: ${DURATION}s"

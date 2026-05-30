@@ -32,5 +32,5 @@ Feature: Admin Settings
     Given the user is logged in as admin
     When they navigate to "/admin/configuracoes"
     And they fill in the password form with mismatched confirmation
-    And they save the account settings
+    And they click save account settings
     Then they should see a password mismatch error

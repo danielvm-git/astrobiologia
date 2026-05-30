@@ -5,8 +5,8 @@ Then("I should see the main navigation", async ({ page }) => {
 });
 
 Then("I should see at least one article card", async ({ page }) => {
-  await page.locator("article").first().waitFor({ timeout: 10000 });
-  const count = await page.locator("article").count();
+  await page.getByTestId("article-card").first().waitFor({ timeout: 10000 });
+  const count = await page.getByTestId("article-card").count();
   expect(count).toBeGreaterThanOrEqual(1);
 });
 

@@ -9,6 +9,7 @@ import { ARTICLE_LOCALES } from "../../../../lib/article-locales";
 import {
   ARTICLE_TITLE_REQUIRED_MESSAGE,
   getPortugueseTitleValidationErrorFromInputs,
+  translationHasContent,
 } from "../../../../lib/article-editor-validation";
 
 function json(data: unknown, status = 200) {
@@ -132,9 +133,12 @@ export const POST: APIRoute = async ({ locals, request }) => {
 
   const generateId = () => ID.unique();
   const articleId = generateId();
+  const articleSlug =
+    (ptBrTrans?.slug ?? String(body.slug ?? "")).trim() ||
+    `artigo-${articleId.slice(-10)}`;
   const article = await databases.createDocument(DB, ARTICLES, articleId, {
     title: ptBrTrans?.title ?? String(body.title ?? ""),
-    slug: ptBrTrans?.slug ?? String(body.slug ?? ""),
+    slug: articleSlug,
     excerpt: ptBrTrans?.excerpt ?? String(body.excerpt ?? ""),
     content: ptBrTrans?.content ?? String(body.content ?? ""),
     category: body.category || "noticias",
@@ -169,7 +173,7 @@ export const POST: APIRoute = async ({ locals, request }) => {
   for (const t of translations) {
     if (!t.language || seenLangs.has(t.language)) continue;
     // Only create if there's actual content or it's the primary language
-    if (!t.title && !t.content && t.language !== "pt-br") continue;
+    if (!translationHasContent(t)) continue;
     seenLangs.add(t.language);
 
     const transId = generateId();
@@ -182,6 +186,9 @@ export const POST: APIRoute = async ({ locals, request }) => {
       : "";
 
     if (!uniqueSlug && (t.title || t.content)) {
+      uniqueSlug = `${articleId}-${t.language}`;
+    }
+    if (!uniqueSlug.trim()) {
       uniqueSlug = `${articleId}-${t.language}`;
     }
 

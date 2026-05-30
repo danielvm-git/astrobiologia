@@ -1,21 +1,6 @@
 import { Client, Account, Databases, Storage } from "node-appwrite";
 import { parse } from "cookie";
-
-// Patch Client to prevent Undici agent validation crash under modern Node (v24/v26)
-const originalPrepare = (Client.prototype as any).prepareRequest;
-(Client.prototype as any).prepareRequest = function (
-  method: string,
-  url: URL,
-  headers: Record<string, string> = {},
-  params: Record<string, any> = {}
-) {
-  const result = originalPrepare.call(this, method, url, headers, params);
-  if (result && result.options) {
-    delete result.options.agent;
-    delete result.options.dispatcher;
-  }
-  return result;
-};
+import "./appwrite-node-patch";
 
 /**
  * Helper to get environment variables with multiple fallbacks:

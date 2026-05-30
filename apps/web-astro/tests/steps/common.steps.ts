@@ -1,12 +1,19 @@
-import { existsSync, readFileSync } from "node:fs";
-import path from "node:path";
 import { Given, When, Then, expect } from "../fixtures/base.fixture";
+import {
+  ensureSeedPublishedArticle,
+  unpublishAllArticles,
+} from "../helpers/appwriteTestClient";
+import { requireE2eAdminCredentials } from "../helpers/e2eEnv";
 
 Given("the user is on the homepage", async ({ page }) => {
+  await ensureSeedPublishedArticle();
   await page.goto("/");
 });
 
 Given("the user navigates to {string}", async ({ page }, url: string) => {
+  if (url === "/artigos" || url === "/") {
+    await ensureSeedPublishedArticle();
+  }
   await page.goto(url);
 });
 
@@ -15,23 +22,11 @@ When("they navigate to {string}", async ({ page }, url: string) => {
 });
 
 Given("the user is logged in as admin", async ({ page }) => {
-  const authFile = path.join(process.cwd(), "tests/.auth/admin.json");
+  // Admin projects load storageState from auth.setup; verify session is valid.
+  await page.goto("/admin");
+  if (!page.url().includes("/admin/login")) return;
 
-  if (existsSync(authFile)) {
-    // Fast path: inject the session cookie saved by globalSetup (no network round-trip)
-    const { cookies } = JSON.parse(readFileSync(authFile, "utf-8"));
-    await page.context().addCookies(cookies);
-    return;
-  }
-
-  // Fallback: per-test login (local dev without pre-seeded auth state)
-  const email = process.env.E2E_ADMIN_EMAIL;
-  const password = process.env.E2E_ADMIN_PASSWORD;
-  if (!email || !password) {
-    throw new Error(
-      "Admin auth state not found. Set E2E_ADMIN_EMAIL and E2E_ADMIN_PASSWORD so globalSetup can create tests/.auth/admin.json."
-    );
-  }
+  const { email, password } = requireE2eAdminCredentials();
   await page.goto("/admin/login");
   const status = await page.evaluate(
     async ({ email: e, password: p }) => {
@@ -67,8 +62,7 @@ Then("they should be redirected to {string}", async ({ page }, url: string) => {
 });
 
 Given("no articles are published", async () => {
-  // no-op: this is a test environment precondition
-  // In CI, the test DB starts empty. In dev, rely on manual state.
+  await unpublishAllArticles();
 });
 
 Then("they should see a not-found message", async ({ page }) => {

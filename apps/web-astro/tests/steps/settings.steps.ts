@@ -1,4 +1,5 @@
 import { When, Then, expect } from "../fixtures/base.fixture";
+import { getE2eAdminPassword } from "../helpers/e2eEnv";
 
 When("they select the {string} theme", async ({ page }, theme: string) => {
   await page.getByTestId(`theme-${theme}`).click();
@@ -15,12 +16,19 @@ Then(
   }
 );
 
-When("they fill in the account password form", async ({ page }) => {
-  const password = process.env.E2E_ADMIN_PASSWORD;
-  if (!password) throw new Error("E2E_ADMIN_PASSWORD must be set");
+When("they fill in the account password form", async ({ page, $testInfo }) => {
+  const password = getE2eAdminPassword();
+  if (!password) {
+    $testInfo.skip(true, "E2E admin password not configured in .env");
+    return;
+  }
   await page.getByTestId("account-current-password").fill(password);
   await page.getByTestId("account-password").fill(password);
   await page.getByTestId("account-password-confirm").fill(password);
+});
+
+When("they click save account settings", async ({ page }) => {
+  await page.getByTestId("account-save").click();
 });
 
 When("they save the account settings", async ({ page }) => {

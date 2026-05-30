@@ -4,6 +4,7 @@ import { createAdminClient, getEnv } from "../../../../lib/appwrite";
 import {
   ARTICLE_TITLE_REQUIRED_MESSAGE,
   getPortugueseTitleValidationErrorFromInputs,
+  translationHasContent,
 } from "../../../../lib/article-editor-validation";
 
 function json(data: unknown, status = 200) {
@@ -76,7 +77,7 @@ export const ALL: APIRoute = async ({ locals, request, params }) => {
       ARTICLES,
       id,
       sanitize({
-        slug: ptBrTrans?.["slug"] ?? body["slug"],
+        title: ptBrTrans?.["title"] ?? body["title"],
         category: body["category"],
         tags: body["tags"],
         featuredImage: body["featuredImage"],
@@ -111,37 +112,53 @@ export const ALL: APIRoute = async ({ locals, request, params }) => {
       const lang = clean["language"] as string;
       if (!lang) continue;
 
-      // Skip if it's empty and not the primary language
-      if (!clean["title"] && !clean["content"] && lang !== "pt-br") continue;
+      if (
+        !translationHasContent({
+          language: lang,
+          title: String(clean["title"] ?? ""),
+          content: String(clean["content"] ?? ""),
+        })
+      )
+        continue;
 
       const docId = idByLanguage.get(lang);
       const generateId = () => ID.unique();
 
       const suffix = `-${lang}`;
-      let uniqueSlug = clean["slug"]
-        ? lang === "pt-br" || (clean["slug"] as string).endsWith(suffix)
-          ? clean["slug"]
-          : `${clean["slug"]}${suffix}`
+      let uniqueSlug: string = clean["slug"]
+        ? lang === "pt-br" || String(clean["slug"]).endsWith(suffix)
+          ? String(clean["slug"])
+          : `${String(clean["slug"])}${suffix}`
         : "";
 
       if (!uniqueSlug && (clean["title"] || clean["content"])) {
         uniqueSlug = `${id}-${lang}`;
       }
+      if (!uniqueSlug.trim()) {
+        uniqueSlug = `${id}-${lang}-draft`;
+      }
 
       if (docId) {
         await databases.updateDocument(DB, TRANS, docId, {
-          ...clean,
-          slug: uniqueSlug,
+          title: clean["title"],
+          content: clean["content"],
+          excerpt: clean["excerpt"],
+          metaTitle: clean["metaTitle"],
+          metaDescription: clean["metaDescription"],
           article_id: id,
         });
       } else {
         const transId = generateId();
+        const createSlug =
+          uniqueSlug === `${id}-${lang}-draft`
+            ? `${id}-${lang}-${transId.slice(-8)}`
+            : uniqueSlug;
         const newDoc = await databases.createDocument(DB, TRANS, transId, {
           ...clean,
-          slug: uniqueSlug,
+          slug: createSlug,
           article_id: id,
         });
-        idByLanguage.set(lang, newDoc.$id); // Prevent duplicate creation in same request
+        idByLanguage.set(lang, newDoc.$id);
       }
     }
 

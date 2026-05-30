@@ -18,3 +18,21 @@ export function getPortugueseTitleValidationErrorFromInputs(
   const ptBr = inputs.find((t) => t.language === MASTER_ARTICLE_LOCALE);
   return getPortugueseTitleValidationError({ [MASTER_ARTICLE_LOCALE]: ptBr });
 }
+
+function stripHtml(value: string): string {
+  return value
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;/g, " ")
+    .trim();
+}
+
+/** True when a locale has user-visible title or body (ignores empty TipTap HTML). */
+export function translationHasContent(input: {
+  language?: string;
+  title?: string;
+  content?: string;
+}): boolean {
+  if (input.language === MASTER_ARTICLE_LOCALE) return true;
+  if (String(input.title ?? "").trim()) return true;
+  return stripHtml(String(input.content ?? "")).length > 0;
+}
