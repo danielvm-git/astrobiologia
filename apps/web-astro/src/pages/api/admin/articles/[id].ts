@@ -23,6 +23,42 @@ function sanitize(data: Record<string, unknown>): Record<string, unknown> {
   );
 }
 
+function normalizeTranslationForAppwrite(
+  data: Record<string, unknown>
+): Record<string, unknown> {
+  const stringFields = [
+    "title",
+    "content",
+    "excerpt",
+    "metaTitle",
+    "metaDescription",
+    "slug",
+  ];
+  const normalized: Record<string, unknown> = {};
+
+  for (const field of stringFields) {
+    const value = data[field];
+    if (value === undefined || value === null) {
+      normalized[field] = "";
+    } else {
+      const str = String(value);
+      if (field === "metaDescription" && str.length > 500) {
+        normalized[field] = str.substring(0, 500);
+      } else {
+        normalized[field] = str;
+      }
+    }
+  }
+
+  for (const [key, value] of Object.entries(data)) {
+    if (!stringFields.includes(key)) {
+      normalized[key] = value;
+    }
+  }
+
+  return normalized;
+}
+
 type TranslationInput = Record<string, unknown> & { language: string };
 
 export const ALL: APIRoute = async ({ locals, request, params }) => {
@@ -139,12 +175,13 @@ export const ALL: APIRoute = async ({ locals, request, params }) => {
       }
 
       if (docId) {
+        const normalized = normalizeTranslationForAppwrite(clean);
         await databases.updateDocument(DB, TRANS, docId, {
-          title: clean["title"],
-          content: clean["content"],
-          excerpt: clean["excerpt"],
-          metaTitle: clean["metaTitle"],
-          metaDescription: clean["metaDescription"],
+          title: normalized["title"],
+          content: normalized["content"],
+          excerpt: normalized["excerpt"],
+          metaTitle: normalized["metaTitle"],
+          metaDescription: normalized["metaDescription"],
           article_id: id,
         });
       } else {
@@ -153,8 +190,9 @@ export const ALL: APIRoute = async ({ locals, request, params }) => {
           uniqueSlug === `${id}-${lang}-draft`
             ? `${id}-${lang}-${transId.slice(-8)}`
             : uniqueSlug;
+        const normalized = normalizeTranslationForAppwrite(clean);
         const newDoc = await databases.createDocument(DB, TRANS, transId, {
-          ...clean,
+          ...normalized,
           slug: createSlug,
           article_id: id,
         });

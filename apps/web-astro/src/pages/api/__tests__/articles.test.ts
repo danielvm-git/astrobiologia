@@ -125,4 +125,80 @@ describe("PUT /api/admin/articles/[id]", () => {
     );
     expect(enCreates).toHaveLength(0);
   });
+
+  it("updates translation with missing metaDescription (undefined), sending empty string to Appwrite", async () => {
+    const { ALL } = await import("../admin/articles/[id]");
+    resetAppwriteMocks();
+    mockGetDocument.mockResolvedValue({ $id: "art_1" });
+    mockUpdateDocument.mockResolvedValue({});
+    mockListDocuments.mockResolvedValue({
+      documents: [{ $id: "trans_pt", language: "pt-br" }],
+    });
+    const res = await ALL({
+      locals: { user: mockUser },
+      params: { id: "art_1" },
+      request: new Request("http://localhost/api/admin/articles/art_1", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          translations: [
+            {
+              language: "pt-br",
+              title: "Título",
+              slug: "titulo",
+              content: "Conteúdo",
+              excerpt: "Excerpt",
+              metaTitle: undefined,
+              metaDescription: undefined,
+            },
+          ],
+        }),
+      }),
+    } as unknown as Parameters<typeof ALL>[0]);
+    expect(res.status).toBe(200);
+    expect(mockUpdateDocument).toHaveBeenCalled();
+    // First call is article update, second call is translation update
+    const translationUpdateCall = mockUpdateDocument.mock.calls[1];
+    expect(translationUpdateCall).toBeDefined();
+    const updatePayload = translationUpdateCall[3];
+    expect(updatePayload).toBeDefined();
+    expect(updatePayload.metaDescription).toBe("");
+    expect(typeof updatePayload.metaDescription).toBe("string");
+  });
+
+  it("truncates metaDescription over 500 chars to 500 chars", async () => {
+    const { ALL } = await import("../admin/articles/[id]");
+    resetAppwriteMocks();
+    mockGetDocument.mockResolvedValue({ $id: "art_1" });
+    mockUpdateDocument.mockResolvedValue({});
+    const longDesc = "a".repeat(600);
+    mockListDocuments.mockResolvedValue({
+      documents: [{ $id: "trans_pt", language: "pt-br" }],
+    });
+    const res = await ALL({
+      locals: { user: mockUser },
+      params: { id: "art_1" },
+      request: new Request("http://localhost/api/admin/articles/art_1", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          translations: [
+            {
+              language: "pt-br",
+              title: "Título",
+              slug: "titulo",
+              content: "Conteúdo",
+              metaDescription: longDesc,
+            },
+          ],
+        }),
+      }),
+    } as unknown as Parameters<typeof ALL>[0]);
+    expect(res.status).toBe(200);
+    // First call is article update, second call is translation update
+    const translationUpdateCall = mockUpdateDocument.mock.calls[1];
+    const updatePayload = translationUpdateCall[3];
+    expect(updatePayload.metaDescription).toBe("a".repeat(500));
+    expect(updatePayload.metaDescription.length).toBeLessThanOrEqual(500);
+  });
 });
