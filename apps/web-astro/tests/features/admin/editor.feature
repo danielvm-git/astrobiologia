@@ -22,10 +22,21 @@ Feature: Admin Article Editor
     Then they should see a validation error for the title field
 
   @p1 @admin
-  Scenario: Admin edits an existing article
+  Scenario: Admin sees title validation when saving from English tab
+    Given the user is logged in as admin
+    When they navigate to "/admin/artigos/new"
+    And they click the "EN" translation tab
+    And they save the article without filling in the title
+    Then they should see a validation error for the title field
+    And the PT-BR translation tab should be active
+
+  @p1 @admin
+  Scenario: Admin edits an existing article preserving slug
     Given the user is logged in as admin
     And an existing article exists
     When they navigate to edit the article
+    And they remember the article slug
     And they update the article title with "Updated Title"
     And they save the article
     Then the article should be updated successfully
+    And the article slug should be unchanged

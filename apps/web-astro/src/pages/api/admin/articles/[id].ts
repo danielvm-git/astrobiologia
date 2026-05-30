@@ -1,6 +1,10 @@
 import type { APIRoute } from "astro";
 import { ID, Query } from "node-appwrite";
 import { createAdminClient, getEnv } from "../../../../lib/appwrite";
+import {
+  ARTICLE_TITLE_REQUIRED_MESSAGE,
+  getPortugueseTitleValidationErrorFromInputs,
+} from "../../../../lib/article-editor-validation";
 
 function json(data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -56,6 +60,14 @@ export const ALL: APIRoute = async ({ locals, request, params }) => {
     const translationsInput = body["translations"] as
       | TranslationInput[]
       | undefined;
+
+    if (Array.isArray(translationsInput) && translationsInput.length > 0) {
+      const titleError =
+        getPortugueseTitleValidationErrorFromInputs(translationsInput);
+      if (titleError) {
+        return json({ error: ARTICLE_TITLE_REQUIRED_MESSAGE }, 400);
+      }
+    }
 
     const ptBrTrans = translationsInput?.find((t) => t.language === "pt-br");
 

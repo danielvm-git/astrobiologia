@@ -6,6 +6,10 @@ import {
   getEnv,
 } from "../../../../lib/appwrite";
 import { ARTICLE_LOCALES } from "../../../../lib/article-locales";
+import {
+  ARTICLE_TITLE_REQUIRED_MESSAGE,
+  getPortugueseTitleValidationErrorFromInputs,
+} from "../../../../lib/article-editor-validation";
 
 function json(data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -118,6 +122,14 @@ export const POST: APIRoute = async ({ locals, request }) => {
     ? (body.translations as TranslationInput[])
     : [];
   const ptBrTrans = translations_input.find((t) => t.language === "pt-br");
+  const titleError =
+    translations_input.length > 0
+      ? getPortugueseTitleValidationErrorFromInputs(translations_input)
+      : getPortugueseTitleValidationErrorFromInputs([
+          { language: "pt-br", title: String(body.title ?? "") },
+        ]);
+  if (titleError) return json({ error: ARTICLE_TITLE_REQUIRED_MESSAGE }, 400);
+
   const generateId = () => ID.unique();
   const articleId = generateId();
   const article = await databases.createDocument(DB, ARTICLES, articleId, {

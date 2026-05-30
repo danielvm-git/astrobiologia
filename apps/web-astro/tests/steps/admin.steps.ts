@@ -1,4 +1,11 @@
 import { Given, When, Then, expect } from "../fixtures/base.fixture";
+import {
+  createArticleViaUi,
+  clickSaveArticleButton,
+  expectArticleEditorTitleLoaded,
+  expectArticleSaveSuccess,
+  expectLocaleTabActive,
+} from "../helpers/createArticleViaUi";
 
 When(
   "they fill in the article title with {string}",
@@ -6,7 +13,7 @@ When(
     const fullTitle = `${title} ${Date.now()} ${Math.floor(Math.random() * 10000)}`;
     await page.getByTestId("article-title").waitFor();
     await page.getByTestId("article-title").fill(fullTitle);
-    await page.getByTestId("article-title").blur(); // Trigger autoSlug
+    await page.getByTestId("article-title").blur();
     await expect(page.getByTestId("article-slug")).not.toHaveValue("", {
       timeout: 5000,
     });
@@ -39,59 +46,22 @@ When(
 );
 
 When("they save the article", async ({ page, createdArticleIds }) => {
-  const savedPromise = page.waitForResponse(
-    (r) =>
-      r.url().includes("/api/admin/articles") &&
-      r.request().method() === "POST" &&
-      r.ok(),
-    { timeout: 30000 }
-  );
-  await page.getByRole("button", { name: /confirmar e salvar/i }).click();
-  const response = await savedPromise;
-  const body = await response.json();
+  const body = await clickSaveArticleButton(page, "auto");
   if (body.id) createdArticleIds.push(body.id);
 });
 
 Then("the article should be created successfully", async ({ page }) => {
-  await expect(page.getByTestId("toast-success")).toBeVisible({
-    timeout: 15000,
-  });
+  await expectArticleSaveSuccess(page);
 });
 
 Given(
   "they are editing an existing article",
   async ({ page, createdArticleIds }) => {
-    // Create a fresh article first to ensure we have one to edit and it gets cleaned up
-    await page.goto("/admin/artigos/new");
-    await page.getByTestId("article-title").waitFor({ timeout: 10000 });
-    const title = `Artigo para Tradução ${Date.now()}`;
-    await page.getByTestId("article-title").fill(title);
-    await page.getByTestId("article-title").blur();
-
-    const editor = page.getByTestId("article-editor");
-    await editor.locator('[contenteditable="true"]').click();
-    await editor
-      .locator('[contenteditable="true"]')
-      .fill("Conteúdo de teste para tradução.");
-
-    const savedPromise = page.waitForResponse(
-      (r) =>
-        r.url().includes("/api/admin/articles") &&
-        r.request().method() === "POST" &&
-        r.ok()
-    );
-    await page.getByRole("button", { name: /confirmar e salvar/i }).click();
-    const response = await savedPromise;
-    const body = await response.json();
-    if (body.id) createdArticleIds.push(body.id);
-
-    // Wait for the post-save redirect to the edit page before proceeding
-    await page.waitForURL(/\/admin\/artigos\/.+\/edit/, { timeout: 10000 });
-    await page.getByTestId("article-title").waitFor({ timeout: 10000 });
-    // Ensure the article data is loaded from the server
-    await expect(page.getByTestId("article-title")).not.toHaveValue("", {
-      timeout: 15000,
+    await createArticleViaUi(page, createdArticleIds, {
+      title: `Artigo para Tradução ${Date.now()}`,
+      content: "Conteúdo de teste para tradução.",
     });
+    await expectArticleEditorTitleLoaded(page);
   }
 );
 
@@ -119,16 +89,8 @@ Then(
 );
 
 When("they save the translation", async ({ page }) => {
-  const savedPromise = page.waitForResponse(
-    (r) =>
-      /\/api\/admin\/articles\/[^/]+$/.test(r.url()) &&
-      r.request().method() === "PUT" &&
-      r.ok(),
-    { timeout: 30000 }
-  );
-  await page.getByRole("button", { name: /confirmar e salvar/i }).click();
-  await savedPromise;
-  await expect(page.getByTestId("toast-success")).toBeVisible();
+  await clickSaveArticleButton(page, "PUT");
+  await expectArticleSaveSuccess(page);
 });
 
 When("they save the article without filling in the title", async ({ page }) => {
@@ -144,24 +106,15 @@ Then(
   }
 );
 
+Then("the PT-BR translation tab should be active", async ({ page }) => {
+  await expectLocaleTabActive(page, "pt-br");
+});
+
 Given("an existing article exists", async ({ page, createdArticleIds }) => {
-  await page.goto("/admin/artigos/new");
-  await page.getByTestId("article-title").waitFor({ timeout: 10000 });
-  const title = `Existing Article ${Date.now()}`;
-  await page.getByTestId("article-title").fill(title);
-  await page.getByTestId("article-title").blur();
-  await page.locator('[contenteditable="true"]').fill("Conteúdo de teste.");
-  const savedPromise = page.waitForResponse(
-    (r) =>
-      r.url().includes("/api/admin/articles") &&
-      r.request().method() === "POST" &&
-      r.ok()
-  );
-  await page.getByRole("button", { name: /confirmar e salvar/i }).click();
-  const response = await savedPromise;
-  const body = await response.json();
-  if (body.id) createdArticleIds.push(body.id);
-  await page.waitForURL(/\/admin\/artigos\/.+\/edit/, { timeout: 10000 });
+  await createArticleViaUi(page, createdArticleIds, {
+    title: `Existing Article ${Date.now()}`,
+    content: "Conteúdo de teste.",
+  });
 });
 
 When("they navigate to edit the article", async ({ page }) => {
@@ -175,6 +128,13 @@ When("they navigate to edit the article", async ({ page }) => {
   await page.getByTestId("article-title").waitFor({ timeout: 10000 });
 });
 
+When("they remember the article slug", async ({ page }) => {
+  const slug = await page.getByTestId("article-slug").inputValue();
+  await page.evaluate((value) => {
+    sessionStorage.setItem("e2e-remembered-slug", value);
+  }, slug);
+});
+
 When(
   "they update the article title with {string}",
   async ({ page }, newTitle: string) => {
@@ -183,61 +143,19 @@ When(
 );
 
 Then("the article should be updated successfully", async ({ page }) => {
-  await expect(page.getByTestId("toast-success")).toBeVisible({
-    timeout: 15000,
-  });
+  await expectArticleSaveSuccess(page);
+});
+
+Then("the article slug should be unchanged", async ({ page }) => {
+  const remembered = await page.evaluate(() =>
+    sessionStorage.getItem("e2e-remembered-slug")
+  );
+  await expect(page.getByTestId("article-slug")).toHaveValue(remembered ?? "");
 });
 
 When("they clear the translation content", async ({ page }) => {
   const editor = page.getByTestId("article-editor");
   await editor.locator('[contenteditable="true"]').fill("");
-});
-
-Given(
-  "they are editing an existing article with a Portuguese translation",
-  async ({ page, createdArticleIds }) => {
-    await page.goto("/admin/artigos/new");
-    await page.getByTestId("article-title").waitFor({ timeout: 10000 });
-    const title = `Artigo PT ${Date.now()}`;
-    await page.getByTestId("article-title").fill(title);
-    await page.getByTestId("article-title").blur();
-    await page
-      .locator('[contenteditable="true"]')
-      .fill("Conteúdo em português.");
-    const savedPromise = page.waitForResponse(
-      (r) =>
-        r.url().includes("/api/admin/articles") &&
-        r.request().method() === "POST" &&
-        r.ok()
-    );
-    await page.getByRole("button", { name: /confirmar e salvar/i }).click();
-    const response = await savedPromise;
-    const body = await response.json();
-    if (body.id) createdArticleIds.push(body.id);
-    await page.waitForURL(/\/admin\/artigos\/.+\/edit/, { timeout: 10000 });
-    await page.getByTestId("article-title").waitFor({ timeout: 10000 });
-    await expect(page.getByTestId("article-title")).not.toHaveValue("", {
-      timeout: 15000,
-    });
-  }
-);
-
-When("they try to create another Portuguese translation", async ({ page }) => {
-  // The UI only shows one tab per locale — "create another" means
-  // switching to pt-br tab and saving with new content
-  await page
-    .getByRole("button", { name: /^PT-BR/i })
-    .first()
-    .click();
-  await page.getByTestId("article-title").fill(`Updated PT ${Date.now()}`);
-});
-
-Then("they should see a duplicate warning", async ({ page }) => {
-  // The current UI overwrites the existing translation — success toast
-  // implies the "create" was handled gracefully
-  await expect(page.getByTestId("toast-success")).toBeVisible({
-    timeout: 15000,
-  });
 });
 
 const LANG_LOCALE: Record<string, string> = {
@@ -254,7 +172,6 @@ Then(
     const locale =
       LANG_LOCALE[lang.toLowerCase()] ?? lang.toLowerCase().slice(0, 2);
     const tabLabel = locale.toUpperCase();
-    // Re-select the translation tab — editor may reset to PT-BR after save
     await page
       .getByRole("button", { name: new RegExp(`^${tabLabel}`, "i") })
       .first()
