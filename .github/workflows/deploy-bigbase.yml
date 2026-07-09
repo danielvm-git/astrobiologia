@@ -1,0 +1,46 @@
+name: Deploy to BigBase
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        working-directory: apps/web-astro
+        run: pnpm run build
+
+      - name: Deploy to BigBase
+        env:
+          BIGBASE_SERVER: ${{ secrets.BIGBASE_SERVER }}
+          BIGBASE_DEPLOY_TOKEN: ${{ secrets.BIGBASE_DEPLOY_TOKEN }}
+          BIGBASE_SITE_ID: ${{ secrets.BIGBASE_SITE_ID }}
+        run: |
+          # Package dist/ into a tar and stream to BigBase deploy API.
+          cd apps/web-astro
+          tar -czf /tmp/site.tar.gz -C dist .
+          curl -sfX POST "$BIGBASE_SERVER/api/deploy" \
+            -H "Authorization: Bearer $BIGBASE_DEPLOY_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "{\"site_id\": \"$BIGBASE_SITE_ID\", \"branch\": \"main\", \"app_type\": \"static\"}"
+          # Upload the build artifact
+          curl -sfX POST "$BIGBASE_SERVER/api/deploy/upload" \
+            -H "Authorization: Bearer $BIGBASE_DEPLOY_TOKEN" \
+            -F "file=@/tmp/site.tar.gz" \
+            -F "site_id=$BIGBASE_SITE_ID"
