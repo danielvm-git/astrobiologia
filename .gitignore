@@ -82,6 +82,7 @@ allure-results/
 apps/web-astro/allure-report/
 apps/web-astro/.features-gen/
 apps/web-astro/tests/.auth/
+apps/web-astro/e2e-skip.marker
 
 # Astro
 apps/web-astro/.astro/
