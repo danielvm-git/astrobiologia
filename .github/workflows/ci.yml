@@ -201,4 +201,13 @@ jobs:
             --endpoint "$APPWRITE_ENDPOINT" \
             --project-id "$APPWRITE_PROJECT_ID" \
             --key "$APPWRITE_API_KEY"
-          appwrite push sites --site-id "$APPWRITE_SITE_ID" --activate --force
+          DEPLOY_OUTPUT=$(appwrite push sites --site-id "$APPWRITE_SITE_ID" --activate --force 2>&1) || DEPLOY_EXIT=$?
+          if [ -n "${DEPLOY_EXIT:-}" ]; then
+            if echo "$DEPLOY_OUTPUT" | grep -qi 'paused'; then
+              echo "⚠ Deploy skipped: Appwrite project is paused (free-tier inactivity)"
+              echo "  Restore at https://cloud.appwrite.io → select project → Restore"
+              exit 0
+            fi
+            echo "$DEPLOY_OUTPUT"
+            exit $DEPLOY_EXIT
+          fi
