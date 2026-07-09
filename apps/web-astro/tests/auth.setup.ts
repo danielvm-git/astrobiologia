@@ -24,6 +24,13 @@ setup("admin storage state", async ({ page }) => {
   // Check skip marker before attempting any Appwrite operations.
   if (fs.existsSync(SKIP_MARKER)) {
     const reason = fs.readFileSync(SKIP_MARKER, "utf-8").trim();
+    // Write an empty storage state so dependent projects don't crash on missing file.
+    // Their BDD Before hooks will skip tests when the marker is present.
+    writeAdminStorageState({
+      name: `a_session_${process.env.APPWRITE_PROJECT_ID ?? "_"}`,
+      value: "skipped",
+      expires: Date.now() / 1000 + 3600,
+    });
     setup.skip(true, `E2E skipped: Appwrite unavailable (${reason})`);
     return;
   }
