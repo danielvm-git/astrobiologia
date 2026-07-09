@@ -73,6 +73,7 @@ jobs:
   e2e-p0:
     name: Playwright P0 (Chromium)
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     env:
       APPWRITE_ENDPOINT: ${{ secrets.APPWRITE_ENDPOINT }}
       APPWRITE_PROJECT_ID: ${{ secrets.APPWRITE_PROJECT_ID }}
@@ -113,20 +114,23 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          key: playwright-${{ runner.os }}-v1-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Install Playwright Chromium + system deps
         working-directory: apps/web-astro
         if: steps.playwright-cache.outputs.cache-hit != 'true'
+        timeout-minutes: 10
         run: npx playwright install --with-deps chromium
 
       - name: Install Playwright system deps (browser cached)
         working-directory: apps/web-astro
         if: steps.playwright-cache.outputs.cache-hit == 'true'
+        timeout-minutes: 5
         run: npx playwright install-deps chromium
 
       - name: Run P0 E2E
         working-directory: apps/web-astro
+        timeout-minutes: 20
         run: pnpm run test:e2e:p0
         env:
           CI: true

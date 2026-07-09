@@ -9,6 +9,7 @@
   "exclude": [
     "node_modules",
     "dist",
+    "coverage",
     "tests",
     "playwright.config.ts",
     "vitest.setup.ts",
