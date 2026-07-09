@@ -32,6 +32,11 @@ jobs:
           BIGBASE_DEPLOY_TOKEN: ${{ secrets.BIGBASE_DEPLOY_TOKEN }}
           BIGBASE_SITE_ID: ${{ secrets.BIGBASE_SITE_ID }}
         run: |
+          if [ -z "$BIGBASE_DEPLOY_TOKEN" ]; then
+            echo "⚠ BigBase deploy skipped: BIGBASE_DEPLOY_TOKEN secret not configured"
+            echo "  Set up via bigbase_provision_ci_credentials (MCP) or GitHub repo settings."
+            exit 0
+          fi
           # Package dist/ into a tar and stream to BigBase deploy API.
           cd apps/web-astro
           tar -czf /tmp/site.tar.gz -C dist .
