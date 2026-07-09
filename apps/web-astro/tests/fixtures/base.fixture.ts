@@ -14,9 +14,6 @@ loadE2eEnv();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const SKIP_MARKER = path.resolve(__dirname, "..", "..", "e2e-skip.marker");
-const skipReason = fs.existsSync(SKIP_MARKER)
-  ? fs.readFileSync(SKIP_MARKER, "utf-8").trim()
-  : null;
 
 type TestFixtures = {
   createdArticleIds: string[];
@@ -60,14 +57,16 @@ export const test = base.extend<TestFixtures>({
 export const { Given, When, Then, Before } = createBdd(test);
 
 // Skip all E2E tests when Appwrite infra is unavailable (paused / unconfigured).
-// Uses $test.skip() via BDD Before hook — more reliable than test.beforeEach with BDD.
-if (skipReason) {
-  Before(async function ({ $test }) {
+// The marker check MUST be inside the Before callback, not at module scope,
+// because global-setup writes the marker AFTER modules are loaded.
+Before(async function ({ $test }) {
+  if (fs.existsSync(SKIP_MARKER)) {
+    const reason = fs.readFileSync(SKIP_MARKER, "utf-8").trim();
     $test.skip(
       true,
-      `E2E skipped: Appwrite unavailable (${skipReason}). Restore at https://cloud.appwrite.io`
+      `E2E skipped: Appwrite unavailable (${reason}). Restore at https://cloud.appwrite.io`
     );
-  });
-}
+  }
+});
 
 export { expect } from "@playwright/test";
