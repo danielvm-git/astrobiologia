@@ -21,6 +21,16 @@ export default async function globalSetup(_config: FullConfig) {
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     console.error("✗ Global Setup FAILED: Could not seed test data:", msg);
+
+    // Detect paused Appwrite project and surface clear fix instructions
+    if (/paused/i.test(msg)) {
+      console.error(
+        "\n💡 FIX: Your Appwrite project is paused due to inactivity." +
+          "\n   Go to https://cloud.appwrite.io → select your project → click 'Restore'." +
+          "\n   This is an Appwrite Cloud restriction for free-tier projects."
+      );
+    }
+
     // Fail hard — don't proceed if seeding fails, as P0 tests depend on it
     throw err;
   }
