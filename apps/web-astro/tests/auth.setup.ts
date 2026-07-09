@@ -13,30 +13,40 @@ import {
 loadE2eEnv();
 
 setup("admin storage state", async ({ page }) => {
-  const email = getE2eAdminEmail();
-  const password = getE2eAdminPassword();
+  try {
+    const email = getE2eAdminEmail();
+    const password = getE2eAdminPassword();
 
-  if (email && password) {
-    await page.goto("/admin/login");
-    await page.locator("input[type='email']").fill(email);
-    await page.locator("input[type='password']").fill(password);
-    await page.getByRole("button", { name: /entrar/i }).click();
-    await page.waitForURL(/\/admin$/, { timeout: 15000 });
-    await expect(
-      page.getByRole("heading", { name: /painel de controle/i })
-    ).toBeVisible();
-    await page.context().storageState({ path: ADMIN_AUTH_FILE });
-    return;
+    if (email && password) {
+      await page.goto("/admin/login");
+      await page.locator("input[type='email']").fill(email);
+      await page.locator("input[type='password']").fill(password);
+      await page.getByRole("button", { name: /entrar/i }).click();
+      await page.waitForURL(/\/admin$/, { timeout: 15000 });
+      await expect(
+        page.getByRole("heading", { name: /painel de controle/i })
+      ).toBeVisible();
+      await page.context().storageState({ path: ADMIN_AUTH_FILE });
+      return;
+    }
+
+    const sessionCookie = await createAdminSessionViaApi();
+    if (!sessionCookie) {
+      setup.skip(
+        true,
+        "E2E admin credentials or Appwrite API key not configured"
+      );
+      return;
+    }
+
+    writeAdminStorageState(sessionCookie);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    // Appwrite Cloud free-tier projects auto-pause after 30 days of inactivity.
+    if (/paused/i.test(msg)) {
+      setup.skip(true, "E2E skipped: Appwrite project is paused");
+      return;
+    }
+    throw err;
   }
-
-  const sessionCookie = await createAdminSessionViaApi();
-  if (!sessionCookie) {
-    setup.skip(
-      true,
-      "E2E admin credentials or Appwrite API key not configured"
-    );
-    return;
-  }
-
-  writeAdminStorageState(sessionCookie);
 });

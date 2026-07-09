@@ -3,7 +3,7 @@ Feature: Admin Authentication
   I want to securely access the admin panel
   So I can manage site content
 
-  @p0 @smoke
+  @p0 @admin
   Scenario: Valid credentials redirect to dashboard
     Given the user navigates to "/admin/login"
     Then the login form should be visible
