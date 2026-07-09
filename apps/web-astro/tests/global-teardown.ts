@@ -1,9 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import type { FullConfig } from "@playwright/test";
 import { cleanupE2eArtifacts } from "./helpers/appwriteTestClient";
 import { loadE2eEnv } from "./helpers/e2eEnv";
 
+// Use import.meta.url because Playwright may load global-teardown as an ES module.
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const SKIP_MARKER = path.resolve(__dirname, "..", "e2e-skip.marker");
 
 export default async function globalTeardown(_config: FullConfig) {
