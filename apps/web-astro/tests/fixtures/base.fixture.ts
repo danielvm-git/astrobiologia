@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { test as base, createBdd } from "playwright-bdd";
 import { loadE2eEnv } from "../helpers/e2eEnv";
 import { deleteE2eArticleById } from "../helpers/appwriteTestClient";
@@ -9,6 +10,9 @@ loadE2eEnv();
 
 // Read skip marker written by global-setup when Appwrite is unavailable/paused.
 // This lets CI pass green when infra is down rather than blocking on infra issues.
+// Use fileURLToPath because playwright-bdd loads this file as an ES module.
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const SKIP_MARKER = path.resolve(__dirname, "..", "..", "e2e-skip.marker");
 const skipReason = fs.existsSync(SKIP_MARKER)
   ? fs.readFileSync(SKIP_MARKER, "utf-8").trim()
