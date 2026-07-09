@@ -57,14 +57,17 @@ export const test = base.extend<TestFixtures>({
   },
 });
 
+export const { Given, When, Then, Before } = createBdd(test);
+
 // Skip all E2E tests when Appwrite infra is unavailable (paused / unconfigured).
-// This keeps CI green and prevents blocking on external infra issues.
+// Uses $test.skip() via BDD Before hook — more reliable than test.beforeEach with BDD.
 if (skipReason) {
-  const reason = `E2E skipped: Appwrite unavailable (${skipReason}). Restore at https://cloud.appwrite.io`;
-  test.beforeEach(async () => {
-    test.skip(true, reason);
+  Before(async function ({ $test }) {
+    $test.skip(
+      true,
+      `E2E skipped: Appwrite unavailable (${skipReason}). Restore at https://cloud.appwrite.io`
+    );
   });
 }
 
-export const { Given, When, Then, Before } = createBdd(test);
 export { expect } from "@playwright/test";
