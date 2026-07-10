@@ -1,211 +1,185 @@
-<!-- generated-by: gsd-doc-writer -->
+# Astrobiologia
 
-# Astrobiologia.com.br
+A multilingual astrobiology news platform — professional science journalism covering research on life in the universe, maintained by Danilo Albergaria. Published in 6 languages via DeepL machine translation.
 
-A professional journalistic portal covering astrobiology, maintained by Danilo Albergaria. This project focuses on news, interviews, and Brazilian research regarding life in the universe.
-
-[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](package.json)
+[![CI](https://github.com/danielvm-git/astrobiologia/actions/workflows/ci.yml/badge.svg)](https://github.com/danielvm-git/astrobiologia/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Current Status
+## Motivation
 
-**Phase 2: Administrative CMS (Articles CRUD)** - Currently implementing and polishing the content management system and article workflows.
+Astrobiology research is global but fragmented across language barriers. This platform aggregates and publishes science journalism in Portuguese, English, Spanish, Dutch, Japanese, and Chinese — all from a single admin panel with DeepL-powered translation. Every design decision prioritizes editorial workflows: structured translations, slug management, and publish/draft states.
 
-## Tech Stack
+## Tech stack
 
-- **Frontend**: [Astro](https://astro.build/) with React islands
-- **Backend**: [Appwrite Cloud](https://appwrite.io/) (Auth, Database, Storage)
-- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
-- **Internationalization**: Built-in locale system (pt-br, en, es, nl, ja, zh)
-- **Package Manager**: [pnpm](https://pnpm.io/)
+| Layer           | Technology                                                       |
+| --------------- | ---------------------------------------------------------------- |
+| Framework       | [Astro 5](https://astro.build) with React 19 islands             |
+| Styling         | [Tailwind CSS 4](https://tailwindcss.com/)                       |
+| Backend         | [Appwrite Cloud](https://appwrite.io/) (Auth, Database, Storage) |
+| i18n            | Built-in locale system (pt-br, en, es, nl, ja, zh)               |
+| Translation     | [DeepL API](https://www.deepl.com/pro-api)                       |
+| Testing         | Vitest + Playwright + playwright-bdd                             |
+| Package manager | [pnpm](https://pnpm.io/) workspaces                              |
+| CI/CD           | GitHub Actions → Appwrite Sites + BigBase                        |
+
+## Features
+
+- **6-language publishing** — write in Portuguese, translate to 5 other languages with one click
+- **Admin panel** — full CMS with article editor, translation management, settings, and dashboard
+- **Auto-slug generation** — derived from Portuguese title, with per-locale suffixes
+- **Category browsing** — articles organized by research category
+- **Full-text search** — cross-locale search with result highlighting
+- **Dark mode** — persisted theme preference
+- **P0 E2E gate** — Playwright BDD tests for critical admin flows
 
 ## Installation
 
-Follow these steps to set up the project locally:
-
-1. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/daniloalbergaria/astrobiologia.git
-   cd astrobiologia
-   ```
-
-2. **Install dependencies**:
-
-   ```bash
-   pnpm install --frozen-lockfile
-   ```
-
-3. **Configure Environment Variables**:
-   Copy the example environment file and fill in your Appwrite Cloud credentials:
-   ```bash
-   cp .env.example .env
-   ```
-   _Note: You will need an Appwrite Cloud project, database, and collection IDs as specified in `.env.example`._
-
-## Quick Start
-
-1. **Run the development server**:
-
-   ```bash
-   pnpm dev
-   ```
-
-2. **Open the application**:
-   Navigate to `http://localhost:4321` in your browser.
-
-3. **Access Admin Panel**:
-   Go to `/admin/login` to access the CMS (requires valid Appwrite credentials).
-
-## Project Structure
-
-- `apps/web-astro/`: Main Astro application
-  - `src/routes/`: Astro routes including public portal and admin CMS
-  - `src/lib/`: Shared utilities (Appwrite client, locale helpers, article logic)
-  - `src/components/`: React island components (ArticleCard, SearchBox, etc.)
-  - `src/components/admin/`: Admin panel components (Dashboard, ArticleEditor, etc.)
-  - `src/pages/api/`: API routes for auth, articles, settings, upload
-  - `src/middleware/index.ts`: Request middleware (locale detection, auth redirects)
-- `messages/`: Translation files for i18n
-
-## Testing
-
-### Test Suite Overview
-
-The project uses a two-tier testing strategy:
-
-| Tier          | Tool                | Scope                                          | Count                                |
-| ------------- | ------------------- | ---------------------------------------------- | ------------------------------------ |
-| Unit tests    | Vitest              | Pure functions, utilities, business logic      | 49 tests across 4 files              |
-| E2E/BDD tests | Playwright + BDDGen | User flows, page interactions, admin workflows | 27 scenarios across 10 feature files |
-
-### Running Tests
-
-#### Unit Tests
-
 ```bash
-# Run all unit tests
-cd apps/web-astro && pnpm run test:unit
-
-# Run with coverage report
-pnpm run test:coverage
-
-# Watch mode (development)
-pnpm run test:unit:watch
+git clone https://github.com/danielvm-git/astrobiologia.git
+cd astrobiologia
+pnpm install --frozen-lockfile
 ```
 
-#### Type Check
+Configure environment (see `.env.test.example` for required vars):
 
 ```bash
-# TypeScript type check (no emit)
-pnpm run check
-
-# Astro diagnostics
-pnpm run check:astro
+cp apps/web-astro/.env.test.example apps/web-astro/.env.test
 ```
 
-#### E2E Tests
+## Quick start
 
 ```bash
-# Run all E2E tests (requires Appwrite credentials)
-cd apps/web-astro && pnpm run test:e2e
+# Development server
+pnpm --filter @astrobiologia/web-astro dev    # → http://localhost:4321
 
-# Run P0 (critical path) tests only
-pnpm run test:e2e:p0
+# Admin panel
+# → http://localhost:4321/admin/login
 
-# Run with Playwright UI
-pnpm run test:ui
+# Build for production
+pnpm --filter @astrobiologia/web-astro build  # → dist/
+
+# Preview production build
+pnpm --filter @astrobiologia/web-astro preview
 ```
 
-### Coverage Requirements
+## Code Example
 
-Coverage thresholds are enforced in CI. Builds fail if any metric falls below its threshold:
+```typescript
+// src/lib/article-editor-translate.ts — translate an article to any locale
+import type { ArticleTranslation } from "./article-editor-types";
 
-| Metric     | Threshold | Current |
-| ---------- | --------- | ------- |
-| Statements | >= 8%     | 8.63%   |
-| Branches   | >= 45%    | 79.1%   |
-| Functions  | >= 25%    | 61.7%   |
+export async function buildTranslatedLocaleFields(
+  source: ArticleTranslation,
+  targetLang: string
+): Promise<ArticleTranslation> {
+  const fields = [
+    "title",
+    "excerpt",
+    "content",
+    "metaTitle",
+    "metaDescription",
+  ];
+  const translations = await Promise.all(
+    fields.map((field) =>
+      fetch("/api/admin/translate", {
+        method: "POST",
+        body: JSON.stringify({ text: source[field], targetLang }),
+      }).then((r) => r.json())
+    )
+  );
+  return {
+    language: targetLang,
+    title: translations[0].translated,
+    slug: `${source.slug}-${targetLang}`,
+    excerpt: translations[1].translated,
+    content: translations[2].translated,
+    metaTitle: translations[3].translated,
+    metaDescription: translations[4].translated,
+  };
+}
+```
 
-View the full coverage report after running `pnpm run test:coverage`:
+## Project structure
+
+```
+apps/web-astro/
+├── src/
+│   ├── components/          — React/Astro UI components
+│   │   └── admin/           — Admin panel (Dashboard, ArticleEditor, Settings)
+│   ├── lib/                 — shared logic, types, Appwrite client
+│   ├── pages/               — Astro pages + API routes
+│   │   └── api/admin/       — articles CRUD, translate, settings
+│   └── middleware/           — locale detection, auth redirects
+├── tests/
+│   ├── features/            — BDD .feature files
+│   │   └── admin/           — admin-specific scenarios
+│   ├── steps/               — step definitions
+│   └── helpers/             — E2E utilities, Appwrite test client
+├── playwright.config.ts
+└── vitest.config.ts
+specs/
+├── bugs/                    — bug registry
+└── TEST-REVIEW.md           — test quality review (92/100)
+```
+
+## Tests
 
 ```bash
-open apps/web-astro/coverage/index.html
+# TypeScript typecheck
+pnpm --filter @astrobiologia/web-astro check
+
+# Unit tests (69 tests, 10 files)
+pnpm --filter @astrobiologia/web-astro test:unit
+
+# API integration tests (14 tests, 3 files)
+pnpm --filter @astrobiologia/web-astro test:api
+
+# Coverage with gates (statements ≥15%, branches ≥50%, functions ≥45%)
+pnpm --filter @astrobiologia/web-astro test:coverage
+
+# E2E P0 (Playwright Chromium, requires Appwrite)
+pnpm --filter @astrobiologia/web-astro test:e2e:p0
 ```
 
-### Test Organization
+### Test architecture
 
-**Unit tests** (`src/lib/__tests__/`):
+| Tier            | Tool                        | Scope                                     | Tests         |
+| --------------- | --------------------------- | ----------------------------------------- | ------------- |
+| Unit            | Vitest                      | Pure functions, utilities, business logic | 69            |
+| API integration | Vitest                      | Auth, articles CRUD, translate endpoints  | 14            |
+| E2E BDD         | Playwright + playwright-bdd | User flows, admin workflows               | ~20 scenarios |
 
-- `locale.test.ts` -- Locale tag normalization and matching (16 tests)
-- `article-locales.test.ts` -- Article locale label resolution (8 tests)
-- `article-read.test.ts` -- Translation selection logic (12 tests)
-- `appwrite.test.ts` -- Appwrite client helpers, env vars, session cookies (13 tests)
+- **Locators**: `getByTestId` primary, `getByRole` secondary. No CSS classes, no `waitForTimeout`.
+- **Coverage gates**: statements ≥15%, branches ≥50%, functions ≥45% (enforced in CI).
+- **P0 E2E**: runs on every PR/push. Gracefully skips when Appwrite free-tier project is paused.
 
-**Test fixtures** (`tests/fixtures/`):
+## CI
 
-- `articles.ts` -- Factory functions for Article and ArticleTranslation test data
-- `users.ts` -- Factory functions for User test data (admin, editor, reader roles)
+Every push and PR runs:
 
-**BDD features** (`tests/features/`):
+| Gate             | Description                                      |
+| ---------------- | ------------------------------------------------ |
+| Typecheck        | `tsc --noEmit`                                   |
+| Unit + API tests | Vitest with coverage thresholds                  |
+| P0 E2E           | Playwright Chromium (skips when Appwrite paused) |
+| Deploy           | Appwrite Sites + BigBase (on main)               |
 
-- `homepage.feature` -- Homepage loading, empty states
-- `articles.feature` -- Article reading, navigation, empty states
-- `search.feature` -- Search with results, no results, empty query
-- `categories.feature` -- Category browsing, non-existent categories
-- `admin/auth.feature` -- Login with valid/invalid credentials
-- `admin/dashboard.feature` -- Dashboard stats, quick actions, auth redirects
-- `admin/editor.feature` -- Article creation, validation, editing
-- `admin/settings.feature` -- Theme persistence, password change, metadata
-- `admin/translation.feature` -- DeepL translation, validation, duplicates
-- `bugs.feature` -- Regression tests for fixed bugs
+## Deploy
 
-### Writing New Tests
+- **Primary**: [Appwrite Sites](https://appwrite.io/) via `appwrite.json`
+- **Secondary**: [BigBase](https://bigbase.click) via `danielvm-git/.github/actions/bigbase-deploy`
+- **Live**: [astrobiologia.bigbase.click](https://astrobiologia.bigbase.click)
 
-#### Unit Test Guidelines
+## Contribute
 
-- Place test files in `src/lib/__tests__/` alongside the code they test
-- Use the naming convention `<module>.test.ts`
-- Follow AAA pattern (Arrange, Act, Assert)
-- Use fixture factories from `tests/fixtures/` for test data
-- Keep tests focused: one assertion per test case when possible
-- Mock external dependencies (Appwrite SDK) using `vi.mock()` or `vi.spyOn()`
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feat/amazing`)
+3. Commit changes (`git commit -m 'feat: add amazing thing'`)
+4. Push (`git push origin feat/amazing`)
+5. Open a Pull Request
 
-#### BDD Feature Guidelines
-
-- Place feature files in `tests/features/` (use `tests/features/admin/` for admin features)
-- Tag scenarios with priority: `@p0` (critical path), `@p1` (important), `@wip` (work in progress)
-- Tag with `@smoke` for smoke test candidates
-- Use `@admin` tag for scenarios requiring authentication
-- Keep scenarios independent -- each should set up its own preconditions
-
-### CI Quality Gates
-
-Every PR and push to main runs the following gates:
-
-| Gate    | Description                               |
-| ------- | ----------------------------------------- |
-| G.1     | All unit tests must pass                  |
-| G.2     | P0 E2E tests must pass (Chromium)         |
-| G.3     | TypeScript type check must pass           |
-| G.4     | Test suite must complete within 5 minutes |
-| G.7     | CI runs on every PR                       |
-| G.8     | CI fails on any failing test              |
-| S.1-S.4 | Coverage thresholds enforced              |
-
-### Quality Expectations
-
-- All new functions must have at least one unit test
-- All bug fixes must include a regression test
-- All new user-facing features must include BDD scenarios
-- Tests must pass locally before pushing
-- Coverage must meet or exceed thresholds
-- Type check must pass with zero errors
-
-## Deployment
-
-The project is optimized for deployment on **Appwrite Sites**. See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions.
+See [CONVENTIONS.md](CONVENTIONS.md) for coding standards and [AGENTS.md](AGENTS.md) for AI agent instructions.
 
 ## License
 
-This project is licensed under the MIT License.
+MIT © Daniel Valente de Macedo

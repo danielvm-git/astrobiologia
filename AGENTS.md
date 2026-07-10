@@ -1,111 +1,94 @@
-# Agent instructions
+# Astrobiologia — AI Agent Instructions
 
-Coding agents working in this repository must follow **mandatory ctxo MCP workflow** before reading or changing source files. Tooling and evidence-gathering rules override assumptions. The behavioral guidelines below complement that workflow: they bias toward **caution over speed**. For trivial tasks (obvious one-liners, typos), use judgment—not every step needs full rigor.
+> **Multi-agent context** — This is the canonical project context for **Claude Code**, **Cursor**, **Cline**, **Aider**, **OpenCode**, **Gemini CLI**, and other AGENTS.md-native tools. All agents read this file.
 
-## ctxo MCP Tool Usage (MANDATORY)
+Coding agents working in this repository must follow an **Evidence-First Workflow** before reading or changing source files. The behavioral guidelines below bias toward **caution over speed**. For trivial tasks (obvious one-liners, typos), use judgment.
 
-**ALWAYS use ctxo MCP tools before reading source files or making code changes.** The ctxo index contains dependency graphs, git intent, anti-patterns, and change health that cannot be derived from reading files alone. Skipping these tools leads to blind edits and broken dependencies.
+## Project
+
+Astrobiologia.com — multilingual astrobiology news platform.
+Stack: **Astro 5, React 19, TypeScript, pnpm monorepo, Appwrite BaaS, BigBase deploy**
+
+| Action     | Command                                                |
+| ---------- | ------------------------------------------------------ |
+| Dev        | `pnpm --filter @astrobiologia/web-astro dev`           |
+| Build      | `pnpm --filter @astrobiologia/web-astro build`         |
+| Typecheck  | `pnpm --filter @astrobiologia/web-astro check`         |
+| Unit tests | `pnpm --filter @astrobiologia/web-astro test:unit`     |
+| Coverage   | `pnpm --filter @astrobiologia/web-astro test:coverage` |
+| API tests  | `pnpm --filter @astrobiologia/web-astro test:api`      |
+| E2E (P0)   | `pnpm --filter @astrobiologia/web-astro test:e2e:p0`   |
+| Full CI    | `gh pr checks` / push to main                          |
+
+## Architecture
+
+Monorepo with `apps/web-astro` as the primary Astro SSR app. Content managed via Appwrite Databases (articles, translations, categories). Admin panel at `/admin` with React components. E2E tests use Playwright + playwright-bdd (BDD). Deployed to both Appwrite Sites and BigBase. E2E gracefully skips when Appwrite free-tier project is paused.
+
+## Conventions
+
+- Conventional Commits (`feat:`, `fix:`, `docs:`, `ci:`, `chore:`)
+- Pre-commit hooks: prettier → typecheck → unit tests (lint-staged)
+- Coverage gates: statements ≥15%, branches ≥50%, functions ≥45%
+- E2E locators: `getByTestId` primary, `getByRole` secondary, no CSS classes
+- Never use `__dirname` in E2E infra — use `import.meta.url` + `fileURLToPath` (Playwright loads as ESM)
+- Read specs/ and CONVENTIONS.md before writing code
+
+## Evidence-First Workflow
+
+**ALWAYS gather evidence before reading source files or making code changes.**
 
 ### Before ANY Code Modification
 
-1. Call `get_blast_radius` for the symbol you are about to change — understand what breaks
-2. Call `get_why_context` for the same symbol — check for revert history or anti-patterns
-3. Only then read and edit source files
+1. Check what depends on the symbol (grep importers, dependency graph)
+2. Check git history for why it exists (`git log`, `git blame`)
+3. Only then read and edit the specific lines required
 
-### Before Starting a Task
+### Task-Specific Context
 
-| Task Type                  | REQUIRED First Call                            |
-| -------------------------- | ---------------------------------------------- |
-| Fixing a bug               | `get_context_for_task(taskType: "fix")`        |
-| Adding/extending a feature | `get_context_for_task(taskType: "extend")`     |
-| Refactoring                | `get_context_for_task(taskType: "refactor")`   |
-| Understanding code         | `get_context_for_task(taskType: "understand")` |
+If ctxo MCP tools are available, use them:
 
-### Before Reviewing a PR or Diff
+- **Bug:** `get_context_for_task(taskType: "fix")`
+- **Feature:** `get_context_for_task(taskType: "extend")`
+- **Refactor:** `get_context_for_task(taskType: "refactor")`
 
-- Call `get_pr_impact` — single call gives full risk assessment with co-change analysis
+## Clean Code Rules
 
-### When Exploring or Searching Code
+1. **300-line limit** — No file should exceed 300 lines. Decompose large files.
+2. **Small functions** — 4–20 lines ideal. Fits in a single attention window.
+3. **Grep-friendly names** — Unique, descriptive symbol names. A search should return exactly one target.
+4. **Why-comments** — Explain intent and business rules, not what the code does.
 
-- Use `search_symbols` for name/regex lookup — DO NOT grep source files for symbol discovery
-- Use `get_ranked_context` for natural language queries — DO NOT manually browse directories
-
-### Orientation in Unfamiliar Areas
-
-- Call `get_architectural_overlay` to understand layer boundaries
-- Call `get_symbol_importance` to identify critical symbols
-
-### NEVER Do These
-
-- NEVER edit a function without first calling `get_blast_radius` on it
-- NEVER skip `get_why_context` — reverted code and anti-patterns are invisible without it
-- NEVER grep source files to find symbols when `search_symbols` exists
-- NEVER manually trace imports when `find_importers` gives the full reverse dependency graph
-  Superpowers: https://github.com/obra/superpowers
-
-## Behavioral guidelines
-
-Reduce common LLM coding mistakes. Merge with project-specific Cursor rules and skills as needed.
+## Behavioral Guidelines
 
 ### 1. Think Before Coding
 
-**Don't assume. Don't hide confusion. Surface tradeoffs.**
-
-Before implementing:
-
-- State your assumptions explicitly. If uncertain, ask.
-- If multiple interpretations exist, present them — don't pick silently.
-- If a simpler approach exists, say so. Push back when warranted.
-- If something is unclear, stop. Name what's confusing. Ask.
+State assumptions explicitly. Surface tradeoffs. If something is unclear, ask — don't guess.
 
 ### 2. Simplicity First
 
-**Minimum code that solves the problem. Nothing speculative.**
-
-- No features beyond what was asked.
-- No abstractions for single-use code.
-- No "flexibility" or "configurability" that wasn't requested.
-- No error handling for impossible scenarios.
-- If you write 200 lines and it could be 50, rewrite it.
-
-Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
+Minimum code that solves the problem. No features beyond what was asked. No abstractions for single-use code. If 200 lines could be 50, rewrite.
 
 ### 3. Surgical Changes
 
-**Touch only what you must. Clean up only your own mess.**
-
-When editing existing code:
-
-- Don't "improve" adjacent code, comments, or formatting.
-- Don't refactor things that aren't broken.
-- Match existing style, even if you'd do it differently.
-- If you notice unrelated dead code, mention it — don't delete it.
-
-When your changes create orphans:
-
-- Remove imports/variables/functions that YOUR changes made unused.
-- Don't remove pre-existing dead code unless asked.
-
-The test: Every changed line should trace directly to the user's request.
+Touch only what you must. Match existing style. Don't "improve" adjacent code. Remove only imports/variables YOUR changes made unused.
 
 ### 4. Goal-Driven Execution
 
-**Define success criteria. Loop until verified.**
+Define success criteria. Loop until verified. Run tests after every change. Show evidence before declaring done.
 
-Transform tasks into verifiable goals:
+### 5. Test Quality
 
-- "Add validation" → "Write tests for invalid inputs, then make them pass"
-- "Fix the bug" → "Write a test that reproduces it, then make it pass"
-- "Refactor X" → "Ensure tests pass before and after"
+All tests must follow the F.I.R.S.T rubric (Fast, Independent, Repeatable, Self-Validating, Timely). E2E tests in `tests/` follow GEMINI.md quality mandates.
 
-For multi-step tasks, state a brief plan:
+## Never
 
-```
-1. [Step] → verify: [check]
-2. [Step] → verify: [check]
-3. [Step] → verify: [check]
-```
+- Never edit a function without knowing what it breaks
+- Never skip checking git intent on modified code
+- Never dismiss reproducible gate failures as pre-existing
+- Never proceed on red CI — invoke fix-bug first
+- Never use `__dirname` in E2E test infra files
+- Never use `page.waitForTimeout()` in Playwright tests
 
-Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
+## Subdirectory Instructions
 
-**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+- [Tests](./apps/web-astro/tests/GEMINI.md): Test quality mandates, locator strategies, waiting patterns

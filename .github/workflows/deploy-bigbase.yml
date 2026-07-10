@@ -4,9 +4,17 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
@@ -26,26 +34,23 @@ jobs:
         working-directory: apps/web-astro
         run: pnpm run build
 
-      - name: Deploy to BigBase
-        env:
-          BIGBASE_SERVER: ${{ secrets.BIGBASE_SERVER }}
-          BIGBASE_DEPLOY_TOKEN: ${{ secrets.BIGBASE_DEPLOY_TOKEN }}
-          BIGBASE_SITE_ID: ${{ secrets.BIGBASE_SITE_ID }}
+      - name: Check BigBase secrets
+        id: check
         run: |
-          if [ -z "$BIGBASE_DEPLOY_TOKEN" ]; then
+          if [ -z "${{ secrets.BIGBASE_DEPLOY_TOKEN }}" ]; then
+            echo "configured=false" >> $GITHUB_OUTPUT
             echo "⚠ BigBase deploy skipped: BIGBASE_DEPLOY_TOKEN secret not configured"
-            echo "  Set up via bigbase_provision_ci_credentials (MCP) or GitHub repo settings."
-            exit 0
+            echo "  Provision via bigbase_provision_ci_credentials (MCP) or GitHub repo settings."
+          else
+            echo "configured=true" >> $GITHUB_OUTPUT
           fi
-          # Package dist/ into a tar and stream to BigBase deploy API.
-          cd apps/web-astro
-          tar -czf /tmp/site.tar.gz -C dist .
-          curl -sfX POST "$BIGBASE_SERVER/api/deploy" \
-            -H "Authorization: Bearer $BIGBASE_DEPLOY_TOKEN" \
-            -H "Content-Type: application/json" \
-            -d "{\"site_id\": \"$BIGBASE_SITE_ID\", \"branch\": \"main\", \"app_type\": \"static\"}"
-          # Upload the build artifact
-          curl -sfX POST "$BIGBASE_SERVER/api/deploy/upload" \
-            -H "Authorization: Bearer $BIGBASE_DEPLOY_TOKEN" \
-            -F "file=@/tmp/site.tar.gz" \
-            -F "site_id=$BIGBASE_SITE_ID"
+
+      - name: Deploy to BigBase
+        if: steps.check.outputs.configured == 'true'
+        uses: danielvm-git/.github/actions/bigbase-deploy@main
+        with:
+          site_id: ${{ secrets.BIGBASE_SITE_ID }}
+          app_type: static
+          site_url: https://astrobiologia.bigbase.click
+          deploy_token: ${{ secrets.BIGBASE_DEPLOY_TOKEN }}
+          bigbase_server: ${{ secrets.BIGBASE_SERVER }}
