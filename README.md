@@ -137,6 +137,9 @@ pnpm --filter @astrobiologia/web-astro test:api
 # Coverage with gates (statements ≥15%, branches ≥50%, functions ≥45%)
 pnpm --filter @astrobiologia/web-astro test:coverage
 
+# Preflight (typecheck + unit + api + build)
+pnpm preflight
+
 # E2E P0 (Playwright Chromium, requires Appwrite)
 pnpm --filter @astrobiologia/web-astro test:e2e:p0
 ```

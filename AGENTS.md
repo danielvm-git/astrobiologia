@@ -18,6 +18,7 @@ Stack: **Astro 5, React 19, TypeScript, pnpm monorepo, Appwrite BaaS, BigBase de
 | Coverage   | `pnpm --filter @astrobiologia/web-astro test:coverage` |
 | API tests  | `pnpm --filter @astrobiologia/web-astro test:api`      |
 | E2E (P0)   | `pnpm --filter @astrobiologia/web-astro test:e2e:p0`   |
+| Preflight  | `pnpm preflight`                                       |
 | Full CI    | `gh pr checks` / push to main                          |
 
 ## Architecture
